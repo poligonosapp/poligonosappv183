@@ -23,7 +23,7 @@
     },
     "allowSyntheticDefaultImports": true,
     "noImplicitThis": true,
-    "baseUrl": "./",
+    "baseUrl": "./poligonosapp",
     "allowJs": true,
     "declaration": true,
     "adjacent-overload-signatures": [true, {

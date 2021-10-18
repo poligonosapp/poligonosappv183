@@ -9,9 +9,15 @@
     "**/*.tsconfig.eslint.json"
   ],
   "compilerOptions": {
+    "module": "ES2020",
     "paths": {
-      "jquery": ["node_modules/jquery/dist/jquery"],
-      "*": ["*", "generated/*"]
+      "jquery": [
+        "node_modules/jquery/dist/jquery"
+      ],
+      "*": [
+        "*",
+        "generated/*"
+      ]
     },
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
@@ -28,8 +34,15 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

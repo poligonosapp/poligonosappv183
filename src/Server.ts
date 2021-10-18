@@ -7,13 +7,13 @@
 // 'use strict'; // eslint https://stackoverflow.com/questions/32791507/node-js-and-eslint-disagree-on-use-strict
 
 import {GeoJSONAbstractClass, map} from "./Leaflet";
-import {MapReturnType} from "./layer/GeoJSON";
+// import {MapReturnType} from "./layer/GeoJSON";
 import Exception from "typescript";
 
 // require('./src/Leaflet.ts');
 
- // const L.PoligonosApp = require('poligonosapp');
- // L.PoligonosApp();
+// const L.PoligonosApp = require('poligonosapp');
+// L.PoligonosApp();
 
 // import express from 'express';
 // export require('iconv').Iconv;
@@ -29,133 +29,130 @@ import Exception from "typescript";
 
 // const bodyParser = require('body-parser');
 
+// const {GeoJSONAbstractClass, map} = require("./Leaflet");
+
 function serve(): void | GeoJSONAbstractClass | String {
 
-  const { L , Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require ('./Leaflet.ts');
+    const {MapReturnType} = require("./layer/GeoJSON");
 
-  const {PoligonosApp} = require('./PoligonosApp');
+    console.log(`\n...\n`);
 
-  const {Response , Request, Router} = require('express');
+    const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet.ts');
 
-  const Exception = require('typescript');
+    const {PoligonosApp} = require('./PoligonosApp');
 
-  const router = Router();
-  
-  const bodyParser = require('body-parser');
+    const {Response, Request, Router} = require('express');
 
-      // Constants
-      const PORT = 8080;
-      const HOST = '0.0.0.0';
-  
-  // App
-      const express = require('express');
-      const app = express();
-      
-      console.log(`...`);
+    const Exception = require('typescript');
 
-      // https://stackoverflow.com/questions/54649465/how-to-do-try-catch-and-finally-statements-in-typescript/54649617
-      try{
+    const router = Router();
 
-        router.get('/', (req:Request, res:Response):void => {
+    const bodyParser = require('body-parser');
 
-        // res.json({success:true});
-        // res.send('PoligonosApp');
-        // res.sendFile('./polygons.geojson');
-        // res.json('./polygons.geojson');
-        // require('./Leaflet.ts'); // L.PoligonosApp();
-        // require('./PoligonosApp.ts');
-        const polygons = L.Polygon('./polygons.geojson');
-        
-        //canvas
-        // @ts-ignore
-            const map:MapReturnType = L.Map('map', {
-        renderer: L.canvas()
-        });
+    // Constants
+    const PORT = 8080;
+    const HOST = '0.0.0.0';
 
-        polygons.addTo(map);
+    // App
+    const express = require('express');
+    const app = express();
 
-        const option:number = 1;
+    console.log(`\n...\n`);
 
-        switch(option){
-            case 1:
-                const token1 = require('./Pipeline');
+    // https://stackoverflow.com/questions/54649465/how-to-do-try-catch-and-finally-statements-in-typescript/54649617
+    try {
 
-                const a1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
-                // const b1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+        router.get('/', (req: Request, res: Response): void => {
 
-                const s1 = a1.concat(token1);
+            // res.json({success:true});
+            // res.send('PoligonosApp');
+            // res.sendFile('./polygons.geojson');
+            // res.json('./polygons.geojson');
+            // require('./Leaflet.ts'); // L.PoligonosApp();
+            // require('./PoligonosApp.ts');
+            const polygons = L.Polygon('./polygons.geojson');
 
-                L.tileLayer(s1, {
-                    maxZoom: 18,
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    id: 'mapbox/light-v9',
-                    tileSize: 512,
-                    zoomOffset: -1
-                }).addTo(map);
+            //canvas
+            // @ts-ignore
+            const map: MapReturnType = L.Map('map', {
+                renderer: L.canvas()
+            });
 
-        //});
-                break;
-            case 2:
-                const token2 = require('./Token');
+            polygons.addTo(map);
 
-                const a2 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
-                // const b2 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+            console.log((2%0 == 0));
 
-                const s2 = a2.concat(token2);
-                L.tileLayer(s2, {
-                    maxZoom: 18,
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    id: 'mapbox/light-v9',
-                    tileSize: 512,
-                    zoomOffset: -1
-                }).addTo(map);
+            const option:boolean = (2%0 == 0);
 
-        // });
-                break;
-        }
+            switch (option) {
+                case false:
+                    // eslint-disable-next-line no-case-declarations
+                    const token1:string = require('./Pipeline');
+
+                    // eslint-disable-next-line no-case-declarations
+                    const a1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
+                    // const b1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+                    // eslint-disable-next-line no-case-declarations
+                    const s1:string = a1.concat(token1);
+
+                    L.tileLayer(s1, {
+                        maxZoom: 18,
+                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        id: 'mapbox/light-v9',
+                        tileSize: 512,
+                        zoomOffset: -1
+                    }).addTo(map);
+
+                    //});
+                    break;
+                case true:
+                    const token2:string = require('./Token');
+
+                    const a2:string = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
+                    // const b2 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+                    const s2:string = a2.concat(token2);
+
+                    L.tileLayer(s2, {
+                        maxZoom: 18,
+                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        id: 'mapbox/light-v9',
+                        tileSize: 512,
+                        zoomOffset: -1
+                    }).addTo(map);
+
+                    break;
+            } // end switch
+
+        }); // end res.get
 
         // typescript 2304 cannot find name 'res'
         // res.json({success:true});
-    
 
-      }
-      catch(e){
+
+    }//end try res.get
+    catch (e) {
         // typescript error TS1044
         // const result = (e as Exception).Message;
 
         // console.log(result);
 
-              throw new Exception("LEAFLET TOKEN NOT FOUND");
+        throw new Exception("LEAFLET TOKEN NOT FOUND");
 
-      }
-      finally{
+    } finally {
 
-    app.listen(PORT, HOST);
-    console.log(`Running on http://${HOST}:${PORT}`);
+        app.listen(PORT, HOST);
+        console.log(`Running on http://${HOST}:${PORT}`);
 
-      }
+    }
+
+    //}
 
 } // end function serve
 
-// https://stackoverflow.com/questions/54649465/how-to-do-try-catch-and-finally-statements-in-typescript/54649617
-try{
-  serve();
-}catch(e){
-  //typescript 2304
-  // const result = (e as Exception).Message;
-
-  // console.log(result);
-
-    throw new Exception("LEAFLET TOKEN NOT FOUND");
-
-}
-finally{
-
-  console.log("finally");
-
-}
 
 // export default serve;
 

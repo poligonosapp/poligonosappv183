@@ -53,7 +53,7 @@ for (let index = 0; index < polygonsArray.length; index++) {
 const PoligonosApp = L.Class.extend({
 
 	// A property with initial value = 42
-	myDemoProperty: makeUnique(polygonsArray),
+	PoligonosAppProperty: makeUnique(polygonsArray),
 
 	// A method
 	myDemoMethod: function() {
@@ -80,7 +80,7 @@ PoligonosAppDemoClass.include({
 	_myPrivateProperty: 78,
 
 	// Redefining a method
-	myDemoMethod: function() { return this._myPrivateProperty; }
+	PoligonosAppMethod: function() { return this._myPrivateProperty; }
 
 });
 

@@ -108,7 +108,7 @@ export const Canvas = Renderer.extend({
 	_updatePaths: function () {
 		if (this._postponeUpdatePaths) { return; }
 
-		const layer;
+		const layer:LayerReturnType;
 		this._redrawBounds = null;
 		for (const id in this._layers) {
 			layer = this._layers[id];
@@ -246,7 +246,7 @@ export const Canvas = Renderer.extend({
 		}
 	},
 
-	_redraw: function () {
+	_redraw: function ():void {
 		this._redrawRequest = null;
 
 		if (this._redrawBounds) {
@@ -423,7 +423,8 @@ export const Canvas = Renderer.extend({
 			return;
 		}
 
-		const layer, candidateHoveredLayer;
+		const layer;
+		const candidateHoveredLayer;
 
 		for (const order = this._drawFirst; order; order = order.next) {
 			layer = order.layer;
@@ -447,6 +448,7 @@ export const Canvas = Renderer.extend({
 		}
 
 		this._mouseHoverThrottled = true;
+
 		setTimeout(Util.bind(function () {
 			this._mouseHoverThrottled = false;
 		}, this), 32);

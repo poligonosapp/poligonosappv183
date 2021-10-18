@@ -3,7 +3,7 @@ import {Object, ReturnType} from "typescript";
 type NumberReturnType = number | ReturnType<typeof Object.Number>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface PointReturn{
+export interface PointReturn{
 
     x: number | ReturnType<typeof Object.Number>;
     y: number | ReturnType<typeof Object.Number>;
@@ -13,3 +13,4 @@ interface PointReturn{
     getX():NumberReturnType;
     getY():NumberReturnType;
 }
+

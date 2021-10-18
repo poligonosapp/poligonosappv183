@@ -6,8 +6,8 @@
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // @ts-ignore
-import {Object, ReturnType} from "typescript";
-import {Point} from "../geometry";
+import {Object, ReturnType} from 'typescript';
+import {Point} from '../geometry';
 
 type EventReturnType = ReturnType<typeof Event>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -51,7 +51,7 @@ export function extend(dest:ObjectReturnType[]): ObjectReturnType[] {
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 export const create = Object.create || (function ():ObjectReturnType|FunctionReturnType {
 try{
-	function F() {}
+	function F():FunctionReturnType {}
 	return function (proto:ObjectReturnType):ObjectReturnType|FunctionReturnType {
 		F.prototype = proto;
 		return new F();
@@ -65,7 +65,9 @@ try{
 // Returns a new function bound to the arguments passed, like [Function.prototype.bind](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
 // Has a `L.bind()` shortcut.
 export function bind(fn:FunctionReturnType, obj:ObjectReturnType):FunctionReturnType {
+	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const slice = Array.prototype.slice;
+	const arguments = Array.prototype.slice;
 
 	if (fn.bind) {
 		return fn.bind.apply(fn, slice.call(arguments, 1));
@@ -99,6 +101,7 @@ export function stamp(obj:ObjectReturnType):NumberReturnType {
 // function, followed by any arguments passed when invoking the bound function.
 // Has an `L.throttle` shortcut.
 export function throttle(fn:FunctionReturnType, time:NumberReturnType, context:ObjectReturnType):FunctionReturnType {
+
 	const lock;
 	const args;
 	const wrapperFn;
@@ -190,7 +193,7 @@ export function getParamString(obj:ObjectReturnType, existingUrl:StringReturnTyp
 	return ((!existingUrl || existingUrl.indexOf('?') === -1) ? '?' : '&') + params.join('&');
 }
 
-const templateRe = /\{ *([\w_ -]+) *\}/g;
+const templateRe:StringReturnType = '/\{ *([\w_ -]+) *\}/g';
 
 // @function template(str: String, data: Object): String
 // Simple templating facility, accepts a template string of the form `'Hello {a}, {b}'`
@@ -199,7 +202,8 @@ const templateRe = /\{ *([\w_ -]+) *\}/g;
 // data values — they will be evaluated passing `data` as an argument.
 export function template(str:StringReturnType, data:ObjectReturnType):StringReturnType {
 	return str.replace(templateRe, function (str:StringReturnType, key:ObjectReturnType) {
-		const value = data[key];
+
+		const value:FunctionReturnType = data[key];
 
 		if (value === undefined) {
 			throw new Error('No value provided for variable ' + str);
@@ -234,24 +238,26 @@ export const emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQAB
 
 // inspired by http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 
-function getPrefixed(name) {
+function getPrefixed(name:StringReturnType) {
 	return window['webkit' + name] || window['moz' + name] || window['ms' + name];
 }
 
-const lastTime = 0;
+// const lastTime = 0;
 
 // fallback for IE 7-8
 function timeoutDefer(fn:FunctionReturnType) {
+	const lastTime = 0;
 	const time = +new Date();
 	const timeToCall = Math.max(0, 16 - (time - lastTime));
 
 	lastTime = time + timeToCall;
+
 	return window.setTimeout(fn, timeToCall);
 }
 
 export const requestFn = window.requestAnimationFrame || getPrefixed('RequestAnimationFrame') || timeoutDefer;
 export const cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimationFrame') ||
-		getPrefixed('CancelRequestAnimationFrame') || function (id) { window.clearTimeout(id); };
+		getPrefixed('CancelRequestAnimationFrame') || function (id:NumberReturnType):NumberReturnType { window.clearTimeout(id); };
 
 // @function requestAnimFrame(fn: Function, context?: Object, immediate?: Boolean): Number
 // Schedules `fn` to be executed when the browser repaints. `fn` is bound to
@@ -259,7 +265,7 @@ export const cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimat
 // the browser doesn't have native support for
 // [`window.requestAnimationFrame`](https://developer.mozilla.org/docs/Web/API/window/requestAnimationFrame),
 // otherwise it's delayed. Returns a request ID that can be used to cancel the request.
-export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType, immediate) {
+export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType, immediate:boolean) {
 	if (immediate && requestFn === timeoutDefer) {
 		fn.call(context);
 	} else {

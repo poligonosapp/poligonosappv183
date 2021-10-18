@@ -156,7 +156,7 @@ export const Layers = Control.extend({
 
 	// @method removeLayer(layer: Layer): this
 	// Remove the given layer from the control.
-	removeLayer: function (layer) {
+	removeLayer: function (layer:LayerReturnType) {
 		layer.off('add remove', this._onLayerChange, this);
 
 		const obj = this._getLayer(Util.stamp(layer));
@@ -278,15 +278,21 @@ export const Layers = Control.extend({
 		const baseLayersPresent;
 		const overlaysPresent;
 		// const i;
-		const obj;
+		let obj:LayerReturnType[] = [];
 		let baseLayersCount = 0;
 
-		for (const i in this._layers.length) {
+		for (const i in this._layers) {
+
 			obj = this._layers[i];
+
 			this._addItem(obj);
+
 			overlaysPresent = overlaysPresent || obj.overlay;
+
 			baseLayersPresent = baseLayersPresent || !obj.overlay;
+
 			baseLayersCount += !obj.overlay ? 1 : 0;
+
 		}
 
 		// Hide base layers section if there's only one layer.

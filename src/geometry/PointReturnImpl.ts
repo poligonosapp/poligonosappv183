@@ -6,7 +6,7 @@ import {Object, ReturnType} from "typescript";
 
 type NumberReturnType = number | ReturnType<typeof Object.Number>;
 
-public function roundXY(x:number, y:number, round:number):PointReturn {
+export function roundXY(x:number, y:number, round:number):PointReturn {
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     x = Object.create((round ? Math.round(x) : x));
@@ -17,7 +17,7 @@ public function roundXY(x:number, y:number, round:number):PointReturn {
     return new Point(x, y);
 }
 
-class PointReturnImpl implements PointReturn{
+export class PointReturnImpl implements PointReturn{
 
     // round: number | ReturnType<typeof Object.Number>;
 
@@ -26,10 +26,6 @@ class PointReturnImpl implements PointReturn{
     constructor(x:number, y:number, round:number) {
         roundXY(x,y,round);
     }
-
-
-
-
 
     public getX(): number|NumberReturnType{
         return this.x;

@@ -34,7 +34,7 @@ import {PointReturn} from './PointReturn';
 
 // @ts-ignore
 import {Object, ReturnType} from 'typescript';
-import {Point} from "./Point";
+import {Point, toPoint} from "./Point";
 import {PointReturnImpl} from "./PointReturnImpl";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
@@ -70,6 +70,8 @@ Bounds.prototype = {
 	// @method extend(point: Point): this
 	// Extends the bounds to contain the given point.
 	extend: function (point:PointReturnType):BoundsReturnType { // (Point)
+
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		point = toPoint(point);
 
 		// @property min: Point
@@ -77,13 +79,17 @@ Bounds.prototype = {
 		// @property max: Point
 		// The bottom right corner of the rectangle.
 		if (!this.min && !this.max) {
+
 			this.min = point.clone();
 			this.max = point.clone();
+
 		} else {
+
 			this.min.x = Math.min(point.x, this.min.x);
 			this.max.x = Math.max(point.x, this.max.x);
 			this.min.y = Math.min(point.y, this.min.y);
 			this.max.y = Math.max(point.y, this.max.y);
+
 		}
 		return this;
 	},
@@ -132,18 +138,25 @@ Bounds.prototype = {
 	// @method contains(point: Point): Boolean
 	// Returns `true` if the rectangle contains the given point.
 	contains: function (obj:PointReturnType):boolean {
-		const min;
-		const max;
+
+		let min;
+		let max;
 
 		if (typeof obj[0] === 'number' || obj instanceof Point) {
+
 			obj = this.toPoint(obj);
+
 		} else {
+
 			obj = toBounds(obj);
+
 		}
 
 		if (obj instanceof Bounds) {
+
 			min = obj.min;
 			max = obj.max;
+
 		} else {
 			min = max = obj;
 		}

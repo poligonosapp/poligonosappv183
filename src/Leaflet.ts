@@ -9,27 +9,60 @@
 import {version} from '../package.json';
 export {version};
 
+import * as L from './Leaflet';
+
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+export type MapReturnType = ReturnType<typeof L.Map>;
+type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+
 // import {L.PoligonosApp} from './PoligonosApp';
 
 const polygonsArray = require('./polygons.geojson');
 
 import {GeoJSON} from './layer/vector/GeoJSON';
+import {Object, ReturnType} from "typescript";
+import {LayerGroup} from "./layer";
+import {Point} from "./geometry";
+
+const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet.ts');
+
+//canvas
+// @ts-ignore
+const map: MapReturnType = L.Map('map', {
+	renderer: L.canvas()
+});
+
+const data:GeoJSONReturnType[] = require('/polygons.geojson');
 
   L.geoJSON(data, {
- 	style: function (feature) {
+ 	style: function (feature:LayerReturnType) {
  		return {color: feature.properties.color};
  	}
- }).bindPopup(function (layer) {
+ }).bindPopup(function (layer:LayerReturnType) {
  	return layer.feature.properties.description;
  }).addTo(map);
+
+function makeUnique(polygonsArray: GeoJSONReturnType[]):Set {
+
+	 const setObjects:Set = new Set(polygonsArray);
+
+	 // for (const i in polygonsArray) {
+
+		// setObjects[i].add(polygonsArray);
+
+	 // }
+
+	return setObjects;//TODO get set data structure
+}
 
 const PoligonosApp = L.Class.extend({
 
 	// A property with initial value = 42
-	myDemoProperty: makeUnique(polygonsArray),
+	PoligonosAppProperty: makeUnique(polygonsArray),
 
 	// A method
-	myDemoMethod: function() {
+	PoligonosAppMethod: function():GeoJSONReturnType[] {
 
 		// const s = new Server();
 

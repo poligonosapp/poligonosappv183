@@ -24,7 +24,7 @@ import {Earth} from '../../geo/crs/CRS.Earth';
 
 export const Circle = CircleMarker.extend({
 
-	initialize: function (latlng, options, legacyOptions) {
+	initialize: function (latlng:LatLngReturnType, options, legacyOptions) {
 		if (typeof options === 'number') {
 			// Backwards compatibility with 0.7.x factory (latlng, radius, options?)
 			options = Util.extend({}, legacyOptions, {radius: options});

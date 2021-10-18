@@ -1,4 +1,14 @@
+import { Point } from "src/geometry";
+import { GeoJSON, LayerGroup } from "src/layer";
 import { GeoJSONAbstractClass } from "./GeoJSONAbstractClass";
+
+import * as L from '../Leaflet';
+
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+export type MapReturnType = ReturnType<typeof L.Map>;
+type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+
 
 /*
 	L.Handler is a base class for handler classes that are used internally to inject
@@ -11,7 +21,7 @@ import { GeoJSONAbstractClass } from "./GeoJSONAbstractClass";
 
 export class Handler extends GeoJSONAbstractClass.extend({
 
-	initialize: function (map) {
+	initialize: function (map:MapReturnType) {
 		this._map = map;
 	},
 

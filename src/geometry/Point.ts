@@ -86,7 +86,7 @@ Point.prototype = {
 	// Returns a copy of the current point.
 	// fail type self.Point
 	// @ts-ignore
-	clone: function ():NumberReturnType {
+	clone: function ():PointReturnImpl {
 	try{
 		if(typeof Point.x === typeof numberAuxX){
 			if(typeof this.y === typeof numberAuxY) {

@@ -17,8 +17,8 @@ type onReturnType = ReturnType<typeof String | Object.Number >;
 
 type eventReturnType = ReturnType<typeof Event>;
 type idReturnType = ReturnType<typeof Number>;
-type objReturnType = ReturnType<typeof Object|Event|Point>;
-type handlerReturnType = ReturnType<typeof Object|Event|Point>;
+type objReturnType = ReturnType<typeof Object|typeof Event|typeof Point>;
+type handlerReturnType = ReturnType<typeof Object|typeof Event|typeof Point>;
 
 type _onReturnType = ReturnType<typeof String | Object.Number >;
 type offReturnType = ReturnType<typeof String | Object.Number >;

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export function index():void{
@@ -16,6 +19,11 @@ export function index():void{
 // https://stackoverflow.com/questions/54649465/how-to-do-try-catch-and-finally-statements-in-typescript/54649617
     try{
         serve();
+
+        const NewClass = require('./core/DemoAbstractClassImpl');
+        const fail = new NewClass(require('./polygons.geojson'));
+        console.log(fail);
+
     }catch(e){
         //typescript 2304
         // const result = (e as Exception).Message;

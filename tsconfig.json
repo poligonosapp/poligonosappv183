@@ -6,7 +6,8 @@
     "docs/**/*ts",
     "src/**/*ts",
     "src/**/*geojson",
-    "**/*.tsconfig.eslint.json"
+    "**/*.tsconfig.eslint.json",
+    "tsconfig-path-bootstrap.ts"
   ],
   "compilerOptions": {
     "module": "ES2020",

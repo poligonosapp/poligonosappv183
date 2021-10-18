@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as DomEvent from './DomEvent';
 import * as Util from '../core/Util';
 import {Point} from '../geometry/Point';
 import * as Browser from '../core/Browser';
 
 // @ts-ignore
-import {HTMLElement, Object, ReturnType} from 'typescript';
+import {HTMLElement, Object, ReturnType, CSSStyleSheet} from 'typescript';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+type CSSStyleSheetReturnType = ReturnType<typeof CSSStyleSheet>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof Point>;
 type ObjectReturnType = ReturnType<typeof Object.String>;
@@ -184,9 +188,9 @@ export function setOpacity(el, value) {
 	}
 }
 
-function _setOpacityIE(el, value) {
-	const filter = false,
-	    filterName = 'DXImageTransform.Microsoft.Alpha';
+function _setOpacityIE(el:HTMLElementReturnType, value) {
+	const filter = false;
+	const filterName = 'DXImageTransform.Microsoft.Alpha';
 
 	// filters collection throws an error if we try to retrieve a filter that doesn't exist
 	try {
@@ -314,7 +318,8 @@ export function enableImageDrag() {
 	DomEvent.off(window, 'dragstart', DomEvent.preventDefault);
 }
 
-const _outlineElement, _outlineStyle;
+const _outlineElement:HTMLElementReturnType;
+const _outlineStyle:CSSStyleSheetReturnType;
 // @function preventOutline(el: HTMLElement)
 // Makes the [outline](https://developer.mozilla.org/docs/Web/CSS/outline)
 // of the element `el` invisible. Used internally by Leaflet to prevent
@@ -344,9 +349,9 @@ export function restoreOutline() {
 
 // @function getSizedParentNode(el: HTMLElement): HTMLElement
 // Finds the closest parent node which size (width and height) is not null.
-export function getSizedParentNode(element:StringReturnType):StringReturnTypeing {
+export function getSizedParentNode(element:StringReturnType):StringReturnType {
 	do {
-		element = element.parentNode;
+		const element = element.parentNode;
 	} while ((!element.offsetWidth || !element.offsetHeight) && element !== document.body);
 	return element;
 }

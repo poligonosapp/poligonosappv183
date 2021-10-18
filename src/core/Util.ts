@@ -1,3 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-implied-eval */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-implied-eval */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /*
  * @namespace Util
  *
@@ -9,13 +21,24 @@
 import {Object, ReturnType} from 'typescript';
 import {Point} from '../geometry';
 
+import {DemoAbstractClassImpl} from './DemoAbstractClassImpl';
+
+import {GeoJSON} from '../layer';
+// @ts-ignore
+import {ReturnType} from "typescript";
+// import {LatLng} from "../geo";
+
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+// type LatLngReturnType = ReturnType<typeof LatLng>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+
 type EventReturnType = ReturnType<typeof Event>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 type ArgumentReturnType = ReturnType<typeof Object.Function.typeArguments>;
 
 type FunctionReturnType = ReturnType<typeof Object.Function>;
-type ObjectReturnType = ReturnType<typeof Object.String>;
+type ObjectReturnType = ReturnType<typeof DemoAbstractClassImpl | typeof Object.String>;
 type PointReturnType = ReturnType<typeof Point>;
 type ArrayReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
@@ -35,12 +58,16 @@ export function extend(dest:ObjectReturnType[]): ObjectReturnType[] {
 	// const len;
 	const src:ObjectReturnType[] = [];
 
-	let arguments:ArgumentReturnType = Object.Function.getTypeArguments(dest);
+	let arguments:ObjectReturnType[] = Array.prototype.slice(dest);
 
 	for (const j in arguments) {
-		src = arguments[j];
+		
 		for (const i in src) {
+
+			src[i] = arguments[j];
+
 			dest[i] = src[i];
+
 		}
 	}
 	return dest;
@@ -169,7 +196,7 @@ export function splitWords(str:StringReturnType | StringReturnType[]) {
 
 // @function setOptions(obj: Object, options: Object): Object
 // Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`. Has an `L.setOptions` shortcut.
-export function setOptions(obj:ObjectReturnType, options:NumberReturnType):NumberReturnType {
+export function setOptions(obj:ObjectReturnType, options:GeoJSONReturnType):GeoJSONReturnType {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!Object.prototype.hasOwnProperty.call(obj, 'options')) {
 		obj.options = obj.options ? create(obj.options) : {};
@@ -224,7 +251,8 @@ export const isArray = Array.isArray || function (obj:ObjectReturnType):boolean 
 // @function indexOf(array: Array, el: Object): Number
 // Compatibility polyfill for [Array.prototype.indexOf](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
 export function indexOf(array:ArrayReturnType, el:ObjectReturnType) {
-	for (const i in array.length) {
+	
+	for (const i in array) {
 		if (array[i] === el) { return i; }
 	}
 	return -1;
@@ -238,15 +266,15 @@ export const emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQAB
 
 // inspired by http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 
-function getPrefixed(name:StringReturnType) {
+function getPrefixed(name:StringReturnType):Window & typeof globalThis {
 	return window['webkit' + name] || window['moz' + name] || window['ms' + name];
 }
 
 // const lastTime = 0;
 
 // fallback for IE 7-8
-function timeoutDefer(fn:FunctionReturnType) {
-	const lastTime = 0;
+function timeoutDefer(fn:FunctionReturnType):number {
+	let lastTime = 0;
 	const time = +new Date();
 	const timeToCall = Math.max(0, 16 - (time - lastTime));
 

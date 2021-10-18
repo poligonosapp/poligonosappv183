@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {Point} from "./Point";
 
 import {PointReturn} from "./PointReturn";
@@ -26,11 +27,14 @@ export class PointReturnImpl implements PointReturn{
     constructor(x:number, y:number, round:number) {
         roundXY(x,y,round);
     }
+    // typescript PointReturn interface implementation
+    x: number | ReturnType<typeof Object.Number>;
+    y: number | ReturnType<typeof Object.Number>;
 
     public getX(): number|NumberReturnType{
         return this.x;
     }
-    public getY(): number{
+    public getY(): number|NumberReturnType{
         return this.y;
     }
 

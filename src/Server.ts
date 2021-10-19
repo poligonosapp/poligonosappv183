@@ -74,7 +74,7 @@ function serve(): void | GeoJSONAbstractClass | String {
 
             //canvas
             // @ts-ignore
-            const map: MapReturnType = L.Map('map', {
+            public const map: MapReturnType = L.Map('map', {
                 renderer: L.canvas()
             });
 

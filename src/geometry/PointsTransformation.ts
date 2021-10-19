@@ -60,10 +60,10 @@ export public class PointsTransformationClass implements Iterable<PointReturnImp
 
 	private let coefficients: Set<PointReturnType>;
 
-	constructor(a:PointReturnImpl|Set<NumberReturnType>, 
-		b:PointReturnImpl|Set<NumberReturnType>, 
-		c:PointReturnImpl|Set<NumberReturnType>, 
-		d:PointReturnImpl|Set<NumberReturnType>){
+	constructor(a:PointReturnImpl, 
+		b:PointReturnImpl, 
+		c:PointReturnImpl, 
+		d:PointReturnImpl){
 
 			this._a = a;
 			this._b = b;
@@ -74,25 +74,11 @@ export public class PointsTransformationClass implements Iterable<PointReturnImp
 
 }
 
-export function PointsTransformationFunction(this: any, a:NumberReturnType[]|Set<NumberReturnType>, 
-	b:NumberReturnType[]|Set<NumberReturnType>, 
-	c:NumberReturnType[]|Set<NumberReturnType>, 
-	d:NumberReturnType[]|Set<NumberReturnType>):NumberReturnType[]|NumberReturnType|PointReturnImpl|void {
+export function PointsTransformationFunction(a:PointReturnImpl, 
+	b:PointReturnImpl, 
+	c:PointReturnImpl, 
+	d:PointReturnImpl):NumberReturnType[]|NumberReturnType|PointReturnImpl|void {
 
-	// 'this' implicitly has type 'any' because it does not have a type annotation.ts(2683)
-	// let this._a: NumberReturnType;
-	// let this._b: NumberReturnType;
-	// let this._c: NumberReturnType;
-	// let this._d: NumberReturnType;
-
-	if (Util.isArray(a)) {
-		// use array properties
-		this._a = a[0];
-		this._b = b[0];
-		this._c = c[0];
-		this._d = d[0];
-		return;
-	}
 	this._a = a;
 	this._b = b;
 	this._c = c;

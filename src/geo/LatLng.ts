@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as Util from '../core/Util';
 import {Earth} from './crs/CRS.Earth';
 import {toLatLngBounds} from './LatLngBounds';

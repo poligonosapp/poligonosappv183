@@ -4,23 +4,31 @@ import {LatLng} from '../LatLng';
 import {LatLngBounds} from '../LatLngBounds';
 import * as Util from '../../core/Util';
 
+import {LonLat} from './Projection.LonLat';
+import {Mercator} from './Projection.Mercator';
+import {SphericalMercator} from './Projection.SphericalMercator';
+
 
 import {LatLng} from '../LatLng';
 import {Bounds} from '../../geometry/Bounds';
 import {Point} from '../../geometry/Point';
 
+import {projection} from './Projection';
 
 import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';
 import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+import { PointReturnImpl } from './PointReturnImpl';
+import { PointsTransformationFunction } from 'src/geometry/PointsTransformation';
+type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
 // type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-// type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -55,11 +63,16 @@ type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | Retu
  */
 
 export const CRS = {
+	
+	let projection = projection();
+	// let projection = Projection.LonLat;
+	let transformation : PointsTransformationFunction;
+
 	// @method latLngToPoint(latlng: LatLng, zoom: Number): Point
 	// Projects geographical coordinates into pixel coordinates for a given zoom.
-	latLngToPoint: function (latlng, zoom) {
-		const projectedPoint = this.projection.project(latlng),
-		    scale = this.scale(zoom);
+	latLngToPoint: function (latlng:LatLngReturnType, zoom:NumberReturnType) {
+		const projectedPoint = this.projection.project(latlng);
+		const scale = this.scale(zoom);
 
 		return this.transformation._transform(projectedPoint, scale);
 	},
@@ -67,7 +80,7 @@ export const CRS = {
 	// @method pointToLatLng(point: Point, zoom: Number): LatLng
 	// The inverse of `latLngToPoint`. Projects pixel coordinates on a given
 	// zoom into geographical coordinates.
-	pointToLatLng: function (point, zoom) {
+	pointToLatLng: function (point:PointReturnImpl, zoom:NumberReturnType) {
 		const scale = this.scale(zoom);
 		const untransformedPoint = this.transformation.untransform(point, scale);
 
@@ -77,14 +90,14 @@ export const CRS = {
 	// @method project(latlng: LatLng): Point
 	// Projects geographical coordinates into coordinates in units accepted for
 	// this CRS (e.g. meters for EPSG:3857, for passing it to WMS services).
-	project: function (latlng) {
+	project: function (latlng:LatLngReturnType):PointReturn {
 		return this.projection.project(latlng);
 	},
 
 	// @method unproject(point: Point): LatLng
 	// Given a projected coordinate returns the corresponding LatLng.
 	// The inverse of `project`.
-	unproject: function (point) {
+	unproject: function (point:PointReturnImpl) {
 		return this.projection.unproject(point);
 	},
 

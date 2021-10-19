@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {CRS} from './CRS';
 import {LonLat} from '../projection/Projection.LonLat';
 import {toPointsTransformationFunction} from '../../geometry/PointsTransformation';

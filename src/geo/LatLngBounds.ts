@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -59,7 +60,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  * can't be added to it with the `include` function.
  */
 
-export function LatLngBounds(corner1:NumberReturnType, corner2:NumberReturnType):LatLngReturnType|LatLngReturnType[] { // (LatLng, LatLng) or (LatLng[])
+export function LatLngBounds(corner1:NumberReturnType|LatLngReturnType, corner2:NumberReturnType|LatLngReturnType):LatLngReturnType|LatLngReturnType[] { // (LatLng, LatLng) or (LatLng[])
 	if (!corner1) { return; }
 
 	const latlngs = corner2 ? [corner1, corner2] : corner1;
@@ -228,7 +229,7 @@ LatLngBounds.prototype = {
 
 	// @method overlaps(otherBounds: LatLngBounds): Boolean
 	// Returns `true` if the rectangle overlaps the given bounds. Two bounds overlap if their intersection is an area.
-	overlaps: function (bounds) {
+	overlaps: function (bounds:LatLngBoundsReturnType):boolean {
 		bounds = toLatLngBounds(bounds);
 
 		const sw = this._southWest;
@@ -250,7 +251,7 @@ LatLngBounds.prototype = {
 
 	// @method equals(otherBounds: LatLngBounds, maxMargin?: Number): Boolean
 	// Returns `true` if the rectangle is equivalent (within a small margin of error) to the given bounds. The margin of error can be overridden by setting `maxMargin` to a small number.
-	equals: function (bounds, maxMargin) {
+	equals: function (bounds:LatLngBoundsReturnType, maxMargin:NumberReturnType):boolean {
 		if (!bounds) { return false; }
 
 		bounds = toLatLngBounds(bounds);
@@ -274,13 +275,13 @@ LatLngBounds.prototype = {
 // @alternative
 // @factory L.latLngBounds(latlngs: LatLng[])
 // Creates a `LatLngBounds` object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with [`fitBounds`](#map-fitbounds).
-export function toLatLngBounds(a: LatLngReturnType, b: LatLngReturnType) {
+export function toLatLngBounds(a: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType, b: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType):LatLngBoundsReturnType {
 	if (a instanceof LatLngBounds) {
 		return a;
 	}
 	return new LatLngBounds(a, b);
 }
-export function toLatLngBounds(latlngs: LatLngReturnType[]):LatLngReturnType {
+export function toLatLngBounds(latlngs: LatLngBoundsReturnType[]):LatLngBoundsReturnType {
 	if (latlngs[0] instanceof LatLngBounds) {
 		return latlngs[0];
 	}

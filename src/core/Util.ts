@@ -1,3 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable no-unsafe-finally */
+/* eslint-disable no-inner-declarations */
+/* eslint-disable @typescript-eslint/no-implied-eval */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable prefer-rest-params */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-implied-eval */
@@ -26,6 +43,7 @@ import {DemoAbstractClassImpl} from './DemoAbstractClassImpl';
 import {GeoJSON} from '../layer';
 // @ts-ignore
 import {ReturnType} from "typescript";
+import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
 // import {LatLng} from "../geo";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
@@ -52,13 +70,15 @@ type numberAuxY = ReturnType<typeof Object.Number>;
 
 // @function extend(dest: Object, src?: Object): Object
 // Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter. Has an `L.extend` shortcut.
-export function extend(dest:ObjectReturnType[]): ObjectReturnType[] {
+export function extend(dest:PointReturnImpl[]): ObjectReturnType[] {
 	// const i;
 	// const j;
 	// const len;
 	const src:ObjectReturnType[] = [];
 
-	let arguments:ObjectReturnType[] = Array.prototype.slice(dest);
+	let arguments = new PointReturnImpl[4];
+	// arguments = Array.prototype.slice(dest,0,3);// linear transformation 4 coefficients
+	arguments = dest;
 
 	for (const j in arguments) {
 		
@@ -78,12 +98,18 @@ export function extend(dest:ObjectReturnType[]): ObjectReturnType[] {
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 export const create = Object.create || (function ():ObjectReturnType|FunctionReturnType {
 try{
-	function F():FunctionReturnType {}
+	
+	function F():FunctionReturnType {};
+
 	return function (proto:ObjectReturnType):ObjectReturnType|FunctionReturnType {
 		F.prototype = proto;
 		return new F();
 	};
-}finally {
+	
+}catch(e){
+	throw new TypeError("TypeError");//https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.create
+}
+finally {
 	return;
 }
 })();
@@ -93,14 +119,14 @@ try{
 // Has a `L.bind()` shortcut.
 export function bind(fn:FunctionReturnType, obj:ObjectReturnType):FunctionReturnType {
 	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const slice = Array.prototype.slice;
-	const arguments = Array.prototype.slice;
+	const slice = Array.prototype.slice(obj, 0, 3); // linear transformation 4 coefficients
+	const arguments = Array.prototype.slice(obj, 0, 3); // // linear transformation 4 coefficients
 
 	if (fn.bind) {
 		return fn.bind.apply(fn, slice.call(arguments, 1));
 	}
 
-	const args = slice.call(arguments, 2);
+	const args = Array.prototype.slice.call(arguments, 2);
 
 	return function () {
 		return fn.apply(obj, args.length ? args.concat(slice.call(arguments)) : arguments);
@@ -129,10 +155,10 @@ export function stamp(obj:ObjectReturnType):NumberReturnType {
 // Has an `L.throttle` shortcut.
 export function throttle(fn:FunctionReturnType, time:NumberReturnType, context:ObjectReturnType):FunctionReturnType {
 
-	const lock;
-	const args;
-	const wrapperFn;
-	const later;
+	let lock:boolean;
+	const args:boolean;
+	const wrapperFn:FunctionReturnType;
+	let later:FunctionReturnType;
 
 	later = function ():void {
 		// reset lock and call if queued
@@ -273,7 +299,7 @@ function getPrefixed(name:StringReturnType):Window & typeof globalThis {
 // const lastTime = 0;
 
 // fallback for IE 7-8
-function timeoutDefer(fn:FunctionReturnType):number {
+function timeoutDefer(fn:FunctionReturnType|NumberReturnType):NumberReturnType {
 	let lastTime = 0;
 	const time = +new Date();
 	const timeToCall = Math.max(0, 16 - (time - lastTime));
@@ -293,7 +319,7 @@ export const cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimat
 // the browser doesn't have native support for
 // [`window.requestAnimationFrame`](https://developer.mozilla.org/docs/Web/API/window/requestAnimationFrame),
 // otherwise it's delayed. Returns a request ID that can be used to cancel the request.
-export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType, immediate:boolean) {
+export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType, immediate:boolean):FunctionReturnType {
 	if (immediate && requestFn === timeoutDefer) {
 		fn.call(context);
 	} else {
@@ -303,7 +329,7 @@ export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType,
 
 // @function cancelAnimFrame(id: Number): undefined
 // Cancels a previous `requestAnimFrame`. See also [window.cancelAnimationFrame](https://developer.mozilla.org/docs/Web/API/window/cancelAnimationFrame).
-export function cancelAnimFrame(id: NumberReturnType): undefined | void {
+export function cancelAnimFrame(id: NumberReturnType): undefined | void | FunctionReturnType {
 try{
 	if (id) {
 		cancelFn.call(window, id);

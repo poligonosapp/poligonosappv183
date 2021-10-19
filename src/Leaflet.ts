@@ -31,7 +31,7 @@ const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet.
 //canvas
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const map: MapReturnType = L.Map('map', {
+public const map: MapReturnType = L.Map('map', {
 	renderer: L.canvas()
 });
 
@@ -45,11 +45,12 @@ const data:GeoJSONReturnType[] = require('/polygons.geojson');
  	return layer.feature.properties.description;
  }).addTo(map);
 
-function makeUnique(polygonsArray: GeoJSONReturnType[]):Set<GeoJSON> {
+function makeUnique(polygonsArray: GeoJSONReturnType[]):Set<GeoJSONReturnType> {
 
-const setObjects:Set<GeoJSON> = new Set(polygonsArray);
+// const setObjects:Set<GeoJSONReturnType> = new Set(polygonsArray);
 
-	return setObjects;
+	// return setObjects;
+	return new Set(polygonsArray);
 }
 
 const PoligonosApp = L.Class.extend({

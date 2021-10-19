@@ -2,6 +2,10 @@ import {LatLng} from '../LatLng';
 import {Bounds} from '../../geometry/Bounds';
 import {Point} from '../../geometry/Point';
 
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+// type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
+
 /*
  * @namespace Projection
  * @projection L.Projection.SphericalMercator
@@ -13,12 +17,12 @@ import {Point} from '../../geometry/Point';
 
 const earthRadius = 6378137;
 
-export var SphericalMercator = {
+export const SphericalMercator = {
 
 	R: earthRadius,
 	MAX_LATITUDE: 85.0511287798,
 
-	project: function (latlng) {
+	project: function (latlng:LatLngReturnType) {
 		const d = Math.PI / 180,
 		    max = this.MAX_LATITUDE,
 		    lat = Math.max(Math.min(max, latlng.lat), -max),

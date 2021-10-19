@@ -12,6 +12,7 @@
   "compilerOptions": {
     "module": "ES2020",
     "paths": {
+      "src/*":["src/*"],
       "jquery": [
         "node_modules/jquery/dist/jquery"
       ],
@@ -37,6 +38,7 @@
     "target": "es2015",
     "lib": [
       "es2018",
+      "es2020",
       "dom"
     ]
   },

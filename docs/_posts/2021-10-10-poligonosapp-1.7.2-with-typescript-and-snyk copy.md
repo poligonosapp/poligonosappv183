@@ -8,6 +8,8 @@ authorsite: https://hub.docker.com/u/poligonosapp
 
 poligonosapp v1.7.2-with-typescript-and-snyk
 
+@rollup/plugin-alias
+
 https://www.npmjs.com/package/@rollup/plugin-typescript
 
 https://www.luiztools.com.br/post/como-usar-typescript-com-node-js-3/

@@ -7,6 +7,9 @@
 // 'use strict'; // eslint https://stackoverflow.com/questions/32791507/node-js-and-eslint-disagree-on-use-strict
 
 import {GeoJSONAbstractClass, map} from "./Leaflet";
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+import {Point} from "./geometry";
+type StringReturnType = ReturnType<typeof  Point.prototype.toString>;
 // import {MapReturnType} from "./layer/GeoJSON";
 import Exception from "typescript";
 
@@ -31,7 +34,7 @@ import Exception from "typescript";
 
 // const {GeoJSONAbstractClass, map} = require("./Leaflet");
 
-function serve(): void | GeoJSONAbstractClass | String {
+function serve(): void | GeoJSONAbstractClass | StringReturnType {
 
     const {MapReturnType} = require("./layer/GeoJSON");
 
@@ -80,23 +83,27 @@ function serve(): void | GeoJSONAbstractClass | String {
 
             polygons.addTo(map);
 
-            console.log((2%0 == 0));
+            console.log((6%2 == 0));
 
-            const option:boolean = (2%0 == 0);
+            const option:boolean = (6%2 == 0);
+
+            let token:string;
+            let a:string;
+            let s:string;
 
             switch (option) {
                 case false:
                     // eslint-disable-next-line no-case-declarations
-                    const token1:string = require('./Pipeline');
+                    token:string = require('./Pipeline');
 
                     // eslint-disable-next-line no-case-declarations
-                    const a1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
+                    a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
                     // const b1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
 
                     // eslint-disable-next-line no-case-declarations
-                    const s1:string = a1.concat(token1);
+                    s:string = a.concat(token);
 
-                    L.tileLayer(s1, {
+                    L.tileLayer(s, {
                         maxZoom: 18,
                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
                             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -105,17 +112,19 @@ function serve(): void | GeoJSONAbstractClass | String {
                         zoomOffset: -1
                     }).addTo(map);
 
+                    console.log(map);
+
                     //});
                     break;
                 case true:
-                    const token2:string = require('./Token');
+                    token = require('./Token');
 
-                    const a2:string = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
+                    a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
                     // const b2 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
 
-                    const s2:string = a2.concat(token2);
+                    s = a.concat(token);
 
-                    L.tileLayer(s2, {
+                    L.tileLayer(s, {
                         maxZoom: 18,
                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
                             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -140,7 +149,7 @@ function serve(): void | GeoJSONAbstractClass | String {
 
         // console.log(result);
 
-        throw new Exception("LEAFLET TOKEN NOT FOUND");
+        throw new Exception("TYPESCRIPT: LEAFLET TOKEN NOT FOUND");
 
     } finally {
 

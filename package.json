@@ -3,7 +3,7 @@
     "version": "1.7.2-with-typescript-and-snyk",
     "homepage": "https://bitbucket.org/poligonosapp/",
     "description": "leaflet fork with typescript and snyk",
-    "type": "module",
+    "type": "commonjs",
     "author": "Fabio Rodrigues <https://www.facebook.com/kefaro>, Luis Mendes <machadoluismendes@gmail.com>",
     "devDependencies": {
         "@babel/core": "^7.14.5",

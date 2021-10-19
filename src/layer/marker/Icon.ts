@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { GeoJSONAbstractClass } from "../../core/GeoJSONAbstractClass";
 import {setOptions} from '../../core/Util';
 import {toPoint as point} from '../../geometry/Point';
 import {retina} from '../../core/Browser';
+import {GeoJSON} from '../layer';
+
+import {ReturnType} from "typescript";
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
 
 /*
  * @class Icon
@@ -31,7 +37,7 @@ import {retina} from '../../core/Browser';
  *
  */
 
-export var Icon = GeoJSONAbstractClass.extend({
+export const Icon: GeoJSONReturnType = GeoJSONAbstractClass.extend({
 
 	/* @section
 	 * @aka Icon options
@@ -84,24 +90,24 @@ export var Icon = GeoJSONAbstractClass.extend({
 		crossOrigin: false
 	},
 
-	initialize: function (options) {
+	initialize: function (options:GeoJSONReturnType[]) {
 		setOptions(this, options);
 	},
 
 	// @method createIcon(oldIcon?: HTMLElement): HTMLElement
 	// Called internally when the icon has to be shown, returns a `<img>` HTML element
 	// styled according to the options.
-	createIcon: function (oldIcon) {
+	createIcon: function (oldIcon:HTMLElementReturnType):HTMLElementReturnType {
 		return this._createIcon('icon', oldIcon);
 	},
 
 	// @method createShadow(oldIcon?: HTMLElement): HTMLElement
 	// As `createIcon`, but for the shadow beneath it.
-	createShadow: function (oldIcon) {
+	createShadow: function (oldIcon:HTMLElementReturnType):HTMLElementReturnType {
 		return this._createIcon('shadow', oldIcon);
 	},
 
-	_createIcon: function (name, oldIcon) {
+	_createIcon: function (name, oldIcon:HTMLElementReturnType) {
 		const src = this._getIconUrl(name);
 
 		if (!src) {

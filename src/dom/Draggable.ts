@@ -1,9 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Evented} from '../core/Events';
 import * as Browser from '../core/Browser';
 import * as DomEvent from './DomEvent';
 import * as DomUtil from './DomUtil';
 import * as Util from '../core/Util';
 import {Point} from '../geometry/Point';
+
+import {GeoJSON} from '../layer';
+
+import {ReturnType} from "typescript";
+type EventReturnType = ReturnType<typeof Event>;
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
 
 /*
  * @class Draggable
@@ -49,7 +59,7 @@ export const Draggable = Evented.extend({
 
 	// @constructor L.Draggable(el: HTMLElement, dragHandle?: HTMLElement, preventOutline?: Boolean, options?: Draggable options)
 	// Creates a `Draggable` object for moving `el` when you start dragging the `dragHandle` element (equals `el` itself by default).
-	initialize: function (element, dragStartTarget, preventOutline, options) {
+	initialize: function (element:HTMLElementReturnType, dragStartTarget:HTMLElementReturnType, preventOutline:boolean, options: GeoJSONReturnType[]) {
 		Util.setOptions(this, options);
 
 		this._element = element;
@@ -84,7 +94,7 @@ export const Draggable = Evented.extend({
 		this._moved = false;
 	},
 
-	_onDown: function (e) {
+	_onDown: function (e:EventReturnType) {
 		// Ignore simulated events, since we handle both touch and
 		// mouse explicitly; otherwise we risk getting duplicates of
 		// touch events, see #4315.
@@ -112,8 +122,8 @@ export const Draggable = Evented.extend({
 		// Fired when a drag is about to start.
 		this.fire('down');
 
-		const first = e.touches ? e.touches[0] : e,
-		    sizedParent = DomUtil.getSizedParentNode(this._element);
+		const first = e.touches ? e.touches[0] : e;
+		const sizedParent = DomUtil.getSizedParentNode(this._element);
 
 		this._startPoint = new Point(first.clientX, first.clientY);
 
@@ -124,7 +134,7 @@ export const Draggable = Evented.extend({
 		DomEvent.on(document, END[e.type], this._onUp, this);
 	},
 
-	_onMove: function (e) {
+	_onMove: function (e:EventReturnType) {
 		// Ignore simulated events, since we handle both touch and
 		// mouse explicitly; otherwise we risk getting duplicates of
 		// touch events, see #4315.
@@ -137,8 +147,8 @@ export const Draggable = Evented.extend({
 			return;
 		}
 
-		const first = (e.touches && e.touches.length === 1 ? e.touches[0] : e),
-		    offset = new Point(first.clientX, first.clientY)._subtract(this._startPoint);
+		const first = (e.touches && e.touches.length === 1 ? e.touches[0] : e);
+		const offset:PointReturnType = new Point(first.clientX, first.clientY)._subtract(this._startPoint);
 
 		if (!offset.x && !offset.y) { return; }
 		if (Math.abs(offset.x) + Math.abs(offset.y) < this.options.clickTolerance) { return; }

@@ -21,7 +21,7 @@ type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
 export abstract class GeoJSONAbstractClass {
 	// @typescript-eslint/no-unsafe-call warning before user input @typescript-eslint/no-unsafe-call warning before user input https://github.com/poligonosapp/programming-typescript-answers/blob/master/src/ch04/exercises.ts
 	// null unknown undefined https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html
-	static options : GeoJSONReturnType;
+	static options : GeoJSONReturnType[];
 	static extend: GeoJSONReturnType;
 	static include: GeoJSONReturnType;
 	static initialize: GeoJSONReturnType;

@@ -9,15 +9,15 @@ import {Mercator} from './Projection.Mercator';
 import {SphericalMercator} from './Projection.SphericalMercator';
 
 
-import {LatLng} from '../LatLng';
-import {Bounds} from '../../geometry/Bounds';
-import {Point} from '../../geometry/Point';
+// import {LatLng} from '../LatLng';
+// import {Bounds} from '../../geometry/Bounds';
+// import {Point} from '../../geometry/Point';
 
 import {projection} from './Projection';
 
 import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';
-import {Point} from "../geometry";
+// import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 import { PointReturnImpl } from './PointReturnImpl';

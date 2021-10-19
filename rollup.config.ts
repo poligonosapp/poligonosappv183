@@ -4,13 +4,12 @@ import { babel } from '@rollup/plugin-babel';
 
 export default {
   input: 'src/index.ts',
-  sourcemap: true,
   output: {
-    dir: 'output',
-    format: 'esm'
-  },
+    dir: 'dist',
+    format: 'es'
+  },  
   plugins: [
-    typescript({lib: ["es2020","es2015","es5", "dom"], target: "es2015"}),
+    typescript({declaration:true, lib: ["es2020","es5","es6", "dom"], target: "es5"}),
     babel({ babelHelpers: 'bundled' })
   ],
   external: ["angular", "react"]

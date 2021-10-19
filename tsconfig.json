@@ -1,16 +1,22 @@
 {
   "compileOnSave": false,
   "include": [
-    "rollup.config.ts",
     "babel.config.json",
     "docs/**/*ts",
     "src/**/*ts",
     "src/**/*geojson",
     "**/*.tsconfig.eslint.json",
-    "tsconfig-path-bootstrap.ts"
+    "tsconfig-path-bootstrap.ts",
+    "rollup.config.ts"
   ],
   "compilerOptions": {
-    "module": "ES2020",
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
     "paths": {
       "src/*":["src/*"],
       "jquery": [
@@ -22,20 +28,15 @@
       ]
     },
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
     "esModuleInterop": true,
     "noImplicitThis": true,
     "baseUrl": "./",
-    "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
     "lib": [
       "es2018",
       "es2020",

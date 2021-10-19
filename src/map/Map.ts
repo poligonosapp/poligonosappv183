@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as Util from '../core/Util';
 import {Evented} from '../core/Events';
 import {EPSG3857} from '../geo/crs/CRS.EPSG3857';
@@ -300,11 +301,11 @@ export const Map = Evented.extend({
 			};
 		}
 
-		const paddingOffset = paddingBR.subtract(paddingTL).divideBy(2),
+		const paddingOffset = paddingBR.subtract(paddingTL).divideBy(2);
 
-		    swPoint = this.project(bounds.getSouthWest(), zoom),
-		    nePoint = this.project(bounds.getNorthEast(), zoom),
-		    center = this.unproject(swPoint.add(nePoint).divideBy(2).add(paddingOffset), zoom);
+		const swPoint = this.project(bounds.getSouthWest(), zoom);
+		const nePoint = this.project(bounds.getNorthEast(), zoom);
+		let center = this.unproject(swPoint.add(nePoint).divideBy(2).add(paddingOffset), zoom);
 
 		return {
 			center: center,
@@ -315,7 +316,7 @@ export const Map = Evented.extend({
 	// @method fitBounds(bounds: LatLngBounds, options?: fitBounds options): this
 	// Sets a map view that contains the given geographical bounds with the
 	// maximum zoom level possible.
-	fitBounds: function (bounds, options) {
+	fitBounds: function (bounds:LatLngBoundsReturnType, options) {
 
 		bounds = toLatLngBounds(bounds);
 
@@ -336,7 +337,7 @@ export const Map = Evented.extend({
 
 	// @method panTo(latlng: LatLng, options?: Pan options): this
 	// Pans the map to a given center.
-	panTo: function (center, options) { // (LatLng)
+	panTo: function (center:LatLngReturnType, options):LatLngReturnType { // (LatLng)
 		return this.setView(center, this._zoom, {pan: options});
 	},
 
@@ -396,21 +397,21 @@ export const Map = Evented.extend({
 
 		this._stop();
 
-		const from = this.project(this.getCenter()),
-		    to = this.project(targetCenter),
-		    size = this.getSize(),
-		    startZoom = this._zoom;
+		const from = this.project(this.getCenter());
+		const to = this.project(targetCenter);
+		const size = this.getSize();
+		const startZoom = this._zoom;
 
 		targetCenter = toLatLng(targetCenter);
 		targetZoom = targetZoom === undefined ? startZoom : targetZoom;
 
 		const w0 = Math.max(size.x, size.y),
-		    w1 = w0 * this.getZoomScale(startZoom, targetZoom),
-		    u1 = (to.distanceTo(from)) || 1,
-		    rho = 1.42,
-		    rho2 = rho * rho;
+		const w1 = w0 * this.getZoomScale(startZoom, targetZoom);
+		const u1 = (to.distanceTo(from)) || 1;
+		const rho = 1.42;
+		const rho2 = rho * rho;
 
-		function r(i) {
+		function r(i):NumberReturnType {
 			const s1 = i ? -1 : 1,
 			    s2 = i ? w1 : w0,
 			    t1 = w1 * w1 - w0 * w0 + s1 * rho2 * rho2 * u1 * u1,
@@ -475,7 +476,7 @@ export const Map = Evented.extend({
 
 	// @method setMaxBounds(bounds: LatLngBounds): this
 	// Restricts the map view to the given bounds (see the [maxBounds](#map-maxbounds) option).
-	setMaxBounds: function (bounds) {
+	setMaxBounds: function (bounds:LatLngBoundsReturnType) {
 		bounds = toLatLngBounds(bounds);
 
 		if (!bounds.isValid()) {
@@ -496,7 +497,7 @@ export const Map = Evented.extend({
 
 	// @method setMinZoom(zoom: Number): this
 	// Sets the lower limit for the available zoom levels (see the [minZoom](#map-minzoom) option).
-	setMinZoom: function (zoom) {
+	setMinZoom: function (zoom:NumberReturnType) {
 		const oldZoom = this.options.minZoom;
 		this.options.minZoom = zoom;
 
@@ -513,7 +514,7 @@ export const Map = Evented.extend({
 
 	// @method setMaxZoom(zoom: Number): this
 	// Sets the upper limit for the available zoom levels (see the [maxZoom](#map-maxzoom) option).
-	setMaxZoom: function (zoom) {
+	setMaxZoom: function (zoom:NumberReturnType) {
 		const oldZoom = this.options.maxZoom;
 		this.options.maxZoom = zoom;
 
@@ -530,7 +531,7 @@ export const Map = Evented.extend({
 
 	// @method panInsideBounds(bounds: LatLngBounds, options?: Pan options): this
 	// Pans the map to the closest view that would lie inside the given bounds (if it's not already), controlling the animation using the options specific, if any.
-	panInsideBounds: function (bounds, options) {
+	panInsideBounds: function (bounds:LatLngBoundsReturnType, options) {
 		this._enforcingBounds = true;
 		const center = this.getCenter(),
 		    newCenter = this._limitCenter(center, this._zoom, toLatLngBounds(bounds));
@@ -549,7 +550,7 @@ export const Map = Evented.extend({
 	// the display to more restricted bounds, like [`fitBounds`](#map-fitbounds).
 	// If `latlng` is already within the (optionally padded) display bounds,
 	// the map will not be panned.
-	panInside: function (latlng, options) {
+	panInside: function (latlng:LatLngReturnType, options) {
 		options = options || {};
 
 		const paddingTL = toPoint(options.paddingTopLeft || options.padding || [0, 0]),
@@ -1742,6 +1743,6 @@ if(e instanceof Error){
 // @factory L.map(el: HTMLElement, options?: Map options)
 // Instantiates a map object given an instance of a `<div>` HTML element
 // and optionally an object literal with `Map options`.
-export function createMap(id, options) {
+export function createMap(id:HTMLElementReturnType, options) {
 	return new Map(id, options);
 }

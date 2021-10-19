@@ -94,23 +94,7 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
             switch (option) {
                 case false:
                     // eslint-disable-next-line no-case-declarations
-                    token:string = require('./Pipeline');
-
-                    // eslint-disable-next-line no-case-declarations
-                    a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
-                    // const b1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-                    // eslint-disable-next-line no-case-declarations
-                    s:string = a.concat(token);
-
-                    L.tileLayer(s, {
-                        maxZoom: 18,
-                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                        id: 'mapbox/light-v9',
-                        tileSize: 512,
-                        zoomOffset: -1
-                    }).addTo(map);
+                    a = atlassianFunction(a, token, L, s, map);
 
                     console.log(map);
 
@@ -163,5 +147,26 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
 } // end function serve
 
 
+
+
+function atlassianFunction(a: string, token: string, L: any, s: string, map: any) {
+    token: string = require('./Pipeline');
+
+    // eslint-disable-next-line no-case-declarations
+    a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
+    // const b1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+    // eslint-disable-next-line no-case-declarations
+    s: string = a.concat(token);
+
+    L.tileLayer(s, {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox/light-v9',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(map);
+    return a;
+}
 // export default serve;
 

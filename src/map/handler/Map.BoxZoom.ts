@@ -11,6 +11,9 @@ import * as DomEvent from '../../dom/DomEvent';
 import {LatLngBounds} from '../../geo/LatLngBounds';
 import {Bounds} from '../../geometry/Bounds';
 
+type EventReturnType = ReturnType<typeof Event>;
+type MapReturnType = ReturnType<typeof EventReturnType>;
+
 /*
  * L.Handler.BoxZoom is used to add shift-drag zoom interaction to the map
  * (zoom to a selected bounding box), enabled by default.

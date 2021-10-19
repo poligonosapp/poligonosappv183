@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -37,7 +38,7 @@ import {isArray, formatNum} from '../core/Util';
 // @ts-ignore
 import {Object, ReturnType} from 'typescript';
 
-import {PointReturn} from './PointReturn';
+// import {PointReturn} from './PointReturn';
 
 import {PointReturnImpl} from './PointReturnImpl';
 
@@ -46,19 +47,24 @@ import {PointReturnImpl} from './PointReturnImpl';
 	// y: number | ReturnType<typeof Object.Number>;
 //}
 
-export function Point(x:NumberReturnType,y:NumberReturnType): PointReturnImpl{
-	// @ts-ignore
-	return new PointReturnImpl(x,y);
-};
-
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
-export function Point(x:NumberReturnType, y:NumberReturnType, round:NumberReturnType): PointReturnImpl {
+
+export function Point(...args: [x: NumberReturnType, y: NumberReturnType, round: NumberReturnType]): PointReturnImpl {
 	// @property x: Number; The `x` coordinate of the point
 	// const x = Object.create((round ? Math.round(x) : x));
 	// @property y: Number; The `y` coordinate of the point
 	// const y = Object.create((round ? Math.round(y) : y));
-	return new PointReturnImpl(x,y,round).roundXY(x,y,round);
+
+	try{
+		// if(round){
+			return new PointReturnImpl(x, y, round).roundXY(x, y, round);
+		//}
+	}catch(e){
+		throw new RuntimeException("TYPESCRIPT ROUND ARG OVERLOAD EXCEPTION");
+	}
+
+	return new PointReturnImpl(x,y);
 }
 
 // Point(0,0,0);
@@ -72,11 +78,11 @@ type PointReturnType = ReturnType<typeof Point>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
 type roundReturnType = ReturnType<typeof Point> | ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;
-type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
+// type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
 
-type numberAuxX = ReturnType<typeof Object.Number>;
+type numberAuxX = ReturnType<typeof number | typeof Object.Number>;
 
-type numberAuxY = ReturnType<typeof Object.Number>;
+type numberAuxY = ReturnType<typeof number | typeof Object.Number>;
 
 Point.prototype = {
 
@@ -88,12 +94,19 @@ Point.prototype = {
 	// @ts-ignore
 	clone: function ():PointReturnImpl {
 	try{
-		if(typeof Point.x === typeof numberAuxX){
-			if(typeof this.y === typeof numberAuxY) {
-				return new Point(this.x.clone(), this.y.clone());
+		
+		let theClone = new Point(this.x.clone(), this.y.clone());
+
+		if(typeof Point.x === theClone.x ){
+			if(typeof Point.y === theClone.y ) {
+				return theClone;
 			}
 		}
-	}finally {
+	}
+	catch(e){
+		throw new RuntimeException("TYPESCRIPT POINT CLONE EXCEPTION");
+	}
+	finally {
 		return -1;// not a number
 	}
 

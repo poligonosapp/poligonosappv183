@@ -1,6 +1,6 @@
 import {Earth} from './CRS.Earth';
 import {LonLat} from '../projection/Projection.LonLat';
-import {toTransformation} from '../../geometry/Transformation';
+import {toTransformation} from '../../geometry/PointsTransformation';
 import * as Util from '../../core/Util';
 
 /*

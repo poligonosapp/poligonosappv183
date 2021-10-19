@@ -1,6 +1,6 @@
 import {CRS} from './CRS';
 import {LonLat} from '../projection/Projection.LonLat';
-import {toTransformation} from '../../geometry/Transformation';
+import {toPointsTransformationFunction} from '../../geometry/PointsTransformation';
 import * as Util from '../../core/Util';
 
 
@@ -14,6 +14,8 @@ import {Object, ReturnType} from 'typescript';
 import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
@@ -48,19 +50,19 @@ type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | Retu
 
 export const Simple = Util.extend({}, CRS, {
 	projection: LonLat,
-	transformation: toTransformation(1, 0, -1, 0),
+	transformation: toPointsTransformationFunction(1, 0, -1, 0),
 
-	scale: function (zoom) {
+	scale: function (zoom):NumberReturnType {
 		return Math.pow(2, zoom);
 	},
 
-	zoom: function (scale) {
+	zoom: function (scale):NumberReturnType {
 		return Math.log(scale) / Math.LN2;
 	},
 
-	distance: function (latlng1, latlng2) {
-		var dx = latlng2.lng - latlng1.lng,
-		    dy = latlng2.lat - latlng1.lat;
+	distance: function (latlng1:LatLngReturnType, latlng2:LatLngReturnType):NumberReturnType {
+		const dx = latlng2.lng - latlng1.lng;
+		const dy = latlng2.lat - latlng1.lat;
 
 		return Math.sqrt(dx * dx + dy * dy);
 	},

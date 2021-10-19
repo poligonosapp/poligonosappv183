@@ -8,6 +8,8 @@
 import {Point} from './Point';
 import * as Util from '../core/Util';
 
+import {PointsTransformation} from './PointsTransformation';
+
 import {ReturnType, Object} from 'typescript';
 // import {Point} from "../geometry";
 // import {LatLngBounds} from "../geo";
@@ -30,6 +32,8 @@ type PointReturnType = ReturnType<typeof Point>;
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 
+
+
 /*
  * @class Transformation
  * @aka L.Transformation
@@ -48,6 +52,48 @@ type PointReturnType = ReturnType<typeof Point>;
  * ```
  */
 
+public class ArrayTransformationClass implements Iterable<PointReturnType>{
+
+	private let _a:PointReturnImpl[];
+	private let _b:PointReturnImpl[];
+	private let _c:PointReturnImpl[];
+	private let _d:PointReturnImpl[];
+
+	private let coefficients: Set<PointReturnType>;
+
+	constructor(a:PointReturnType[], 
+		b:PointReturnType[]>, 
+		c:PointReturnType[]>, 
+		d:PointReturnType[]){
+
+			this.coefficients = new PointReturnImpl[4];
+
+			for(const i in this.coefficients){
+				this._a = a[i+0];// | a.values(0)
+				this._b = b[i+1];
+				this._c = c[i+2];
+				this._d = d[i+3];
+			}
+
+	}
+
+	constructor(coefficients:PointReturnType[4]){
+
+		this.coefficients = new PointReturnImpl[4];
+
+		// if(this.coefficients == 4){
+
+			this._a = coefficients[0];
+			this._b = coefficients[1];
+			this._c = coefficients[2];
+			this._d = coefficients[3];
+
+		// }
+		
+	}
+
+}
+
 	// _a:ReturnType<typeof NumberReturnType[]>|Set<NumberReturnType>;
 	// _b:NumberReturnType[]|Set<NumberReturnType>;
 	// _c:NumberReturnType[]|Set<NumberReturnType>;
@@ -56,35 +102,12 @@ type PointReturnType = ReturnType<typeof Point>;
 
 // factory new L.Transformation(a: Number, b: Number, c: Number, d: Number)
 // Creates a `Transformation` object with the given coefficients.
-export function Transformation(coefficients:NumberReturnType[]){
+export function ArrayTransformationFunction(coefficients:NumberReturnType[]){
 	return coefficients;
 }
-export function Transformation2(a:NumberReturnType[]|Set<NumberReturnType>, 
-	b:NumberReturnType[]|Set<NumberReturnType>, 
-	c:NumberReturnType[]|Set<NumberReturnType>, 
-	d:NumberReturnType[]|Set<NumberReturnType>):NumberReturnType[]|NumberReturnType|PointReturnImpl|void {
 
-	// 'this' implicitly has type 'any' because it does not have a type annotation.ts(2683)
-	// let this._a: NumberReturnType;
-	// let this._b: NumberReturnType;
-	// let this._c: NumberReturnType;
-	// let this._d: NumberReturnType;
 
-	if (Util.isArray(a)) {
-		// use array properties
-		this._a = a[0];
-		this._b = a[1];
-		this._c = a[2];
-		this._d = a[3];
-		return;
-	}
-	this._a = a;
-	this._b = b;
-	this._c = c;
-	this._d = d;
-}
-
-Transformation.prototype = {
+ArrayTransformationFunction.prototype = {
 	// @method transform(point: Point, scale?: Number): Point
 	// Returns a transformed point, optionally multiplied by the given scale.
 	// Only accepts actual `L.Point` instances, not arrays.
@@ -107,7 +130,7 @@ Transformation.prototype = {
 
 		scale = scale || 1;
 		
-		return new Point(
+		return new PointReturnImpl(
 			(point.x / scale - this._b) / this._a,
 		(point.y / scale - this._d) / this._c);
 	}
@@ -123,10 +146,10 @@ Transformation.prototype = {
 // Expects an coefficients array of the form
 // `[a: Number, b: Number, c: Number, d: Number]`.
 
-export function toTransformation(coefficients:NumberReturnType[]):NumberReturnType[]{
-	return new Transformation(coefficients);
+export function toArrayTransformationFunction(coefficients:NumberReturnType[]):ArrayTransformationClass[]{
+	return new ArrayTransformationClass(coefficients);
 }
 
-export function toTransformation2(a:NumberReturnType, b:NumberReturnType, c:NumberReturnType, d:NumberReturnType):PointReturnImpl|void {
-	return new Transformation(a, b, c, d);
+export function toTransformation2(a:NumberReturnType, b:NumberReturnType, c:NumberReturnType, d:NumberReturnType):Transformation0 {
+	return new PointsTransformationClass(a, b, c, d);
 }

@@ -1,6 +1,6 @@
 import {Earth} from './CRS.Earth';
 import {SphericalMercator} from '../projection/Projection.SphericalMercator';
-import {toTransformation} from '../../geometry/Transformation';
+import {toTransformation} from '../../geometry/PointsTransformation';
 import * as Util from '../../core/Util';
 
 /*

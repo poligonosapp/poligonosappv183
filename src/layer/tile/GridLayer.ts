@@ -9,9 +9,13 @@ import * as Browser from '../../core/Browser';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
 // import {Point} from '../../geometry/Point';
-import { Bounds } from "../../geometry/Bounds.1";
-import {toLatLngBounds as latLngBounds} from '../../geo/LatLngBoundsFunction';
-import { LatLngBounds } from "../../geo/LatLngBounds.1";
+
+import { BoundsClass } from "src/geometry/BoundsClass";
+import { BoundsFunction } from "src/geometry/BoundsFunction";
+
+import {toLatLngBoundsFunction as latLngBounds} from '../../geo/LatLngBoundsFunction';
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
+import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
@@ -21,9 +25,9 @@ import {GeoJSONClass} from "src/layer/GeoJSONClass";
 import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
-type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
+type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass | typeof LatLngBoundsFunction>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-// type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type pointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -319,10 +323,11 @@ export const GridLayer = Layer.extend({
 	_setAutoZIndex: function (compare) {
 		// go through all other layers of the same pane, set zIndex to max + 1 (front) or min - 1 (back)
 
-		const layers = this.getPane().children;
-		const edgeZIndex = -compare(-Infinity, Infinity); // -Infinity for max, Infinity for min
+		const layers = this.getPane().children;let edgeZIndex = -compare(-Infinity, Infinity); // -Infinity for max, Infinity for min
 
-		for (const i = 0, len = layers.length, zIndex; i < len; i++) {
+		let zIndex;
+
+		for (const i in layers) {
 
 			zIndex = layers[i].style.zIndex;
 
@@ -345,9 +350,7 @@ export const GridLayer = Layer.extend({
 
 		DomUtil.setOpacity(this._container, this.options.opacity);
 
-		const now = +new Date();
-		const nextFrame = false;
-		const willPrune = false;
+		const now = +new Date();let nextFrame = false;let willPrune = false;
 
 		for (const key in this._tiles) {
 			const tile = this._tiles[key];
@@ -457,12 +460,12 @@ export const GridLayer = Layer.extend({
 			return;
 		}
 
-		for (key in this._tiles) {
+		for (const key in this._tiles) {
 			tile = this._tiles[key];
 			tile.retain = tile.current;
 		}
 
-		for (key in this._tiles) {
+		for (const key in this._tiles) {
 			tile = this._tiles[key];
 			if (tile.current && !tile.active) {
 				const coords = tile.coords;
@@ -472,14 +475,14 @@ export const GridLayer = Layer.extend({
 			}
 		}
 
-		for (key in this._tiles) {
+		for (const key in this._tiles) {
 			if (!this._tiles[key].retain) {
 				this._removeTile(key);
 			}
 		}
 	},
 
-	_removeTilesAtZoom: function (zoom) {
+	_removeTilesAtZoom: function (zoom:NumberReturnType) {
 		for (const key in this._tiles) {
 			if (this._tiles[key].coords.z !== zoom) {
 				continue;

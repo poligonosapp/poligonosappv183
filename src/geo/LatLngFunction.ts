@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as Util from '../core/Util';
 import {Earth} from './crs/CRS.Earth';
-import {toLatLngBounds} from './LatLngBoundsFunction';
+import {toLatLngBoundsFunction} from './LatLngBoundsFunction';
 
 // import {Point} from '../../geometry/Point';
 import {Bounds} from '../../geometry/Bounds';
@@ -133,7 +133,7 @@ LatLngFunction.prototype = {
 
 		const lngAccuracy = latAccuracy / Math.cos((Math.PI / 180) * this.lat);
 
-		return toLatLngBounds(
+		return toLatLngBoundsFunction(
 		        [this.lat - latAccuracy, this.lng - lngAccuracy],
 		        [this.lat + latAccuracy, this.lng + lngAccuracy]);
 	},

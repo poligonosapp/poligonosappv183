@@ -9,7 +9,7 @@ import {Handler} from '../../core/Handler';
 import {Draggable} from '../../dom/Draggable';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
-import {toLatLngBounds as latLngBounds} from '../../geo/LatLngBoundsFunction';
+import {toLatLngBoundsFunction as latLngBounds} from '../../geo/LatLngBoundsFunction';
 import {toBounds} from '../../geometry/BoundsFunction';
 
 /*

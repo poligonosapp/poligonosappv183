@@ -5,7 +5,10 @@ import {Evented} from '../core/Events';
 import {EPSG3857} from '../geo/crs/CRS.EPSG3857';
 import {Point, toPoint} from '../geometry/Point';
 import {toBounds} from '../geometry/BoundsFunction';
-import { Bounds } from "../geometry/Bounds.1";
+
+import { BoundsClass } from "../geometry/BoundsClass";
+import { BoundsFunction } from "../geometry/BoundsFunction";
+
 import {LatLngFunction, toLatLng} from '../geo/LatLngFunction';
 // import {LatLngBounds, toLatLngBounds} from '../geo/LatLngBounds';
 import * as Browser from '../core/Browser';
@@ -18,15 +21,18 @@ type EventReturnType = ReturnType<typeof Event>;
 
 // import {Point} from '../../geometry/Point';
 // import {Bounds} from '../../geometry/Bounds';
-import {LatLngBounds, toLatLngBounds as latLngBounds} from '../../geo/LatLngBounds';
+import {LatLngBounds, toLatLngBounds as latLngBounds} from "src/geo/LatLngBounds";
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
 // import * as Util from './Util';
 // import {Point} from "../geometry";
 import {FeatureGroup} from "../layer";
 
+import { GeoJSONClass } from "src/layer/GeoJSONClass";
+import { GeoJSONFunction } from "src/layer/GeoJSONFunction";
+
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;

@@ -1,5 +1,5 @@
 import {Polygon} from './Polygon';
-import {toLatLngBounds} from '../../geo/LatLngBoundsFunction';
+import {toLatLngBoundsFunction} from '../../geo/LatLngBoundsFunction';
 import {ReturnType} from 'typescript';
 // import {Point} from "../geometry";
 import {LatLngBounds} from "../geo";
@@ -61,7 +61,7 @@ export const Rectangle = Polygon.extend({
 	},
 
 	_boundsToLatLngs: function (latLngBounds) {
-		latLngBounds = toLatLngBounds(latLngBounds);
+		latLngBounds = toLatLngBoundsFunction(latLngBounds);
 		return [
 			latLngBounds.getSouthWest(),
 			latLngBounds.getNorthWest(),

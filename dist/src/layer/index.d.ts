@@ -1,8 +1,8 @@
 export { Layer } from './Layer';
 export { LayerGroup, layerGroup } from './LayerGroup';
 export { FeatureGroup, featureGroup } from './FeatureGroup';
-import { GeoJSON, geoJSON, geoJson } from './GeoJSON';
-export { GeoJSON, geoJSON, geoJson };
+import { GeoJSONFunction, geoJSON, geoJson } from './GeoJSONFunction';
+export { GeoJSONFunction as GeoJSON, geoJSON, geoJson };
 export { ImageOverlay, imageOverlay } from './ImageOverlay';
 export { VideoOverlay, videoOverlay } from './VideoOverlay';
 export { DivOverlay } from './DivOverlay';

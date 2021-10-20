@@ -77,7 +77,7 @@
         "pretest": "npm run lint --fix",
         "test": "npm run test-nolint",
         "test-nolint": "karma start ./spec/karma.conf.ts",
-        "build": "npm run ts-node webpack && npm run rollup && tsc --outDir ./dist && npm run uglify",
+        "build": "npm run rollup && tsc --outDir ./dist && npm run uglify",
         "release": "./build/publish.sh",
         "lint": "eslint src spec/suites docs/docs/tsc",
         "lintfix": "npm run lint --fix",

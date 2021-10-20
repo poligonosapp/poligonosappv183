@@ -2,13 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Layer} from './Layer';
 import * as Util from '../core/Util';
-import {toLatLngBounds} from '../geo/LatLngBoundsFunction';
-import { LatLngBounds } from "../geo/LatLngBounds.1";
-import { BoundsClass } from "../geometry/BoundsClass";
+import {toLatLngBoundsFunction} from '../geo/LatLngBoundsFunction';
+
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
+import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
+import { BoundsClass } from "src/geometry/BoundsClass";
+import { BoundsClassFunction } from "src/geometry/BoundsFunction";
+
 import * as DomUtil from '../dom/DomUtil';
 import {Object, ReturnType} from "typescript";
 import {Point} from "../geometry";
-import {LatLng} from "../geo";
+import {LatLngClass} from "src/geo";
 import {FeatureGroup} from "./FeatureGroup";
 import {GeoJSONFunction} from "./GeoJSONFunction";
 // import {GeoJSON} from './layer';
@@ -18,11 +22,11 @@ import {GeoJSONFunction} from "./GeoJSONFunction";
 type ImageOverlayReturnType = ReturnType<typeof ImageOverlay>;
 type EventReturnType = ReturnType<typeof Event>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
+type LatLngBoundsReturnType = ReturnType<typeof LatLngBoundsClass| typeof LatLngBoundsClass>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof Point | typeof Point[]>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LatLngReturnType = ReturnType<typeof LatLng>;
+type LatLngReturnType = ReturnType<typeof LatLngClass>;
 type GeoJSONReturnType = ReturnType<typeof GeoJSONFunction>;
 type MapReturnType = ReturnType<typeof Map>;
 type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -83,7 +87,7 @@ export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 
 	initialize: function (url:StringReturnType, bounds:BoundsReturnType, options:NumberReturnType) { // (String, LatLngBounds, Object)
 		this._url = url;
-		this._bounds = toLatLngBounds(bounds);
+		this._bounds = toLatLngBoundsFunction(bounds);
 
 		Util.getOptions(this, options);
 	},
@@ -163,7 +167,7 @@ export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 	// @method setBounds(bounds: LatLngBounds): this
 	// Update the bounds that this ImageOverlay covers
 	setBounds: function (bounds:BoundsReturnType) {
-		this._bounds = toLatLngBounds(bounds);
+		this._bounds = toLatLngBoundsFunction(bounds);
 
 		if (this._map) {
 			this._reset();

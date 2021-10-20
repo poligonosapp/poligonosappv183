@@ -5,7 +5,7 @@ import * as Browser from '../../core/Browser';
 import * as Util from '../../core/Util';
 import { Bounds } from "../../geometry/Bounds.1";
 
-import {toLatLngBounds as latLngBounds} from '../../geo/LatLngBoundsFunction';
+import {toLatLngBoundsFunction as latLngBounds} from '../../geo/LatLngBoundsFunction';
 import { LatLngBounds } from "../../geo/LatLngBounds.1";
 
 import {Object, ReturnType, HTMLElement} from 'typescript';

@@ -1,5 +1,5 @@
 export { Point, toPoint as point } from './Point';
-export { Bounds, toBounds as bounds } from './Bounds';
+export { Bounds, toBounds as bounds } from './BoundsFunction';
 export { Transformation, toTransformation as transformation } from './PointsTransformation';
 import * as LineUtil from './LineUtil';
 export { LineUtil };

@@ -101,7 +101,7 @@ LatLngBounds.prototype = {
 			if (!sw2 || !ne2) { return this; }
 
 		} else {
-			return obj ? this.extend(toLatLng(obj) || toLatLngBounds(obj)) : this;
+			return obj ? this.extend(toLatLng(obj) || toLatLngBoundsFunction(obj)) : this;
 		}
 
 		if (!sw && !ne) {
@@ -198,7 +198,7 @@ LatLngBounds.prototype = {
 		if (typeof obj[0] === 'number' || obj instanceof LatLngFunction || 'lat' in obj) {
 			obj = toLatLng(obj);
 		} else {
-			obj = toLatLngBounds(obj);
+			obj = toLatLngBoundsFunction(obj);
 		}
 
 		const sw = this._southWest;
@@ -236,7 +236,7 @@ LatLngBounds.prototype = {
 	// @method overlaps(otherBounds: LatLngBounds): Boolean
 	// Returns `true` if the rectangle overlaps the given bounds. Two bounds overlap if their intersection is an area.
 	overlaps: function (bounds:LatLngBoundsReturnType):boolean {
-		bounds = toLatLngBounds(bounds);
+		bounds = toLatLngBoundsFunction(bounds);
 
 		const sw = this._southWest;
 		const ne = this._northEast;
@@ -260,7 +260,7 @@ LatLngBounds.prototype = {
 	equals: function (bounds:LatLngBoundsReturnType, maxMargin:NumberReturnType):boolean {
 		if (!bounds) { return false; }
 
-		bounds = toLatLngBounds(bounds);
+		bounds = toLatLngBoundsFunction(bounds);
 
 		return this._southWest.equals(bounds.getSouthWest(), maxMargin) &&
 		       this._northEast.equals(bounds.getNorthEast(), maxMargin);
@@ -281,13 +281,18 @@ LatLngBounds.prototype = {
 // @alternative
 // @factory L.latLngBounds(latlngs: LatLng[])
 // Creates a `LatLngBounds` object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with [`fitBounds`](#map-fitbounds).
-export function toLatLngBounds(a: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType, b: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType):LatLngBoundsReturnType {
+export function toLatLngBoundsFunction(a: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType, 
+	b: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType):LatLngBoundsReturnType {
 	if (a instanceof LatLngBounds) {
 		return a;
 	}
+	else if (b instanceof LatLngBounds) 
 	return new LatLngBoundsClass(a, b);
+	else{
+		throw new Exception("toLatLngBoundsFunction Exception");
+	}
 }
-export function toLatLngBounds(latlngs: LatLngBoundsReturnType[]):LatLngBoundsReturnType {
+export function toLatLngBoundsFunction(latlngs: LatLngBoundsReturnType[]):LatLngBoundsReturnType {
 	if (latlngs[0] instanceof LatLngBounds) {
 		return latlngs[0];
 	}

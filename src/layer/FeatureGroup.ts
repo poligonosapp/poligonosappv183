@@ -4,7 +4,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {LayerGroup} from './LayerGroup';
-import { LatLngBounds } from "../geo/LatLngBounds.1";
+
+import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
 
 /*
  * @class FeatureGroup
@@ -36,7 +38,7 @@ import {LatLng} from "../geo";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type MapReturnType = ReturnType<typeof Map>;
 type LatLngReturnType = ReturnType<typeof LatLng>;
-type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
+type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass|typeof LatLngBoundsFunction>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -105,7 +107,7 @@ export const FeatureGroup = LayerGroup.extend({
 	// @method getBounds(): LatLngBounds
 	// Returns the LatLngBounds of the Feature Group (created from bounds and coordinates of its children).
 	getBounds: function ():LatLngBoundsReturnType {
-		const bounds:LatLngBoundsReturnType = new LatLngBounds();
+		const bounds:LatLngBoundsReturnType = new LatLngBoundsClass();
 
 		for (const id in this._layers) {
 			const layer = this._layers[id];

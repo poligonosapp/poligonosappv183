@@ -1,0 +1,13 @@
+import { version } from './package.json';
+export { version };
+import { Map } from './map/Map';
+export declare type MapReturnType = ReturnType<typeof Map>;
+import { ReturnType } from "typescript";
+export * from PoligonosApp;
+export * from './control/index';
+export * from './core/index';
+export * from './dom/index';
+export * from './geometry/index';
+export * from './geo/index';
+export * from './layer/index';
+export * from './map/index';

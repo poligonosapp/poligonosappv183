@@ -1,4 +1,4 @@
-import { Object, ReturnType } from 'typescript';
+import { Object, ReturnType, Event } from 'typescript';
 import { Point } from "../geometry";
 declare type EventReturnType = ReturnType<typeof Event>;
 declare type StringReturnType = ReturnType<typeof Point.prototype.toString> | string | ReturnType<typeof Object.String>;

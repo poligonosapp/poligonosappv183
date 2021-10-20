@@ -60,7 +60,7 @@ export const Draggable = Evented.extend({
 	// @constructor L.Draggable(el: HTMLElement, dragHandle?: HTMLElement, preventOutline?: Boolean, options?: Draggable options)
 	// Creates a `Draggable` object for moving `el` when you start dragging the `dragHandle` element (equals `el` itself by default).
 	initialize: function (element:HTMLElementReturnType, dragStartTarget:HTMLElementReturnType, preventOutline:boolean, options: GeoJSONReturnType[]) {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 
 		this._element = element;
 		this._dragStartTarget = dragStartTarget || element;

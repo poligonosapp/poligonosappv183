@@ -10,13 +10,17 @@ import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
 // import {Point} from '../../geometry/Point';
 import { Bounds } from "../../geometry/Bounds.1";
-import {LatLngBounds, toLatLngBounds as latLngBounds} from '../../geo/LatLngBounds';
+import {toLatLngBounds as latLngBounds} from '../../geo/LatLngBoundsFunction';
+import { LatLngBounds } from "../../geo/LatLngBounds.1";
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
 import {FeatureGroup} from "../FeatureGroup";
 import { MapReturnType } from 'src/core/Handler';
+import {GeoJSONClass} from "src/layer/GeoJSONClass";
+import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -179,8 +183,8 @@ export const GridLayer = Layer.extend({
 		keepBuffer: 2
 	},
 
-	initialize: function (options) {
-		Util.setOptions(this, options);
+	initialize: function (options:GeoJSONReturnType[]):GeoJSONReturnType[] {
+		return Util.getOptions(this, options);
 	},
 
 	onAdd: function () {

@@ -30,7 +30,7 @@ export const Attribution = Control.extend({
 	},
 
 	initialize: function (options) {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 
 		this._attributions = {};
 	},

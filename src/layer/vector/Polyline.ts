@@ -1,8 +1,8 @@
 import {Path} from './Path';
 import * as Util from '../../core/Util';
 import * as LineUtil from '../../geometry/LineUtil';
-import {LatLng, toLatLng} from '../../geo/LatLng';
-import {LatLngBounds} from '../../geo/LatLngBounds';
+import {LatLngFunction, toLatLng} from '../../geo/LatLngFunction';
+import { LatLngBounds } from "../../geo/LatLngBounds.1";
 import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 
@@ -12,7 +12,7 @@ import {LatLngBounds} from "../geo";
 // import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type LatLngReturnType = ReturnType<typeof LatLng>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof Point>;
@@ -82,7 +82,7 @@ export const Polyline = Path.extend({
 	},
 
 	initialize: function (latlngs:LatLngReturnType, options:NumberReturnType) {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 		this._setLatLngs(latlngs);
 	},
 
@@ -250,7 +250,7 @@ export const Polyline = Path.extend({
 
 	// recursively turns latlngs into a set of rings with projected coordinates
 	_projectLatlngs: function (latlngs:LatLngReturnType[], result, projectedBounds) {
-		const flat = latlngs[0] instanceof LatLng;
+		const flat = latlngs[0] instanceof LatLngFunction;
 		// const len = latlngs.length;
 		// const i;
 		const ring;

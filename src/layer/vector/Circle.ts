@@ -1,8 +1,8 @@
 import {CircleMarker} from './CircleMarker';
 import {Path} from './Path';
 import * as Util from '../../core/Util';
-import {toLatLng} from '../../geo/LatLng';
-import {LatLngBounds} from '../../geo/LatLngBounds';
+import {toLatLng} from '../../geo/LatLngFunction';
+import { LatLngBounds } from "../../geo/LatLngBounds.1";
 import {Earth} from '../../geo/crs/CRS.Earth';
 
 
@@ -29,7 +29,7 @@ export const Circle = CircleMarker.extend({
 			// Backwards compatibility with 0.7.x factory (latlng, radius, options?)
 			options = Util.extend({}, legacyOptions, {radius: options});
 		}
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 		this._latlng = toLatLng(latlng);
 
 		if (isNaN(this.options.radius)) { throw new Error('Circle radius cannot be NaN'); }

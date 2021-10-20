@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {LayerGroup} from './LayerGroup';
-import {LatLngBounds} from '../geo/LatLngBounds';
+import { LatLngBounds } from "../geo/LatLngBounds.1";
 
 /*
  * @class FeatureGroup

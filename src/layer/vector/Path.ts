@@ -133,7 +133,7 @@ export const Path = Layer.extend({
 	// @method setStyle(style: Path options): this
 	// Changes the appearance of a Path based on the options in the `Path options` object.
 	setStyle: function (style) {
-		Util.setOptions(this, style);
+		Util.getOptions(this, style);
 		if (this._renderer) {
 			this._renderer._updateStyle(this);
 			if (this.options.stroke && style && Object.prototype.hasOwnProperty.call(style, 'weight')) {

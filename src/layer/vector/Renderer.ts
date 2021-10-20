@@ -8,7 +8,8 @@ import { Bounds } from "../../geometry/Bounds.1";
 
 import {Point} from '../../geometry/Point';
 // import {Bounds} from '../../geometry/Bounds';
-import {LatLngBounds, toLatLngBounds as latLngBounds} from '../../geo/LatLngBounds';
+import {toLatLngBounds as latLngBounds} from '../../geo/LatLngBoundsFunction';
+import { LatLngBounds } from "../../geo/LatLngBounds.1";
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
@@ -76,7 +77,7 @@ export const Renderer = Layer.extend({
 	},
 
 	initialize: function (options:NumberReturnType):void {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 		Util.stamp(this);
 		this._layers = this._layers || {};
 	},

@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as Util from '../core/Util';
 import {Earth} from './crs/CRS.Earth';
-import {toLatLngBounds} from './LatLngBounds';
+import {toLatLngBounds} from './LatLngBoundsFunction';
 
 // import {Point} from '../../geometry/Point';
 import {Bounds} from '../../geometry/Bounds';
@@ -15,7 +15,7 @@ import {Point} from "../geometry";
 import {FeatureGroup} from "../layer";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -61,25 +61,16 @@ type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | 
  * can't be added to it with the `include` function.
  */
 
-interface Props{
+export interface Props{
 	lat:NumberReturnType;
 	lng:NumberReturnType;
 	alt:NumberReturnType;
 }
 
-export public class LatLng{
+export function LatLngFunction(props:Props):void {
 	
-	#props:Props;
-
-	constructor(props:Props){
-		this.props = props;
-	}
-}
-
-export function LatLng(props:Props):void {
-	
-	if (isNaN(lat) || isNaN(lng)) {
-		throw new Error('Invalid LatLng object: (' + lat + ', ' + lng + ')');
+	if (isNaN(props.lat) || isNaN(props.lng)) {
+		throw new Error('Invalid LatLng object: (' + props.lat + ', ' + props.lng + ')');
 	}
 
 	// @property lat: Number
@@ -99,7 +90,7 @@ export function LatLng(props:Props):void {
 	// }
 }
 
-LatLng.prototype = {
+LatLngFunction.prototype = {
 	// @method equals(otherLatLng: LatLng, maxMargin?: Number): Boolean
 	// Returns `true` if the given `LatLng` point is at the same position (within a small margin of error). The margin of error can be overridden by setting `maxMargin` to a small number.
 	equals: function (obj:LatLngReturnType, maxMargin:NumberReturnType):boolean {
@@ -137,7 +128,9 @@ LatLng.prototype = {
 	// @method toBounds(sizeInMeters: Number): LatLngBounds
 	// Returns a new `LatLngBounds` object in which each boundary is `sizeInMeters/2` meters apart from the `LatLng`.
 	toBounds: function (sizeInMeters:NumberReturnType): LatLngBoundsReturnType[] {
+
 		const latAccuracy = 180 * sizeInMeters / 40075017;
+
 		const lngAccuracy = latAccuracy / Math.cos((Math.PI / 180) * this.lat);
 
 		return toLatLngBounds(
@@ -146,7 +139,7 @@ LatLng.prototype = {
 	},
 
 	clone: function ():LatLngReturnType {
-		return new LatLng(this.lat, this.lng, this.alt);
+		return new LatLngClass(this.lat, this.lng, this.alt);
 	}
 };
 
@@ -164,15 +157,15 @@ LatLng.prototype = {
 // Expects an plain object of the form `{lat: Number, lng: Number}` or `{lat: Number, lng: Number, alt: Number}` instead.
 
 export function toLatLng(a:NumberReturnType, b:NumberReturnType, c:NumberReturnType):LatLngReturnType {
-	if (a instanceof LatLng) {
+	if (a instanceof LatLngFunction) {
 		return a;
 	}
 	if (Util.isArray(a) && typeof a[0] !== 'object') {
 		if (a.length === 3) {
-			return new LatLng(a[0], a[1], a[2]);
+			return new LatLngFunction(a[0], a[1], a[2]);
 		}
 		if (a.length === 2) {
-			return new LatLng(a[0], a[1]);
+			return new LatLngFunction(a[0], a[1]);
 		}
 		return null;
 	}
@@ -180,10 +173,10 @@ export function toLatLng(a:NumberReturnType, b:NumberReturnType, c:NumberReturnT
 		return a;
 	}
 	if (typeof a === 'object' && 'lat' in a) {
-		return new LatLng(a.lat, 'lng' in a ? a.lng : a.lon, a.alt);
+		return new LatLngFunction(a.lat, 'lng' in a ? a.lng : a.lon, a.alt);
 	}
 	if (b === undefined) {
 		return null;
 	}
-	return new LatLng(a, b, c);
+	return new LatLngFunction(a, b, c);
 }

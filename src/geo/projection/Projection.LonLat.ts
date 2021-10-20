@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import {LatLng} from '../LatLng';
+import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 
@@ -53,7 +53,7 @@ export const LonLat = {
 	},
 
 	unproject: function (point:PointReturnType):LatLngReturnType {
-		return new LatLng(point.y, point.x);
+		return new LatLngFunction(point.y, point.x);
 	},
 
 	bounds: new Bounds([-180, -90], [180, 90])

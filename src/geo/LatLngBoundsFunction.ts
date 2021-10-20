@@ -4,14 +4,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {LatLng, toLatLng} from './LatLng';
+import {LatLngFunction, toLatLng} from './LatLngFunction';
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
 import {FeatureGroup} from "../layer";
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type LatLngReturnType = ReturnType<typeof LatLng>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -60,12 +61,17 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  * can't be added to it with the `include` function.
  */
 
+export interface Props{
+	corner1:NumberReturnType|LatLngReturnType;
+	corner2:NumberReturnType|LatLngReturnType
+}
+
 export function LatLngBounds(corner1:NumberReturnType|LatLngReturnType, corner2:NumberReturnType|LatLngReturnType):LatLngReturnType|LatLngReturnType[] { // (LatLng, LatLng) or (LatLng[])
 	if (!corner1) { return; }
 
 	const latlngs = corner2 ? [corner1, corner2] : corner1;
 
-	for (let i = 0, len = latlngs.length; i < len; i++) {
+	for (const i in latlngs) {
 		this.extend(latlngs[i]);
 	}
 }
@@ -81,14 +87,14 @@ LatLngBounds.prototype = {
 	extend: function (obj: LatLngReturnType | LatLngBoundsReturnType):LatLngBoundsReturnType|void {
 		const sw = this._southWest;
 		const ne = this._northEast;
-		const sw2;
-		const ne2;
+		let sw2;
+		let ne2;
 
-		if (obj instanceof LatLng) {
+		if (obj instanceof LatLngFunction) {
 			sw2 = obj;
 			ne2 = obj;
 
-		} else if (obj instanceof LatLngBounds) {
+		} else if (obj instanceof LatLngBoundsClass) {
 			sw2 = obj._southWest;
 			ne2 = obj._northEast;
 
@@ -99,8 +105,8 @@ LatLngBounds.prototype = {
 		}
 
 		if (!sw && !ne) {
-			this._southWest = new LatLng(sw2.lat, sw2.lng);
-			this._northEast = new LatLng(ne2.lat, ne2.lng);
+			this._southWest = new LatLngClass(sw2.lat, sw2.lng);
+			this._northEast = new LatLngClass(ne2.lat, ne2.lng);
 		} else {
 			sw.lat = Math.min(sw2.lat, sw.lat);
 			sw.lng = Math.min(sw2.lng, sw.lng);
@@ -121,15 +127,15 @@ LatLngBounds.prototype = {
 		const heightBuffer = Math.abs(sw.lat - ne.lat) * bufferRatio;
 		const widthBuffer = Math.abs(sw.lng - ne.lng) * bufferRatio;
 
-		return new LatLngBounds(
-		        new LatLng(sw.lat - heightBuffer, sw.lng - widthBuffer),
-		        new LatLng(ne.lat + heightBuffer, ne.lng + widthBuffer));
+		return new LatLngBoundsClass(
+		        new LatLngFunction(sw.lat - heightBuffer, sw.lng - widthBuffer),
+		        new LatLngFunction(ne.lat + heightBuffer, ne.lng + widthBuffer));
 	},
 
 	// @method getCenter(): LatLng
 	// Returns the center point of the bounds.
 	getCenter: function (): LatLngReturnType {
-		return new LatLng(
+		return new LatLngClass(
 		        (this._southWest.lat + this._northEast.lat) / 2,
 		        (this._southWest.lng + this._northEast.lng) / 2);
 	},
@@ -149,13 +155,13 @@ LatLngBounds.prototype = {
 	// @method getNorthWest(): LatLng
 	// Returns the north-west point of the bounds.
 	getNorthWest: function (): LatLngReturnType {
-		return new LatLng(this.getNorth(), this.getWest());
+		return new LatLngFunction(this.getNorth(), this.getWest());
 	},
 
 	// @method getSouthEast(): LatLng
 	// Returns the south-east point of the bounds.
 	getSouthEast: function (): LatLngReturnType {
-		return new LatLng(this.getSouth(), this.getEast());
+		return new LatLngFunction(this.getSouth(), this.getEast());
 	},
 
 	// @method getWest(): Number
@@ -189,7 +195,7 @@ LatLngBounds.prototype = {
 	// @method contains (latlng: LatLng): Boolean
 	// Returns `true` if the rectangle contains the given point.
 	contains: function (obj:LatLngBoundsReturnType|LatLngReturnType):LatLngBoundsReturnType|LatLngReturnType { // (LatLngBounds) or (LatLng) -> Boolean
-		if (typeof obj[0] === 'number' || obj instanceof LatLng || 'lat' in obj) {
+		if (typeof obj[0] === 'number' || obj instanceof LatLngFunction || 'lat' in obj) {
 			obj = toLatLng(obj);
 		} else {
 			obj = toLatLngBounds(obj);
@@ -200,7 +206,7 @@ LatLngBounds.prototype = {
 		const sw2;
 		const ne2;
 
-		if (obj instanceof LatLngBounds) {
+		if (obj instanceof LatLngBoundsClass) {
 			sw2 = obj.getSouthWest();
 			ne2 = obj.getNorthEast();
 		} else {
@@ -214,7 +220,7 @@ LatLngBounds.prototype = {
 	// @method intersects(otherBounds: LatLngBounds): Boolean
 	// Returns `true` if the rectangle intersects the given bounds. Two bounds intersect if they have at least one point in common.
 	intersects: function (bounds: LatLngBoundsReturnType[]):boolean {
-		bounds = toLatLngBounds(bounds);
+		bounds = toLatLngBoundsClass(bounds);
 
 		const sw = this._southWest;
 		const ne = this._northEast;
@@ -279,11 +285,11 @@ export function toLatLngBounds(a: LatLngReturnType|LatLngReturnType[]|LatLngBoun
 	if (a instanceof LatLngBounds) {
 		return a;
 	}
-	return new LatLngBounds(a, b);
+	return new LatLngBoundsClass(a, b);
 }
 export function toLatLngBounds(latlngs: LatLngBoundsReturnType[]):LatLngBoundsReturnType {
 	if (latlngs[0] instanceof LatLngBounds) {
 		return latlngs[0];
 	}
-	return new LatLngBounds(latlngs[0], latlngs[1]);
+	return new LatLngBoundsClass(latlngs[0], latlngs[1]);
 }

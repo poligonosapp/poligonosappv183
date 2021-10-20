@@ -6,7 +6,7 @@ import {EPSG3857} from '../geo/crs/CRS.EPSG3857';
 import {Point, toPoint} from '../geometry/Point';
 import {toBounds} from '../geometry/BoundsFunction';
 import { Bounds } from "../geometry/Bounds.1";
-import {LatLng, toLatLng} from '../geo/LatLng';
+import {LatLngFunction, toLatLng} from '../geo/LatLngFunction';
 // import {LatLngBounds, toLatLngBounds} from '../geo/LatLngBounds';
 import * as Browser from '../core/Browser';
 import * as DomEvent from '../dom/DomEvent';
@@ -27,7 +27,7 @@ import {FeatureGroup} from "../layer";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
-type LatLngReturnType = ReturnType<typeof LatLng>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -162,7 +162,7 @@ export const Map: GeoJSONReturnType = Evented.extend({
 
 	initialize: function (id:NumberReturnType, options:NumberReturnType): HTMLElement | StringReturnType | ObjectReturnType { // (HTMLElement or String, Object)
 
-		options = Util.setOptions(this, options);
+		options = Util.getOptions(this, options);
 
 		// Make sure to assign internal flags at the beginning,
 		// to avoid inconsistent state in some edge cases.
@@ -724,7 +724,7 @@ export const Map: GeoJSONReturnType = Evented.extend({
 	_handleGeolocationResponse: function (pos) {
 		const lat = pos.coords.latitude,
 		    lng = pos.coords.longitude,
-		    latlng = new LatLng(lat, lng),
+		    latlng = new LatLngFunction(lat, lng),
 		    bounds = latlng.toBounds(pos.coords.accuracy * 2),
 		    options = this._locateOptions;
 

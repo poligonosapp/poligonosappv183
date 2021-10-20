@@ -12,7 +12,7 @@ import {Circle} from './vector/Circle';
 import {CircleMarker} from './vector/CircleMarker';
 import {Polyline} from './vector/Polyline';
 import {Polygon} from './vector/Polygon';
-import {LatLng} from '../geo/LatLng';
+import {LatLngFunction} from '../geo/LatLngFunction';
 import * as LineUtil from '../geometry/LineUtil';
 import {Object, ReturnType} from "typescript";
 import {Point} from "../geometry";
@@ -29,7 +29,7 @@ import {Function} from 'typescript';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type FunctionReturnType = ReturnType<typeof Function>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LatLngReturnType = ReturnType<typeof LatLng>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type GeoJSONReturnType = ReturnType<typeof GeoJSONFunction|GeoJSONClass>;
 export type MapReturnType = ReturnType<typeof Map>;
 type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -114,7 +114,7 @@ export const GeoJSONFunction:FunctionReturnType = FeatureGroup.extend({
 	 */
 
 	initialize: function (geojson:GeoJSONReturnType, options:NumberReturnType):void {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 
 		this._layers = {};
 
@@ -268,7 +268,7 @@ function _pointToLayer(pointToLayerFn:FunctionReturnType, geojson:GeoJSONReturnT
 // Creates a `LatLng` object from an array of 2 numbers (longitude, latitude)
 // or 3 numbers (longitude, latitude, altitude) used in GeoJSON for points.
 export function coordsToLatLng(coords:[]): LatLngReturnType {
-	return new LatLng(coords[1], coords[0], coords[2]);
+	return new LatLngFunction(coords[1], coords[0], coords[2]);
 }
 
 // @function coordsToLatLngs(coords: Array, levelsDeep?: Number, coordsToLatLng?: Function): Array

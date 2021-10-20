@@ -268,7 +268,7 @@ Layer.include({
 	bindTooltip: function (content, options) {
 
 		if (content instanceof Tooltip) {
-			Util.setOptions(content, options);
+			Util.getOptions(content, options);
 			this._tooltip = content;
 			content._source = this;
 		} else {

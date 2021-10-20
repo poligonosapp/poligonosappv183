@@ -5,7 +5,7 @@ import {toPointsTransformationFunction} from '../../geometry/PointsTransformatio
 import * as Util from '../../core/Util';
 
 
-import {LatLng} from '../LatLng';
+import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 
@@ -16,7 +16,7 @@ import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;

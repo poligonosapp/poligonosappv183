@@ -58,7 +58,7 @@ type numberAuxY = ReturnType<typeof Object.Number>;
 export const LayerGroup = Layer.extend({
 // 12 IANA Considerations Optional parameters:  n/a
 	initialize: function (layers:LayerReturnType, options:NumberReturnType):LatLngBoundsReturnType|void {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 
 		this._layers = {};
 

@@ -1,7 +1,7 @@
 
 import { BoundsClass } from "../../geometry/BoundsClass";
-import {LatLng} from '../LatLng';
-import {LatLngBounds} from '../LatLngBounds';
+import {LatLngFunction} from '../LatLngFunction';
+import { LatLngBounds } from "../LatLngBounds.1";
 import * as Util from '../../core/Util';
 
 import {LonLat} from './Projection.LonLat';
@@ -22,7 +22,7 @@ import {Object, ReturnType} from 'typescript';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 import { PointReturnImpl } from './PointReturnImpl';
 import { PointsTransformationFunction } from 'src/geometry/PointsTransformation';
-type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
@@ -166,7 +166,7 @@ export const CRS = {
 
 		const alt = latlng.alt;
 
-		return new LatLng(lat, lng, alt);
+		return new LatLngFunction(lat, lng, alt);
 	},
 
 	// @method wrapLatLngBounds(bounds: LatLngBounds): LatLngBounds
@@ -190,9 +190,9 @@ export const CRS = {
 
 		const ne = bounds.getNorthEast();
 
-		const newSw = new LatLng(sw.lat - latShift, sw.lng - lngShift);
+		const newSw = new LatLngFunction(sw.lat - latShift, sw.lng - lngShift);
 
-		const newNe = new LatLng(ne.lat - latShift, ne.lng - lngShift);
+		const newNe = new LatLngFunction(ne.lat - latShift, ne.lng - lngShift);
 
 		return new LatLngBounds(newSw, newNe);
 	}

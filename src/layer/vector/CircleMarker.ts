@@ -1,6 +1,6 @@
 import {Path} from './Path';
 import * as Util from '../../core/Util';
-import {LatLng, toLatLng} from '../../geo/LatLng';
+import {LatLngFunction, toLatLng} from '../../geo/LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
 
 import {Object, ReturnType} from "typescript";
@@ -14,7 +14,7 @@ import {FeatureGroup} from "../FeatureGroup";
 type EventReturnType = ReturnType<typeof Event>;
 // type FunctionReturnType = ReturnType<typeof Function>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LatLngReturnType = ReturnType<typeof LatLng>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 // type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
 export type MapReturnType = ReturnType<typeof L.Map>;
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -42,7 +42,7 @@ export const CircleMarker = Path.extend({
 	},
 
 	initialize: function (latlng:LayerReturnType, options:NumberReturnType):void {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 		this._latlng = toLatLng(latlng);
 		this._radius = this.options.radius;
 	},

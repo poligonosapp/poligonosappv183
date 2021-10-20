@@ -375,7 +375,7 @@ Layer.include({
 	bindPopup: function (content, options) {
 
 		if (content instanceof Popup) {
-			Util.setOptions(content, options);
+			Util.getOptions(content, options);
 			this._popup = content;
 			content._source = this;
 		} else {

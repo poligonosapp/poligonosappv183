@@ -1,9 +1,9 @@
-import {LatLng} from '../LatLng';
+import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 
 import { PointReturnImpl } from "src/geometry/PointReturnImpl";
-type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 
 /**
  * CRS helper

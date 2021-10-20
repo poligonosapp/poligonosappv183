@@ -6,7 +6,7 @@
 import {Layer} from './Layer';
 import {FeatureGroup} from './FeatureGroup';
 import * as Util from '../core/Util';
-import {toLatLng} from '../geo/LatLng';
+import {toLatLng} from '../geo/LatLngFunction';
 import {toPoint} from '../geometry/Point';
 import * as DomUtil from '../dom/DomUtil';
 
@@ -40,7 +40,7 @@ export const DivOverlay = Layer.extend({
 	},
 
 	initialize: function (options, source) {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 
 		this._source = source;
 	},

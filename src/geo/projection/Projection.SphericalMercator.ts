@@ -1,10 +1,10 @@
-import {LatLng} from '../LatLng';
+import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 
 /*
  * @namespace Projection
@@ -36,7 +36,7 @@ export const SphericalMercator = {
 	unproject: function (point) {
 		const d = 180 / Math.PI;
 
-		return new LatLng(
+		return new LatLngFunction(
 			(2 * Math.atan(Math.exp(point.y / this.R)) - (Math.PI / 2)) * d,
 			point.x * d / this.R);
 	},

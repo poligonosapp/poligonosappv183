@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import {LatLng} from '../LatLng';
+import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 
 /*
  * @namespace Projection
@@ -51,6 +51,6 @@ export const Mercator = {
 			phi += dphi;
 		}
 
-		return new LatLng(phi * d, point.x * d / r);
+		return new LatLngFunction(phi * d, point.x * d / r);
 	}
 };

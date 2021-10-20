@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { GeoJSONAbstractClass } from "../../core/GeoJSONAbstractClass";
-import {setOptions} from '../../core/Util';
+import {getOptions} from '../../core/Util';
 import {toPoint as point} from '../../geometry/Point';
 import {retina} from '../../core/Browser';
 import {GeoJSON} from '../layer';
@@ -91,7 +91,7 @@ export const Icon: GeoJSONReturnType = GeoJSONAbstractClass.extend({
 	},
 
 	initialize: function (options:GeoJSONReturnType[]) {
-		setOptions(this, options);
+		getOptions(this, options);
 	},
 
 	// @method createIcon(oldIcon?: HTMLElement): HTMLElement

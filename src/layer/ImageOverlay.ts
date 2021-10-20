@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Layer} from './Layer';
 import * as Util from '../core/Util';
-import {LatLngBounds, toLatLngBounds} from '../geo/LatLngBounds';
+import {toLatLngBounds} from '../geo/LatLngBoundsFunction';
+import { LatLngBounds } from "../geo/LatLngBounds.1";
 import { BoundsClass } from "../geometry/BoundsClass";
 import * as DomUtil from '../dom/DomUtil';
 import {Object, ReturnType} from "typescript";
@@ -84,7 +85,7 @@ export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 		this._url = url;
 		this._bounds = toLatLngBounds(bounds);
 
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 	},
 
 	onAdd: function () {

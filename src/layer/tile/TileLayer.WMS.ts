@@ -1,5 +1,5 @@
 import {TileLayer} from './TileLayer';
-import {extend, setOptions, getParamString} from '../../core/Util';
+import {extend, getOptions, getParamString} from '../../core/Util';
 import {retina} from '../../core/Browser';
 import {EPSG4326} from '../../geo/crs/CRS.EPSG4326';
 import {toBounds} from '../../geometry/BoundsFunction';
@@ -78,7 +78,7 @@ export const TileLayerWMS = TileLayer.extend({
 			}
 		}
 
-		options = setOptions(this, options);
+		options = getOptions(this, options);
 
 		const realRetina = options.detectRetina && retina ? 2 : 1;
 		const tileSize = this.getTileSize();

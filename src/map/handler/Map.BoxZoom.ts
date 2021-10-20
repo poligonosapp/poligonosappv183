@@ -8,8 +8,14 @@ import {Handler} from '../../core/Handler';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
 import * as DomEvent from '../../dom/DomEvent';
-import {LatLngBounds} from '../../geo/LatLngBounds';
-import { Bounds } from "../../geometry/Bounds.1";
+
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
+import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
+
+import { BoundsClass } from "../../geometry/BoundsClass";
+import { BoundsFunction } from "../../geometry/BoundsFunction";
+
+import {Event} from "typescript";
 
 type EventReturnType = ReturnType<typeof Event>;
 type MapReturnType = ReturnType<typeof Map>;
@@ -87,7 +93,7 @@ export const BoxZoom = Handler.extend({
 		}, this);
 	},
 
-	_onMouseMove: function (e) {
+	_onMouseMove: function (e:EventReturnType) {
 		if (!this._moved) {
 			this._moved = true;
 
@@ -99,7 +105,7 @@ export const BoxZoom = Handler.extend({
 
 		this._point = this._map.mouseEventToContainerPoint(e);
 
-		const bounds = new Bounds(this._point, this._startPoint);
+		const bounds = new BoundsClass(this._point, this._startPoint);
 		const size = bounds.getSize();
 
 		DomUtil.setPosition(this._box, bounds.min);
@@ -136,7 +142,7 @@ export const BoxZoom = Handler.extend({
 		this._clearDeferredResetState();
 		this._resetStateTimeout = setTimeout(Util.bind(this._resetState, this), 0);
 
-		const bounds = new LatLngBounds(this._map.containerPointToLatLng(this._startPoint),
+		const bounds = new LatLngBoundsClass(this._map.containerPointToLatLng(this._startPoint),
 		this._map.containerPointToLatLng(this._point));
 
 		this._map
@@ -144,7 +150,7 @@ export const BoxZoom = Handler.extend({
 			.fire('boxzoomend', {boxZoomBounds: bounds});
 	},
 
-	_onKeyDown: function (e) {
+	_onKeyDown: function (e:EventReturnType) {
 		if (e.keyCode === 27) {
 			this._finish();
 		}

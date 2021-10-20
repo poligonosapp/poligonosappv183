@@ -24,7 +24,7 @@ export const Control = GeoJSONAbstractClass.extend({
 	},
 
 	initialize: function (options) {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 	},
 
 	/* @section

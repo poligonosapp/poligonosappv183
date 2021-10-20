@@ -1,5 +1,5 @@
-export {LatLng, toLatLng as latLng} from './LatLng';
-export {LatLngBounds, toLatLngBounds as latLngBounds} from './LatLngBounds';
+export {LatLngFunction as LatLng, toLatLng as latLng} from './LatLngFunction';
+export {LatLngBounds, toLatLngBounds as latLngBounds} from './LatLngBoundsFunction';
 
 import * as Projection from './projection/index';
 export {Projection};

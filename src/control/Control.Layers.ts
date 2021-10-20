@@ -96,7 +96,7 @@ export const Layers = Control.extend({
 	},
 
 	initialize: function (baseLayers:LayerReturnType[], overlays:LayerReturnType[], options:NumberReturnType) {
-		Util.setOptions(this, options);
+		Util.getOptions(this, options);
 
 		this._layerControlInputs = [];
 		this._layers = [];

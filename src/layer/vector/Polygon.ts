@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Polyline} from './Polyline';
-import {LatLng} from '../../geo/LatLng';
+import {LatLngFunction} from '../../geo/LatLngFunction';
 import * as LineUtil from '../../geometry/LineUtil';
 import {Point} from '../../geometry/Point';
 import { Bounds } from "../../geometry/Bounds.1";
@@ -108,7 +108,7 @@ export const Polygon = Polyline.extend({
 		    len = result.length;
 
 		// remove last point if it equals first one
-		if (len >= 2 && result[0] instanceof LatLng && result[0].equals(result[len - 1])) {
+		if (len >= 2 && result[0] instanceof LatLngFunction && result[0].equals(result[len - 1])) {
 			result.pop();
 		}
 		return result;

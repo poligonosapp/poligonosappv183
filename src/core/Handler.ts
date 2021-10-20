@@ -71,5 +71,8 @@ export public class Handler extends GeoJSONAbstractClass.extend({
  	};
 
 });
+	static extend(arg0: { initialize: (map: any) => void; addHooks: () => void; removeHooks: () => void; moved: () => any; _destroy: () => void; _resetState: () => void; _clearDeferredResetState: () => void; _onMouseDown: (e: any) => false | undefined; _onMouseMove: (e: any) => void; _finish: () => void; _onMouseUp: (e: any) => void; _onKeyDown: (e: any) => void; }) {
+		throw new Error('Method not implemented.');
+	}
 
 

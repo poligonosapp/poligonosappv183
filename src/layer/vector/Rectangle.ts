@@ -1,5 +1,5 @@
 import {Polygon} from './Polygon';
-import {toLatLngBounds} from '../../geo/LatLngBounds';
+import {toLatLngBounds} from '../../geo/LatLngBoundsFunction';
 import {ReturnType} from 'typescript';
 // import {Point} from "../geometry";
 import {LatLngBounds} from "../geo";

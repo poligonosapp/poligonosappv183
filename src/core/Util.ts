@@ -40,7 +40,9 @@ import {Point} from '../geometry';
 
 import {DemoAbstractClassImpl} from './DemoAbstractClassImpl';
 
-import {GeoJSON} from '../layer';
+// import {GeoJSON} from '../layer';
+import {GeoJSONClass} from "src/layer/GeoJSONClass";
+import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
 // @ts-ignore
 import {ReturnType} from "typescript";
 import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
@@ -48,7 +50,7 @@ import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type LatLngReturnType = ReturnType<typeof LatLng>;
-type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 
 type EventReturnType = ReturnType<typeof Event>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -222,7 +224,7 @@ export function splitWords(str:StringReturnType | StringReturnType[]) {
 
 // @function setOptions(obj: Object, options: Object): Object
 // Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`. Has an `L.setOptions` shortcut.
-export function setOptions(obj:ObjectReturnType, options:GeoJSONReturnType[]):GeoJSONReturnType[] {
+export function getOptions(obj:ObjectReturnType, options:GeoJSONReturnType[]):GeoJSONReturnType[] {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!Object.prototype.hasOwnProperty.call(obj, 'options')) {
 		obj.options = obj.options ? create(obj.options) : {};

@@ -13,10 +13,18 @@ module.exports = {
       path.resolve(__dirname, '../src'),
     ],
     alias: {
+      "jquery-ui": "jquery-ui/jquery-ui.js",
+      modules: path.join(__dirname, "node_modules"),
       'jquery-ui': 'jquery-ui-dist/jquery-ui.js',
       Utilities: path.resolve(__dirname, 'src/utilities/'),
       Templates: path.resolve(__dirname, 'src/templates/'),
     },
     extensions: ['', '.ts','.js', '.json'],
-  },
+  },plugins: [
+    new webpack.ProvidePlugin({
+      "$":"jquery",
+      "jQuery":"jquery",
+      "window.jQuery":"jquery"
+    }
+  ]
 };

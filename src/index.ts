@@ -23,6 +23,14 @@ export function index():void{
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const {$}= require("jquery");
+    
+    const {event, ui } = require("jquery-ui");
+
+    $( ".selector" ).autocomplete({
+        focus: function( event:event, ui ) {}
+      });
+
+      $( ".selector" ).on( "autocompletefocus", function( event, ui ) {} );
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-var-requires
     const Exception = require("typescript");
@@ -41,7 +49,7 @@ export function index():void{
         //typescript 2304
         // const result = (e as Exception).Message;
 
-        // console.log(result);
+        console.log(e.message);
 
         throw new Exception("LEAFLET TOKEN NOT FOUND");
 

@@ -9,7 +9,7 @@ import {Object, ReturnType} from "typescript";
 import {Point} from "../geometry";
 import {LatLng} from "../geo";
 import {FeatureGroup} from "./FeatureGroup";
-import {GeoJSON} from "./GeoJSON";
+import {GeoJSONFunction} from "./GeoJSONFunction";
 // import {GeoJSON} from './layer';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type LatLngReturnType = ReturnType<typeof LatLng>;
@@ -22,7 +22,7 @@ type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | 
 type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof Point | typeof Point[]>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type LatLngReturnType = ReturnType<typeof LatLng>;
-type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSONFunction>;
 type MapReturnType = ReturnType<typeof Map>;
 type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

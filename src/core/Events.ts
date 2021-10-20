@@ -8,7 +8,7 @@ import { GeoJSONAbstractClass } from "./GeoJSONAbstractClass";
 import * as Util from './Util';
 
 // @ts-ignore
-import {Object, ReturnType} from 'typescript';
+import {Object, ReturnType, Event} from 'typescript';
 import {Point} from "../geometry";
 import {LayerGroup} from "../layer";
 

@@ -15,6 +15,7 @@ import {LatLngBounds, toLatLngBounds as latLngBounds} from '../../geo/LatLngBoun
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
 import {FeatureGroup} from "../FeatureGroup";
+import { MapReturnType } from 'src/core/Handler';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
@@ -192,11 +193,11 @@ export const GridLayer = Layer.extend({
 		this._update();
 	},
 
-	beforeAdd: function (map) {
+	beforeAdd: function (map:MapReturnType) {
 		map._addZoomLimit(this);
 	},
 
-	onRemove: function (map) {
+	onRemove: function (map:MapReturnType) {
 		this._removeAllTiles();
 		DomUtil.remove(this._container);
 		map._removeZoomLimit(this);
@@ -240,7 +241,7 @@ export const GridLayer = Layer.extend({
 
 	// @method setZIndex(zIndex: Number): this
 	// Changes the [zIndex](#gridlayer-zindex) of the grid layer.
-	setZIndex: function (zIndex) {
+	setZIndex: function (zIndex:NumberReturnType) {
 		this.options.zIndex = zIndex;
 		this._updateZIndex();
 

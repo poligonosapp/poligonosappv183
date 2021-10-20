@@ -1,6 +1,6 @@
 // typescript webpack.config.js https://webpack.js.org/guides/typescript/
 const path = require('path');
-const webpack = require('webpack');// https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
+var webpack = require('webpack'); // https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
 
 module.exports = {
   mode: 'production',

@@ -1,6 +1,6 @@
 // typescript webpack.config.js https://webpack.js.org/guides/typescript/
 const path = require('path');
-const webpack = require('webpack');// https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
+const webpack = require('webpack'); // https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
 
 module.exports = {
   mode: 'production',
@@ -20,7 +20,7 @@ module.exports = {
     alias: {
       "jquery-ui": "jquery-ui/jquery-ui.js",
       modules: path.join(__dirname, "node_modules"),
-      'jquery-ui': 'jquery-ui-dist/jquery-ui.js',
+      'jquery-ui-dist': 'jquery-ui-dist/jquery-ui.js',
       Utilities: path.resolve(__dirname, 'src/utilities/'),
       Templates: path.resolve(__dirname, 'src/templates/'),
     },
@@ -30,7 +30,6 @@ module.exports = {
       "$":"jquery",
       "jQuery":"jquery",
       "window.jQuery":"jquery"
-    }),
-    new HtmlWebpackPlugin({ template: './index.html' })
+    })
   ]
 };

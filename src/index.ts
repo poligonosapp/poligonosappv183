@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 // webpack index.ts
 import _ from 'lodash';
 function component() {
@@ -27,7 +28,7 @@ export function index():void{
     const {event, ui } = require("jquery-ui");
 
     $( ".selector" ).autocomplete({
-        focus: function( event:event, ui ) {}
+        focus: function( event:event, ui:ui ) {}
       });
 
       $( ".selector" ).on( "autocompletefocus", function( event, ui ) {} );

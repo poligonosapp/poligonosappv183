@@ -10,7 +10,7 @@ export default {
   input: 'src/index.ts',
   output: {
     dir: 'dist',
-    format: 'es'
+    format: 'cjs'
   },  
   plugins: [
     typescript({declaration:true, lib: ["es2020","es5","es6", "dom"], target: "es5"}),
@@ -23,5 +23,5 @@ export default {
       ]
     })
   ],
-  external: ["angular", "react"]
+  external: ["webpack","babel","ts-node","typescript","jquery-ui","jquery","angular", "react","karma","eslint"]
 };

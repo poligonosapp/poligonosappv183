@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 // import {Point, toPoint} from './Point';
 // import {Point, toPoint} from './PointImp';
 import {PointReturn} from './PointReturn';
@@ -36,13 +39,14 @@ import {PointReturn} from './PointReturn';
 import {Object, ReturnType} from 'typescript';
 import {Point, toPoint} from "./Point";
 import {PointReturnImpl} from "./PointReturnImpl";
+import { BoundsClass } from './BoundsClass';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof Point> | ReturnType<typeof PointReturnImpl>;
 
-type BoundsReturnType = ReturnType<typeof Bounds | typeof Array | typeof Point | typeof Point[]>;
+type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof Point | typeof Point[]>;
 
 // type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 // type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
@@ -53,12 +57,17 @@ type BoundsReturnType = ReturnType<typeof Bounds | typeof Array | typeof Point |
 
 // type numberAuxY = ReturnType<typeof Object.Number>;
 
+export interface Props{
+	a:NumberReturnType;
+	b:NumberReturnType;
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function Bounds(a:NumberReturnType, b:NumberReturnType): BoundsReturnType {
 
 	if (!a) { return; }
 
-	const points = b ? [a, b] : a;
+	const points:NumberReturnType[] = b ? [a, b] : a;
 
 	for (const i in points) {
 		this.extend(points[i]);
@@ -171,6 +180,7 @@ Bounds.prototype = {
 	// Returns `true` if the rectangle intersects the given bounds. Two bounds
 	// intersect if they have at least one point in common.
 	intersects: function (bounds:BoundsReturnType):boolean { // (Bounds) -> Boolean
+		
 		bounds = toBounds(bounds);
 
 		const min = this.min;
@@ -211,8 +221,8 @@ Bounds.prototype = {
 // @factory L.bounds(points: Point[])
 // Creates a Bounds object from the given array of points.
 export function toBounds(a:PointReturnType|PointReturnType[], b:PointReturnType|PointReturnType[]):BoundsReturnType {
-	if (!a || a instanceof Bounds) {
+	if (!a || a instanceof BoundsClass) {
 		return a;
 	}
-	return new Bounds(a, b);
+	return new BoundsClass(a, b);
 }

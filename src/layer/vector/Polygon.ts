@@ -9,7 +9,7 @@ import {Polyline} from './Polyline';
 import {LatLng} from '../../geo/LatLng';
 import * as LineUtil from '../../geometry/LineUtil';
 import {Point} from '../../geometry/Point';
-import {Bounds} from '../../geometry/Bounds';
+import { Bounds } from "../../geometry/Bounds.1";
 import * as PolyUtil from '../../geometry/PolyUtil';
 
 /*

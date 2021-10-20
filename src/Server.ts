@@ -36,6 +36,8 @@ import Exception from "typescript";
 
 function serve(): void | GeoJSONAbstractClass | StringReturnType {
 
+
+
     const {MapReturnType} = require("./layer/GeoJSON");
 
     console.log(`\n...\n`);
@@ -83,50 +85,51 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
 
             polygons.addTo(map);
 
-            console.log((6%2 == 0));
+            // console.log((6%2 == 0));
 
-            const option:boolean = (6%2 == 0);
+            // const option:boolean = (6%2 == 0);
 
             let token:string;
             let a:string;
             let s:string;
+// Octokit pipeline parser
+            token = require('./Token');
 
-            switch (option) {
-                case false:
-                    // eslint-disable-next-line no-case-declarations
-                    a = atlassianFunction(a, token, L, s, map);
+            a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
 
-                    console.log(map);
+            s = a.concat(token);
 
-                    //});
-                    break;
-                case true:
-                    token = require('./Token');
+            L.tileLayer(s, {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox/light-v9',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(map);
+// Atlassian pipeline parser
+            token = require('./Pipeline');
 
-                    a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
-                    // const b2 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+            a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
 
-                    s = a.concat(token);
+            s = a.concat(token);
 
-                    L.tileLayer(s, {
-                        maxZoom: 18,
-                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                        id: 'mapbox/light-v9',
-                        tileSize: 512,
-                        zoomOffset: -1
-                    }).addTo(map);
+            L.tileLayer(s, {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox/light-v9',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(map);
 
-                    break;
-            } // end switch
-
-        }); // end res.get
+    
 
         // typescript 2304 cannot find name 'res'
         // res.json({success:true});
 
 
-    }//end try res.get
+    }//end try res get
     catch (e) {
         // typescript error TS1044
         // const result = (e as Exception).Message;
@@ -150,13 +153,13 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
 
 
 function atlassianFunction(a: string, token: string, L: any, s: string, map: any) {
-    token: string = require('./Pipeline');
+    token = require('./Pipeline');
 
     // eslint-disable-next-line no-case-declarations
     a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
     // const b1 = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
     // eslint-disable-next-line no-case-declarations
-    s: string = a.concat(token);
+    s = a.concat(token);
 
     L.tileLayer(s, {
         maxZoom: 18,

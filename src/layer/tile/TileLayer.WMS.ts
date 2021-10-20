@@ -2,7 +2,7 @@ import {TileLayer} from './TileLayer';
 import {extend, setOptions, getParamString} from '../../core/Util';
 import {retina} from '../../core/Browser';
 import {EPSG4326} from '../../geo/crs/CRS.EPSG4326';
-import {toBounds} from '../../geometry/Bounds';
+import {toBounds} from '../../geometry/BoundsFunction';
 
 /*
  * @class TileLayer.WMS

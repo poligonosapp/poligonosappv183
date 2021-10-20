@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as Util from '../core/Util';
@@ -15,7 +17,7 @@ import {FeatureGroup} from "../layer";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
-// type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 // type pointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
@@ -24,6 +26,7 @@ type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | Ret
 // type LayerGroupReturnType = ReturnType<typeof  LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type PointReturnType = ReturnType<typeof Point>;
+// type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 // type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
 // type roundReturnType = ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;
@@ -58,7 +61,23 @@ type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | 
  * can't be added to it with the `include` function.
  */
 
-export function LatLng(this: any, lat:NumberReturnType, lng:NumberReturnType, alt:NumberReturnType):void {
+interface Props{
+	lat:NumberReturnType;
+	lng:NumberReturnType;
+	alt:NumberReturnType;
+}
+
+export public class LatLng{
+	
+	#props:Props;
+
+	constructor(props:Props){
+		this.props = props;
+	}
+}
+
+export function LatLng(props:Props):void {
+	
 	if (isNaN(lat) || isNaN(lng)) {
 		throw new Error('Invalid LatLng object: (' + lat + ', ' + lng + ')');
 	}
@@ -66,18 +85,18 @@ export function LatLng(this: any, lat:NumberReturnType, lng:NumberReturnType, al
 	// @property lat: Number
 	// Latitude in degrees
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	this.lat = +lat;
+	// this.lat:NumberReturnType = +lat;// Declaring this in a function unreachable code
 
 	// @property lng: Number
 	// Longitude in degrees
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	this.lng = +lng;
+	// this.lng:NumberReturnType = +lng;
 
 	// @property alt: Number
 	// Altitude in meters (optional)
-	if (alt !== undefined) {
-		this.alt = +alt;
-	}
+	// if (alt !== undefined) {
+		// this.alt = +alt;
+	// }
 }
 
 LatLng.prototype = {

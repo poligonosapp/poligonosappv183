@@ -9,10 +9,10 @@ import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
 import * as DomEvent from '../../dom/DomEvent';
 import {LatLngBounds} from '../../geo/LatLngBounds';
-import {Bounds} from '../../geometry/Bounds';
+import { Bounds } from "../../geometry/Bounds.1";
 
 type EventReturnType = ReturnType<typeof Event>;
-type MapReturnType = ReturnType<typeof EventReturnType>;
+type MapReturnType = ReturnType<typeof Map>;
 
 /*
  * L.Handler.BoxZoom is used to add shift-drag zoom interaction to the map
@@ -29,7 +29,7 @@ Map.mergeOptions({
 });
 
 export const BoxZoom = Handler.extend({
-	initialize: function (map) {
+	initialize: function (map:MapReturnType) {
 		this._map = map;
 		this._container = map._container;
 		this._pane = map._panes.overlayPane;
@@ -66,7 +66,7 @@ export const BoxZoom = Handler.extend({
 		}
 	},
 
-	_onMouseDown: function (e) {
+	_onMouseDown: function (e:EventReturnType) {
 		if (!e.shiftKey || ((e.which !== 1) && (e.button !== 1))) { return false; }
 
 		// Clear the deferred resetState if it hasn't executed yet, otherwise it
@@ -125,7 +125,7 @@ export const BoxZoom = Handler.extend({
 		}, this);
 	},
 
-	_onMouseUp: function (e) {
+	_onMouseUp: function (e:EventReturnType) {
 		if ((e.which !== 1) && (e.button !== 1)) { return; }
 
 		this._finish();

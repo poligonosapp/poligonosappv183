@@ -1,21 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Layer} from './Layer';
 import * as Util from '../core/Util';
 import {LatLngBounds, toLatLngBounds} from '../geo/LatLngBounds';
-import {Bounds} from '../geometry/Bounds';
+import { BoundsClass } from "../geometry/BoundsClass";
 import * as DomUtil from '../dom/DomUtil';
 import {Object, ReturnType} from "typescript";
 import {Point} from "../geometry";
 import {LatLng} from "../geo";
 import {FeatureGroup} from "./FeatureGroup";
 import {GeoJSON} from "./GeoJSON";
-
+// import {GeoJSON} from './layer';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+// type LatLngReturnType = ReturnType<typeof LatLng>;
+// type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
 type ImageOverlayReturnType = ReturnType<typeof ImageOverlay>;
 type EventReturnType = ReturnType<typeof Event>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-type BoundsReturnType = ReturnType<typeof Bounds | typeof Array | typeof Point | typeof Point[]>;
+type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof Point | typeof Point[]>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type LatLngReturnType = ReturnType<typeof LatLng>;
 type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
@@ -40,7 +44,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  * ```
  */
 
-export const ImageOverlay = Layer.extend({
+export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 
 	// @section
 	// @aka ImageOverlay options

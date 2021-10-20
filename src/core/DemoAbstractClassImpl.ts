@@ -6,11 +6,12 @@ import {GeoJSON} from './layer/vector/GeoJSON';
 import { Point } from 'src/geometry';
 import { LayerGroup } from 'src/layer';
 
-import * as L from '../Leaflet';
+// import * as L from '../Leaflet';
+import {Map} from '../Map';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
-export type MapReturnType = ReturnType<typeof L.Map>;
+export type MapReturnType = ReturnType<typeof Map>;
 type ObjectReturnType = ReturnType<typeof Object>;
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 

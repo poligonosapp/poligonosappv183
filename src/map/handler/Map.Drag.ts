@@ -10,7 +10,7 @@ import {Draggable} from '../../dom/Draggable';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
 import {toLatLngBounds as latLngBounds} from '../../geo/LatLngBounds';
-import {toBounds} from '../../geometry/Bounds';
+import {toBounds} from '../../geometry/BoundsFunction';
 
 /*
  * L.Handler.MapDrag is used to make the map draggable (with panning inertia), enabled by default.

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as Util from '../core/Util';
 import {Evented} from '../core/Events';
 import {EPSG3857} from '../geo/crs/CRS.EPSG3857';
 import {Point, toPoint} from '../geometry/Point';
-import {Bounds, toBounds} from '../geometry/Bounds';
+import {toBounds} from '../geometry/BoundsFunction';
+import { Bounds } from "../geometry/Bounds.1";
 import {LatLng, toLatLng} from '../geo/LatLng';
 // import {LatLngBounds, toLatLngBounds} from '../geo/LatLngBounds';
 import * as Browser from '../core/Browser';
@@ -19,10 +21,12 @@ type EventReturnType = ReturnType<typeof Event>;
 import {LatLngBounds, toLatLngBounds as latLngBounds} from '../../geo/LatLngBounds';
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
+// import * as Util from './Util';
 // import {Point} from "../geometry";
 import {FeatureGroup} from "../layer";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
 type LatLngReturnType = ReturnType<typeof LatLng>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
@@ -62,7 +66,7 @@ type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | 
  *
  */
 
-export const Map = Evented.extend({
+export const Map: GeoJSONReturnType = Evented.extend({
 
 	options: {
 		// @section Map State Options
@@ -156,7 +160,8 @@ export const Map = Evented.extend({
 		trackResize: true
 	},
 
-	initialize: function (id:NumberReturnType, options:NumberReturnType): HTMLElement | StringReturnType | Object { // (HTMLElement or String, Object)
+	initialize: function (id:NumberReturnType, options:NumberReturnType): HTMLElement | StringReturnType | ObjectReturnType { // (HTMLElement or String, Object)
+
 		options = Util.setOptions(this, options);
 
 		// Make sure to assign internal flags at the beginning,

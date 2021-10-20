@@ -16,6 +16,7 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
+    "strict": true,
     "moduleResolution": "node",
     "paths": {
       "src/*":["src/*"],

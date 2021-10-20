@@ -4,7 +4,7 @@ import {CRS} from './CRS';
 import * as Util from '../../core/Util';
 
 import {LatLng} from '../LatLng';
-import {Bounds} from '../../geometry/Bounds';
+import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 
 
@@ -18,7 +18,7 @@ import {Point} from "../geometry";
 // type EventReturnType= ReturnType<typeof Event>;
 // type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-// type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -54,7 +54,7 @@ export const Earth = Util.extend({}, CRS, {
 	R: 6371000,
 
 	// distance between two geographical points using spherical law of cosines approximation
-	distance: function (latlng1:LatLngReturnType, latlng2:LatLngReturnType) {
+	distance: function (latlng1:LatLngReturnType, latlng2:LatLngReturnType):NumberReturnType {
 		const rad = Math.PI / 180;
 		const lat1 = latlng1.lat * rad;
 		const lat2 = latlng2.lat * rad;

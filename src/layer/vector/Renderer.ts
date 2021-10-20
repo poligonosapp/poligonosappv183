@@ -2,7 +2,7 @@ import {Layer} from '../Layer';
 import * as DomUtil from '../../dom/DomUtil';
 import * as Util from '../../core/Util';
 import * as Browser from '../../core/Browser';
-import {Bounds} from '../../geometry/Bounds';
+import { Bounds } from "../../geometry/Bounds.1";
 
 // import {Bounds} from '../../geometry/Bounds';
 

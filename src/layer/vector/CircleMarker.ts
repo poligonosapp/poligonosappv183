@@ -1,7 +1,7 @@
 import {Path} from './Path';
 import * as Util from '../../core/Util';
 import {LatLng, toLatLng} from '../../geo/LatLng';
-import {Bounds} from '../../geometry/Bounds';
+import { Bounds } from "../../geometry/Bounds.1";
 
 import {Object, ReturnType} from "typescript";
 import {Point} from "../geometry";

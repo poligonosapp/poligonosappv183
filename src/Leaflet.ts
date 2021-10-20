@@ -6,11 +6,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import {version} from '../package.json';
+import {version} from './package.json';
 export {version};
 
 // import * as L from './Leaflet';
-import {Map} from './Leaflet';
+import {Map} from './map/Map';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
@@ -26,7 +26,7 @@ import {Object, ReturnType, Set} from "typescript";
 import {LayerGroup} from "./layer";
 import {Point} from "./geometry";
 
-const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet.ts');
+import { L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
 
 //canvas
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -35,7 +35,7 @@ public const map: MapReturnType = L.Map('map', {
 	renderer: L.canvas()
 });
 
-const data:GeoJSONReturnType[] = require('/polygons.geojson');
+import data from '/polygons.geojson';
 
   L.geoJSON(data, {
  	style: function (feature:LayerReturnType) {

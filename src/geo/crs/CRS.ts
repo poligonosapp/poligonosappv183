@@ -1,5 +1,5 @@
 
-import {Bounds} from '../../geometry/Bounds';
+import { BoundsClass } from "../../geometry/BoundsClass";
 import {LatLng} from '../LatLng';
 import {LatLngBounds} from '../LatLngBounds';
 import * as Util from '../../core/Util';
@@ -26,7 +26,7 @@ type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.pro
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
-// type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
+type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -112,21 +112,26 @@ export const CRS = {
 	// @method zoom(scale: Number): Number
 	// Inverse of `scale()`, returns the zoom level corresponding to a scale
 	// factor of `scale`.
-	zoom: function (scale) {
+	zoom: function (scale:NumberReturnType):NumberReturnType {
 		return Math.log(scale / 256) / Math.LN2;
 	},
 
 	// @method getProjectedBounds(zoom: Number): Bounds
 	// Returns the projection's bounds scaled and transformed for the provided `zoom`.
-	getProjectedBounds: function (zoom) {
+	getProjectedBounds: function (zoom:NumberReturnType):BoundsClass {
+
 		if (this.infinite) { return null; }
 
-		const b = this.projection.bounds,
-		    s = this.scale(zoom),
-		    min = this.transformation.transform(b.min, s),
-		    max = this.transformation.transform(b.max, s);
+		const b = this.projection.bounds;
 
-		return new Bounds(min, max);
+		const s = this.scale(zoom);
+
+		const min = this.transformation.transform(b.min, s);
+
+		const max = this.transformation.transform(b.max, s);
+
+		return new BoundsClass(min, max);
+
 	},
 
 	// @method distance(latlng1: LatLng, latlng2: LatLng): Number
@@ -153,10 +158,13 @@ export const CRS = {
 	// @method wrapLatLng(latlng: LatLng): LatLng
 	// Returns a `LatLng` where lat and lng has been wrapped according to the
 	// CRS's `wrapLat` and `wrapLng` properties, if they are outside the CRS's bounds.
-	wrapLatLng: function (latlng) {
-		const lng = this.wrapLng ? Util.wrapNum(latlng.lng, this.wrapLng, true) : latlng.lng,
-		    lat = this.wrapLat ? Util.wrapNum(latlng.lat, this.wrapLat, true) : latlng.lat,
-		    alt = latlng.alt;
+	wrapLatLng: function (latlng:LatLngReturnType): LatLngReturnType {
+
+		const lng = this.wrapLng ? Util.wrapNum(latlng.lng, this.wrapLng, true) : latlng.lng;
+
+		const lat = this.wrapLat ? Util.wrapNum(latlng.lat, this.wrapLat, true) : latlng.lat;
+
+		const alt = latlng.alt;
 
 		return new LatLng(lat, lng, alt);
 	},
@@ -165,20 +173,26 @@ export const CRS = {
 	// Returns a `LatLngBounds` with the same size as the given one, ensuring
 	// that its center is within the CRS's bounds.
 	// Only accepts actual `L.LatLngBounds` instances, not arrays.
-	wrapLatLngBounds: function (bounds) {
-		const center = bounds.getCenter(),
-		    newCenter = this.wrapLatLng(center),
-		    latShift = center.lat - newCenter.lat,
-		    lngShift = center.lng - newCenter.lng;
+	wrapLatLngBounds: function (bounds:LatLngBoundsReturnType):LatLngBoundsReturnType {
+
+		const center = bounds.getCenter();
+
+		const newCenter = this.wrapLatLng(center);
+
+		const latShift = center.lat - newCenter.lat;
+		const lngShift = center.lng - newCenter.lng;
 
 		if (latShift === 0 && lngShift === 0) {
 			return bounds;
 		}
 
-		const sw = bounds.getSouthWest(),
-		    ne = bounds.getNorthEast(),
-		    newSw = new LatLng(sw.lat - latShift, sw.lng - lngShift),
-		    newNe = new LatLng(ne.lat - latShift, ne.lng - lngShift);
+		const sw = bounds.getSouthWest();
+
+		const ne = bounds.getNorthEast();
+
+		const newSw = new LatLng(sw.lat - latShift, sw.lng - lngShift);
+
+		const newNe = new LatLng(ne.lat - latShift, ne.lng - lngShift);
 
 		return new LatLngBounds(newSw, newNe);
 	}

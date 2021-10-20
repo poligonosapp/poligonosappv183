@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {LatLng} from '../LatLng';
-import {Bounds} from '../../geometry/Bounds';
+import { Bounds } from "../../geometry/Bounds.1";
 import {Point} from '../../geometry/Point';
 import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
 

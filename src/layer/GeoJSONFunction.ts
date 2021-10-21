@@ -271,8 +271,8 @@ function _pointToLayer(pointToLayerFn:FunctionReturnType, geojson:GeoJSONReturnT
 // @function coordsToLatLng(coords: Array): LatLng
 // Creates a `LatLng` object from an array of 2 numbers (longitude, latitude)
 // or 3 numbers (longitude, latitude, altitude) used in GeoJSON for points.
-export function coordsToLatLng(coords:[]): LatLngReturnType {
-	return new LatLngClass(coords[1], coords[0], coords[2]);
+export function coordsToLatLng(coords:NumberReturnType[]): LatLngReturnType {
+	return new LatLngFunction(coords[1], coords[0],).toLatLng(coords[1], coords[0], coords[2]);
 }
 
 // @function coordsToLatLngs(coords: Array, levelsDeep?: Number, coordsToLatLng?: Function): Array

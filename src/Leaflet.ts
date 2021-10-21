@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import {version} from './package';
+import {version} from "../../package";
 export {version};
 
 // import * as L from './Leaflet';

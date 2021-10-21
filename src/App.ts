@@ -29,7 +29,7 @@ class App extends React.Component{
         // this.props.a  = a;
 
         this.state = {
-            leafletTokenGitHub: await require('./Pipeline').pipeline().toPromise(),
+            leafletTokenGitHub: await require('./Token').token().toPromise(),
             leafletTokenAtlassian: await require('./Pipeline').pipeline().toPromise(),
             mapConst: new PoligonosApp().L.Map('map', {
                 renderer: PoligonosApp.L.canvas()
@@ -46,7 +46,7 @@ class App extends React.Component{
 
     private github() {
         // this.props.leafletTokenGitHub = await require('./Token').token().toPromise();
-        this.props.s = this.props.a.concat(this.state.leafletTokenGitHub);
+        this.props.s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.state.leafletTokenGitHub);
 
         PoligonosApp.L.tileLayer(this.props.s, {
             maxZoom: 18,
@@ -63,7 +63,7 @@ class App extends React.Component{
             
             // this.state.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
 
-            this.props.s = this.props.a.concat(this.state.leafletTokenAtlassian);
+            this.props.s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.state.leafletTokenAtlassian);
 
             new PoligonosApp().L.tileLayer(this.props.s, {
                 maxZoom: 18,
@@ -93,7 +93,7 @@ class App extends React.Component{
         );
 
 
-        return (<div>PoligonosApp {this.state.mapConst}<div>);
+        return (<div>PoligonosApp {this.state.mapConst}</div>);
     }
 } // end class App
 

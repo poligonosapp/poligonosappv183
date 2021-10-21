@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import {version} from "../../package";
+import {version} from "../src";
 export {version};
 
 // import * as L from './Leaflet';
@@ -19,7 +19,7 @@ export type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof Laye
 
 // import {L.PoligonosApp} from './PoligonosApp';
 
-import polygonsArray:typeof GeoJSONReturnType[] from './polygons.geojson';
+import polygonsArray: PoligonosApp().L.Polygon[] from './polygons.geojson';
 
 import {GeoJSONClass} from 'src/layer/GeoJSONClass';
 import {GeoJSONFunction} from 'src/layer/GeoJSONFunction';

@@ -28,7 +28,7 @@ async function token (): Promise<string>{
     }
     finally{
         // return null;
-        throw new Exception('retieve token GitHub error');
+        console.log('\n GitHub Token.ts finally \n');
     }
     
 }

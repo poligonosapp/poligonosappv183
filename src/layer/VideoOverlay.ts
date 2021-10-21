@@ -10,12 +10,13 @@ import * as Util from '../core/Util';
 // @ts-ignore
 import {ReturnType} from 'typescript';
 // import {Point} from "../geometry";
-import {LatLngBounds} from "../geo";
+import {LatLngBoundsClass} from "src/geo/LatLngBoundsClass";
+import {LatLngBoundsFunction} from "src/geo/LatLngBoundsFunction";
 // import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type LatLngReturnType = ReturnType<typeof LatLng>;
-type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
+type LatLngBoundsReturnType = ReturnType<typeof LatLngBoundsClass | typeof LatLngBoundsFunction>;
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 // type PointReturnType = ReturnType<typeof Point>;
 // type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;

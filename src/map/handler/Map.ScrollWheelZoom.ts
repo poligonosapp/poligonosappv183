@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Map} from '../Map';
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 import * as DomEvent from '../../dom/DomEvent';
 import * as Util from '../../core/Util';
 
@@ -32,7 +32,7 @@ Map.mergeOptions({
 	wheelPxPerZoomLevel: 60
 });
 
-export const ScrollWheelZoom = Handler.extend({
+export const ScrollWheelZoom = HandlerFunction.extend({
 	addHooks: function () {
 		DomEvent.on(this._map._container, 'wheel', this._onWheelScroll, this);
 

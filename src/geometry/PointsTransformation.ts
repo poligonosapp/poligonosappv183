@@ -51,14 +51,14 @@ type PointReturnType = ReturnType<typeof Point>;
  * ```
  */
 
-export public class PointsTransformationClass implements Iterable<PointReturnImpl>{
+export class PointsTransformationClass implements Iterable<PointReturnImpl>{
 
-	private let _a:PointReturnImpl;
-	private let _b:PointReturnImpl;
-	private let _c:PointReturnImpl;
-	private let _d:PointReturnImpl;
+	_a:PointReturnImpl;
+    _b:PointReturnImpl;
+	_c:PointReturnImpl;
+	_d:PointReturnImpl;
 
-	private let coefficients: Set<PointReturnType>;
+	coefficients!: Set<PointReturnType>;
 
 	constructor(a:PointReturnImpl, 
 		b:PointReturnImpl, 
@@ -79,13 +79,14 @@ export function PointsTransformationFunction(a:PointReturnImpl,
 	c:PointReturnImpl, 
 	d:PointReturnImpl):NumberReturnType[]|NumberReturnType|PointReturnImpl|void {
 
-	this._a = a;
-	this._b = b;
-	this._c = c;
-	this._d = d;
+	// this._a:PointReturnImpl = a;
+	// this._b:PointReturnImpl = b;
+	// this._c:PointReturnImpl = c;
+	// this._d:PointReturnImpl = d;
 }
 
 PointsTransformationFunction.prototype = {
+	
 	// @method transform(point: Point, scale?: Number): Point
 	// Returns a transformed point, optionally multiplied by the given scale.
 	// Only accepts actual `L.Point` instances, not arrays.

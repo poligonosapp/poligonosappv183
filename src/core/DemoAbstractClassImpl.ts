@@ -2,7 +2,10 @@ import { GeoJSONAbstractClass } from './GeoJSONAbstractClass';
 import * as Util from './Util';
 
 import {Object, ReturnType} from "typescript";
-import {GeoJSON} from './layer/vector/GeoJSON';
+
+import {GeoJSONClass} from "src/layer/GeoJSONClass";
+import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
+
 import { Point } from 'src/geometry';
 import { LayerGroup } from 'src/layer';
 
@@ -10,7 +13,7 @@ import { LayerGroup } from 'src/layer';
 import {Map} from '../Map';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 export type MapReturnType = ReturnType<typeof Map>;
 type ObjectReturnType = ReturnType<typeof Object>;
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -24,7 +27,7 @@ public class DemoAbstractClassImpl extends GeoJSONAbstractClass{
 	} // end constructor
 
 // @overrride
-export function extend (props:GeoJSONReturnType[]) {
+static function extend (props:GeoJSONReturnType[]) {
 
 	// @function extend(props: Object): Function
 	// [Extends the current class](#class-inheritance) given the properties to be included.

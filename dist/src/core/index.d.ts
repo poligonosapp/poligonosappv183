@@ -17,7 +17,7 @@ export declare const Mixin: {
         _propagateEvent: (e: any) => void;
     };
 };
-export { Handler } from './Handler';
+export { HandlerFunction as Handler } from './HandlerFunction';
 import * as Util from './Util';
 export { Util };
 export { extend, bind, stamp, getOptions as setOptions } from './Util';

@@ -52,7 +52,7 @@ type PointReturnType = ReturnType<typeof Point>;
  * ```
  */
 
-public class ArrayTransformationClass implements Iterable<PointReturnType>{
+export class ArrayTransformationClass implements Iterable<PointReturnType>{
 
 	private let _a:PointReturnImpl[];
 	private let _b:PointReturnImpl[];
@@ -146,10 +146,11 @@ ArrayTransformationFunction.prototype = {
 // Expects an coefficients array of the form
 // `[a: Number, b: Number, c: Number, d: Number]`.
 
-export function toArrayTransformationFunction(coefficients:NumberReturnType[]):ArrayTransformationClass[]{
+export function toArrayTransformationFunction(coefficients:NumberReturnType[]):ArrayTransformationClass{
 	return new ArrayTransformationClass(coefficients);
 }
 
-export function toTransformation2(a:NumberReturnType, b:NumberReturnType, c:NumberReturnType, d:NumberReturnType):Transformation0 {
+export function toTransformation2(a:NumberReturnType, 
+	b:NumberReturnType, c:NumberReturnType, d:NumberReturnType):PointsTransformationClass {
 	return new PointsTransformationClass(a, b, c, d);
 }

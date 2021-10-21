@@ -1,9 +1,11 @@
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 import * as DomUtil from '../../dom/DomUtil';
 import {Draggable} from '../../dom/Draggable';
 import {toBounds} from '../../geometry/BoundsFunction';
 import {toPoint} from '../../geometry/Point';
 import {requestAnimFrame, cancelAnimFrame} from '../../core/Util';
+
+
 
 /*
  * L.Handler.MarkerDrag is used internally by L.Marker to make the markers draggable.
@@ -23,7 +25,7 @@ import {requestAnimFrame, cancelAnimFrame} from '../../core/Util';
  * Marker dragging handler (by both mouse and touch). Only valid when the marker is on the map (Otherwise set [`marker.options.draggable`](#marker-draggable)).
  */
 
-export var MarkerDrag = Handler.extend({
+export const MarkerDrag = HandlerFunction.extend({
 	initialize: function (marker) {
 		this._marker = marker;
 	},

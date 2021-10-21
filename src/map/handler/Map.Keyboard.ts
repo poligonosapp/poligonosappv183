@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Map} from '../Map';
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 import {on, off, stop} from '../../dom/DomEvent';
 import {toPoint} from '../../geometry/Point';
 
@@ -25,7 +25,7 @@ Map.mergeOptions({
 	keyboardPanDelta: 80
 });
 
-export const Keyboard = Handler.extend({
+export const Keyboard = HandlerFunction.extend({
 
 	keyCodes: {
 		left:    [37],

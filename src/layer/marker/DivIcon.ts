@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {Icon} from './Icon';
 import {toPoint as point} from '../../geometry/Point';
 import {empty} from '../../dom/DomUtil';
@@ -21,7 +23,7 @@ import {empty} from '../../dom/DomUtil';
  * By default, it has a 'leaflet-div-icon' CSS class and is styled as a little white square with a shadow.
  */
 
-export var DivIcon = Icon.extend({
+export const DivIcon = Icon.extend({
 	options: {
 		// @section
 		// @aka DivIcon options

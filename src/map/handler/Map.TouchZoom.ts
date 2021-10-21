@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {Map} from '../Map';
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 import * as DomEvent from '../../dom/DomEvent';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
@@ -30,7 +30,7 @@ Map.mergeOptions({
 	bounceAtZoomLimits: true
 });
 
-export const TouchZoom = Handler.extend({
+export const TouchZoom = HandlerFunction.extend({
 	addHooks: function () {
 		DomUtil.addClass(this._map._container, 'leaflet-touch-zoom');
 		DomEvent.on(this._map._container, 'touchstart', this._onTouchStart, this);

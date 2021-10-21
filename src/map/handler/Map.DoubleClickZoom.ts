@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {Map} from '../Map';
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 
 /*
  * L.Handler.DoubleClickZoom is used to handle double-click zoom on the map, enabled by default.
@@ -21,7 +21,7 @@ Map.mergeOptions({
 	doubleClickZoom: true
 });
 
-export const DoubleClickZoom = Handler.extend({
+export const DoubleClickZoom = HandlerFunction.extend({
 	addHooks: function () {
 		this._map.on('dblclick', this._onDoubleClick, this);
 	},

@@ -4,14 +4,15 @@
 // @uninheritable
 // Thanks to John Resig and Dean Edwards for inspiration!
 import * as Util from './Util';
-import {GeoJSON} from '../layer';
+import {GeoJSONClass} from "src/layer/GeoJSONClass";
+import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
 // @ts-ignore
 import {ReturnType} from "typescript";
 // import {LatLng} from "../geo";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type LatLngReturnType = ReturnType<typeof LatLng>;
-type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 
 // import * as L from './src/Leaflet';
 

@@ -20,7 +20,7 @@ import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
 import {FeatureGroup} from "../FeatureGroup";
-import { MapReturnType } from 'src/core/Handler';
+import { MapReturnType } from 'src/core/HandlerFunction';
 import {GeoJSONClass} from "src/layer/GeoJSONClass";
 import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html

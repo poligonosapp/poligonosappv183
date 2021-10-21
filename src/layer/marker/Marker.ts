@@ -1,9 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {Layer} from '../Layer';
 import {IconDefault} from './Icon.Default';
 import * as Util from '../../core/Util';
-import {toLatLng as latLng} from '../../geo/LatLngFunction';
+import {LatLngFunction} from "src/geo/LatLngFunction";
+import {LatLngClass} from "src/geo/LatLngClass";
 import * as DomUtil from '../../dom/DomUtil';
 import {MarkerDrag} from './Marker.Drag';
+
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngClass> 
+| ReturnType<typeof LatLngFunction.prototype.clone>;
 
 /*
  * @class Marker
@@ -18,7 +28,7 @@ import {MarkerDrag} from './Marker.Drag';
  * ```
  */
 
-export var Marker = Layer.extend({
+export const Marker = Layer.extend({
 
 	// @section
 	// @aka Marker options
@@ -381,6 +391,6 @@ export var Marker = Layer.extend({
 
 // @factory L.marker(latlng: LatLng, options? : Marker options)
 // Instantiates a Marker object given a geographical point and optionally an options object.
-export function marker(latlng, options) {
+export function marker(latlng:LatLngReturnType, options) {
 	return new Marker(latlng, options);
 }

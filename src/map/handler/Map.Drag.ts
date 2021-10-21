@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Map} from '../Map';
 import * as Browser from '../../core/Browser';
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 import {Draggable} from '../../dom/Draggable';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
@@ -58,7 +58,7 @@ Map.mergeOptions({
 	maxBoundsViscosity: 0.0
 });
 
-export const Drag = Handler.extend({
+export const Drag = HandlerFunction.extend({
 	addHooks: function () {
 		if (!this._draggable) {
 			const map = this._map;

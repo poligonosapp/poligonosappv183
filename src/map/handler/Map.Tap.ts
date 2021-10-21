@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {Map} from '../Map';
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 import * as DomEvent from '../../dom/DomEvent';
 import {Point} from '../../geometry/Point';
 import * as Util from '../../core/Util';
@@ -31,7 +31,7 @@ Map.mergeOptions({
 	tapTolerance: 15
 });
 
-export const Tap = Handler.extend({
+export const Tap = HandlerFunction.extend({
 	addHooks: function () {
 		DomEvent.on(this._map._container, 'touchstart', this._onDown, this);
 	},

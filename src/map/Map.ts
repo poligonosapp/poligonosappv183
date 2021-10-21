@@ -33,7 +33,7 @@ import { GeoJSONFunction } from "src/layer/GeoJSONFunction";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
-type LatLngReturnType = ReturnType<typeof LatLngFunction>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction| typeof latLngBounds>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

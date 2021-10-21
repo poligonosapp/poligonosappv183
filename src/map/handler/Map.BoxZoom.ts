@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {Map} from '../Map';
-import {Handler} from '../../core/Handler';
+import {HandlerFunction} from '../../core/HandlerFunction';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
 import * as DomEvent from '../../dom/DomEvent';
@@ -34,7 +34,7 @@ Map.mergeOptions({
 	boxZoom: true
 });
 
-export const BoxZoom = Handler.extend({
+export const BoxZoom = HandlerFunction.extend({
 	initialize: function (map:MapReturnType) {
 		this._map = map;
 		this._container = map._container;

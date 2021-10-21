@@ -1,1 +1,1 @@
-export declare var MarkerDrag: any;
+export declare const MarkerDrag: any;

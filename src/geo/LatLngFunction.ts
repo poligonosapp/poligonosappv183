@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
@@ -7,12 +8,16 @@ import {Earth} from './crs/CRS.Earth';
 import {toLatLngBoundsFunction} from './LatLngBoundsFunction';
 
 // import {Point} from '../../geometry/Point';
-import {Bounds} from '../../geometry/Bounds';
-import {LatLngBounds, toLatLngBounds as latLngBounds} from '../../geo/LatLngBounds';
+import {BoundsClass} from "src/geometry/BoundsClass";
+import {BoundsFunction} from "src/geometry/BoundsFunction";
+
+import {LatLngBoundsClass} from "src/geo/LatLngBoundsClass";
+import {LatLngBoundsFunction} from "src/geo/LatLngBoundsFunction";
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
 import {FeatureGroup} from "../layer";
+import { LatLngClass } from './LatLngClass';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
@@ -157,15 +162,15 @@ LatLngFunction.prototype = {
 // Expects an plain object of the form `{lat: Number, lng: Number}` or `{lat: Number, lng: Number, alt: Number}` instead.
 
 export function toLatLng(a:NumberReturnType, b:NumberReturnType, c:NumberReturnType):LatLngReturnType {
-	if (a instanceof LatLngFunction) {
+	if (a instanceof LatLngClass) {
 		return a;
 	}
 	if (Util.isArray(a) && typeof a[0] !== 'object') {
 		if (a.length === 3) {
-			return new LatLngFunction(a[0], a[1], a[2]);
+			return new LatLngClass(a[0], a[1], a[2]);
 		}
 		if (a.length === 2) {
-			return new LatLngFunction(a[0], a[1]);
+			return new LatLngClass(a[0], a[1]);
 		}
 		return null;
 	}

@@ -15,14 +15,15 @@ import {Object, ReturnType, HTMLElement} from 'typescript';
 import {$ , Event} from 'jquery';
 import {Point} from "../geometry";
 import {FeatureGroup} from "./FeatureGroup";
-import {LatLngBounds} from "../geo";
+import {LatLngBoundsClass} from "src/geo/LatLngBoundsClass";
+import {LatLngBoundsFunction} from "src/geo/LatLngBoundsFunction";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type FunctionReturnType = ReturnType<typeof Function>;
 type MapReturnType = ReturnType<typeof Map>;
 type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 type EventReturnType= ReturnType<typeof Event>;
-type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
+type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass | typeof LatLngBoundsFunction>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type pointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

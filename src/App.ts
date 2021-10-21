@@ -1,6 +1,6 @@
 // import PoligonosApp from "./PoligonosApp";
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, { render } from 'react-dom';
 
 import { PoligonosApp, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
 import { MapReturnType } from "./layer/GeoJSONFunction";
@@ -14,7 +14,7 @@ interface Props{
 
 class App extends React.Component{
 
-    public const map: MapReturnType = PoligonosApp.L.Map('map', {
+    public const mapConst: MapReturnType = new PoligonosApp().L.Map('map', {
         renderer: PoligonosApp.L.canvas()
     });
 
@@ -29,42 +29,42 @@ class App extends React.Component{
         // this.props.a  = a;
 
         try{
-            this.github(this.props.a);
+            this.github();
         }catch{
-            this.atlassian(this.props.a);
+            this.atlassian();
         }finally{
-
+            
         }
 
 
-        private atlassian(a: string): void {
+        function atlassian(): void {
             
             this.props.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
 
-            s = a.concat(this.state.props.leafletTokenAtlassian);
+            this.props.s = this.props.a.concat(this.state.props.leafletTokenAtlassian);
 
-            L.tileLayer(s, {
+            new PoligonosApp().L.tileLayer(this.props.s, {
                 maxZoom: 18,
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
                     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 id: 'mapbox/light-v9',
                 tileSize: 512,
                 zoomOffset: -1
-            }).addTo(map);
+            }).addTo(mapConst);
         }
 
-        private github(a: string) {
+        function github() {
             this.props.leafletTokenGitHub = await require('./Token').token().toPromise();
-            s = a.concat(this.state.leafletTokenGitHub);
+            this.props.s = a.concat(this.state.leafletTokenGitHub);
 
-            L.tileLayer(s, {
+            PoligonosApp.L.tileLayer(this.props.s, {
                 maxZoom: 18,
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
                     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 id: 'mapbox/light-v9',
                 tileSize: 512,
                 zoomOffset: -1
-            }).addTo(map);
+            }).addTo(mapConst);
         }
     } // end constructor
 
@@ -76,7 +76,7 @@ this.setState(
 );
 
     render(){
-        return (<div>PoligonosApp {this.state.props.children}<div>);
+        return (<div>PoligonosApp {this.state.props.mapConst}<div>);
     }
 } // end class App
 

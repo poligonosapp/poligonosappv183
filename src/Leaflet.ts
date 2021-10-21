@@ -13,23 +13,23 @@ export {version};
 import {Map} from './map/Map';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type GeoJSONReturnType = ReturnType<typeof GeoJSONClass| typeof GeoJSONFunction>;
+export type GeoJSONReturnType = ReturnType<typeof GeoJSONClass| typeof GeoJSONFunction>;
 export type MapReturnType = ReturnType<typeof Map>;
-type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+export type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // import {L.PoligonosApp} from './PoligonosApp';
 
-const polygonsArray = require('./polygons.geojson');
+import polygonsArray:typeof GeoJSONReturnType[] from './polygons.geojson';
 
-import {GeoJSONClass} from 'src/layer/vector/GeoJSONClass';
-import {GeoJSONFunction} from 'src/layer/vector/GeoJSONFunction';
+import {GeoJSONClass} from 'src/layer/GeoJSONClass';
+import {GeoJSONFunction} from 'src/layer/GeoJSONFunction';
 import {Object, ReturnType, Set} from "typescript";
 import {LayerGroup} from "./layer";
 import {Point} from "./geometry";
 
 // import { L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
 
-function makeUnique(polygonsArray: GeoJSONReturnType[]):Set<GeoJSONReturnType> {
+function makeUnique(polygonsArray: GeoJSONReturnType[]):Set<GeoJSONReturnType[]> {
 
 // const setObjects:Set<GeoJSONReturnType> = new Set(polygonsArray);
 

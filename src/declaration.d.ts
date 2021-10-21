@@ -4,6 +4,7 @@ declare module "*.ts";
 declare module "*.tsx";
 declare module 'express';
 declare module 'ts-node';
+import "typescript";
 import 'jquery-ui';
 import 'jquery-ui-dist';
 import 'jquery';

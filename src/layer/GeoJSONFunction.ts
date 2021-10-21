@@ -26,6 +26,7 @@ import {Map} from "src/map/Map";
 import { GeoJSONClass } from './GeoJSONClass';
 
 import {Function} from 'typescript';
+import { LatLngClass } from 'src/geo/LatLngClass';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type FunctionReturnType = ReturnType<typeof Function>;
@@ -123,6 +124,8 @@ export const GeoJSONFunction:FunctionReturnType = FeatureGroup.extend({
 			this.addData(geojson);
 		}
 	},
+
+	
 
 	// @method addData( <GeoJSON> data ): this
 	// Adds a GeoJSON object to the layer.

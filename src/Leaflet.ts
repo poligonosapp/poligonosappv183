@@ -6,14 +6,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import {version} from './package.json';
+import {version} from './package';
 export {version};
 
 // import * as L from './Leaflet';
 import {Map} from './map/Map';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
+type GeoJSONReturnType = ReturnType<typeof GeoJSONClass| typeof GeoJSONFunction>;
 export type MapReturnType = ReturnType<typeof Map>;
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
@@ -21,29 +21,13 @@ type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup>
 
 const polygonsArray = require('./polygons.geojson');
 
-import {GeoJSON} from './layer/vector/GeoJSON';
+import {GeoJSONClass} from 'src/layer/vector/GeoJSONClass';
+import {GeoJSONFunction} from 'src/layer/vector/GeoJSONFunction';
 import {Object, ReturnType, Set} from "typescript";
 import {LayerGroup} from "./layer";
 import {Point} from "./geometry";
 
-import { L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
-
-//canvas
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-public const map: MapReturnType = L.Map('map', {
-	renderer: L.canvas()
-});
-
-import data from '/polygons.geojson';
-
-  L.geoJSON(data, {
- 	style: function (feature:LayerReturnType) {
- 		return {color: feature.properties.color};
- 	}
- }).bindPopup(function (layer:LayerReturnType) {
- 	return layer.feature.properties.description;
- }).addTo(map);
+// import { L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
 
 function makeUnique(polygonsArray: GeoJSONReturnType[]):Set<GeoJSONReturnType> {
 
@@ -53,7 +37,7 @@ function makeUnique(polygonsArray: GeoJSONReturnType[]):Set<GeoJSONReturnType> {
 	return new Set(polygonsArray);
 }
 
-const PoligonosApp = L.Class.extend({
+export const PoligonosApp = L.Class.extend({
 
 	// A property with initial value = 42
 	PoligonosAppProperty: makeUnique(polygonsArray),
@@ -76,7 +60,7 @@ const PoligonosApp = L.Class.extend({
     // return require('./PoligonosApp');
 // }
 
-export * from PoligonosApp;
+// export * from PoligonosApp;
 
 // control
 export * from './control/index';

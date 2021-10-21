@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable prefer-spread */
+/* eslint-disable @typescript-eslint/no-for-in-array */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -127,13 +131,13 @@ export function bind(fn:FunctionReturnType, obj:ObjectReturnType):FunctionReturn
 	const arguments = Array.prototype.slice(obj, 0, 3); // // linear transformation 4 coefficients
 
 	if (fn.bind) {
-		return fn.bind.apply(fn, slice.call(arguments, 1));
+		return fn.bind.apply(fn, Array.prototype.slice.call(arguments, 1));
 	}
 
 	const args = Array.prototype.slice.call(arguments, 2);
 
 	return function () {
-		return fn.apply(obj, args.length ? args.concat(slice.call(arguments)) : arguments);
+		return fn.apply(obj, args.length ? args.concat(Array.prototype.slice.call(arguments)) : arguments);
 	};
 }
 

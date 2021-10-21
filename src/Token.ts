@@ -5,9 +5,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-unsafe-finally */
-function token ():string{
+async function token (): Promise<string>{
 
     const {Octokit, App, Action} = require('octokit');
+
+    const Exception = require('typescript');
     
     try{
         // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
@@ -21,7 +23,10 @@ function token ():string{
         const retrieve = require('./OctokitAppServer.ts');
         retrieve();
         return octokit.toString('leaflet-secret');
-    }finally{
+    }catch{
+        throw new Exception('retieve token GitHub error');
+    }
+    finally{
         // return null;
         throw new Exception('retieve token GitHub error');
     }

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -10,39 +12,16 @@ import {GeoJSONAbstractClass, map} from "./Leaflet";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 import {Point} from "./geometry";
 type StringReturnType = ReturnType<typeof  Point.prototype.toString>;
-// import {MapReturnType} from "./layer/GeoJSON";
+
 import Exception from "typescript";
 
-// require('./src/Leaflet.ts');
-
-// const L.PoligonosApp = require('poligonosapp');
-// L.PoligonosApp();
-
-// import express from 'express';
-// export require('iconv').Iconv;
-// const express = require('express');
-
-// import {L.PoligonosApp} from './PoligonosApp';
-
-// import {Response , Request, Router} from 'express';
-
-// import {Exception} from 'typescript';
-
-// const router = Router();
-
-// const bodyParser = require('body-parser');
-
-// const {GeoJSONAbstractClass, map} = require("./Leaflet");
-
-function serve(): void | GeoJSONAbstractClass | StringReturnType {
-
-
+async function serve(): Promise<void | GeoJSONAbstractClass | StringReturnType> {
 
     const {MapReturnType} = require("./layer/GeoJSONFunction");
 
     console.log(`\n...\n`);
 
-    const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet.ts');
+    const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet');
 
     const {PoligonosApp} = require('./PoligonosApp');
 
@@ -56,7 +35,7 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
 
     // Constants
     const PORT = 8080;
-    const HOST = '0.0.0.0';
+    const HOST = 'https://poligonosapp-v1-7-2.netlify.app/';
 
     // App
     const express = require('express');
@@ -67,7 +46,7 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
     // https://stackoverflow.com/questions/54649465/how-to-do-try-catch-and-finally-statements-in-typescript/54649617
     try {
 
-        router.get('/', (req: Request, res: Response): void => {
+        // router.get('/', (req: Request, res: Response): void => {});
 
             // res.json({success:true});
             // res.send('PoligonosApp');
@@ -90,29 +69,18 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
             // const option:boolean = (6%2 == 0);
 
             let token:string;
+            let tokenAtlassian:string;
             let a:string;
             let s:string;
+            let sAtlassian:string;
 // Octokit pipeline parser
-            token = require('./Token');
+            token = await require('./Token').token();
+            tokenAtlassian = await require('./Pipeline').pipeline();
 
             a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
 
             s = a.concat(token);
-
-            L.tileLayer(s, {
-                maxZoom: 18,
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                id: 'mapbox/light-v9',
-                tileSize: 512,
-                zoomOffset: -1
-            }).addTo(map);
-// Atlassian pipeline parser
-            token = require('./Pipeline');
-
-            a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
-
-            s = a.concat(token);
+            sAtlassian = a.concat(tokenAtlassian);
 
             L.tileLayer(s, {
                 maxZoom: 18,
@@ -123,15 +91,30 @@ function serve(): void | GeoJSONAbstractClass | StringReturnType {
                 zoomOffset: -1
             }).addTo(map);
 
-    }
-    // end try res get
-    catch (e) {
-        // typescript error TS1044
-        // const result = (e as Exception).Message;
+        
 
-        // console.log(e.message);
+    }catch {
+
+        // if(error instanceof TypeError){
+                    // Atlassian pipeline parser
+        // tokenAtlassian = require('./Pipeline');
+
+        // a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
+
+        tokenAtlassian = await require('./Pipeline').pipeline();
+        sAtlassian = a.concat(tokenAtlassian);
+
+        L.tileLayer(sAtlassian, {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/light-v9',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(map);
 
         throw new Exception("TYPESCRIPT: LEAFLET TOKEN NOT FOUND");
+        // }
 
     } finally {
 

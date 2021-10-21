@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/require-await */
 // https://developer.atlassian.com/cloud/jira/platform/understanding-jwt-for-connect-apps/
 // https://github.com/hokaccha/node-jwt-simple
-import token from "./Token";
+// import token from "./Token";
 
-function pipeline():string{
+async function pipeline(): Promise<string>{
 
     // auth Git pipelines Atlassian BitBucket
 

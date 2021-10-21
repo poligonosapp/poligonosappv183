@@ -46,7 +46,8 @@
   },
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS"
+      "module": "CommonJS",
+      "lib": ["dom", "es2015.promise", "es5"]
     }
   },
   "angularCompilerOptions": {

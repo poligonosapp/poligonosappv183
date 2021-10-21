@@ -18,9 +18,9 @@ export interface Props {
 export declare const GeoJSONFunction: FunctionReturnType;
 export declare function geometryToLayer(geojson: GeoJSONReturnType, options: NumberReturnType): LayerReturnType;
 export declare function coordsToLatLng(coords: []): LatLngReturnType;
-export declare function coordsToLatLngs(coords: [], levelsDeep: NumberReturnType, _coordsToLatLng: any): LatLngReturnType[];
+export declare function coordsToLatLngs(coords: [], levelsDeep: NumberReturnType, _coordsToLatLng: FunctionReturnType): LatLngReturnType[];
 export declare function latLngToCoords(latlng: LatLngReturnType, precision: NumberReturnType): any[];
-export declare function latLngsToCoords(latlngs: [], levelsDeep: NumberReturnType, closed: boolean, precision: NumberReturnType): NumberReturnType[];
+export declare function latLngsToCoords(latlngs: LatLngReturnType[], levelsDeep: NumberReturnType, closed: boolean, precision: NumberReturnType): LatLngReturnType[];
 export declare function getFeature(layer: LayerReturnType, newGeometry: GeoJSONReturnType): GeoJSONReturnType;
 export declare function asFeature(geojson: GeoJSONReturnType): GeoJSONReturnType;
 export declare function geoJSON(geojson: GeoJSONReturnType, options: NumberReturnType): GeoJSONReturnType;

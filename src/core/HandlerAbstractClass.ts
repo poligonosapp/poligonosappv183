@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { GeoJSONAbstractClass } from "src/Leaflet";
 import { GeoJSONReturnType } from "./HandlerFunction";
 
 /*
@@ -9,10 +11,11 @@ import { GeoJSONReturnType } from "./HandlerFunction";
 // Abstract class for map interaction handlers
 
 
-export abstract class HandlerAbstractClass {
+export abstract class HandlerAbstractClass extends GeoJSONAbstractClass{
 	props: GeoJSONReturnType;
 	constructor(props: GeoJSONReturnType) {
 
+		super();
 		this.props = props;
 
 	}

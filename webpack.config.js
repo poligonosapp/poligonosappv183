@@ -2,6 +2,8 @@
 const path = require('path');
 const webpack = require('webpack'); // https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
 const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
@@ -18,9 +20,14 @@ module.exports = {
   mode: 'production',
   entry: './src/index.ts',
   output: {
-    filename: 'main.ts',
+    filename: '[name].bundle.ts',
     path: path.resolve(__dirname, 'dist'),
   }, 
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+  },
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' },

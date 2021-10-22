@@ -22,6 +22,7 @@ import {Object, ReturnType} from 'typescript';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 import { PointReturnImpl } from './PointReturnImpl';
 import { PointsTransformationFunction } from 'src/geometry/PointsTransformation';
+import { PointReturn } from "src/geometry/PointReturn";
 type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
@@ -64,13 +65,13 @@ type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | Retu
 
 export const CRS = {
 	
-	let projection = projection();
-	// let projection = Projection.LonLat;
-	let transformation : PointsTransformationFunction;
+	// let projection = projection();
+	let projection = Projection.LonLat;
+	let transformation : PointsTransformationFunction.prototype;
 
 	// @method latLngToPoint(latlng: LatLng, zoom: Number): Point
 	// Projects geographical coordinates into pixel coordinates for a given zoom.
-	latLngToPoint: function (latlng:LatLngReturnType, zoom:NumberReturnType) {
+	latLngToPoint: function (latlng:LatLngReturnType, zoom:NumberReturnType):PointReturnImpl {
 		const projectedPoint = this.projection.project(latlng);
 		const scale = this.scale(zoom);
 
@@ -97,7 +98,7 @@ export const CRS = {
 	// @method unproject(point: Point): LatLng
 	// Given a projected coordinate returns the corresponding LatLng.
 	// The inverse of `project`.
-	unproject: function (point:PointReturnImpl) {
+	unproject: function (point:PointReturnImpl):LatLngReturnType {
 		return this.projection.unproject(point);
 	},
 
@@ -105,7 +106,7 @@ export const CRS = {
 	// Returns the scale used when transforming projected coordinates into
 	// pixel coordinates for a particular zoom. For example, it returns
 	// `256 * 2^zoom` for Mercator-based CRS.
-	scale: function (zoom) {
+	scale: function (zoom:NumberReturnType):NumberReturnType {
 		return 256 * Math.pow(2, zoom);
 	},
 

@@ -18,9 +18,14 @@ module.exports = {
   mode: 'production',
   entry: './src/index.ts',
   output: {
-    filename: 'main.ts',
+    filename: '[name].bundle.ts',
     path: path.resolve(__dirname, 'dist'),
-  }, 
+  },  
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+  },
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' },

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -106,7 +107,7 @@ Bounds.prototype = {
 	// @method getCenter(round?: Boolean): Point
 	// Returns the center point of the bounds.
 	getCenter: function (round:boolean):PointReturnType {
-		return new Point(
+		return new PointReturnImpl(
 		        (this.min.x + this.max.x) / 2,
 		        (this.min.y + this.max.y) / 2, round);
 	},

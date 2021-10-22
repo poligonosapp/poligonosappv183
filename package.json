@@ -72,6 +72,7 @@
         "webpack-cli": "^4.9.1"
     },
     "style": "dist/leaflet.css",
+    "typings": "lib",
     "types": "./src/declaration.d.ts",
     "files": [
         "dist",
@@ -173,6 +174,7 @@
         "browserify": "^17.0.0",
         "core-js": "^3.14.0",
         "css-what": "^5.0.1",
+        "es6-promise": "^4.2.8",
         "express": "^4.17.1",
         "highlight.js": "^11.0.1",
         "http": "0.0.1-security",

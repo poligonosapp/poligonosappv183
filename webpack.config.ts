@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 // typescript webpack.config.js https://webpack.js.org/guides/typescript/
 const path = require('path');
 const webpack = require('webpack'); // https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
@@ -18,9 +20,14 @@ module.exports = {
   mode: 'production',
   entry: './src/index.ts',
   output: {
-    filename: 'main.ts',
+    filename: '[name].bundle.ts',
     path: path.resolve(__dirname, 'dist'),
-  }, 
+  },  
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+  },
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' },
@@ -91,7 +98,7 @@ module.exports = {
         },
       ],
     }),
-    new StylelintPlugin(options),
+    new StylelintPlugin("compiler.options"),
       require('rollup-plugin-replace')({
     'process.env.NODE_ENV': JSON.stringify('production')
   }),

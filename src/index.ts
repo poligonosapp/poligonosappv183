@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -64,3 +65,16 @@ function component() {
   }
   
   document.body.appendChild(component2());
+
+  async function getComponent(){
+    const element = document.createElement('div');
+    const {default: _ } = await import('lodash');
+    element.innerHTML = _.join(['Hello','webpack'],'');
+    return element;
+  }
+
+  getComponent().then(
+    (component) => {
+      document.body.appendChild(component);
+    }
+  );

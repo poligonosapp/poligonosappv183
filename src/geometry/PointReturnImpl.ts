@@ -6,6 +6,7 @@ import {Point} from "./Point";
 import {PointReturn} from "./PointReturn";
 
 import {Object, ReturnType} from "typescript";
+// import { round } from "lodash";
 
 type NumberReturnType = number | ReturnType<typeof Object.Number>;
 
@@ -15,7 +16,7 @@ export class PointReturnImpl implements PointReturn{
 
     constructor(...args: [x: number, y: number, round:number]) {
         if(round){
-            this.roundXY(x, y, round);
+            return this.roundXY(x, y, round);
         }
     }
     // typescript PointReturn interface implementation

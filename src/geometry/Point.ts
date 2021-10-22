@@ -104,7 +104,7 @@ Point.prototype = {
 		}
 	}
 	catch(e){
-		throw new RuntimeException("TYPESCRIPT POINT CLONE EXCEPTION");
+		throw new Exception("TYPESCRIPT POINT CLONE EXCEPTION");
 	}
 	finally {
 		return -1;// not a number

@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {LatLngFunction} from '../LatLngFunction';
-import { Bounds } from "../../geometry/Bounds.1";
-import {Point} from '../../geometry/Point';
-
+import { BoundsClass } from "../../geometry/BoundsClass";
+import {Point} from "src/geometry/Point";
 
 import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';
-import {Point} from "../geometry";
+// import {Point} from "../geometry";
+import { PointsTransformationClass } from 'src/geometry/PointsTransformation';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type MapReturnType = ReturnType<typeof Map>;
@@ -49,12 +50,12 @@ type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | Retu
 
 export const LonLat = {
 	project: function (latlng:LatLngReturnType):PointReturnType {
-		return new Point(latlng.lng, latlng.lat);
+		return new PointsTransformationClass(latlng.lng, latlng.lat);
 	},
 
 	unproject: function (point:PointReturnType):LatLngReturnType {
-		return new LatLngFunction(point.y, point.x);
+		return new LatLngClass(point.y, point.x);
 	},
 
-	bounds: new Bounds([-180, -90], [180, 90])
+	bounds: new BoundsClass([-180, -90], [180, 90])
 };

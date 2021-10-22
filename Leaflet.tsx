@@ -45,6 +45,8 @@ export const PoligonosApp = L.Class.include({
 	// A method
 	PoligonosAppMethod: function(polygonsArray):GeoJSONReturnType[] {
 
+		L.Polygon.include(polygonsArray);
+
 		// const s = new Server();
 
 		// ui

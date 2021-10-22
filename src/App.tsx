@@ -29,7 +29,7 @@ import loadable from '@loadable/component';// https://github.com/gregberge/loada
 
 // const OtherComponent = loadable(() => import('./OtherComponent'));
 
-
+import token from './Token';
 
 interface Props{
     mapConst: Promise<MapReturnType>;
@@ -75,7 +75,9 @@ class App extends React.Component{
 
     function github():Promise<string> {
         
-        leafletTokenGitHub = await require('./Token').token().toPromise();
+        leafletTokenGitHub = await import("./Token").then(token => {
+                token().toPromise();
+            });
 
         if(leafletTokenGitHub){
             return;

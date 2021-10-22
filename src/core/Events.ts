@@ -68,6 +68,10 @@ export const Events = {
 	 */
 	on: function (types:onReturnType, fn:FunctionReturnType, context:EventReturnType):EventReturnType {
 
+if(context.onClick){
+	alert(context.latlng); // ev is an event object (MouseEvent in this case)
+}
+
 		// types can be a map of types/handlers
 		if (typeof types === 'object') {
 			for (const type in types) {

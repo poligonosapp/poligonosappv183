@@ -86,6 +86,10 @@ export function PointsTransformationFunction(a:PointReturnImpl,
 }
 
 PointsTransformationFunction.prototype = {
+
+	project: function (latlng:LatLngReturnType):PointReturnImpl{
+		return latlng.toPoint();
+	}
 	
 	// @method transform(point: Point, scale?: Number): Point
 	// Returns a transformed point, optionally multiplied by the given scale.

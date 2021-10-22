@@ -44,7 +44,7 @@ console.log(`${result.data.length} repos found.`);
 
         return new Promise(
             (resolve,reject) => {
-                octokit.toString('leaflet-secret')
+                octokit.toString('atlassian-secret')
                 setTimeout(
                     () => resolve(result*2, 1000)
                 );

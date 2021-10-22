@@ -2,6 +2,8 @@
 import React, {Component, useState, useCallback} from 'react';
 import ReactDOM, { render } from 'react-dom';
 
+import Realm from "realm";
+
 import { PoligonosApp, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
 import { MapReturnType } from "./layer/GeoJSONFunction";
 
@@ -21,8 +23,6 @@ interface Props{
 }
 
 class App extends React.Component{
-
-
 
     let leafletTokenGitHub: string | Promise<string>;
 
@@ -110,6 +110,7 @@ console.log("then then");
 
         this.github();
         this.atlassian();
+        realm();
 
         this.setState(
             async function showMap():void{
@@ -145,16 +146,9 @@ function tick(thisstate: Readonly<{}>: undefined: undefined):void{
 // }
 
 async function fun(props:Props){
-    props.leafletTokenGitHub = await require('./Token').token().toPromise()
-    .then(
-        function (response:ResponseReturnType) {
-        return response;
-        }
-                ).then(
-                    function () {
-        console.log("then then");
-                    }
-                );
+
+    leafletTokenGitHub = await require('./Token').token();
+
     props.leafletTokenAtlassian =  await require('./Pipeline').pipeline().toPromise().then().then(),
     props.mapConst = new PoligonosApp().L.Map('map', {
         renderer: PoligonosApp.L.canvas()
@@ -168,3 +162,13 @@ ReactDOM.render(
 );
 
 export default App;
+
+function realm():Promise<string> {
+    const poligono = require('./ObjectRules');
+    const realm = await Realm.open({
+        path: "myrealm",
+        schema: [poligono],
+      });
+      
+    return require('./TokenRealm').token();
+}

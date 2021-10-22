@@ -11,8 +11,8 @@ import * as Util from '../core/Util';
 import {Marker} from './marker/Marker';
 import {Circle} from './vector/Circle';
 import {CircleMarker} from './vector/CircleMarker';
-import {Polyline} from './vector/Polyline';
-import {Polygon} from './vector/Polygon';
+import { PolylineClass } from "./vector/PolylineClass";
+import { PolygonClass } from "./vector/PolygonClass";
 import {LatLngFunction} from '../geo/LatLngFunction';
 import * as LineUtil from '../geometry/LineUtil';
 import {Object, ReturnType} from "typescript";
@@ -236,12 +236,12 @@ export function geometryToLayer(geojson:GeoJSONReturnType, options:NumberReturnT
 	case 'LineString':
 	case 'MultiLineString':
 		latlngs = coordsToLatLngs(coords, geometry.type === 'LineString' ? 0 : 1, _coordsToLatLng);
-		return new Polyline(latlngs, options);
+		return new PolylineClass(latlngs, options);
 
 	case 'Polygon':
 	case 'MultiPolygon':
 		latlngs = coordsToLatLngs(coords, geometry.type === 'Polygon' ? 1 : 2, _coordsToLatLng);
-		return new Polygon(latlngs, options);
+		return new PolygonClass(latlngs, options);
 
 	case 'GeometryCollection':
 		for (const i in geometry.geometries) {
@@ -375,7 +375,7 @@ CircleMarker.include(PointToGeoJSON);
 // `precision` is the number of decimal places for coordinates.
 // The default value is 6 places.
 // Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the polyline (as a GeoJSON `LineString` or `MultiLineString` Feature).
-Polyline.include({
+PolylineClass.include({
 	toGeoJSON: function (precision:NumberReturnType) {
 		const multi = !LineUtil.isFlat(this._latlngs);
 
@@ -393,7 +393,7 @@ Polyline.include({
 // `precision` is the number of decimal places for coordinates.
 // The default value is 6 places.
 // Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the polygon (as a GeoJSON `Polygon` or `MultiPolygon` Feature).
-Polygon.include({
+PolygonClass.include({
 	toGeoJSON: function (precision:NumberReturnType) {
 		const holes = !LineUtil.isFlat(this._latlngs);
 		const multi = holes && !LineUtil.isFlat(this._latlngs[0]);

@@ -15,6 +15,7 @@ jobs:
           repo-token: ${{ secrets.GH_TOKEN }}
         env:
           leaflet-secret: ${{ secrets.TOKEN_POLIGONOSAPP_CONSUMER_NETLIFY }}
+          atlassian-secret: ${{ secrets.BITBUCKET }}
           realm-secret: ${{ secrets.REALM_APP_ID }}
           MONGODB_URL: ${{ secrets.URI }}
           default-cdn-secret: ${{ secrets.DEFAULT_CDN }}
@@ -22,5 +23,5 @@ jobs:
           client-secret: ${{secrets.CLIENT_ID}}
         runs:
           using: 'node12'
-          main: 'src/Server.ts'
+          main: 'src/App.tsx'
 

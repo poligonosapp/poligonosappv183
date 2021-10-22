@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-empty-function */
 // webpack index.ts
@@ -13,20 +16,11 @@ function component() {
   }
   
   document.body.appendChild(component());
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-export async function index():Promise<void>{
 
-    const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet');
+  function component2() {
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-var-requires
-    // const serve = require('./Server');
-
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const {$}= require("jquery");
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const {$}= require("jquery");
     
     const {event, ui } = require("jquery-ui");
 
@@ -42,67 +36,28 @@ export async function index():Promise<void>{
     const Exception = require("typescript");
 
     $("button.continue").html("Next Step...");
-
-    //canvas
-            // @ts-ignore
-            public const map: MapReturnType = L.Map('map', {
-                renderer: L.canvas()
-            });
-
-            let token:string;
-            let tokenAtlassian:string;
-            let a:string;
-            let s:string;
-
-// https://stackoverflow.com/questions/54649465/how-to-do-try-catch-and-finally-statements-in-typescript/54649617
-    try{
-
-// Octokit pipeline parser
-        token = await require('./Token').token().toPromise();
-        tokenAtlassian = await require('./Pipeline').pipeline().toPromise();
-
-        a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
-
-        s = a.concat(token);
-
-        L.tileLayer(s, {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            id: 'mapbox/light-v9',
-            tileSize: 512,
-            zoomOffset: -1
-        }).addTo(map);
-
-        // serve();
-
-        const NewClass = require('./core/DemoAbstractClassImpl');
+    
+    const {L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon} = require('./Leaflet');
+    const NewClass = require('./core/DemoAbstractClassImpl');
         const fail = new NewClass(require('./polygons.geojson'));
         console.log(fail);
 
-    }catch(e){
-        //typescript 2304
-        // const result = (e as Exception).Message;
+     const { MapReturnType } = require("./layer/GeoJSONFunction");
 
-        console.log(e.message);
+        //canvas
+            // @ts-ignore
+            const map: MapReturnType = L.Map('map', {
+                renderer: L.canvas()
+            });
 
-        s = await a.concat(tokenAtlassian);
 
-        L.tileLayer(s, {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            id: 'mapbox/light-v9',
-            tileSize: 512,
-            zoomOffset: -1
-        }).addTo(map);
-
-        throw new Exception("LEAFLET TOKEN NOT FOUND");
-
-    }
-    finally{
-
-        console.log("finally");
-
-    }
-} // end index
+    const element = document.createElement('div');
+  
+    // Lodash, currently included via a script, is required for this line to work
+    // Lodash, now imported by this script
+    element.innerHTML = _.join(['', map], ' ');
+  
+    return element;
+  }
+  
+  document.body.appendChild(component2());

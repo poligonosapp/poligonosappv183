@@ -1,4 +1,4 @@
-import {Polygon} from './Polygon';
+import { PolygonClass } from "./PolygonClass";
 import {toLatLngBoundsFunction} from '../../geo/LatLngBoundsFunction';
 import {ReturnType} from 'typescript';
 // import {Point} from "../geometry";
@@ -49,9 +49,9 @@ type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
  */
 
 
-export const Rectangle = Polygon.extend({
+export const Rectangle = PolygonClass.extend({
 	initialize: function (latLngBounds, options) {
-		Polygon.prototype.initialize.call(this, this._boundsToLatLngs(latLngBounds), options);
+		PolygonClass.prototype.initialize.call(this, this._boundsToLatLngs(latLngBounds), options);
 	},
 
 	// @method setBounds(latLngBounds: LatLngBounds): this

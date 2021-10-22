@@ -10,7 +10,7 @@
 
 // import {GeoJSON} from './layer';
 
-import {Polygon} from './layer/vector/Polygon';
+import { PolygonClass } from "./layer/vector/PolygonClass";
 
 // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html
 function makeUnique<T>(

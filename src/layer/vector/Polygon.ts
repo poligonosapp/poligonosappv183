@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -5,60 +6,19 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {Polyline} from './Polyline';
+import { PolylineClass } from "./PolylineClass";
 import {LatLngFunction} from '../../geo/LatLngFunction';
 import * as LineUtil from '../../geometry/LineUtil';
 import {Point} from '../../geometry/Point';
-import { Bounds } from "../../geometry/Bounds.1";
+
+import { BoundsClass } from "src/geometry/BoundsClass";
+import { BoundsFunction } from "src/geometry/BoundsFunction";
+
 import * as PolyUtil from '../../geometry/PolyUtil';
+import { LatLngClass } from 'src/geo/LatLngClass';
+import { PolygonClass } from './PolygonClass';
 
-/*
- * @class Polygon
- * @aka L.Polygon
- * @inherits Polyline
- *
- * A class for drawing polygon overlays on a map. Extends `Polyline`.
- *
- * Note that points you pass when creating a polygon shouldn't have an additional last point equal to the first one — it's better to filter out such points.
- *
- *
- * @example
- *
- * ```tsc
- * // create a red polygon from an array of LatLng points
- * const latlngs = [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]];
- *
- * const polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
- *
- * // zoom the map to the polygon
- * map.fitBounds(polygon.getBounds());
- * ```
- *
- * You can also pass an array of arrays of latlngs, with the first array representing the outer shape and the other arrays representing holes in the outer shape:
- *
- * ```tsc
- * const latlngs = [
- *   [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]], // outer ring
- *   [[37.29, -108.58],[40.71, -108.58],[40.71, -102.50],[37.29, -102.50]] // hole
- * ];
- * ```
- *
- * Additionally, you can pass a multi-dimensional array to represent a MultiPolygon shape.
- *
- * ```tsc
- * const latlngs = [
- *   [ // first polygon
- *     [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]], // outer ring
- *     [[37.29, -108.58],[40.71, -108.58],[40.71, -102.50],[37.29, -102.50]] // hole
- *   ],
- *   [ // second polygon
- *     [[41, -111.03],[45, -111.04],[45, -104.05],[41, -104.05]]
- *   ]
- * ];
- * ```
- */
-
-export const Polygon = Polyline.extend({
+export const PolygonFunction = PolylineClass.extend({
 
 	options: {
 		fill: true
@@ -74,9 +34,17 @@ export const Polygon = Polyline.extend({
 			throw new Error('Must add layer to map before using getCenter()');
 		}
 
-		const i, j, p1, p2, f, area, x, y, center,
-		    points = this._rings[0],
-		    len = points.length;
+		let i;
+		let j;
+		let p1;
+		let p2;
+		let f;
+		let area;
+		let x;
+		let y;
+		let center;
+		let points = this._rings[0];
+		let len = points.length;
 
 		if (!len) { return null; }
 
@@ -103,8 +71,8 @@ export const Polygon = Polyline.extend({
 		return this._map.layerPointToLatLng(center);
 	},
 
-	_convertLatLngs: function (latlngs) {
-		const result = Polyline.prototype._convertLatLngs.call(this, latlngs),
+	_convertLatLngs: function (latlngs:LatLngClass) {
+		const result = PolylineClass.prototype._convertLatLngs.call(this, latlngs),
 		    len = result.length;
 
 		// remove last point if it equals first one
@@ -114,8 +82,8 @@ export const Polygon = Polyline.extend({
 		return result;
 	},
 
-	_setLatLngs: function (latlngs) {
-		Polyline.prototype._setLatLngs.call(this, latlngs);
+	_setLatLngs: function (latlngs:LatLngClass) {
+		PolylineClass.prototype._setLatLngs.call(this, latlngs);
 		if (LineUtil.isFlat(this._latlngs)) {
 			this._latlngs = [this._latlngs];
 		}
@@ -179,13 +147,13 @@ export const Polygon = Polyline.extend({
 		}
 
 		// also check if it's on polygon stroke
-		return inside || Polyline.prototype._containsPoint.call(this, p, true);
+		return inside || PolylineClass.prototype._containsPoint.call(this, p, true);
 	}
 
 });
 
 
 // @factory L.polygon(latlngs: LatLng[], options?: Polyline options)
-export function polygon(latlngs, options) {
-	return new Polygon(latlngs, options);
+export function polygon(latlngs:LatLngClass[], options) {
+	return new PolygonClass(latlngs, options);
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/require-await */
 // https://developer.atlassian.com/cloud/jira/platform/understanding-jwt-for-connect-apps/
 // https://github.com/hokaccha/node-jwt-simple
@@ -9,7 +10,7 @@ async function pipeline(): Promise<string>{
 
     let jwt = require('jwt-simple');
     let payload = { foo: 'bar' };
-    let secret = '1zeTHOnPvjcOzedYwsxsiabrqKC_49ZncrztVyrfGBWstrncS';
+    let secret = require('./TokenAtlassian').token();
     // require('./credentials.json')['hosts']['password'];
 
 // HS256 secrets are typically 128-bit random strings, for example hex-encoded:

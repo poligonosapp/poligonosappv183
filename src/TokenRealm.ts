@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -32,9 +33,9 @@ const { request } = require("@octokit/request");
 // or: import { request } from "@octokit/request";
 // Following GitHub docs formatting:
 // https://developer.github.com/v3/repos/#list-organization-repositories
-const result = await request("GET /orgs/{org}/repos", {
+const result = await request("GET /orgs/poligonosapp/poligonosdemos", {
   headers: {
-    authorization: octokit.toString('leaflet-secret'),
+    authorization: octokit.toString('realm-secret'),
   },
   org: "poligonosapp",
   type: "private",
@@ -44,7 +45,7 @@ console.log(`${result.data.length} repos found.`);
 
         return new Promise(
             (resolve,reject) => {
-                octokit.toString('leaflet-secret')
+                octokit.toString('realm-secret')
                 setTimeout(
                     () => resolve(result*2, 1000)
                 );

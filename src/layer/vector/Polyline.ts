@@ -2,70 +2,26 @@ import {Path} from './Path';
 import * as Util from '../../core/Util';
 import * as LineUtil from '../../geometry/LineUtil';
 import {LatLngFunction, toLatLng} from '../../geo/LatLngFunction';
-import { LatLngBounds } from "../../geo/LatLngBounds.1";
-import { Bounds } from "../../geometry/Bounds.1";
+
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
+import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
+
+import { BoundsClass } from "src/geometry/BoundsClass";
+import { BoundsFunction } from "src/geometry/BoundsFunction";
+
 import {Point} from '../../geometry/Point';
 
-import {ReturnType} from 'typescript';
+import {ReturnType} from "typescript";
+import { PolylineClass } from './PolylineClass';
 // import {Point} from "../geometry";
-import {LatLngBounds} from "../geo";
+// import {LatLngBounds} from "../geo";
 // import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type LatLngReturnType = ReturnType<typeof LatLngFunction>;
-type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
+export type LatLngReturnType = ReturnType<typeof LatLngFunction>;
+type LatLngBoundsReturnType = ReturnType<typeof LatLngBoundsClass | typeof LatLngBoundsFunction>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof Point>;
-// type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-// type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
-// type roundReturnType = ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;
-// type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
-
-// type numberAuxX = ReturnType<typeof Object.Number>;
-
-// type numberAuxY = ReturnType<typeof Object.Number>;
-
-// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-
-/*
- * @class Polyline
- * @aka L.Polyline
- * @inherits Path
- *
- * A class for drawing polyline overlays on a map. Extends `Path`.
- *
- * @example
- *
- * ```tsc
- * // create a red polyline from an array of LatLng points
- * const latlngs = [
- * 	[45.51, -122.68],
- * 	[37.77, -122.43],
- * 	[34.04, -118.2]
- * ];
- *
- * const polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
- *
- * // zoom the map to the polyline
- * map.fitBounds(polyline.getBounds());
- * ```
- *
- * You can also pass a multi-dimensional array to represent a `MultiPolyline` shape:
- *
- * ```tsc
- * // create a red polyline from an array of arrays of LatLng points
- * const latlngs = [
- * 	[[45.51, -122.68],
- * 	 [37.77, -122.43],
- * 	 [34.04, -118.2]],
- * 	[[40.78, -73.91],
- * 	 [41.83, -87.62],
- * 	 [32.76, -96.72]]
- * ];
- * ```
- */
-
-
 export const Polyline = Path.extend({
 
 	// @section
@@ -202,7 +158,7 @@ export const Polyline = Path.extend({
 		return this.redraw();
 	},
 
-	_setLatLngs: function (latlngs:LatLngBoundsReturnType):void {
+	_setLatLngs: function (latlngs:LatLngClassReturnType) {
 		this._bounds = new LatLngBounds();
 		this._latlngs = this._convertLatLngs(latlngs);
 	},
@@ -356,9 +312,9 @@ export const Polyline = Path.extend({
 // optionally an options object. You can create a `Polyline` object with
 // multiple separate lines (`MultiPolyline`) by passing an array of arrays
 // of geographic points.
-export function polyline(latlngs, options) {
-	return new Polyline(latlngs, options);
+export function polyline(latlngs:LatLngReturnType[], options) {
+	return new PolylineClass(latlngs, options);
 }
 
 // Retrocompat. Allow plugins to support Leaflet versions before and after 1.1.
-Polyline._flat = LineUtil._flat;
+PolylineClass._flat = LineUtil._flat;

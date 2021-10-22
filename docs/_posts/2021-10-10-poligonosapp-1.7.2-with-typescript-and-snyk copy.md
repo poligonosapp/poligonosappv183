@@ -8,6 +8,9 @@ authorsite: https://hub.docker.com/u/poligonosapp
 
 poligonosapp v1.7.2-with-typescript-and-snyk
 
+es5.promise typescript
+javascript.info
+
 jquery-ui alias + rollup + webpack
 
 https://stackoverflow.com/questions/33998262/jquery-ui-and-webpack-how-to-manage-it-into-module

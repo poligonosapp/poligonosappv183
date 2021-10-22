@@ -24,19 +24,6 @@ interface Props{
 
 class App extends React.Component{
 
-    let leafletTokenGitHub: string | Promise<string>;
-
-    public const mapConst: MapReturnType[] = new PoligonosApp().L.Map('map', {
-        renderer: PoligonosApp.L.canvas()
-    });
-
-    // mapConst.map(x=>x){}
-
-    // let token:string;
-    // let tokenAtlassian:string;
-    // let a:string;
-    // let s:string;
-
     constructor(props:Props){
         super(props);
         // const a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
@@ -55,8 +42,24 @@ class App extends React.Component{
 
     } // end constructor
 
-    private github() {
-        // this.props.leafletTokenGitHub = await require('./Token').token().toPromise();
+    let leafletTokenGitHub: string | Promise<string>;
+
+    public const mapConst: MapReturnType[] = new PoligonosApp().L.Map('map', {
+        renderer: PoligonosApp.L.canvas()
+    });
+
+    // mapConst.map(x=>x){}
+
+    // let token:string;
+    // let tokenAtlassian:string;
+    // let a:string;
+    // let s:string;
+
+    function github() {
+        leafletTokenGitHub = await require('./Token').token().toPromise();
+        if(leafletTokenGitHub){
+            return;
+        }
         $( "button" ).on( "click", function() {
             $( "p" ).append( "Started..." );
            
@@ -90,7 +93,7 @@ console.log("then then");
     }
 
 
-        private atlassian(): void {
+        function atlassian(): void {
             
             // this.state.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
 
@@ -112,22 +115,7 @@ console.log("then then");
         this.atlassian();
         realm();
 
-        this.setState(
-            async function showMap():void{
-                leafletTokenGitHub = await require('./Token').token().toPromise().then(
-                    function (response:ResponseReturnType) {
-                    return response;
-                    }
-                            ).then(
-                                function () {
-                    console.log("then then");
-                                }
-                            );
-
-
-                const leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise().then().then();
-            }
-        );
+        showMap();
 
 
         return (setInterval(tick(this.state), 1000));
@@ -172,3 +160,28 @@ function realm():Promise<string> {
       
     return require('./TokenRealm').token();
 }
+
+
+    async function showMap():Promise<string>{
+        leafletTokenGitHub = await require('./Token').token().toPromise().then(
+            function (response:ResponseReturnType) {
+            return response;
+            }
+                    ).then(
+                        function () {
+            console.log("then then");
+                        }
+                    );
+
+                    if(leafletTokenGitHub){
+                        return leafletTokenGitHub;
+                    }
+
+        const leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise().then().then();
+        if(leafletTokenAtlassian){
+            return leafletTokenAtlassian;
+        }
+        // return undefined;
+    }
+
+

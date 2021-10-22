@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -55,7 +58,7 @@ function component() {
   
     // Lodash, currently included via a script, is required for this line to work
     // Lodash, now imported by this script
-    element.innerHTML = _.join(['', map], ' ');
+    element.innerHTML = _.join(['PoligonosApp', 'polygons.geojson'], ' ');
   
     return element;
   }

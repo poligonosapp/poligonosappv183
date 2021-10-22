@@ -6,12 +6,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import {version} from "../src";
+import {version} from "package";
 export {version};
 
 // import * as L from './Leaflet';
 import {Map} from './map/Map';
-
+import {Object, ReturnType, Set} from "typescript";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 export type GeoJSONReturnType = ReturnType<typeof GeoJSONClass| typeof GeoJSONFunction>;
 export type MapReturnType = ReturnType<typeof Map>;
@@ -23,7 +23,7 @@ import polygonsArray: PoligonosApp().L.Polygon[] from './polygons.geojson';
 
 import {GeoJSONClass} from 'src/layer/GeoJSONClass';
 import {GeoJSONFunction} from 'src/layer/GeoJSONFunction';
-import {Object, ReturnType, Set} from "typescript";
+
 import {LayerGroup} from "./layer";
 import {Point} from "./geometry";
 

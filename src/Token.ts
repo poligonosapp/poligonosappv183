@@ -20,7 +20,7 @@ async function token (): Promise<string>{
             data: { login },
         } = await octokit.rest.users.getAuthenticated();
         console.log("Hello, %s", login);
-        const retrieve = require('./OctokitAppServer.ts');
+        const retrieve = await require('./OctokitAppServer.ts');
         retrieve();
         return octokit.toString('leaflet-secret');
     }catch{

@@ -76,7 +76,7 @@
     ],
     "private": true,
     "scripts": {
-        "start": "ts-node -r tsconfig-paths/register ./src/App.ts",
+        "start": "ts-node -r tsconfig-paths/register ./src/App.tsx",
         "docs": "ts-node -r tsconfig-paths/register ./build/docs.ts",
         "pretest": "npm run lint --fix",
         "test": "npm run test-nolint",
@@ -153,6 +153,8 @@
     "dependencies": {
         "@angular/compiler": "^11.0.0",
         "@angular/compiler-cli": "^11.0.0",
+        "@octokit/core": "^3.5.1",
+        "@octokit/request": "^5.6.2",
         "@types/body-parser": "^1.19.1",
         "@types/connect": "^3.4.35",
         "@types/eslint": "^7.2.13",

@@ -7,8 +7,9 @@
     "src/**/*geojson",
     "**/*.tsconfig.eslint.json",
     "tsconfig-path-bootstrap.ts",
-    "rollup.config.ts"
-  ],
+    "rollup.config.ts",
+    "style.css"
+, "src/App.tsx"  ],
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
@@ -19,6 +20,7 @@
     "strict": true,
     "moduleResolution": "node",
     "paths": {
+      "package":["./package.json"],
       "src/*":["src/*"],
       "jquery": [
         "node_modules/jquery/dist/jquery"

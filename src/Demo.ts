@@ -7,7 +7,7 @@
 // @ts-ignore
 
 import { MapReturnType } from "./layer/GeoJSONFunction";
-import { PoligonosApp } from "./Leaflet";
+import { PoligonosApp } from "../Leaflet";
 
 const data: PoligonosApp.L.Polygon[] = require("./polygons.geojson");
 

@@ -4,7 +4,7 @@ import ReactDOM, { hydrate, render } from 'react-dom';
 
 import Realm from "realm";
 
-import { PoligonosApp, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
+import { PoligonosApp, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from '../Leaflet';
 import { MapReturnType } from "./layer/GeoJSONFunction";
 
 import {Response} from "express";

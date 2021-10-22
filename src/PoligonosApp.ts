@@ -10,6 +10,7 @@
 
 // import {GeoJSON} from './layer';
 
+import { LayerReturnType } from "Leaflet";
 import { PolygonClass } from "./layer/vector/PolygonClass";
 
 // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html
@@ -37,23 +38,28 @@ function makeUnique<T>(
 	return collection;
   }
 
-function PoligonosApp(polygonsArray:Polygon) {
+export function PoligonosApp(polygonsArray:Polygon) {
 	return polygonsArray;
 }
 const indexPolygonsArray = require('./polygons.geojson').split("},{", 3);
 
-const polygonsArray = require('./polygons.geojson');
+export const polygonsArray = require('./polygons.geojson');
 
 // PoligonosApp(polygonsArray);
 
-for (let index = 0; index < polygonsArray.length; index++) {
-	const element = array[index];
-}
+// for (let index in polygonsArray) {
+//	const element = polygonsArray[index];
+// }
 
-const PoligonosApp = L.Class.extend({
+export const PoligonosApp = L.Class.extend({
 
 	// A property with initial value = 42
 	PoligonosAppProperty: makeUnique(polygonsArray),
+
+	addInitHook : function(){
+		const $ = require('jquery');
+		$('div').addEventListener();
+	},
 
 	// A method
 	myDemoMethod: function() {
@@ -68,6 +74,8 @@ const PoligonosApp = L.Class.extend({
 });
 
 const PoligonosAppDemoInstance = new PoligonosAppDemoClass();
+
+console.log( PoligonosAppDemoInstance.addEventListener() );
 
 // This will output "42" to the development console
 console.log( PoligonosAppDemoInstance.myDemoMethod() );
@@ -101,7 +109,7 @@ const MyBoxClass = L.Class.extend({
 		height: 1
 	},
 
-	initialize: function(name, options) {
+	initialize: function(name:string, options:[]) {
 		this.name = name;
 		L.setOptions(this, options);
 	}
@@ -148,17 +156,17 @@ MyCubeClass.addInitHook('_calculateVolume', argValue1, argValue2);
 // initialize parent class
 L.FeatureGroup = L.LayerGroup.extend({
 
-	addLayer: function (layer) {
+	addLayer: function (layer:LayerReturnType) {
         L.LayerGroup.prototype.addLayer.call(this, layer);
 	},
 
-	removeLayer: function (layer) {
+	removeLayer: function (layer:LayerReturnType) {
         L.LayerGroup.prototype.removeLayer.call(this, layer);
 	},
 });
 
 // initialize factories
-function myBoxClass(name, options) {
+function myBoxClass(name:string, options:[]) {
 	return new MyBoxClass(name, options);
 }
 

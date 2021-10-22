@@ -10,7 +10,7 @@ import {version} from "package";
 export {version};
 
 // import * as L from './Leaflet';
-import {Map} from './map/Map';
+import {Map} from './src/map/Map';
 import {Object, ReturnType, Set} from "typescript";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 export type GeoJSONReturnType = ReturnType<typeof GeoJSONClass| typeof GeoJSONFunction>;
@@ -19,13 +19,13 @@ export type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof Laye
 
 // import {L.PoligonosApp} from './PoligonosApp';
 
-import polygonsArray: PoligonosApp().L.Polygon[] from './polygons.geojson';
+polygonsArray = require('./polygons.geojson');
 
 import {GeoJSONClass} from 'src/layer/GeoJSONClass';
 import {GeoJSONFunction} from 'src/layer/GeoJSONFunction';
 
-import {LayerGroup} from "./layer";
-import {Point} from "./geometry";
+import {LayerGroup} from "./src/layer";
+import {Point} from "./src/geometry";
 
 // import { L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
 
@@ -37,13 +37,13 @@ function makeUnique(polygonsArray: GeoJSONReturnType[]):Set<GeoJSONReturnType[]>
 	return new Set(polygonsArray);
 }
 
-export const PoligonosApp = L.Class.extend({
+export const PoligonosApp = L.Class.include({
 
 	// A property with initial value = 42
 	PoligonosAppProperty: makeUnique(polygonsArray),
 
 	// A method
-	PoligonosAppMethod: function():GeoJSONReturnType[] {
+	PoligonosAppMethod: function(polygonsArray):GeoJSONReturnType[] {
 
 		// const s = new Server();
 
@@ -63,26 +63,28 @@ export const PoligonosApp = L.Class.extend({
 // export * from PoligonosApp;
 
 // control
-export * from './control/index';
+export * from './src/control/index';
 
 // core
-export * from './core/index';
+export * from './src/core/index';
 
 // dom
-export * from './dom/index';
+export * from './src/dom/index';
 
 // geometry
-export * from './geometry/index';
+export * from './src/geometry/index';
 
 // geo
-export * from './geo/index';
+export * from './src/geo/index';
 
 // layer
-export * from './layer/index';
+export * from './src/layer/index';
 
 // map
-export * from './map/index';
+export * from './src/map/index';
 
 // export require('iconv').Iconv;
+
+// export * as namespace from "PoligonosApp";
 
 

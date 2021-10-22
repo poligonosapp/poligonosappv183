@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -401,12 +402,12 @@ export const Layers = Control.extend({
 		}
 
 		// Bugfix issue 2318: Should remove all old layers before readding new ones
-		for (const i in removedLayers.length) {
+		for (const i in removedLayers) {
 			if (this._map.hasLayer(removedLayers[i])) {
 				this._map.removeLayer(removedLayers[i]);
 			}
 		}
-		for (const i in addedLayers.length) {
+		for (const i in addedLayers) {
 			if (!this._map.hasLayer(addedLayers[i])) {
 				this._map.addLayer(addedLayers[i]);
 			}
@@ -454,6 +455,6 @@ export const Layers = Control.extend({
 
 // @factory L.control.layers(baselayers?: Object, overlays?: Object, options?: Control.Layers options)
 // Creates a layers control with the given layers. Base layers will be switched with radio buttons, while overlays will be switched with checkboxes. Note that all base layers should be passed in the base layers object, but only one should be added to the map during map instantiation.
-export const layers = function (baseLayers, overlays, options) {
+export const layers = function (baseLayers:HTMLElementReturnType, overlays, options:[]) {
 	return new Layers(baseLayers, overlays, options);
 };

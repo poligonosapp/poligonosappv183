@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 // 'use strict'; // eslint https://stackoverflow.com/questions/32791507/node-js-and-eslint-disagree-on-use-strict
 
-import {GeoJSONAbstractClass, map} from "./Leaflet";
+import {GeoJSONAbstractClass, map} from "../Leaflet";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 import {Point} from "./geometry";
 type StringReturnType = ReturnType<typeof  Point.prototype.toString>;

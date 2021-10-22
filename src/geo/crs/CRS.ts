@@ -1,7 +1,7 @@
 
 import { BoundsClass } from "../../geometry/BoundsClass";
 import {LatLngFunction} from '../LatLngFunction';
-import { LatLngBounds } from "../LatLngBounds.1";
+import { LatLngBoundsClass } from "../LatLngBoundsClass";
 import * as Util from '../../core/Util';
 
 import {LonLat} from './Projection.LonLat';
@@ -190,9 +190,9 @@ export const CRS = {
 
 		const ne = bounds.getNorthEast();
 
-		const newSw = new LatLngFunction(sw.lat - latShift, sw.lng - lngShift);
+		const newSw = new LatLngClass(sw.lat - latShift, sw.lng - lngShift);
 
-		const newNe = new LatLngFunction(ne.lat - latShift, ne.lng - lngShift);
+		const newNe = new LatLngClass(ne.lat - latShift, ne.lng - lngShift);
 
 		return new LatLngBounds(newSw, newNe);
 	}

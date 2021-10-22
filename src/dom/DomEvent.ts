@@ -5,6 +5,10 @@ import {addPointerListener, removePointerListener} from './DomEvent.Pointer';
 import {addDoubleTapListener, removeDoubleTapListener} from './DomEvent.DoubleTap';
 import {getScale} from './DomUtil';
 
+import {HTMLElement, ReturnType} from "typescript";
+
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+
 /*
  * @namespace DomEvent
  * Utility functions to work with the [DOM events](https://developer.mozilla.org/docs/Web/API/Event), used by Leaflet internally.
@@ -21,7 +25,7 @@ import {getScale} from './DomUtil';
 // @alternative
 // @function on(el: HTMLElement, eventMap: Object, context?: Object): this
 // Adds a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
-export function on(obj, types, fn, context) {
+export function on(obj:HTMLElementReturnType, types, fn, context) {
 
 	if (typeof types === 'object') {
 		for (const type in types) {
@@ -48,7 +52,7 @@ const eventsKey = '_leaflet_events';
 // @alternative
 // @function off(el: HTMLElement, eventMap: Object, context?: Object): this
 // Removes a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
-export function off(obj, types, fn, context) {
+export function off(obj:HTMLElementReturnType, types, fn, context) {
 
 	if (typeof types === 'object') {
 		for (const type in types) {
@@ -83,7 +87,7 @@ const mouseSubst = {
 	wheel: !('onwheel' in window) && 'mousewheel'
 };
 
-function addOne(obj, type, fn, context) {
+function addOne(obj:HTMLElementReturnType, type, fn, context) {
 	const id = type + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : '');
 
 	if (obj[eventsKey] && obj[eventsKey][id]) { return this; }
@@ -127,7 +131,7 @@ function addOne(obj, type, fn, context) {
 	obj[eventsKey][id] = handler;
 }
 
-function removeOne(obj, type, fn, context) {
+function removeOne(obj:HTMLElementReturnType, type, fn, context) {
 
 	const id = type + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : ''),
 	    handler = obj[eventsKey] && obj[eventsKey][id];
@@ -174,7 +178,7 @@ export function stopPropagation(e) {
 
 // @function disableScrollPropagation(el: HTMLElement): this
 // Adds `stopPropagation` to the element's `'wheel'` events (plus browser variants).
-export function disableScrollPropagation(el) {
+export function disableScrollPropagation(el:HTMLElementReturnType) {
 	addOne(el, 'wheel', stopPropagation);
 	return this;
 }
@@ -182,7 +186,7 @@ export function disableScrollPropagation(el) {
 // @function disableClickPropagation(el: HTMLElement): this
 // Adds `stopPropagation` to the element's `'click'`, `'dblclick'`,
 // `'mousedown'` and `'touchstart'` events (plus browser variants).
-export function disableClickPropagation(el) {
+export function disableClickPropagation(el:HTMLElementReturnType) {
 	on(el, 'mousedown touchstart dblclick', stopPropagation);
 	addOne(el, 'click', fakeStop);
 	return this;
@@ -267,7 +271,7 @@ export function skipped(e) {
 }
 
 // check if element really left/entered the event target (for mouseenter/mouseleave)
-export function isExternalTarget(el, e) {
+export function isExternalTarget(el:HTMLElementReturnType, e) {
 
 	let related = e.relatedTarget;
 

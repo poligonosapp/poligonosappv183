@@ -2,6 +2,13 @@ import * as DomEvent from './DomEvent';
 import * as Util from '../core/Util';
 import * as Browser from '../core/Browser';
 
+import {HTMLElement, Object, ReturnType} from 'typescript';
+// import {Point} from "../geometry";
+
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+
 /*
  * Extends L.DomEvent to provide touch support for Internet Explorer and Windows-based devices.
  */
@@ -18,7 +25,7 @@ const _pointerDocListener = false;
 // Provides a touch events wrapper for (ms)pointer events.
 // ref http://www.w3.org/TR/pointerevents/ https://www.w3.org/Bugs/Public/show_bug.cgi?id=22890
 
-export function addPointerListener(obj, type, handler, id) {
+export function addPointerListener(obj:HTMLElementReturnType, type, handler, id) {
 	if (type === 'touchstart') {
 		return _addPointerStart(obj, handler, id);
 

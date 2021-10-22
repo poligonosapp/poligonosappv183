@@ -73,7 +73,7 @@ class App extends React.Component{
     // let a:string;
     // let s:string;
 
-    function github() {
+    function github():Promise<string> {
         
         leafletTokenGitHub = await require('./Token').token().toPromise();
 
@@ -113,9 +113,13 @@ console.log("then then");
     }
 
 
-        function atlassian(): void {
+        function atlassian():Promise<string> {
             
-            // this.state.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
+            leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
+
+            if(leafletTokenAtlassian){
+                return;
+            }
 
             const s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.props.leafletTokenAtlassian);
 

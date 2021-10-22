@@ -8,10 +8,12 @@ import * as Browser from '../core/Browser';
 
 import Event from 'typescript';
 
-import {Object, ReturnType} from 'typescript';
+import {HTMLElement, Object, ReturnType} from 'typescript';
 import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type onReturnType = ReturnType<typeof String | Object.Number >;
 

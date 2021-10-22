@@ -52,14 +52,7 @@ type PointReturnType = ReturnType<typeof Point>;
  * ```
  */
 
-export class ArrayTransformationClass implements Iterable<PointReturnType>{
-
-	private let _a:PointReturnImpl[];
-	private let _b:PointReturnImpl[];
-	private let _c:PointReturnImpl[];
-	private let _d:PointReturnImpl[];
-
-	private let coefficients: Set<PointReturnType>;
+export class ArrayTransformationClass{
 
 	constructor(a:PointReturnType[], 
 		b:PointReturnType[]>, 
@@ -91,6 +84,13 @@ export class ArrayTransformationClass implements Iterable<PointReturnType>{
 		// }
 		
 	}
+
+	private let _a:PointReturnImpl[];
+	private let _b:PointReturnImpl[];
+	private let _c:PointReturnImpl[];
+	private let _d:PointReturnImpl[];
+
+	private let coefficients: Set<PointReturnType>;
 
 }
 

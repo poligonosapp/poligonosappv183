@@ -1,9 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 
 export class MyComponent extends React.Component {
   render() {
-    return <div>Hello World</div>;
+    return ("<div>Hello World</div>");
   }
 }
 

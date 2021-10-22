@@ -115,22 +115,25 @@ console.log("then then");
 
         function atlassian():Promise<string> {
             
-            leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
+try{
+    leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
+    const s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.props.leafletTokenAtlassian);
 
-            if(leafletTokenAtlassian){
-                return;
-            }
+    const p = new PoligonosApp().L.tileLayer(s, {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox/light-v9',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(this.mapConst);
+}catch(e){
+        return throw new Exception("es5 promise exception");
+}finally{
 
-            const s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.props.leafletTokenAtlassian);
+}
 
-            const p = new PoligonosApp().L.tileLayer(s, {
-                maxZoom: 18,
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                id: 'mapbox/light-v9',
-                tileSize: 512,
-                zoomOffset: -1
-            }).addTo(this.mapConst);
+
         }
 
     render(){
@@ -228,6 +231,7 @@ const linkTags = extractor.getLinkTags(); // or extractor.getLinkElements();
 const styleTags = extractor.getStyleTags(); // or extractor.getStyleElements();
 
 import * as component from '@loadable/component';
+import path from 'path';
 component.loadableReady(() => {
   const root = document.getElementById('main')
   hydrate(<App />, root)

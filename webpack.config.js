@@ -12,6 +12,8 @@ const { extendDefaultPlugins } = require("svgo");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const LoadablePlugin = require('@loadable/webpack-plugin');
+
 module.exports = {
   mode: 'production',
   entry: './src/index.ts',
@@ -52,6 +54,7 @@ module.exports = {
   },
 
   plugins: [
+    new LoadablePlugin(),
     new MiniCssExtractPlugin(),
     new ImageMinimizerPlugin({
       minimizerOptions: {

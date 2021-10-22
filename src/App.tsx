@@ -135,8 +135,8 @@ console.log("then then");
 
     render(){
 
-        const a = this.github();
-        const b = this.atlassian();
+        const a = await this.github();
+        const b = await this.atlassian();
         
         realm();
 

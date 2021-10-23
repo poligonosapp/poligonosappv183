@@ -52,27 +52,7 @@ type PointReturnType = ReturnType<typeof Point>;
  * ```
  */
 
-export class ArrayTransformationClass implements Iterable<Array>{
-
-	constructor(a:PointReturnType[], 
-		b:PointReturnType[], 
-		c:PointReturnType[], 
-		d:PointReturnType[]){
-
-			this.coefficients = new PointReturnImpl[4];
-
-			for(const i in this.coefficients){
-
-				this._a[i].add(a[i+0]);// | a.values(0)
-
-				this._b[i].add(b[i+1]);
-
-				this._c[i].add(c[i+2]);
-
-				this._d[i].add(d[i+3]);
-			}
-
-	} 
+export class ArrayTransformationClass implements Iterable<Array>{ 
 
 	constructor(coefficients:PointReturnType[4]){
 
@@ -80,21 +60,83 @@ export class ArrayTransformationClass implements Iterable<Array>{
 
 		// if(this.coefficients == 4){
 
-			this._a[i].add(coefficients[0]);
-			this._b[i].add(coefficients[1]);
-			this._c[i].add(coefficients[2]);
-			this._d[i].add(coefficients[3]);
+for(let i in coefficients){
+
+	this._a[i].add(coefficients[0]);
+	this._b[i].add(coefficients[1]);
+	this._c[i].add(coefficients[2]);
+	this._d[i].add(coefficients[3]);
+	
+}
 
 		// }
 		
-	}
+	} // end constructor
+
+	[Symbol
+		// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+		/*
+		 * @class Transformation
+		 * @aka L.Transformation
+		 *
+		 * Represents an affine transformation: a set of coefficients `a`, `b`, `c`, `d`
+		 * for transforming a point of a form `(x, y)` into `(a*x + b, c*y + d)` and doing
+		 * the reverse. Used by Leaflet in its projections code.
+		 *
+		 * @example
+		 *
+		 * ```tsc
+		 * const transformation = L.transformation(2, 5, -1, 10),
+		 * 	p = L.point(1, 2),
+		 * 	p2 = transformation.transform(p), //  L.point(7, 8)
+		 * 	p3 = transformation.untransform(p2); //  L.point(1, 2)
+		 * ```
+		 */
+		.
+		// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+		/*
+		 * @class Transformation
+		 * @aka L.Transformation
+		 *
+		 * Represents an affine transformation: a set of coefficients `a`, `b`, `c`, `d`
+		 * for transforming a point of a form `(x, y)` into `(a*x + b, c*y + d)` and doing
+		 * the reverse. Used by Leaflet in its projections code.
+		 *
+		 * @example
+		 *
+		 * ```tsc
+		 * const transformation = L.transformation(2, 5, -1, 10),
+		 * 	p = L.point(1, 2),
+		 * 	p2 = transformation.transform(p), //  L.point(7, 8)
+		 * 	p3 = transformation.untransform(p2); //  L.point(1, 2)
+		 * ```
+		 */
+		iterator](): Iterator<any, any, undefined> {
+			
+				// this.coefficients = new PointReturnImpl[4];
+	
+				// for(const i in this.coefficients){
+	
+					this.coefficients.add(a);// | a.values(0)
+	
+					this.coefficients.add(b);
+	
+					this.coefficients.add(c);
+	
+					this.coefficients.add(d);
+				// }
+
+
+				return this.coefficients;
+
+	}// end iterator implementation
 
 	_a = new PointReturnImpl(0,0)[];
 	_b = new PointReturnImpl(0,0)[];
 	_c = new PointReturnImpl(0,0)[];
 	_d = new PointReturnImpl(0,0)[];
 
-	private let coefficients: Set<PointReturnType>;
+	coefficients: Set<Iterator<PointReturnType>>;
 
 } // end class ArrayTransformationClass 
 

@@ -73,6 +73,29 @@ export class PointsTransformationClass implements Iterable<PointReturnImpl>{
 			this._d = d;
 		
 	}
+	[Symbol.iterator](): Iterator<PointReturnImpl, any, undefined> {
+		
+
+	
+				// this.coefficients = new PointReturnImpl[4];
+	
+				// for(const i in this.coefficients){
+	
+					this.coefficients.add(a);// | a.values(0)
+	
+					this.coefficients.add(b);
+	
+					this.coefficients.add(c);
+	
+					this.coefficients.add(d);
+				// }
+
+
+				return this.coefficients;
+	
+		
+
+	}// end iterator implementation
 
 }
 

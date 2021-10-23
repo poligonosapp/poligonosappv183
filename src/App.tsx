@@ -59,7 +59,7 @@ class App extends React.Component{
 
         realm();
 
-        showMap();
+        // showMap();
 
         // const a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
         // this.props.a  = a;
@@ -167,15 +167,17 @@ try{
 
         } // end atlassian function
 
-        const ul = <ul>
+        const ul = (
+            <ul>
             <li>
                 {
                     
-                        this.state.polygons.renderer()
+                        this.props.polygons.renderer()
                     
                 }
             </li>
-        </ul>;
+        </ul>
+        );
 
     render(){
 
@@ -257,8 +259,8 @@ function realm():Promise<string> {
                         }
                     );
 
-                    if(leafletTokenGitHub){
-                        return leafletTokenGitHub;
+                    if(this.props.leafletTokenGitHub){
+                        return this.props.leafletTokenGitHub;
                     }
 
         const leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise().then().then();

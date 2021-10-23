@@ -8,7 +8,7 @@
 import {Point} from './Point';
 import * as Util from '../core/Util';
 
-import {PointsTransformation} from './PointsTransformation';
+import {PointsTransformation, PointsTransformationClass} from './PointsTransformation';
 
 import {ReturnType, Object} from 'typescript';
 // import {Point} from "../geometry";
@@ -52,23 +52,27 @@ type PointReturnType = ReturnType<typeof Point>;
  * ```
  */
 
-export class ArrayTransformationClass{
+export class ArrayTransformationClass implements Iterable<Array>{
 
 	constructor(a:PointReturnType[], 
-		b:PointReturnType[]>, 
-		c:PointReturnType[]>, 
+		b:PointReturnType[], 
+		c:PointReturnType[], 
 		d:PointReturnType[]){
 
 			this.coefficients = new PointReturnImpl[4];
 
 			for(const i in this.coefficients){
-				this._a = a[i+0];// | a.values(0)
-				this._b = b[i+1];
-				this._c = c[i+2];
-				this._d = d[i+3];
+
+				this._a[i].add(a[i+0]);// | a.values(0)
+
+				this._b[i].add(b[i+1]);
+
+				this._c[i].add(c[i+2]);
+
+				this._d[i].add(d[i+3]);
 			}
 
-	}
+	} 
 
 	constructor(coefficients:PointReturnType[4]){
 
@@ -76,23 +80,23 @@ export class ArrayTransformationClass{
 
 		// if(this.coefficients == 4){
 
-			this._a = coefficients[0];
-			this._b = coefficients[1];
-			this._c = coefficients[2];
-			this._d = coefficients[3];
+			this._a[i].add(coefficients[0]);
+			this._b[i].add(coefficients[1]);
+			this._c[i].add(coefficients[2]);
+			this._d[i].add(coefficients[3]);
 
 		// }
 		
 	}
 
-	private let _a:PointReturnImpl[];
-	private let _b:PointReturnImpl[];
-	private let _c:PointReturnImpl[];
-	private let _d:PointReturnImpl[];
+	_a = new PointReturnImpl(0,0)[];
+	_b = new PointReturnImpl(0,0)[];
+	_c = new PointReturnImpl(0,0)[];
+	_d = new PointReturnImpl(0,0)[];
 
 	private let coefficients: Set<PointReturnType>;
 
-}
+} // end class ArrayTransformationClass 
 
 	// _a:ReturnType<typeof NumberReturnType[]>|Set<NumberReturnType>;
 	// _b:NumberReturnType[]|Set<NumberReturnType>;

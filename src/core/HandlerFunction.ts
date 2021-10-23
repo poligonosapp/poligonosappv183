@@ -17,7 +17,7 @@ type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | 
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 
-export const HandlerFunction = GeoJSONAbstractClass.extend({
+export const HandlerFunction: GeoJSONReturnType = GeoJSONAbstractClass.extend({
 
 	initialize: function (map:MapReturnType) {
 		this._map = map;
@@ -47,7 +47,7 @@ export const HandlerFunction = GeoJSONAbstractClass.extend({
 	// Returns `true` if the handler is enabled
 	enabled: function ():boolean {
 		return !!this._enabled;
-	}
+	},
 
 	// @section Extension methods
 	// Classes inheriting from `Handler` must implement the two following methods:
@@ -73,7 +73,7 @@ export const HandlerFunction = GeoJSONAbstractClass.extend({
 	 return this;
  	};
 
-});
+}); // end GeoJSONAbstractClass.extend
 
 
 

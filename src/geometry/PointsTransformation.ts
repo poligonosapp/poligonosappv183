@@ -12,6 +12,8 @@ import {ReturnType, Object} from 'typescript';
 // import {Point} from "../geometry";
 // import {LatLngBounds} from "../geo";
 import { PointReturnImpl } from './PointReturnImpl';
+import { LatLngReturnType } from 'src/layer/vector/Polyline';
+import { ArrayTransformationClass } from './ArrayTransformation';
 // import { PointsTransformationFunction } from './ArrayTransformation';
 // import {Point} from "../geometry";
 

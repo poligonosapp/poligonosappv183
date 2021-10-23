@@ -12,7 +12,7 @@ import {ReturnType} from "typescript";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type LatLngReturnType = ReturnType<typeof LatLng>;
-type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
+export type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 
 // import * as L from './src/Leaflet';
 

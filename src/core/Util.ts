@@ -78,7 +78,7 @@ type numberAuxY = ReturnType<typeof Object.Number>;
 
 // @function extend(dest: Object, src?: Object): Object
 // Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter. Has an `L.extend` shortcut.
-export function extend(dest:PointReturnImpl[]): ObjectReturnType[] {
+export function extend(dest:PointReturnImpl[], props:GeoJSONReturnType[]): ObjectReturnType[] {
 	// const i;
 	// const j;
 	// const len;
@@ -164,7 +164,7 @@ export function stamp(obj:ObjectReturnType):NumberReturnType {
 export function throttle(fn:FunctionReturnType, time:NumberReturnType, context:ObjectReturnType):FunctionReturnType {
 
 	let lock:boolean;
-	const args:boolean;
+	const args = true;
 	const wrapperFn:FunctionReturnType;
 	let later:FunctionReturnType;
 

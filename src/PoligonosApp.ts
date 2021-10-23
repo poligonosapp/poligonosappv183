@@ -14,11 +14,12 @@
 import { LayerReturnType, Polygon } from "Leaflet";
 import { PolygonClass } from "./layer/vector/PolygonClass";
 
-import("@babel/preset-react").then(
-	require => {
-		return require("@babel/preset-react");
-	}
-);
+// declare module '@babel/preset-react';
+// import("@babel/preset-react").then(
+//	require => {
+//		return require("@babel/preset-react");
+//	}
+// );
 
 // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html
 function makeUnique<T>(

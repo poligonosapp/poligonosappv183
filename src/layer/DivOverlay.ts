@@ -9,6 +9,14 @@ import * as Util from '../core/Util';
 import {toLatLng} from '../geo/LatLngFunction';
 import {toPoint} from '../geometry/PointFunction';
 import * as DomUtil from '../dom/DomUtil';
+import {Map} from "src/map/Map";
+
+import {Event} from "typescript";
+import { LatLngReturnType } from './vector/PolylineFunction';
+
+type MapReturnType = ReturnType<typeof Map>;
+type EventReturnType = ReturnType<typeof Event>;
+type DivOverlayOptionsReturnType = ReturnType<typeof DivOverlay|typeof String | typeof Number | typeof Array| typeof PointClass>;
 
 
 
@@ -39,13 +47,13 @@ export const DivOverlay = LayerFunction.extend({
 		pane: 'popupPane'
 	},
 
-	initialize: function (options, source) {
+	initialize: function (options:DivOverlayOptionsReturnType, source) {
 		Util.getOptions(this, options);
 
 		this._source = source;
 	},
 
-	onAdd: function (map) {
+	onAdd: function (map:MapReturnType) {
 		this._zoomAnimated = map._zoomAnimated;
 
 		if (!this._container) {
@@ -67,7 +75,7 @@ export const DivOverlay = LayerFunction.extend({
 		this.bringToFront();
 	},
 
-	onRemove: function (map) {
+	onRemove: function (map:MapReturnType) {
 		if (map._fadeAnimated) {
 			DomUtil.setOpacity(this._container, 0);
 			this._removeTimeout = setTimeout(Util.bind(DomUtil.remove, undefined, this._container), 200);
@@ -79,7 +87,7 @@ export const DivOverlay = LayerFunction.extend({
 	// @namespace Popup
 	// @method getLatLng: LatLng
 	// Returns the geographical point of popup.
-	getLatLng: function () {
+	getLatLng: function ():LatLngReturnType {
 		return this._latlng;
 	},
 
@@ -130,7 +138,7 @@ export const DivOverlay = LayerFunction.extend({
 		this._adjustPan();
 	},
 
-	getEvents: function () {
+	getEvents: function ():EventReturnType[] {
 		const events = {
 			zoom: this._updatePosition,
 			viewreset: this._updatePosition

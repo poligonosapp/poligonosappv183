@@ -280,7 +280,7 @@ export function toPoint(x:PointReturnType[], y:NumberReturnType[], round:NumberR
 		return x;
 	}
 	if (isArray(x)) {
-		return new PointFunction(x[0], x[1], round);
+		return new PointClass().round(x[0], x[1], round);
 	}
 	if (x === undefined || x === null) {
 		return x;

@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import * as Browser from '../core/Browser';
 import {DivOverlay} from './DivOverlay';
@@ -6,6 +10,13 @@ import {Map} from '../map/Map';
 import {LayerFunction} from './Layer';
 import * as Util from '../core/Util';
 import * as DomUtil from '../dom/DomUtil';
+import { MapReturnType } from 'src/core/HandlerFunction';
+import { LayerReturnType } from 'Leaflet';
+
+import {Event} from "typescript";
+
+type EventReturnType = ReturnType<typeof Event>;
+type TooltipOptionsReturnType = ReturnType<typeof Tooltip|typeof String|typeof Array|typeof Boolean|typeof Number|typeof PointClass>;
 
 /*
  * @class Tooltip
@@ -29,7 +40,7 @@ import * as DomUtil from '../dom/DomUtil';
 
 
 // @namespace Tooltip
-export var Tooltip = DivOverlay.extend({
+export const Tooltip = DivOverlay.extend({
 
 	// @section
 	// @aka Tooltip options
@@ -66,7 +77,7 @@ export var Tooltip = DivOverlay.extend({
 		opacity: 0.9
 	},
 
-	onAdd: function (map) {
+	onAdd: function (map:MapReturnType) {
 		DivOverlay.prototype.onAdd.call(this, map);
 		this.setOpacity(this.options.opacity);
 
@@ -85,7 +96,7 @@ export var Tooltip = DivOverlay.extend({
 		}
 	},
 
-	onRemove: function (map) {
+	onRemove: function (map:MapReturnType) {
 		DivOverlay.prototype.onRemove.call(this, map);
 
 		// @namespace Map
@@ -103,7 +114,7 @@ export var Tooltip = DivOverlay.extend({
 		}
 	},
 
-	getEvents: function () {
+	getEvents: function ():EventReturnType {
 		const events = DivOverlay.prototype.getEvents.call(this);
 
 		if (Browser.touch && !this.options.permanent) {
@@ -190,7 +201,7 @@ export var Tooltip = DivOverlay.extend({
 		}
 	},
 
-	_animateZoom: function (e) {
+	_animateZoom: function (e:EventReturnType) {
 		const pos = this._map._latLngToNewLayerPoint(this._latlng, e.zoom, e.center);
 		this._setPosition(pos);
 	},
@@ -205,7 +216,7 @@ export var Tooltip = DivOverlay.extend({
 // @namespace Tooltip
 // @factory L.tooltip(options?: Tooltip options, source?: Layer)
 // Instantiates a Tooltip object given an optional `options` object that describes its appearance and location and an optional `source` object that is used to tag the tooltip with a reference to the Layer to which it refers.
-export var tooltip = function (options, source) {
+export const tooltip = function (options:TooltipOptionsReturnType, source:LayerReturnType) {
 	return new Tooltip(options, source);
 };
 
@@ -218,7 +229,7 @@ Map.include({
 	// @alternative
 	// @method openTooltip(content: String|HTMLElement, latlng: LatLng, options?: Tooltip options): this
 	// Creates a tooltip with the specified content and options and open it.
-	openTooltip: function (tooltip, latlng, options) {
+	openTooltip: function (tooltip:TooltipOptionsReturnType[], latlng, options) {
 		if (!(tooltip instanceof Tooltip)) {
 			tooltip = new Tooltip(options).setContent(tooltip);
 		}

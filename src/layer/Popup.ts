@@ -25,6 +25,7 @@ import {PointReturn} from "./src/geometry";
 import {LayerGroup} from "./src/layer";
 import { LatLngReturnType } from './vector/PolylineFunction';
 
+type ContentReturnType = ReturnType< typeof String| typeof HTMLElement| typeof Function| typeof Popup>;
 type EventReturnType = ReturnType<typeof Event>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 type PointReturnType = ReturnType<typeof PointFunction|typeof PointClass|typeof PointReturnImpl| typeof PointReturn>;
@@ -363,7 +364,7 @@ Map.include({
 
 	// @method closePopup(popup?: Popup): this
 	// Closes the popup previously opened with [openPopup](#map-openpopup) (or the given one).
-	closePopup: function (popup) {
+	closePopup: function (popup:PopupReturnType) {
 		if (!popup || popup === this._popup) {
 			popup = this._popup;
 			this._popup = null;
@@ -397,7 +398,7 @@ LayerFunction.include({
 	// Binds a popup to the layer with the passed `content` and sets up the
 	// necessary event listeners. If a `Function` is passed it will receive
 	// the layer as the first argument and should return a `String` or `HTMLElement`.
-	bindPopup: function (content, options) {
+	bindPopup: function (content: ContentReturnType, options:PopupOptionsReturnType[]) {
 
 		if (content instanceof Popup) {
 			Util.getOptions(content, options);

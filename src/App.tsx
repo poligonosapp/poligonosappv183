@@ -1,10 +1,10 @@
-// import PoligonosApp from "./PoligonosApp";
+import PoligonosApp, { polygonsArray, PoligonosAppReturnType } from "./PoligonosApp";
 import React, {Component, useState, useCallback} from 'react';
 import ReactDOM, { hydrate, render } from 'react-dom';
-
+import {PoligonosAppComponent} from "./PoligonosAppComponent";
 import Realm from "realm";
 
-import { PoligonosApp, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from '../Leaflet';
+import { Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from '../Leaflet';
 import { MapReturnType } from "./layer/GeoJSONFunction";
 
 import {Response} from "express";
@@ -14,6 +14,7 @@ import {ReturnType} from "typescript";
 // import {Promise} from "typescript";
 
 type ResponseReturnType = ReturnType<typeof Response>;
+// type PoligonosAppReturnType = ReturnType<typeof PoligonosApp>;
 
 import _ from 'lodash';
 
@@ -32,6 +33,7 @@ import loadable from '@loadable/component';// https://github.com/gregberge/loada
 import token from './Token';
 
 interface Props{
+    polygons: Promise<PoligonosAppReturnType>[];
     mapConst: Promise<MapReturnType>;
     leafletTokenGitHub: Promise<string>;
     leafletTokenAtlassian: Promise<string>;
@@ -44,10 +46,27 @@ class App extends React.Component{
 
     constructor(props:Props){
         super(props);
+
+        this.state = {
+            leafletTokenGitHub: new Promise<string>(),
+            leafletTokenAtlassian: new Promise<string>(),
+            mapConst: new Promise<MapReturnType>(),
+            polygons: new Promise<new PoligonosApp()>[];
+        }
+
+        this.mapConst = await github();
+        this.mapConst = await atlassian();
+
+        realm();
+
+        showMap();
+
         // const a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
         // this.props.a  = a;
 
         await fun(props);
+
+        const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;
         
 
         // this.mapConst = this.state.mapConst;
@@ -60,7 +79,7 @@ class App extends React.Component{
 
     } // end constructor
 
-    leafletTokenGitHub: Promise<string>;
+    
 
     public const mapConst: MapReturnType[] = new PoligonosApp().L.Map('map', {
         renderer: PoligonosApp.L.canvas()
@@ -74,8 +93,10 @@ class App extends React.Component{
     // let s:string;
 
     function github():Promise<string> {
+
+        // const [leafletTokenGitHub, useState]:Promise<string> = this.setState({leafletTokenGitHub:this.props.children});
         
-        leafletTokenGitHub = await import("./Token").then(token => {
+        this.state.leafletTokenGitHub = await import("./Token").then(token => {
                 token().toPromise();
             });
 
@@ -93,7 +114,7 @@ class App extends React.Component{
               $( "p" ).append( " Finished! " );
             });
           });
-        leafletTokenGitHub = await require('./Token').token().toPromise().then(
+        this.state.leafletTokenGitHub = await require('./Token').token().toPromise().then(
 function (response:ResponseReturnType) {
 return response;
 }
@@ -112,13 +133,18 @@ console.log("then then");
             tileSize: 512,
             zoomOffset: -1
         }).addTo(this.mapConst);
+
+        this.state.polygons.add(p);
+
     }
 
 
         function atlassian():Promise<string> {
             
+        // const [leafletTokenAtlassian, useState]:Promise<string> = this.setState({leafletTokenAtlassian:this.props.children});
+            
 try{
-    leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
+    this.state.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
     const s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.props.leafletTokenAtlassian);
 
     const p = new PoligonosApp().L.tileLayer(s, {
@@ -129,6 +155,9 @@ try{
         tileSize: 512,
         zoomOffset: -1
     }).addTo(this.mapConst);
+
+    this.state.polygons.add(p);
+
 }catch(e){
         return throw new Exception("es5 promise exception");
 }finally{
@@ -136,25 +165,49 @@ try{
 }
 
 
-        }
+        } // end atlassian function
+
+        const ul = <ul>
+            <li>
+                {
+                    
+                        this.state.polygons.renderer()
+                    
+                }
+            </li>
+        </ul>;
 
     render(){
 
-        const a = await this.github();
-        const b = await this.atlassian();
+        // const [leafletTokenGitHub, useState]:Promise<string> = this.setState({leafletTokenGitHub:this.props.children});
+        // const [leafletTokenAtlassian, useState]:Promise<string> = this.setState({leafletTokenAtlassian:this.props.children});
+
+        // this.mapConst = await this.github();
+        // this.mapConst = await this.atlassian();
         
-        realm();
+        // realm();
 
-        showMap();
+        // showMap();
+
+        <PoligonosAppComponent ul={ul}>
+        PoligonosAppComponent
+        </PoligonosAppComponent>
 
 
-        return (setInterval(tick(this.state), 1000));
+        return (setInterval(tick(), 1000));
     };
 
 
-function tick(thisstate: Readonly<{}>: undefined: undefined):void{
-    const element = (<div>PoligonosApp {this.state.mapConst} </div>);
+function tick():void{
+
+    for(const i in this.state.polygons){
+        this.state.polygons[i].renderer();
+    }
+
+    const element = (<div>PoligonosApp</div>);
+
     ReactDOM.render(element, document.getElementById('map'));
+
 }
 
 // async function funPromise():Promise<Response<string>>{
@@ -165,12 +218,13 @@ function tick(thisstate: Readonly<{}>: undefined: undefined):void{
 
 async function fun(props:Props){
 
-    leafletTokenGitHub = await require('./Token').token();
+    this.state.leafletTokenGitHub = await require('./Token').token();
 
-    props.leafletTokenAtlassian =  await require('./Pipeline').pipeline().toPromise().then().then(),
-    props.mapConst = new PoligonosApp().L.Map('map', {
+    this.state.leafletTokenAtlassian =  await require('./Pipeline').pipeline().toPromise().then().then(),
+    const p = new PoligonosApp().L.Map('map', {
         renderer: PoligonosApp.L.canvas()
-    })
+    });
+    this.state.polygons.add(p);
     return props;
 };
 

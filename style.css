@@ -1,3 +1,7 @@
 body {
     background: green;
 }
+
+canvas{
+    background: rgb(0, 60, 128);
+}

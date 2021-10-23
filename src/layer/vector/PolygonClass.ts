@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { LatLngClass } from 'src/geo/LatLngClass';
 
 /*
@@ -47,6 +48,6 @@ import { LatLngClass } from 'src/geo/LatLngClass';
  */
 
 export class PolygonClass {
-	constructor(latlngs: LatLngClass[], options: NumberReturnType[]) {
+	constructor(_latlngs: LatLngClass[], options: NumberReturnType[]) {
 	}
 }

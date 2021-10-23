@@ -23,11 +23,13 @@ import {Object, ReturnType} from 'typescript';
 import { PointReturnImpl } from './PointReturnImpl';
 import { PointsTransformationFunction } from 'src/geometry/PointsTransformation';
 import { PointReturn } from "src/geometry/PointReturn";
+import { toLatLngBoundsFunction } from "../LatLngBoundsFunction";
+import { LatLngClass } from "../LatLngClass";
 type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
-type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
+type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass|typeof toLatLngBoundsFunction>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -195,6 +197,6 @@ export const CRS = {
 
 		const newNe = new LatLngClass(ne.lat - latShift, ne.lng - lngShift);
 
-		return new LatLngBounds(newSw, newNe);
+		return new LatLngBoundsClass(newSw, newNe);
 	}
 };

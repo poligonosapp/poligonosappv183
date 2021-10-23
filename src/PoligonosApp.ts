@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -10,8 +11,14 @@
 
 // import {GeoJSON} from './layer';
 
-import { LayerReturnType } from "Leaflet";
+import { LayerReturnType, Polygon } from "Leaflet";
 import { PolygonClass } from "./layer/vector/PolygonClass";
+
+import("@babel/preset-react").then(
+	require => {
+		return require("@babel/preset-react");
+	}
+);
 
 // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html
 function makeUnique<T>(
@@ -38,9 +45,6 @@ function makeUnique<T>(
 	return collection;
   }
 
-export function PoligonosApp(polygonsArray:Polygon) {
-	return polygonsArray;
-}
 const indexPolygonsArray = require('./polygons.geojson').split("},{", 3);
 
 export const polygonsArray = require('./polygons.geojson');
@@ -73,7 +77,7 @@ export const PoligonosApp = L.Class.extend({
 
 });
 
-const PoligonosAppDemoInstance = new PoligonosAppDemoClass();
+const PoligonosAppDemoInstance = new PoligonosApp();
 
 console.log( PoligonosAppDemoInstance.addEventListener() );
 
@@ -82,7 +86,7 @@ console.log( PoligonosAppDemoInstance.myDemoMethod() );
 
 // include
 
-PoligonosAppDemoClass.include({
+PoligonosApp.include({
 
 	// Adding a new property to the class
 	_myPrivateProperty: 78,
@@ -92,7 +96,7 @@ PoligonosAppDemoClass.include({
 
 });
 
-const poligonosAppSecondDemoInstance = new PoligonosAppDemoClass();
+const poligonosAppSecondDemoInstance = new PoligonosApp();
 
 // This will output "78"
 console.log( poligonosAppSecondDemoInstance.myDemoMethod() );
@@ -170,5 +174,5 @@ function myBoxClass(name:string, options:[]) {
 	return new MyBoxClass(name, options);
 }
 
-
-export default PoligonosApp as L.PoligonosApp;
+export type PoligonosAppReturnType = ReturnType<typeof PoligonosApp>;
+export default PoligonosApp ;

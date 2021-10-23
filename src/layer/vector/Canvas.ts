@@ -1,20 +1,29 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Renderer} from './Renderer';
 import * as DomUtil from '../../dom/DomUtil';
 import * as DomEvent from '../../dom/DomEvent';
 import * as Browser from '../../core/Browser';
 import * as Util from '../../core/Util';
-import { Bounds } from "../../geometry/Bounds.1";
+
+import { BoundsClass } from "src/geometry/BoundsClass";
+import { BoundsFunction } from "src/geometry/BoundsFunction";
 
 import {toLatLngBoundsFunction as latLngBounds} from '../../geo/LatLngBoundsFunction';
-import { LatLngBounds } from "../../geo/LatLngBounds.1";
 
-import {Object, ReturnType, HTMLElement} from 'typescript';
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
+import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
+
+import {HTMLCanvasElement, Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
 import {FeatureGroup} from "../FeatureGroup";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type CanvasReturnType = ReturnType<typeof Canvas>;
-type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
+//typeof Canvas|
+type CanvasReturnType = ReturnType<typeof HTMLCanvasElement>;
+
+type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass|typeof LatLngBoundsFunction>;
 
 type EventReturnType = ReturnType<typeof Event>;
 

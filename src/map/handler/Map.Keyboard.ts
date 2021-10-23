@@ -5,7 +5,7 @@
 import {Map} from '../Map';
 import {HandlerFunction} from '../../core/HandlerFunction';
 import {on, off, stop} from '../../dom/DomEvent';
-import {toPoint} from '../../geometry/Point';
+import {toPoint} from '../../geometry/PointFunction';
 
 
 /*

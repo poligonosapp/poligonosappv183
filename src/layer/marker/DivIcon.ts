@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {Icon} from './Icon';
-import {toPoint as point} from '../../geometry/Point';
+import {toPoint as point} from '../../geometry/PointFunction';
 import {empty} from '../../dom/DomUtil';
 
 /*

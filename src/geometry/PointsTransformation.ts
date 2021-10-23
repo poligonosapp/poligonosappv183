@@ -5,14 +5,14 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import {Point} from './Point';
+import {PointFunction} from './PointFunction';
 import * as Util from '../core/Util';
 
 import {ReturnType, Object} from 'typescript';
 // import {Point} from "../geometry";
 // import {LatLngBounds} from "../geo";
 import { PointReturnImpl } from './PointReturnImpl';
-import { LatLngReturnType } from 'src/layer/vector/Polyline';
+import { LatLngReturnType } from 'src/layer/vector/PolylineFunction';
 import { ArrayTransformationClass } from './ArrayTransformation';
 // import { PointsTransformationFunction } from './ArrayTransformation';
 // import {Point} from "../geometry";
@@ -20,8 +20,8 @@ import { ArrayTransformationClass } from './ArrayTransformation';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type LatLngReturnType = ReturnType<typeof LatLng>;
 // type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+type PointReturnType = ReturnType<typeof PointFunction>;
 // type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 // type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
 // type roundReturnType = ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;

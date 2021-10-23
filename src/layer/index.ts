@@ -1,4 +1,4 @@
-export {Layer} from './Layer';
+export {LayerFunction as Layer} from './Layer';
 export {LayerGroup, layerGroup} from './LayerGroup';
 export {FeatureGroup, featureGroup} from './FeatureGroup';
 import {GeoJSONFunction, geoJSON, geoJson, geometryToLayer, coordsToLatLng, coordsToLatLngs, latLngToCoords, latLngsToCoords, getFeature, asFeature} from './GeoJSONFunction';

@@ -1,6 +1,6 @@
 import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
-import {Point} from '../../geometry/Point';
+import {PointFunction} from '../../geometry/PointFunction';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -28,7 +28,7 @@ export const SphericalMercator = {
 		    lat = Math.max(Math.min(max, latlng.lat), -max),
 		    sin = Math.sin(lat * d);
 
-		return new Point(
+		return new PointFunction(
 			this.R * latlng.lng * d,
 			this.R * Math.log((1 + sin) / (1 - sin)) / 2);
 	},

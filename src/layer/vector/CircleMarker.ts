@@ -1,4 +1,4 @@
-import {Path} from './Path';
+import {PathFunction} from './PathFunction';
 import * as Util from '../../core/Util';
 import {LatLngFunction, toLatLng} from '../../geo/LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
@@ -29,7 +29,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  * A circle of a fixed size with radius specified in pixels. Extends `Path`.
  */
 
-export const CircleMarker = Path.extend({
+export const CircleMarker = PathFunction.extend({
 
 	// @section
 	// @aka CircleMarker options
@@ -80,7 +80,7 @@ export const CircleMarker = Path.extend({
 
 	setStyle : function (options) {
 		const radius = options && options.radius || this._radius;
-		Path.prototype.setStyle.call(this, options);
+		PathFunction.prototype.setStyle.call(this, options);
 		this.setRadius(radius);
 		return this;
 	},

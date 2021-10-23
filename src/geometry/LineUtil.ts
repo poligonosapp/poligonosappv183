@@ -1,4 +1,4 @@
-import {Point} from './Point';
+import {PointFunction} from './PointFunction';
 import {PointReturnImpl} from './PointReturnImpl';
 import * as Util from '../core/Util';
 import {LatLng} from "../geo";
@@ -7,7 +7,7 @@ import {Object , ReturnType} from "typescript";// no List no ArrayList no Serial
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type LatLngReturnType = ReturnType<typeof LatLng>;
 type PointReturnImplType = ReturnType<typeof PointReturnImpl>;
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 
 
 /*
@@ -188,7 +188,7 @@ export function _getEdgeIntersection(a, b, code, bounds, round) {
 		y = a.y + dy * (min.x - a.x) / dx;
 	}
 
-	return new Point(x, y, round);
+	return new PointFunction(x, y, round);
 }
 
 export function _getBitCode(p, bounds) {
@@ -240,7 +240,7 @@ export function _sqClosestPointOnSegment(p:PointReturnImpl, p1:PointReturnImpl, 
 	dx = p.x - x;
 	dy = p.y - y;
 
-	return sqDist ? dx * dx + dy * dy : new Point(x, y);
+	return sqDist ? dx * dx + dy * dy : new PointFunction(x, y);
 }
 
 

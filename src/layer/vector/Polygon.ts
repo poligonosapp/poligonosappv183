@@ -9,16 +9,20 @@
 import { PolylineClass } from "./PolylineClass";
 import {LatLngFunction} from '../../geo/LatLngFunction';
 import * as LineUtil from '../../geometry/LineUtil';
-import {Point} from '../../geometry/Point';
+import {PointFunction} from '../../geometry/PointFunction';
 
 import { BoundsClass } from "src/geometry/BoundsClass";
 import { BoundsFunction } from "src/geometry/BoundsFunction";
 
+import { PolylineClass } from './PolylineClass';
+import { PolylineFunction } from './PolylineFunction';
+
 import * as PolyUtil from '../../geometry/PolyUtil';
 import { LatLngClass } from 'src/geo/LatLngClass';
 import { PolygonClass } from './PolygonClass';
+import { PointReturnImpl } from "src/geometry/PointReturnImpl";
 
-export const PolygonFunction = PolylineClass.extend({
+export const PolygonFunction = PolylineFunction.extend({
 
 	options: {
 		fill: true
@@ -72,8 +76,8 @@ export const PolygonFunction = PolylineClass.extend({
 	},
 
 	_convertLatLngs: function (latlngs:LatLngClass) {
-		const result = PolylineClass.prototype._convertLatLngs.call(this, latlngs),
-		    len = result.length;
+		const result = PolylineFunction.prototype._convertLatLngs.call(this, latlngs);
+		const len = result.length;
 
 		// remove last point if it equals first one
 		if (len >= 2 && result[0] instanceof LatLngFunction && result[0].equals(result[len - 1])) {
@@ -83,7 +87,7 @@ export const PolygonFunction = PolylineClass.extend({
 	},
 
 	_setLatLngs: function (latlngs:LatLngClass) {
-		PolylineClass.prototype._setLatLngs.call(this, latlngs);
+		PolylineFunction.prototype._setLatLngs.call(this, latlngs);
 		if (LineUtil.isFlat(this._latlngs)) {
 			this._latlngs = [this._latlngs];
 		}
@@ -98,10 +102,10 @@ export const PolygonFunction = PolylineClass.extend({
 
 		const bounds = this._renderer._bounds,
 		    w = this.options.weight,
-		    p = new Point(w, w);
+		    p = new PointReturnImpl(w, w);
 
 		// increase clip padding by stroke width to avoid stroke on clip edges
-		bounds = new Bounds(bounds.min.subtract(p), bounds.max.add(p));
+		bounds = new BoundsClass(bounds.min.subtract(p), bounds.max.add(p));
 
 		this._parts = [];
 		if (!this._pxBounds || !this._pxBounds.intersects(bounds)) {
@@ -127,16 +131,23 @@ export const PolygonFunction = PolylineClass.extend({
 
 	// Needed by the `Canvas` renderer for interactivity
 	_containsPoint: function (p) {
-		const inside = false,
-		    part, p1, p2, i, j, k, len, len2;
+		const inside = false;
+		const part;
+		const p1;
+		const p2;
+		const i;
+		const j;
+		const k;
+		const len.
+		const len2;
 
 		if (!this._pxBounds || !this._pxBounds.contains(p)) { return false; }
 
 		// ray casting algorithm for detecting if point is in polygon
-		for (i = 0, len = this._parts.length; i < len; i++) {
+		for (let i = 0, len = this._parts.length; i < len; i++) {
 			part = this._parts[i];
 
-			for (j = 0, len2 = part.length, k = len2 - 1; j < len2; k = j++) {
+			for (let j = 0, len2 = part.length, k = len2 - 1; j < len2; k = j++) {
 				p1 = part[j];
 				p2 = part[k];
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
-import {Point} from '../../geometry/Point';
+import {PointFunction} from '../../geometry/PointFunction';
 import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
@@ -33,7 +33,7 @@ export const Mercator = {
 
 		y = -r * Math.log(Math.max(ts, 1E-10));
 
-		return new Point(latlng.lng * d * r, y);
+		return new PointFunction(latlng.lng * d * r, y);
 	},
 
 	unproject: function (point:PointReturnImpl):LatLngReturnType {

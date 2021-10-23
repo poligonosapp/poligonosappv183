@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {LatLngFunction} from '../LatLngFunction';
 import { BoundsClass } from "../../geometry/BoundsClass";
-import {Point} from "src/geometry/Point";
+import {PointFunction} from "src/geometry/PointFunction";
 
 import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';
@@ -18,7 +18,7 @@ import { PointsTransformationClass } from 'src/geometry/PointsTransformation';
 // type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 // type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

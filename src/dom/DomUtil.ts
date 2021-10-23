@@ -1,23 +1,29 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as DomEvent from './DomEvent';
 import * as Util from '../core/Util';
-import {Point} from '../geometry/Point';
+import {PointFunction} from '../geometry/PointFunction';
 import * as Browser from '../core/Browser';
 
 // @ts-ignore
 import {HTMLElement, Object, ReturnType, CSSStyleSheet} from 'typescript';
+import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
+
+import {PointClass} from "src/geometry/PointClass";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type CSSStyleSheetReturnType = ReturnType<typeof CSSStyleSheet>;
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+type PointReturnType = ReturnType<typeof PointFunction>;
 type ObjectReturnType = ReturnType<typeof Object.String>;
-type StringReturnType = ReturnType<typeof HTMLElement> | ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
-type roundReturnType = ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;
-type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
+type StringReturnType = ReturnType<typeof HTMLElement> | ReturnType<typeof  PointFunction.prototype.toString> | string | ReturnType<typeof Object.String>;
+type _roundReturnType = ReturnType<typeof  PointFunction.prototype._round> | number | ReturnType<typeof Object.Number>;
+type roundReturnType = ReturnType<typeof  PointFunction.prototype.round> | number | ReturnType<typeof Object.Number>;
+type floorReturnType = ReturnType<typeof  PointFunction.prototype.floor> | number | ReturnType<typeof Object.Number>;
 
 type numberAuxX = ReturnType<typeof Object.Number>;
 
@@ -57,14 +63,14 @@ export const TRANSITION_END =
 // @function get(id: String|HTMLElement): HTMLElement
 // Returns an element given its DOM id, or returns the element itself
 // if it was passed directly.
-export function get(id:StringReturnType) {
+export function get(id:StringReturnType|HTMLElementReturnType):HTMLElementReturnType {
 	return typeof id === 'string' ? document.getElementById(id) : id;
 }
 
 // @function getStyle(el: HTMLElement, styleAttrib: String): String
 // Returns the value for a certain style attribute on an element,
 // including computed values or values set through CSS.
-export function getStyle(el, style) {
+export function getStyle(el:HTMLElementReturnType, style:StringReturnType):StringReturnType {
 	const value = el.style[style] || (el.currentStyle && el.currentStyle[style]);
 
 	if ((!value || value === 'auto') && document.defaultView) {
@@ -76,7 +82,7 @@ export function getStyle(el, style) {
 
 // @function create(tagName: String, className?: String, container?: HTMLElement): HTMLElement
 // Creates an HTML element with `tagName`, sets its class to `className`, and optionally appends it to `container` element.
-export function create(tagName, className, container) {
+export function create(tagName:StringReturnType, className:StringReturnType, container:HTMLElementReturnType):HTMLElementReturnType {
 	const el = document.createElement(tagName);
 	el.className = className || '';
 
@@ -88,7 +94,7 @@ export function create(tagName, className, container) {
 
 // @function remove(el: HTMLElement)
 // Removes `el` from its parent element
-export function remove(el) {
+export function remove(el:HTMLElementReturnType) {
 	const parent = el.parentNode;
 	if (parent) {
 		parent.removeChild(el);
@@ -97,7 +103,7 @@ export function remove(el) {
 
 // @function empty(el: HTMLElement)
 // Removes all of `el`'s children elements from `el`
-export function empty(el) {
+export function empty(el:HTMLElementReturnType) {
 	while (el.firstChild) {
 		el.removeChild(el.firstChild);
 	}
@@ -105,7 +111,7 @@ export function empty(el) {
 
 // @function toFront(el: HTMLElement)
 // Makes `el` the last child of its parent, so it renders in front of the other children.
-export function toFront(el) {
+export function toFront(el:HTMLElementReturnType) {
 	const parent = el.parentNode;
 	if (parent && parent.lastChild !== el) {
 		parent.appendChild(el);
@@ -114,7 +120,7 @@ export function toFront(el) {
 
 // @function toBack(el: HTMLElement)
 // Makes `el` the first child of its parent, so it renders behind the other children.
-export function toBack(el) {
+export function toBack(el:HTMLElementReturnType) {
 	const parent = el.parentNode;
 	if (parent && parent.firstChild !== el) {
 		parent.insertBefore(el, parent.firstChild);
@@ -123,7 +129,7 @@ export function toBack(el) {
 
 // @function hasClass(el: HTMLElement, name: String): Boolean
 // Returns `true` if the element's class attribute contains `name`.
-export function hasClass(el, name) {
+export function hasClass(el:HTMLElementReturnType, name:StringReturnType):boolean {
 	if (el.classList !== undefined) {
 		return el.classList.contains(name);
 	}
@@ -133,7 +139,7 @@ export function hasClass(el, name) {
 
 // @function addClass(el: HTMLElement, name: String)
 // Adds `name` to the element's class attribute.
-export function addClass(el, name) {
+export function addClass(el:HTMLElementReturnType, name:StringReturnType) {
 	if (el.classList !== undefined) {
 		const classes = Util.splitWords(name);
 		for (const i = 0, len = classes.length; i < len; i++) {
@@ -147,7 +153,7 @@ export function addClass(el, name) {
 
 // @function removeClass(el: HTMLElement, name: String)
 // Removes `name` from the element's class attribute.
-export function removeClass(el, name) {
+export function removeClass(el:HTMLElementReturnType, name:StringReturnType) {
 	if (el.classList !== undefined) {
 		el.classList.remove(name);
 	} else {
@@ -157,7 +163,7 @@ export function removeClass(el, name) {
 
 // @function setClass(el: HTMLElement, name: String)
 // Sets the element's class.
-export function setClass(el, name) {
+export function setClass(el:HTMLElementReturnType, name:StringReturnType) {
 	if (el.className.baseVal === undefined) {
 		el.className = name;
 	} else {
@@ -168,7 +174,7 @@ export function setClass(el, name) {
 
 // @function getClass(el: HTMLElement): String
 // Returns the element's class.
-export function getClass(el) {
+export function getClass(el:HTMLElementReturnType):StringReturnType {
 	// Check if the element is an SVGElementInstance and use the correspondingElement instead
 	// (Required for linked SVG elements in IE11.)
 	if (el.correspondingElement) {
@@ -180,7 +186,7 @@ export function getClass(el) {
 // @function setOpacity(el: HTMLElement, opacity: Number)
 // Set the opacity of an element (including old IE support).
 // `opacity` must be a number from `0` to `1`.
-export function setOpacity(el, value) {
+export function setOpacity(el:HTMLElementReturnType, value:NumberReturnType) {
 	if ('opacity' in el.style) {
 		el.style.opacity = value;
 	} else if ('filter' in el.style) {
@@ -188,7 +194,7 @@ export function setOpacity(el, value) {
 	}
 }
 
-function _setOpacityIE(el:HTMLElementReturnType, value) {
+function _setOpacityIE(el:HTMLElementReturnType, value:NumberReturnType) {
 	const filter = false;
 	const filterName = 'DXImageTransform.Microsoft.Alpha';
 
@@ -231,8 +237,8 @@ export function testProp(props: StringReturnType[]): StringReturnType {
 // Resets the 3D CSS transform of `el` so it is translated by `offset` pixels
 // and optionally scaled by `scale`. Does not have an effect if the
 // browser doesn't support 3D CSS transforms.
-export function setTransform(el:StringReturnType, offset:PointReturnType, scale:NumberReturnType) {
-	const pos = offset || new Point(0, 0);
+export function setTransform(el:HTMLElementReturnType, offset:PointReturnType, scale:NumberReturnType) {
+	const pos = offset || new PointClass(0, 0) || new PointReturnImpl(0,0,0);
 
 	el.style[TRANSFORM] =
 		(Browser.ie3d ?
@@ -265,7 +271,7 @@ export function getPosition(el:StringReturnType):PointReturnType {
 	// this method is only used for elements previously positioned using setPosition,
 	// so it's safe to cache the position for performance
 
-	return el._leaflet_pos || new Point(0, 0);
+	return el._leaflet_pos || new PointFunction(0, 0);
 }
 
 // @function disableTextSelection()

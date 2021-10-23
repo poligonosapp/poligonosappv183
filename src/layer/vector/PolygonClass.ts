@@ -1,5 +1,13 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { LatLngClass } from 'src/geo/LatLngClass';
+import {Point} from "../geometry";
+import {Object, ReturnType} from "typescript";
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+
+type PathOptionsReturnType = ReturnType<typeof String> | ReturnType<typeof Object.Number> | ReturnType<typeof Object.Boolean>;
+
 
 /*
  * @class Polygon
@@ -48,6 +56,7 @@ import { LatLngClass } from 'src/geo/LatLngClass';
  */
 
 export class PolygonClass {
-	constructor(_latlngs: LatLngClass[], options: NumberReturnType[]) {
+	constructor(_latlngs: LatLngClass[], options: PathOptionsReturnType[]) {
+
 	}
 }

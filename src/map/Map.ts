@@ -3,7 +3,7 @@
 import * as Util from '../core/Util';
 import {Evented} from '../core/Events';
 import {EPSG3857} from '../geo/crs/CRS.EPSG3857';
-import {Point, toPoint} from '../geometry/Point';
+import {PointFunction, toPoint} from '../geometry/PointFunction';
 import {toBounds} from '../geometry/BoundsFunction';
 
 import { BoundsClass } from "../geometry/BoundsClass";
@@ -36,15 +36,15 @@ type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 type LatLngReturnType = ReturnType<typeof LatLngFunction| typeof latLngBounds>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type pointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+type pointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 
-type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 // type LayerGroupReturnType = ReturnType<typeof  LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
-type PointReturnType = ReturnType<typeof Point>;
-type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
+type PointReturnType = ReturnType<typeof PointFunction>;
+type StringReturnType = ReturnType<typeof  PointFunction.prototype.toString> | string | ReturnType<typeof Object.String>;
 // type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
 // type roundReturnType = ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;
 // type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
@@ -285,7 +285,7 @@ export const Map: GeoJSONReturnType = Evented.extend({
 	setZoomAround: function (latlng:LatLngReturnType, zoom:NumberReturnType, options:NumberReturnType) {
 		const scale = this.getZoomScale(zoom);
 		const viewHalf = this.getSize().divideBy(2);
-		const containerPoint = latlng instanceof Point ? latlng : this.latLngToContainerPoint(latlng);
+		const containerPoint = latlng instanceof PointFunction ? latlng : this.latLngToContainerPoint(latlng);
 
 		const centerOffset = containerPoint.subtract(viewHalf).multiplyBy(1 - 1 / scale);
 		const newCenter = this.containerPointToLatLng(viewHalf.add(centerOffset));
@@ -933,7 +933,7 @@ if(e instanceof Error){
 	// Returns the current size of the map container (in pixels).
 	getSize: function () {
 		if (!this._size || this._sizeChanged) {
-			this._size = new Point(
+			this._size = new PointFunction(
 				this._container.clientWidth || 0,
 				this._container.clientHeight || 0);
 
@@ -1181,7 +1181,7 @@ if(e instanceof Error){
 		// Pane that contains all other map panes
 
 		this._mapPane = this.createPane('mapPane', this._container);
-		DomUtil.setPosition(this._mapPane, new Point(0, 0));
+		DomUtil.setPosition(this._mapPane, new PointFunction(0, 0));
 
 		// @pane tilePane: HTMLElement = 200
 		// Pane for `GridLayer`s and `TileLayer`s
@@ -1213,7 +1213,7 @@ if(e instanceof Error){
 
 	// @section Map state change events
 	_resetView: function (center, zoom):void {
-		DomUtil.setPosition(this._mapPane, new Point(0, 0));
+		DomUtil.setPosition(this._mapPane, new PointFunction(0, 0));
 
 		const loading = !this._loaded;
 		this._loaded = true;
@@ -1503,7 +1503,7 @@ if(e instanceof Error){
 	// private methods for getting map state
 
 	_getMapPanePos: function () {
-		return DomUtil.getPosition(this._mapPane) || new Point(0, 0);
+		return DomUtil.getPosition(this._mapPane) || new PointFunction(0, 0);
 	},
 
 	_moved: function () {
@@ -1590,7 +1590,7 @@ if(e instanceof Error){
 		    dx = this._rebound(minOffset.x, -maxOffset.x),
 		    dy = this._rebound(minOffset.y, -maxOffset.y);
 
-		return new Point(dx, dy);
+		return new PointFunction(dx, dy);
 	},
 
 	_rebound: function (left, right) {

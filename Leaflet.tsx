@@ -16,16 +16,18 @@ import {Object, ReturnType, Set} from "typescript";
 export type GeoJSONReturnType = ReturnType<typeof GeoJSONClass| typeof GeoJSONFunction>;
 export type MapReturnType = ReturnType<typeof Map>;
 export type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+export type PathOptionsReturnType = ReturnType<typeof String> | ReturnType<typeof Object.Number> | ReturnType<typeof Object.Boolean>;
 
 // import {L.PoligonosApp} from './PoligonosApp';
 
-polygonsArray = require('./polygons.geojson');
+const polygonsArray:[] = require('./polygons.geojson');
 
 import {GeoJSONClass} from 'src/layer/GeoJSONClass';
 import {GeoJSONFunction} from 'src/layer/GeoJSONFunction';
 
 import {LayerGroup} from "./src/layer";
 import {Point} from "./src/geometry";
+import { polygonsArray, polygonsArray } from "src/PoligonosApp";
 
 // import { L, Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from './Leaflet';
 

@@ -1,4 +1,4 @@
-import {Path} from './Path';
+import {PathFunction} from './PathFunction';
 import * as Util from '../../core/Util';
 import * as LineUtil from '../../geometry/LineUtil';
 import {LatLngFunction, toLatLng} from '../../geo/LatLngFunction';
@@ -9,7 +9,7 @@ import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
 import { BoundsClass } from "src/geometry/BoundsClass";
 import { BoundsFunction } from "src/geometry/BoundsFunction";
 
-import {Point} from '../../geometry/Point';
+import {PointFunction} from '../../geometry/PointFunction';
 
 import {ReturnType} from "typescript";
 import { PolylineClass } from './PolylineClass';
@@ -20,9 +20,9 @@ import { PolylineClass } from './PolylineClass';
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 export type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type LatLngBoundsReturnType = ReturnType<typeof LatLngBoundsClass | typeof LatLngBoundsFunction>;
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof Point>;
-export const Polyline = Path.extend({
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+type PointReturnType = ReturnType<typeof PointFunction>;
+export const PolylineFunction = PathFunction.extend({
 
 	// @section
 	// @aka Polyline options
@@ -197,7 +197,7 @@ export const Polyline = Path.extend({
 
 	_updateBounds: function () {
 		const w = this._clickTolerance();
-		const p = new Point(w, w);
+		const p = new PointFunction(w, w);
 		this._pxBounds = new Bounds([
 			this._rawPxBounds.min.subtract(p),
 			this._rawPxBounds.max.add(p)
@@ -239,8 +239,14 @@ export const Polyline = Path.extend({
 			return;
 		}
 
-		const parts = this._parts,
-		    i, j, k, len, len2, segment, points;
+		const parts = this._parts;
+		const i;
+		const j;
+		const k;
+		const len;
+		const len2;
+		const segment;
+		const points;
 
 		for (i = 0, k = 0, len = this._rings.length; i < len; i++) {
 			points = this._rings[i];
@@ -264,8 +270,8 @@ export const Polyline = Path.extend({
 
 	// simplify each clipped part of the polyline for performance
 	_simplifyPoints: function () {
-		const parts = this._parts,
-		    tolerance = this.options.smoothFactor;
+		const parts = this._parts;
+		const tolerance = this.options.smoothFactor;
 
 		for (const i = 0, len = parts.length; i < len; i++) {
 			parts[i] = LineUtil.simplify(parts[i], tolerance);
@@ -312,7 +318,7 @@ export const Polyline = Path.extend({
 // optionally an options object. You can create a `Polyline` object with
 // multiple separate lines (`MultiPolyline`) by passing an array of arrays
 // of geographic points.
-export function polyline(latlngs:LatLngReturnType[], options) {
+export function polyline(latlngs:LatLngReturnType[], options: NumberReturnType[]) {
 	return new PolylineClass(latlngs, options);
 }
 

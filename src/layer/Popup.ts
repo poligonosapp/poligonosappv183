@@ -1,11 +1,36 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {DivOverlay} from './DivOverlay';
 import * as DomEvent from '../dom/DomEvent';
 import * as DomUtil from '../dom/DomUtil';
-import {Point, toPoint} from '../geometry/Point';
+import {PointFunction, toPoint} from '../geometry/PointFunction';
 import {Map} from '../map/Map';
-import {Layer} from './Layer';
+import {LayerFunction} from './Layer';
 import * as Util from '../core/Util';
-import {Path} from './vector/Path';
+import {PathFunction} from './vector/PathFunction';
+
+import {HTMLElement, ReturnType, Event} from "typescript";
+import {Map} from './src/map/Map';
+import { PathOptionsReturnType } from 'Leaflet';
+
+import {Point} from "./src/geometry";
+import {PointClass} from "./src/geometry";
+import {PointReturnImpl} from "./src/geometry";
+import {PointReturn} from "./src/geometry";
+
+import {LayerGroup} from "./src/layer";
+import { LatLngReturnType } from './vector/PolylineFunction';
+
+type EventReturnType = ReturnType<typeof Event>;
+type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
+type PointReturnType = ReturnType<typeof PointFunction|typeof PointClass|typeof PointReturnImpl| typeof PointReturn>;
+type PopupReturnType = ReturnType<typeof Popup>;
+type MapReturnType = ReturnType<typeof Map>;
+type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 /*
  * @class Popup
@@ -35,7 +60,7 @@ import {Path} from './vector/Path';
 
 
 // @namespace Popup
-export var Popup = DivOverlay.extend({
+export const Popup = DivOverlay.extend({
 
 	// @section
 	// @aka Popup options
@@ -103,12 +128,12 @@ export var Popup = DivOverlay.extend({
 	// @namespace Popup
 	// @method openOn(map: Map): this
 	// Adds the popup to the map and closes the previous one. The same as `map.openPopup(popup)`.
-	openOn: function (map) {
+	openOn: function (map:MapReturnType) {
 		map.openPopup(this);
 		return this;
 	},
 
-	onAdd: function (map) {
+	onAdd: function (map:MapReturnType) {
 		DivOverlay.prototype.onAdd.call(this, map);
 
 		// @namespace Map
@@ -125,13 +150,13 @@ export var Popup = DivOverlay.extend({
 			this._source.fire('popupopen', {popup: this}, true);
 			// For non-path layers, we toggle the popup when clicking
 			// again the layer, so prevent the map to reopen it.
-			if (!(this._source instanceof Path)) {
+			if (!(this._source instanceof PathFunction)) {
 				this._source.on('preclick', DomEvent.stopPropagation);
 			}
 		}
 	},
 
-	onRemove: function (map) {
+	onRemove: function (map:MapReturnType) {
 		DivOverlay.prototype.onRemove.call(this, map);
 
 		// @namespace Map
@@ -146,7 +171,7 @@ export var Popup = DivOverlay.extend({
 			// @event popupclose: PopupEvent
 			// Fired when a popup bound to this layer is closed
 			this._source.fire('popupclose', {popup: this}, true);
-			if (!(this._source instanceof Path)) {
+			if (!(this._source instanceof PathFunction)) {
 				this._source.off('preclick', DomEvent.stopPropagation);
 			}
 		}
@@ -173,10 +198,12 @@ export var Popup = DivOverlay.extend({
 	},
 
 	_initLayout: function () {
-		const prefix = 'leaflet-popup',
-		    container = this._container = DomUtil.create('div',
-			prefix + ' ' + (this.options.className || '') +
-			' leaflet-zoom-animated');
+		
+		const prefix = 'leaflet-popup';
+
+		const container = this._container;
+		
+		this._container = DomUtil.create('div',prefix + ' ' + (this.options.className || '') +' leaflet-zoom-animated');
 
 		const wrapper = this._wrapper = DomUtil.create('div', prefix + '-content-wrapper', container);
 		this._contentNode = DomUtil.create('div', prefix + '-content', wrapper);
@@ -198,8 +225,8 @@ export var Popup = DivOverlay.extend({
 	},
 
 	_updateLayout: function () {
-		const container = this._contentNode,
-		    style = container.style;
+		const container = this._contentNode;
+		const style = container.style;
 
 		style.width = '';
 		style.whiteSpace = 'nowrap';
@@ -213,9 +240,9 @@ export var Popup = DivOverlay.extend({
 
 		style.height = '';
 
-		const height = container.offsetHeight,
-		    maxHeight = this.options.maxHeight,
-		    scrolledClass = 'leaflet-popup-scrolled';
+		const height = container.offsetHeight;
+		const maxHeight = this.options.maxHeight;
+		const scrolledClass = 'leaflet-popup-scrolled';
 
 		if (maxHeight && height > maxHeight) {
 			style.height = maxHeight + 'px';
@@ -227,9 +254,9 @@ export var Popup = DivOverlay.extend({
 		this._containerWidth = this._container.offsetWidth;
 	},
 
-	_animateZoom: function (e) {
-		const pos = this._map._latLngToNewLayerPoint(this._latlng, e.zoom, e.center),
-		    anchor = this._getAnchor();
+	_animateZoom: function (e:EventReturnType) {
+		const pos = this._map._latLngToNewLayerPoint(this._latlng, e.zoom, e.center);
+		const anchor = this._getAnchor();
 		DomUtil.setPosition(this._container, pos.add(anchor));
 	},
 
@@ -237,21 +264,21 @@ export var Popup = DivOverlay.extend({
 		if (!this.options.autoPan) { return; }
 		if (this._map._panAnim) { this._map._panAnim.stop(); }
 
-		const map = this._map,
-		    marginBottom = parseInt(DomUtil.getStyle(this._container, 'marginBottom'), 10) || 0,
-		    containerHeight = this._container.offsetHeight + marginBottom,
-		    containerWidth = this._containerWidth,
-		    layerPos = new Point(this._containerLeft, -containerHeight - this._containerBottom);
+		const map = this._map;
+		const marginBottom = parseInt(DomUtil.getStyle(this._container, 'marginBottom'), 10) || 0;
+		const containerHeight = this._container.offsetHeight + marginBottom;
+		const containerWidth = this._containerWidth;
+		const layerPos = new PointFunction(this._containerLeft, -containerHeight - this._containerBottom);
 
 		layerPos._add(DomUtil.getPosition(this._container));
 
-		let containerPos = map.layerPointToContainerPoint(layerPos),
-		    padding = toPoint(this.options.autoPanPadding),
-		    paddingTL = toPoint(this.options.autoPanPaddingTopLeft || padding),
-		    paddingBR = toPoint(this.options.autoPanPaddingBottomRight || padding),
-		    size = map.getSize(),
-		    dx = 0,
-		    dy = 0;
+		let containerPos = map.layerPointToContainerPoint(layerPos);
+		let padding = toPoint(this.options.autoPanPadding);
+		let paddingTL = toPoint(this.options.autoPanPaddingTopLeft || padding);
+		let paddingBR = toPoint(this.options.autoPanPaddingBottomRight || padding);
+		let size = map.getSize();
+		let dx = 0;
+		let dy = 0;
 
 		if (containerPos.x + containerWidth + paddingBR.x > size.x) { // right
 			dx = containerPos.x + containerWidth - size.x + paddingBR.x;
@@ -271,18 +298,16 @@ export var Popup = DivOverlay.extend({
 		// @event autopanstart: Event
 		// Fired when the map starts autopanning when opening a popup.
 		if (dx || dy) {
-			map
-			    .fire('autopanstart')
-			    .panBy([dx, dy]);
+			map.fire('autopanstart').panBy([dx, dy]);
 		}
 	},
 
-	_onCloseButtonClick: function (e) {
+	_onCloseButtonClick: function (e:EventReturnType) {
 		this._close();
 		DomEvent.stop(e);
 	},
 
-	_getAnchor: function () {
+	_getAnchor: function (): PointReturnType {
 		// Where should we anchor the popup on the source layer?
 		return toPoint(this._source && this._source._getPopupAnchor ? this._source._getPopupAnchor() : [0, 0]);
 	}
@@ -292,7 +317,7 @@ export var Popup = DivOverlay.extend({
 // @namespace Popup
 // @factory L.popup(options?: Popup options, source?: Layer)
 // Instantiates a `Popup` object given an optional `options` object that describes its appearance and location and an optional `source` object that is used to tag the popup with a reference to the Layer to which it refers.
-export var popup = function (options, source) {
+export const popup = function (options:PathOptionsReturnType, source:LayerReturnType) {
 	return new Popup(options, source);
 };
 
@@ -315,7 +340,7 @@ Map.include({
 	// @alternative
 	// @method openPopup(content: String|HTMLElement, latlng: LatLng, options?: Popup options): this
 	// Creates a popup with the specified content and options and opens it in the given point on a map.
-	openPopup: function (popup, latlng, options) {
+	openPopup: function (popup:PopupReturnType, latlng:LatLngReturnType, options:PathOptionsReturnType) {
 		if (!(popup instanceof Popup)) {
 			popup = new Popup(options).setContent(popup);
 		}
@@ -366,7 +391,7 @@ Map.include({
  */
 
 // @section Popup methods
-Layer.include({
+LayerFunction.include({
 
 	// @method bindPopup(content: String|HTMLElement|Function|Popup, options?: Popup options): this
 	// Binds a popup to the layer with the passed `content` and sets up the
@@ -486,7 +511,7 @@ Layer.include({
 
 		// if this inherits from Path its a vector and we can just
 		// open the popup at the new location
-		if (layer instanceof Path) {
+		if (layer instanceof PathFunction) {
 			this.openPopup(e.layer || e.target, e.latlng);
 			return;
 		}

@@ -1,4 +1,9 @@
-import {Layer} from '../Layer';
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import {LayerFunction} from '../Layer';
 import * as Util from '../../core/Util';
 
 import {Object, ReturnType} from 'typescript';
@@ -7,11 +12,13 @@ import {LatLngBounds} from "../geo";
 import {FeatureGroup} from "../FeatureGroup";
 import {Point} from "../../geometry";
 import {Canvas} from "./Canvas";
+import { GeoJSONReturnType } from 'Leaflet';
 // import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 
 type MapReturnType = ReturnType<typeof Canvas >;
+type PathOptionsReturnType = ReturnType<typeof String> | ReturnType<typeof Object.Number> | ReturnType<typeof Object.Boolean>;
 
 type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -41,7 +48,7 @@ type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
  * overlays (Polygon, Polyline, Circle). Do not use it directly. Extends `Layer`.
  */
 
-export const Path = Layer.extend({
+export const PathFunction = LayerFunction.extend({
 
 	// @section
 	// @aka Path options
@@ -105,7 +112,7 @@ export const Path = Layer.extend({
 		bubblingMouseEvents: true
 	},
 
-	beforeAdd: function (map) {
+	beforeAdd: function (map:MapReturnType) {
 		// Renderer is set here because we need to call renderer.getEvents
 		// before this.getEvents.
 		this._renderer = map.getRenderer(this);
@@ -123,7 +130,7 @@ export const Path = Layer.extend({
 
 	// @method redraw(): this
 	// Redraws the layer. Sometimes useful after you changed the coordinates that the path uses.
-	redraw: function () {
+	redraw: function ():GeoJSONReturnType {
 		if (this._map) {
 			this._renderer._updatePath(this);
 		}
@@ -132,7 +139,7 @@ export const Path = Layer.extend({
 
 	// @method setStyle(style: Path options): this
 	// Changes the appearance of a Path based on the options in the `Path options` object.
-	setStyle: function (style) {
+	setStyle: function (style:PathOptionsReturnType):GeoJSONReturnType {
 		Util.getOptions(this, style);
 		if (this._renderer) {
 			this._renderer._updateStyle(this);
@@ -145,7 +152,7 @@ export const Path = Layer.extend({
 
 	// @method bringToFront(): this
 	// Brings the layer to the top of all path layers.
-	bringToFront: function () {
+	bringToFront: function ():GeoJSONReturnType {
 		if (this._renderer) {
 			this._renderer._bringToFront(this);
 		}
@@ -154,7 +161,7 @@ export const Path = Layer.extend({
 
 	// @method bringToBack(): this
 	// Brings the layer to the bottom of all path layers.
-	bringToBack: function () {
+	bringToBack: function ():GeoJSONReturnType {
 		if (this._renderer) {
 			this._renderer._bringToBack(this);
 		}

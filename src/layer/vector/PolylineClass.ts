@@ -1,4 +1,10 @@
-import { LatLngReturnType } from './Polyline';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { LatLngReturnType } from './PolylineFunction';
+
+import {Point} from "../geometry";
+import {Object, ReturnType} from "typescript";
+// https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 // type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
@@ -45,6 +51,6 @@ import { LatLngReturnType } from './Polyline';
  * ```
  */
 export class PolylineClass {
-	constructor(latlngs: LatLngReturnType[], options) {
+	constructor(latlngs: LatLngReturnType[], options: NumberReturnType[]) {
 	}
 }

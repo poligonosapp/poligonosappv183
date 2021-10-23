@@ -50,7 +50,7 @@ import {PointReturnImpl} from './PointReturnImpl';
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
 
-export function Point(...args: [x: NumberReturnType, y: NumberReturnType, round: NumberReturnType]): PointReturnImpl {
+export function PointFunction(...args: [x: NumberReturnType, y: NumberReturnType, round: NumberReturnType]): PointReturnImpl {
 	// @property x: Number; The `x` coordinate of the point
 	// const x = Object.create((round ? Math.round(x) : x));
 	// @property y: Number; The `y` coordinate of the point
@@ -73,18 +73,18 @@ const trunc = Math.trunc || function (v) {
 	return v > 0 ? Math.floor(v) : Math.ceil(v);
 };
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof Point>;
-type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
-type roundReturnType = ReturnType<typeof Point> | ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+type PointReturnType = ReturnType<typeof PointFunction>;
+type StringReturnType = ReturnType<typeof  PointFunction.prototype.toString> | string | ReturnType<typeof Object.String>;
+type _roundReturnType = ReturnType<typeof  PointFunction.prototype._round> | number | ReturnType<typeof Object.Number>;
+type roundReturnType = ReturnType<typeof PointFunction> | ReturnType<typeof  PointFunction.prototype.round> | number | ReturnType<typeof Object.Number>;
 // type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
 
-type numberAuxX = ReturnType<typeof number | typeof Object.Number>;
+// type numberAuxX = ReturnType<typeof Object.Number>;
 
-type numberAuxY = ReturnType<typeof number | typeof Object.Number>;
+// type numberAuxY = ReturnType<typeof Object.Number>;
 
-Point.prototype = {
+PointFunction.prototype = {
 
 //	type P = ReturnType<typeof  clone>;
 
@@ -95,10 +95,10 @@ Point.prototype = {
 	clone: function ():PointReturnImpl {
 	try{
 		
-		let theClone = new Point(this.x.clone(), this.y.clone());
+		let theClone = new PointFunction(this.x.clone(), this.y.clone());
 
-		if(typeof Point.x === theClone.x ){
-			if(typeof Point.y === theClone.y ) {
+		if(typeof PointFunction.x === theClone.x ){
+			if(typeof PointFunction.y === theClone.y ) {
 				return theClone;
 			}
 		}
@@ -169,14 +169,14 @@ Point.prototype = {
 	// defined by `scale`.
 	scaleBy: function (point:PointReturnType):PointReturnType {
 		// @ts-ignore
-		return new Point(this.x * point.x, this.y * point.y);
+		return new PointFunction(this.x * point.x, this.y * point.y);
 	},
 
 	// @method unscaleBy(scale: Point): Point
 	// Inverse of `scaleBy`. Divide each coordinate of the current point by
 	// each coordinate of `scale`.
 	unscaleBy: function (point:PointReturnType):PointReturnType {
-		return new Point(this.x / point.x, this.y / point.y);
+		return new PointFunction(this.x / point.x, this.y / point.y);
 	},
 
 	// @method round(): Point
@@ -240,7 +240,7 @@ Point.prototype = {
 
 	// @method equals(otherPoint: Point): Boolean
 	// Returns `true` if the given point has the same coordinates.
-	equals: function (point:NumberReturnType[]):NumberReturnType[] {
+	equals: function (point:NumberReturnType[]):Boolean {
 		point = toPoint(point[0]);
 
 		return point[0].x === this.x &&
@@ -276,17 +276,17 @@ Point.prototype = {
 // @factory L.point(coords: Object)
 // Expects a plain object of the form `{x: Number, y: Number}` instead.
 export function toPoint(x:PointReturnType[], y:NumberReturnType[], round:NumberReturnType[]): PointReturnType {
-	if (x[0] instanceof Point) {
+	if (x[0] instanceof PointFunction) {
 		return x;
 	}
 	if (isArray(x)) {
-		return new Point(x[0], x[1], round);
+		return new PointFunction(x[0], x[1], round);
 	}
 	if (x === undefined || x === null) {
 		return x;
 	}
 	if (typeof x === 'object' && 'x' in x && 'y' in x) {
-		return new Point(x.x, x.y, round);
+		return new PointFunction(x.x, x.y, round);
 	}
-	return new Point(x, y, round);
+	return new PointFunction(x, y, round);
 }

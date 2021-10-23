@@ -2,7 +2,7 @@ import {HandlerFunction} from '../../core/HandlerFunction';
 import * as DomUtil from '../../dom/DomUtil';
 import {Draggable} from '../../dom/Draggable';
 import {toBounds} from '../../geometry/BoundsFunction';
-import {toPoint} from '../../geometry/Point';
+import {toPoint} from '../../geometry/PointFunction';
 import {requestAnimFrame, cancelAnimFrame} from '../../core/Util';
 
 

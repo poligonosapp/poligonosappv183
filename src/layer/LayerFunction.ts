@@ -67,7 +67,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  */
 
 
-export const Layer = Evented.extend({
+export const LayerFunction = Evented.extend({
 
 	// Classes extending `L.Layer` will inherit the following options:
 	options: {

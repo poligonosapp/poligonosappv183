@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { GeoJSONAbstractClass } from "../../core/GeoJSONAbstractClass";
 import {getOptions} from '../../core/Util';
-import {toPoint as point} from '../../geometry/Point';
+import {toPoint as point} from '../../geometry/PointFunction';
 import {retina} from '../../core/Browser';
 import {GeoJSON} from '../layer';
 

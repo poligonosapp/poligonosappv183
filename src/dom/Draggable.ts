@@ -6,7 +6,7 @@ import * as Browser from '../core/Browser';
 import * as DomEvent from './DomEvent';
 import * as DomUtil from './DomUtil';
 import * as Util from '../core/Util';
-import {Point} from '../geometry/Point';
+import {PointFunction} from '../geometry/PointFunction';
 
 import {GeoJSON} from '../layer';
 
@@ -125,7 +125,7 @@ export const Draggable = Evented.extend({
 		const first = e.touches ? e.touches[0] : e;
 		const sizedParent = DomUtil.getSizedParentNode(this._element);
 
-		this._startPoint = new Point(first.clientX, first.clientY);
+		this._startPoint = new PointFunction(first.clientX, first.clientY);
 
 		// Cache the scale, so that we can continuously compensate for it during drag (_onMove).
 		this._parentScale = DomUtil.getScale(sizedParent);
@@ -148,7 +148,7 @@ export const Draggable = Evented.extend({
 		}
 
 		const first = (e.touches && e.touches.length === 1 ? e.touches[0] : e);
-		const offset:PointReturnType = new Point(first.clientX, first.clientY)._subtract(this._startPoint);
+		const offset:PointReturnType = new PointFunction(first.clientX, first.clientY)._subtract(this._startPoint);
 
 		if (!offset.x && !offset.y) { return; }
 		if (Math.abs(offset.x) + Math.abs(offset.y) < this.options.clickTolerance) { return; }

@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import {Layer} from './Layer';
+import {LayerFunction} from './Layer';
 import * as Util from '../core/Util';
 
 import {Object, ReturnType} from 'typescript';
@@ -55,7 +55,7 @@ type numberAuxY = ReturnType<typeof Object.Number>;
  * ```
  */
 
-export const LayerGroup = Layer.extend({
+export const LayerGroup = LayerFunction.extend({
 // 12 IANA Considerations Optional parameters:  n/a
 	initialize: function (layers:LayerReturnType, options:NumberReturnType):LatLngBoundsReturnType|void {
 		Util.getOptions(this, options);

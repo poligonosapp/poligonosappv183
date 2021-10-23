@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import {Layer} from '../Layer';
+import {LayerFunction} from '../Layer';
 import {IconDefault} from './Icon.Default';
 import * as Util from '../../core/Util';
 import {LatLngFunction} from "src/geo/LatLngFunction";
@@ -28,7 +28,7 @@ type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof La
  * ```
  */
 
-export const Marker = Layer.extend({
+export const Marker = LayerFunction.extend({
 
 	// @section
 	// @aka Marker options

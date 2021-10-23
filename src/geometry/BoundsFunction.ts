@@ -38,16 +38,16 @@ import {PointReturn} from './PointReturn';
 
 // @ts-ignore
 import {Object, ReturnType} from 'typescript';
-import {Point, toPoint} from "./Point";
+import {PointFunction, toPoint} from "./PointFunction";
 import {PointReturnImpl} from "./PointReturnImpl";
 import { BoundsClass } from './BoundsClass';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof Point> | ReturnType<typeof PointReturnImpl>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+type PointReturnType = ReturnType<typeof PointFunction> | ReturnType<typeof PointReturnImpl>;
 
-type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof Point | typeof Point[]>;
+type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof PointFunction | typeof PointFunction[]>;
 
 // type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 // type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
@@ -115,13 +115,13 @@ Bounds.prototype = {
 	// @method getBottomLeft(): Point
 	// Returns the bottom-left point of the bounds.
 	getBottomLeft: function ():PointReturnType {
-		return new Point(this.min.x, this.max.y);
+		return new PointFunction(this.min.x, this.max.y);
 	},
 
 	// @method getTopRight(): Point
 	// Returns the top-right point of the bounds.
 	getTopRight: function ():PointReturnType { // -> Point
-		return new Point(this.max.x, this.min.y);
+		return new PointFunction(this.max.x, this.min.y);
 	},
 
 	// @method getTopLeft(): Point
@@ -152,7 +152,7 @@ Bounds.prototype = {
 		let min;
 		let max;
 
-		if (typeof obj[0] === 'number' || obj instanceof Point) {
+		if (typeof obj[0] === 'number' || obj instanceof PointFunction) {
 
 			obj = this.toPoint(obj);
 

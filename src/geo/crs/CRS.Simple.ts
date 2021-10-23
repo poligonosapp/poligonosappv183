@@ -7,7 +7,7 @@ import * as Util from '../../core/Util';
 
 import {LatLngFunction} from '../LatLngFunction';
 import { Bounds } from "../../geometry/Bounds.1";
-import {Point} from '../../geometry/Point';
+import {PointFunction} from '../../geometry/PointFunction';
 
 
 import {Object, ReturnType} from 'typescript';
@@ -15,7 +15,7 @@ import {Object, ReturnType} from 'typescript';
 import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
@@ -23,7 +23,7 @@ type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof La
 // type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 // type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 // type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

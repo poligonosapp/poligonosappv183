@@ -1,9 +1,9 @@
 
 import * as Browser from '../core/Browser';
 import {DivOverlay} from './DivOverlay';
-import {toPoint} from '../geometry/Point';
+import {toPoint} from '../geometry/PointFunction';
 import {Map} from '../map/Map';
-import {Layer} from './Layer';
+import {LayerFunction} from './Layer';
 import * as Util from '../core/Util';
 import * as DomUtil from '../dom/DomUtil';
 
@@ -259,7 +259,7 @@ Map.include({
  */
 
 // @section Tooltip methods
-Layer.include({
+LayerFunction.include({
 
 	// @method bindTooltip(content: String|HTMLElement|Function|Tooltip, options?: Tooltip options): this
 	// Binds a tooltip to the layer with the passed `content` and sets up the

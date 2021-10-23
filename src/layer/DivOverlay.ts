@@ -3,11 +3,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {Layer} from './Layer';
+import {LayerFunction} from './Layer';
 import {FeatureGroup} from './FeatureGroup';
 import * as Util from '../core/Util';
 import {toLatLng} from '../geo/LatLngFunction';
-import {toPoint} from '../geometry/Point';
+import {toPoint} from '../geometry/PointFunction';
 import * as DomUtil from '../dom/DomUtil';
 
 
@@ -20,7 +20,7 @@ import * as DomUtil from '../dom/DomUtil';
  */
 
 // @namespace DivOverlay
-export const DivOverlay = Layer.extend({
+export const DivOverlay = LayerFunction.extend({
 
 	// @section
 	// @aka DivOverlay options
@@ -167,7 +167,7 @@ export const DivOverlay = Layer.extend({
 	},
 
 	_prepareOpen: function (parent, layer, latlng) {
-		if (!(layer instanceof Layer)) {
+		if (!(layer instanceof LayerFunction)) {
 			latlng = layer;
 			layer = parent;
 		}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import {Point} from "./Point";
+import {PointFunction} from "./PointFunction";
 
 import {PointReturn} from "./PointReturn";
 
@@ -14,8 +14,11 @@ export class PointReturnImpl implements PointReturn{
 
     // round: number | ReturnType<typeof Object.Number>;
 
-    constructor(...args: [x: number, y: number, round:number]) {
+    constructor(...args: [x: number, y: number, round:number, point: PointReturnImpl]) {
         if(round){
+            // x = new PointReturnImpl(x,0).getX;
+            // y = new PointReturnImpl(y,0).getY;
+            // z = new PointReturnImpl(z,0);
             return this.roundXY(x, y, round);
         }
     }
@@ -38,7 +41,7 @@ export class PointReturnImpl implements PointReturn{
         y = Object.create((round ? Math.round(y) : y));
     
         // @ts-ignore
-        return new Point(x, y);
+        return new PointFunction(x, y);
     }
 
 }

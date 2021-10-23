@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {Layer} from './Layer';
+import {LayerFunction} from './Layer';
 import * as Util from '../core/Util';
-import {toLatLngBoundsFunction} from '../geo/LatLngBoundsFunction';
+import {toLatLngBoundsFunction, toLatLngBoundsFunctionArray} from '../geo/LatLngBoundsFunction';
 
 import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
 import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
@@ -49,7 +51,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  * ```
  */
 
-export const ImageOverlay:GeoJSONReturnType = Layer.extend({
+export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 
 	// @section
 	// @aka ImageOverlay options
@@ -85,9 +87,9 @@ export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 		className: ''
 	},
 
-	initialize: function (url:StringReturnType, bounds:BoundsReturnType, options:NumberReturnType) { // (String, LatLngBounds, Object)
+	initialize: function (url:StringReturnType, bounds:BoundsReturnType[], options:NumberReturnType) { // (String, LatLngBounds, Object)
 		this._url = url;
-		this._bounds = toLatLngBoundsFunction(bounds);
+		this._bounds = toLatLngBoundsFunctionArray(bounds);
 
 		Util.getOptions(this, options);
 	},
@@ -166,8 +168,8 @@ export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 
 	// @method setBounds(bounds: LatLngBounds): this
 	// Update the bounds that this ImageOverlay covers
-	setBounds: function (bounds:BoundsReturnType) {
-		this._bounds = toLatLngBoundsFunction(bounds);
+	setBounds: function (bounds:BoundsReturnType[]) {
+		this._bounds = toLatLngBoundsFunctionArray(bounds);
 
 		if (this._map) {
 			this._reset();
@@ -178,7 +180,8 @@ export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 	getEvents: function ():EventReturnType {
 		const events = {
 			zoom: this._reset,
-			viewreset: this._reset
+			viewreset: this._reset,
+			zoomanim: Partial<string|boolean|number>
 		};
 
 		if (this._zoomAnimated) {
@@ -243,15 +246,15 @@ export const ImageOverlay:GeoJSONReturnType = Layer.extend({
 	},
 
 	_animateZoom: function (e:EventReturnType) {
-		const scale = this._map.getZoomScale(e.zoom),
-		    offset = this._map._latLngBoundsToNewLayerBounds(this._bounds, e.zoom, e.center).min;
+		const scale = this._map.getZoomScale(e.zoom);
+		const offset = this._map._latLngBoundsToNewLayerBounds(this._bounds, e.zoom, e.center).min;
 
 		DomUtil.setTransform(this._image, offset, scale);
 	},
 
 	_reset: function ():void {
 		const image = this._image;
-		const bounds = new Bounds(
+		const bounds = new BoundsClass(
 		        this._map.latLngToLayerPoint(this._bounds.getNorthWest()),
 		        this._map.latLngToLayerPoint(this._bounds.getSouthEast()));
 

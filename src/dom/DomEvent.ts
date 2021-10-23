@@ -1,13 +1,15 @@
-import {Point} from '../geometry/Point';
+import {PointFunction} from '../geometry/PointFunction';
 import * as Util from '../core/Util';
 import * as Browser from '../core/Browser';
 import {addPointerListener, removePointerListener} from './DomEvent.Pointer';
 import {addDoubleTapListener, removeDoubleTapListener} from './DomEvent.DoubleTap';
 import {getScale} from './DomUtil';
 
-import {HTMLElement, ReturnType} from "typescript";
+import {HTMLElement, ReturnType, Event} from "typescript";
 
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+type EventReturnType = ReturnType<typeof Event>;
+type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 
 /*
  * @namespace DomEvent
@@ -25,7 +27,7 @@ type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 // @alternative
 // @function on(el: HTMLElement, eventMap: Object, context?: Object): this
 // Adds a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
-export function on(obj:HTMLElementReturnType, types, fn, context) {
+export function on(obj:HTMLElementReturnType, types: StringReturnType[], fn, context):StringReturnType {
 
 	if (typeof types === 'object') {
 		for (const type in types) {
@@ -34,7 +36,7 @@ export function on(obj:HTMLElementReturnType, types, fn, context) {
 	} else {
 		types = Util.splitWords(types);
 
-		for (let i = 0, len = types.length; i < len; i++) {
+		for (let i in types) {
 			addOne(obj, types[i], fn, context);
 		}
 	}
@@ -52,7 +54,7 @@ const eventsKey = '_leaflet_events';
 // @alternative
 // @function off(el: HTMLElement, eventMap: Object, context?: Object): this
 // Removes a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
-export function off(obj:HTMLElementReturnType, types, fn, context) {
+export function off(obj:HTMLElementReturnType, types:StringReturnType[], fn, context) {
 
 	if (typeof types === 'object') {
 		for (const type in types) {
@@ -162,7 +164,7 @@ function removeOne(obj:HTMLElementReturnType, type, fn, context) {
 // 	L.DomEvent.stopPropagation(ev);
 // });
 // ```
-export function stopPropagation(e) {
+export function stopPropagation(e:EventReturnType) {
 
 	if (e.stopPropagation) {
 		e.stopPropagation();
@@ -208,7 +210,7 @@ export function preventDefault(e) {
 
 // @function stop(ev: DOMEvent): this
 // Does `stopPropagation` and `preventDefault` at the same time.
-export function stop(e) {
+export function stop(e:EventReturnType) {
 	preventDefault(e);
 	stopPropagation(e);
 	return this;
@@ -217,15 +219,15 @@ export function stop(e) {
 // @function getMousePosition(ev: DOMEvent, container?: HTMLElement): Point
 // Gets normalized mouse position from a DOM event relative to the
 // `container` (border excluded) or to the whole page if not specified.
-export function getMousePosition(e, container) {
+export function getMousePosition(e:EventReturnType, container:HTMLElementReturnType) {
 	if (!container) {
-		return new Point(e.clientX, e.clientY);
+		return new PointFunction(e.clientX, e.clientY);
 	}
 
-	const scale = getScale(container),
-	    offset = scale.boundingClientRect; // left and top  values are in page scale (like the event clientX/Y)
+	const scale = getScale(container);
+	const offset = scale.boundingClientRect; // left and top  values are in page scale (like the event clientX/Y)
 
-	return new Point(
+	return new PointFunction(
 		// offset.left/top values are in page scale (like clientX/Y),
 		// whereas clientLeft/Top (border width) values are the original values (before CSS scale applies).
 		(e.clientX - offset.left) / scale.x - container.clientLeft,
@@ -244,7 +246,7 @@ const wheelPxFactor =
 // pixels scrolled (negative if scrolling down).
 // Events from pointing devices without precise scrolling are mapped to
 // a best guess of 60 pixels.
-export function getWheelDelta(e) {
+export function getWheelDelta(e:EventReturnType):NumberReturnType {
 	return (Browser.edge) ? e.wheelDeltaY / 2 : // Don't trust window-geometry-based delta
 	       (e.deltaY && e.deltaMode === 0) ? -e.deltaY / wheelPxFactor : // Pixels
 	       (e.deltaY && e.deltaMode === 1) ? -e.deltaY * 20 : // Lines
@@ -258,12 +260,12 @@ export function getWheelDelta(e) {
 
 const skipEvents = {};
 
-export function fakeStop(e) {
+export function fakeStop(e:EventReturnType) {
 	// fakes stopPropagation by setting a special event flag, checked/reset with skipped(e)
 	skipEvents[e.type] = true;
 }
 
-export function skipped(e) {
+export function skipped(e:EventReturnType) {
 	const events = skipEvents[e.type];
 	// reset when checking, as it's only used in map container and propagates outside of the map
 	skipEvents[e.type] = false;
@@ -271,7 +273,7 @@ export function skipped(e) {
 }
 
 // check if element really left/entered the event target (for mouseenter/mouseleave)
-export function isExternalTarget(el:HTMLElementReturnType, e) {
+export function isExternalTarget(el:HTMLElementReturnType, e:EventReturnType) {
 
 	let related = e.relatedTarget;
 

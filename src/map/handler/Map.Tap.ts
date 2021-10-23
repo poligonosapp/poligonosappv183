@@ -4,7 +4,7 @@
 import {Map} from '../Map';
 import {HandlerFunction} from '../../core/HandlerFunction';
 import * as DomEvent from '../../dom/DomEvent';
-import {Point} from '../../geometry/Point';
+import {PointFunction} from '../../geometry/PointFunction';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
 import * as Browser from '../../core/Browser';
@@ -57,7 +57,7 @@ export const Tap = HandlerFunction.extend({
 		const first = e.touches[0];
 		const el = first.target;
 
-		this._startPos = this._newPos = new Point(first.clientX, first.clientY);
+		this._startPos = this._newPos = new PointFunction(first.clientX, first.clientY);
 
 		// if touching a link, highlight it
 		if (el.tagName && el.tagName.toLowerCase() === 'a') {
@@ -113,7 +113,7 @@ export const Tap = HandlerFunction.extend({
 
 	_onMove: function (e) {
 		const first = e.touches[0];
-		this._newPos = new Point(first.clientX, first.clientY);
+		this._newPos = new PointFunction(first.clientX, first.clientY);
 		this._simulateEvent('mousemove', first);
 	},
 

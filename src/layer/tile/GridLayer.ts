@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {Layer} from '../Layer';
+import {LayerFunction} from '../Layer';
 import * as Browser from '../../core/Browser';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';
@@ -110,7 +110,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  */
 
 
-export const GridLayer = Layer.extend({
+export const GridLayer = LayerFunction.extend({
 
 	// @section
 	// @aka GridLayer options

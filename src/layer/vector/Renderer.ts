@@ -1,4 +1,4 @@
-import {Layer} from '../Layer';
+import {LayerFunction} from '../Layer';
 import * as DomUtil from '../../dom/DomUtil';
 import * as Util from '../../core/Util';
 import * as Browser from '../../core/Browser';
@@ -6,7 +6,7 @@ import { Bounds } from "../../geometry/Bounds.1";
 
 // import {Bounds} from '../../geometry/Bounds';
 
-import {Point} from '../../geometry/Point';
+import {PointFunction} from '../../geometry/PointFunction';
 // import {Bounds} from '../../geometry/Bounds';
 import {toLatLngBoundsFunction as latLngBounds} from '../../geo/LatLngBoundsFunction';
 import { LatLngBounds } from "../../geo/LatLngBounds.1";
@@ -21,11 +21,11 @@ type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 type EventReturnType = ReturnType<typeof Event>;
 
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 // type pointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 // type LayerGroupReturnType = ReturnType<typeof  LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type PointReturnType = ReturnType<typeof Point>;
@@ -61,7 +61,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
  */
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-export const Renderer = Layer.extend({
+export const Renderer = LayerFunction.extend({
 
 	// @section
 	// @aka Renderer options

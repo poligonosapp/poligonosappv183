@@ -11,6 +11,8 @@ import {Point} from "../geometry";
 import {FeatureGroup} from "../layer";
 import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
 
+import {IteratorException} from "typescript";
+
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
@@ -283,16 +285,19 @@ LatLngBounds.prototype = {
 // Creates a `LatLngBounds` object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with [`fitBounds`](#map-fitbounds).
 export function toLatLngBoundsFunction(a: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType, 
 	b: LatLngReturnType|LatLngReturnType[]|LatLngBoundsReturnType):LatLngBoundsReturnType {
-	if (a instanceof LatLngBounds) {
-		return a;
-	}
-	else if (b instanceof LatLngBounds) 
-	return new LatLngBoundsClass(a, b);
-	else{
-		throw new Exception("toLatLngBoundsFunction Exception");
+	try{
+		if (a instanceof LatLngBounds) {
+			return a;
+		}
+		else if (b instanceof LatLngBounds) {return new LatLngBoundsClass(a, b);}
+		// else{}
+	}catch(e){
+		throw new IteratorException("toLatLngBoundsFunction Exception");
+	}finally{
+
 	}
 }
-export function toLatLngBoundsFunction(latlngs: LatLngBoundsReturnType[]):LatLngBoundsReturnType {
+export function toLatLngBoundsFunctionArray(latlngs: LatLngBoundsReturnType[]):LatLngBoundsReturnType {
 	if (latlngs[0] instanceof LatLngBounds) {
 		return latlngs[0];
 	}

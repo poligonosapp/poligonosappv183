@@ -8,6 +8,8 @@
 import {PointFunction} from './PointFunction';
 import * as Util from '../core/Util';
 
+import {PointClass} from "./src/geometry/PointClass";
+
 import {PointsTransformation, PointsTransformationClass} from './PointsTransformation';
 
 import {ReturnType, Object} from 'typescript';
@@ -131,10 +133,11 @@ for(let i in coefficients){
 
 	}// end iterator implementation
 
-	_a = new PointReturnImpl(0,0)[];
-	_b = new PointReturnImpl(0,0)[];
-	_c = new PointReturnImpl(0,0)[];
-	_d = new PointReturnImpl(0,0)[];
+	// _a.push(new PointClass(0,0));
+
+	// _b = new PointReturnImpl(0,0)[];
+	// _c = new PointReturnImpl(0,0)[];
+	// _d = new PointReturnImpl(0,0)[];
 
 	coefficients: Set<Iterator<PointReturnType>>;
 

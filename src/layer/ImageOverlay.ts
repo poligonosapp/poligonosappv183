@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {LayerFunction} from './Layer';
+import {LayerFunction} from './LayerFunction';
 import * as Util from '../core/Util';
 import {toLatLngBoundsFunction, toLatLngBoundsFunctionArray} from '../geo/LatLngBoundsFunction';
 
@@ -181,7 +181,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 		const events = {
 			zoom: this._reset,
 			viewreset: this._reset,
-			zoomanim: Partial<string|boolean|number>
+			zoomanim: ReturnType<typeof Event>
 		};
 
 		if (this._zoomAnimated) {
@@ -245,11 +245,11 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 		img.alt = this.options.alt;
 	},
 
-	_animateZoom: function (e:EventReturnType) {
+	_animateZoom: function (e:EventReturnType):HTMLElementReturnType {
 		const scale = this._map.getZoomScale(e.zoom);
 		const offset = this._map._latLngBoundsToNewLayerBounds(this._bounds, e.zoom, e.center).min;
 
-		DomUtil.setTransform(this._image, offset, scale);
+		return DomUtil.setTransform(this._image, offset, scale);
 	},
 
 	_reset: function ():void {

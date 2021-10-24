@@ -11,6 +11,8 @@ import {LatLngFunction} from '../../geo/LatLngFunction';
 import * as LineUtil from '../../geometry/LineUtil';
 import {PointFunction} from '../../geometry/PointFunction';
 
+import {PointClass} from 'src/geometry/PointClass';
+
 import { BoundsClass } from "src/geometry/BoundsClass";
 import { BoundsFunction } from "src/geometry/BoundsFunction";
 
@@ -21,6 +23,8 @@ import * as PolyUtil from '../../geometry/PolyUtil';
 import { LatLngClass } from 'src/geo/LatLngClass';
 import { PolygonClass } from './PolygonClass';
 import { PointReturnImpl } from "src/geometry/PointReturnImpl";
+
+type PolylineOptionsReturnType = ReturnType<typeof PolylineFunction| typeof Number | typeof Boolean>;
 
 export const PolygonFunction = PolylineFunction.extend({
 
@@ -100,12 +104,15 @@ export const PolygonFunction = PolylineFunction.extend({
 	_clipPoints: function () {
 		// polygons need a different clipping algorithm so we redefine that
 
-		const bounds = this._renderer._bounds,
-		    w = this.options.weight,
-		    p = new PointReturnImpl(w, w);
+		const bounds:[] = this._renderer._bounds;
+
+		const w = this.options.weight;
+
+		const p = new PointClass(w, w);
 
 		// increase clip padding by stroke width to avoid stroke on clip edges
-		bounds = new BoundsClass(bounds.min.subtract(p), bounds.max.add(p));
+		// bounds = new BoundsClass(bounds.min.subtract(p), bounds.max.add(p));
+		bounds.push(new BoundsFunction(bounds.min.subtract(p), bounds.max.add(p)));
 
 		this._parts = [];
 		if (!this._pxBounds || !this._pxBounds.intersects(bounds)) {
@@ -132,13 +139,13 @@ export const PolygonFunction = PolylineFunction.extend({
 	// Needed by the `Canvas` renderer for interactivity
 	_containsPoint: function (p) {
 		const inside = false;
-		const part;
+		const part = [];
 		const p1;
 		const p2;
-		const i;
+		// const i;
 		const j;
 		const k;
-		const len.
+		const len;
 		const len2;
 
 		if (!this._pxBounds || !this._pxBounds.contains(p)) { return false; }
@@ -158,13 +165,13 @@ export const PolygonFunction = PolylineFunction.extend({
 		}
 
 		// also check if it's on polygon stroke
-		return inside || PolylineClass.prototype._containsPoint.call(this, p, true);
+		return inside || PolylineFunction.prototype._containsPoint.call(this, p, true);
 	}
 
 });
 
 
 // @factory L.polygon(latlngs: LatLng[], options?: Polyline options)
-export function polygon(latlngs:LatLngClass[], options) {
+export function polygon(latlngs:LatLngClass[], options:PolylineOptionsReturnType[]) {
 	return new PolygonClass(latlngs, options);
 }

@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Evented} from '../core/Events';
 import {Map} from '../map/Map';
-import {LayerGroup} from './LayerGroup';
+// import {LayerGroup} from './LayerGroup';
 import * as Util from '../core/Util';
 
 
@@ -18,10 +18,14 @@ import {FeatureGroup} from "./FeatureGroup";
 import {LatLngBoundsClass} from "src/geo/LatLngBoundsClass";
 import {LatLngBoundsFunction} from "src/geo/LatLngBoundsFunction";
 
+import {LayerGroup} from "./LayerGroup";
+
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type LayerGroupReturnType = ReturnType<typeof  LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+export type LayerOptionsReturnType = ReturnType<typeof String|typeof Boolean>;
 type FunctionReturnType = ReturnType<typeof Function>;
 type MapReturnType = ReturnType<typeof Map>;
-type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
+// type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 type EventReturnType= ReturnType<typeof Event>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass | typeof LatLngBoundsFunction>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
@@ -33,7 +37,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
 // type LayerGroupReturnType = ReturnType<typeof  LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type PointReturnType = ReturnType<typeof Point>;
-// type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
+type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 // type _roundReturnType = ReturnType<typeof  Point.prototype._round> | number | ReturnType<typeof Object.Number>;
 // type roundReturnType = ReturnType<typeof  Point.prototype.round> | number | ReturnType<typeof Object.Number>;
 // type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
@@ -88,7 +92,7 @@ export const LayerFunction = Evented.extend({
 	 * @method addTo(map: Map|LayerGroup): this
 	 * Adds the layer to the given map or layer group.
 	 */
-	addTo: function (map:MapReturnType|LayerGroupReturnType):MapReturnType|LayerGroupRetunType {
+	addTo: function (map:MapReturnType|LayerGroupReturnType):MapReturnType|LayerGroupReturnType {
 		map.addLayer(this);
 		return this;
 	},
@@ -118,12 +122,12 @@ export const LayerFunction = Evented.extend({
 		return this._map.getPane(name ? (this.options[name] || name) : this.options.pane);
 	},
 
-	addInteractiveTarget: function (targetEl) {
+	addInteractiveTarget: function (targetEl:HTMLElementReturnType) {
 		this._map._targets[Util.stamp(targetEl)] = this;
 		return this;
 	},
 
-	removeInteractiveTarget: function (targetEl) {
+	removeInteractiveTarget: function (targetEl:HTMLElementReturnType) {
 		delete this._map._targets[Util.stamp(targetEl)];
 		return this;
 	},
@@ -146,7 +150,7 @@ export const LayerFunction = Evented.extend({
 		if (this.getEvents) {
 			const events = this.getEvents();
 			map.on(events, this);
-			this.once('remove', function () {
+			this.once('remove',  ():EventReturnType => {
 				map.off(events, this);
 			}, this);
 		}

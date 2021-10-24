@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {PointFunction} from '../geometry/PointFunction';
 import * as Util from '../core/Util';
 import * as Browser from '../core/Browser';
@@ -5,11 +11,17 @@ import {addPointerListener, removePointerListener} from './DomEvent.Pointer';
 import {addDoubleTapListener, removeDoubleTapListener} from './DomEvent.DoubleTap';
 import {getScale} from './DomUtil';
 
-import {HTMLElement, ReturnType, Event} from "typescript";
+import {HTMLElement, ReturnType, Event, Object} from "typescript";
+
+type FunctionReturnType = ReturnType<typeof Function| typeof EventListener>;
+type ObjectReturnType = ReturnType<typeof Object>;
+
+type NumberReturnType = ReturnType<typeof Number>;
+type TypeReturnType = ReturnType<typeof String | typeof Number | typeof Event>;
 
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type EventReturnType = ReturnType<typeof Event>;
-type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
+type StringReturnType = ReturnType<typeof  PointFunction.prototype.toString> | string | ReturnType<typeof Object.String>;
 
 /*
  * @namespace DomEvent
@@ -27,7 +39,7 @@ type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | 
 // @alternative
 // @function on(el: HTMLElement, eventMap: Object, context?: Object): this
 // Adds a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
-export function on(obj:HTMLElementReturnType, types: StringReturnType[], fn, context):StringReturnType {
+export function on(obj:HTMLElementReturnType, types: StringReturnType[], fn:FunctionReturnType, context:ObjectReturnType):StringReturnType {
 
 	if (typeof types === 'object') {
 		for (const type in types) {
@@ -54,7 +66,8 @@ const eventsKey = '_leaflet_events';
 // @alternative
 // @function off(el: HTMLElement, eventMap: Object, context?: Object): this
 // Removes a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
-export function off(obj:HTMLElementReturnType, types:StringReturnType[], fn, context) {
+export function off(obj:HTMLElementReturnType[][],
+	types:StringReturnType[], fn:FunctionReturnType, context:ObjectReturnType):EventReturnType {
 
 	if (typeof types === 'object') {
 		for (const type in types) {
@@ -89,12 +102,12 @@ const mouseSubst = {
 	wheel: !('onwheel' in window) && 'mousewheel'
 };
 
-function addOne(obj:HTMLElementReturnType, type, fn, context) {
+function addOne(obj:HTMLElementReturnType, type:TypeReturnType[], fn:FunctionReturnType, context:ObjectReturnType) {
 	const id = type + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : '');
 
 	if (obj[eventsKey] && obj[eventsKey][id]) { return this; }
 
-	let handler = function (e) {
+	let handler = function (e:EventReturnType) {
 		return fn.call(context || obj, e || window.event);
 	};
 
@@ -133,10 +146,10 @@ function addOne(obj:HTMLElementReturnType, type, fn, context) {
 	obj[eventsKey][id] = handler;
 }
 
-function removeOne(obj:HTMLElementReturnType, type, fn, context) {
+function removeOne(obj:HTMLElementReturnType, type: TypeReturnType[], fn:FunctionReturnType, context:ObjectReturnType) {
 
-	const id = type + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : ''),
-	    handler = obj[eventsKey] && obj[eventsKey][id];
+	const id = type + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : '');
+	const handler = obj[eventsKey] && obj[eventsKey][id];
 
 	if (!handler) { return this; }
 
@@ -164,7 +177,7 @@ function removeOne(obj:HTMLElementReturnType, type, fn, context) {
 // 	L.DomEvent.stopPropagation(ev);
 // });
 // ```
-export function stopPropagation(e:EventReturnType) {
+export function stopPropagation(e:EventReturnType):EventReturnType {
 
 	if (e.stopPropagation) {
 		e.stopPropagation();
@@ -199,7 +212,7 @@ export function disableClickPropagation(el:HTMLElementReturnType) {
 // following a link in the href of the a element, or doing a POST request
 // with page reload when a `<form>` is submitted).
 // Use it inside listener functions.
-export function preventDefault(e) {
+export function preventDefault(e:EventReturnType) {
 	if (e.preventDefault) {
 		e.preventDefault();
 	} else {
@@ -210,7 +223,7 @@ export function preventDefault(e) {
 
 // @function stop(ev: DOMEvent): this
 // Does `stopPropagation` and `preventDefault` at the same time.
-export function stop(e:EventReturnType) {
+export function stop(e:EventReturnType):EventReturnType {
 	preventDefault(e);
 	stopPropagation(e);
 	return this;

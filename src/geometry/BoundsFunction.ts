@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -59,12 +61,12 @@ type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof Po
 // type numberAuxY = ReturnType<typeof Object.Number>;
 
 export interface Props{
-	a:NumberReturnType;
-	b:NumberReturnType;
+	a:NumberReturnType|NumberReturnType[];
+	b:NumberReturnType|NumberReturnType[];
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function Bounds(a:NumberReturnType, b:NumberReturnType): BoundsReturnType {
+export function BoundsFunction(a:NumberReturnType, b:NumberReturnType): BoundsReturnType {
 
 	if (!a) { return; }
 
@@ -76,7 +78,7 @@ export function Bounds(a:NumberReturnType, b:NumberReturnType): BoundsReturnType
 	return this;
 }
 
-Bounds.prototype = {
+BoundsFunction.prototype = {
 	// @method extend(point: Point): this
 	// Extends the bounds to contain the given point.
 	extend: function (point:PointReturnType):BoundsReturnType { // (Point)
@@ -162,7 +164,7 @@ Bounds.prototype = {
 
 		}
 
-		if (obj instanceof Bounds) {
+		if (obj instanceof BoundsFunction) {
 
 			min = obj.min;
 			max = obj.max;

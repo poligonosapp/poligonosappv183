@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -237,8 +238,8 @@ export function testProp(props: StringReturnType[]): StringReturnType {
 // Resets the 3D CSS transform of `el` so it is translated by `offset` pixels
 // and optionally scaled by `scale`. Does not have an effect if the
 // browser doesn't support 3D CSS transforms.
-export function setTransform(el:HTMLElementReturnType, offset:PointReturnType, scale:NumberReturnType) {
-	const pos = offset || new PointClass(0, 0) || new PointReturnImpl(0,0,0);
+export function setTransform(el:HTMLElementReturnType, offset:PointReturnType, scale:NumberReturnType):HTMLElementReturnType {
+	const pos = offset || new PointClass(0, 0);
 
 	el.style[TRANSFORM] =
 		(Browser.ie3d ?
@@ -251,7 +252,7 @@ export function setTransform(el:HTMLElementReturnType, offset:PointReturnType, s
 // Sets the position of `el` to coordinates specified by `position`,
 // using CSS translate or top/left positioning depending on the browser
 // (used by Leaflet internally to position its layers).
-export function setPosition(el:StringReturnType, point:PointReturnType) {
+export function setPosition(el:StringReturnType, point:PointReturnType):HTMLElementReturnType {
 
 	/*eslint-disable */
 	el._leaflet_pos = point;
@@ -263,6 +264,7 @@ export function setPosition(el:StringReturnType, point:PointReturnType) {
 		el.style.left = point.x + 'px';
 		el.style.top = point.y + 'px';
 	}
+	return el;
 }
 
 // @function getPosition(el: HTMLElement): Point

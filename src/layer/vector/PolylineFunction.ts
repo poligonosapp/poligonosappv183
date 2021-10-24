@@ -185,7 +185,7 @@ export const PolylineFunction = PathFunction.extend({
 	},
 
 	_project: function ():void {
-		const pxBounds = new Bounds();
+		const pxBounds = new BoundsClass();
 		this._rings = [];
 		this._projectLatlngs(this._latlngs, this._rings, pxBounds);
 

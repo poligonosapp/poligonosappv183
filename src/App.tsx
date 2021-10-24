@@ -51,7 +51,7 @@ class App extends React.Component{
             leafletTokenGitHub: new Promise<string>(),
             leafletTokenAtlassian: new Promise<string>(),
             mapConst: new Promise<MapReturnType>(),
-            polygons: new Promise<new PoligonosApp()>[];
+            polygons: new Promise<new PoligonosApp()>[]
         }
 
         this.mapConst = await github();
@@ -100,7 +100,7 @@ class App extends React.Component{
                 token().toPromise();
             });
 
-        if(leafletTokenGitHub){
+        if(!leafletTokenGitHub){
             return;
         }
         $( "button" ).on( "click", function() {
@@ -114,6 +114,7 @@ class App extends React.Component{
               $( "p" ).append( " Finished! " );
             });
           });
+
         this.state.leafletTokenGitHub = await require('./Token').token().toPromise().then(
 function (response:ResponseReturnType) {
 return response;
@@ -135,6 +136,8 @@ console.log("then then");
         }).addTo(this.mapConst);
 
         this.state.polygons.add(p);
+
+        return s;
 
     }
 

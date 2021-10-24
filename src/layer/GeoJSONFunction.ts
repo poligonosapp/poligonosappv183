@@ -29,6 +29,7 @@ import {Function} from 'typescript';
 import { LatLngClass } from 'src/geo/LatLngClass';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+export type GeoJSONFunctionOptions = ReturnType<typeof String>;
 type FunctionReturnType = ReturnType<typeof Function>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type LatLngReturnType = ReturnType<typeof LatLngFunction>;
@@ -182,7 +183,7 @@ export const GeoJSONFunction:FunctionReturnType = FeatureGroup.extend({
 	// @method setStyle( <Function> style ): this
 	// Changes styles of GeoJSON vector layers with the given style function.
 	setStyle: function (style:CSSStyleSheet):CSSStyleSheet {
-		return this.eachLayer(function (layer:LayerReturnType) {
+		return this.eachLayer( (layer:LayerReturnType) => {
 			this._setLayerStyle(layer, style);
 		}, this);
 	},

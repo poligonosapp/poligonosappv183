@@ -11,6 +11,8 @@
 
 import {isArray, formatNum} from '../core/Util';
 
+import {RoundImpl} from "src/geometry/RoundImpl";
+
 /*
  * @class Point
  * @aka L.Point
@@ -74,7 +76,7 @@ const trunc = Math.trunc || function (v) {
 };
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
-type PointReturnType = ReturnType<typeof PointFunction>;
+type PointReturnType = ReturnType<typeof PointFunction|typeof RoundImpl> | ReturnType<typeof Object.Number>;
 type StringReturnType = ReturnType<typeof  PointFunction.prototype.toString> | string | ReturnType<typeof Object.String>;
 type _roundReturnType = ReturnType<typeof  PointFunction.prototype._round> | number | ReturnType<typeof Object.Number>;
 type roundReturnType = ReturnType<typeof PointFunction> | ReturnType<typeof  PointFunction.prototype.round> | number | ReturnType<typeof Object.Number>;
@@ -280,7 +282,7 @@ export function toPoint(x:PointReturnType[], y:NumberReturnType[], round:NumberR
 		return x;
 	}
 	if (isArray(x)) {
-		return new PointClass().round(x[0], x[1], round);
+		return new RoundImpl().round(x[0], x[1], round);
 	}
 	if (x === undefined || x === null) {
 		return x;

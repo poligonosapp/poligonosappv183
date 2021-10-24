@@ -1,4 +1,3 @@
-
 import { BoundsClass } from "../../geometry/BoundsClass";
 import {LatLngFunction} from '../LatLngFunction';
 import { LatLngBoundsClass } from "../LatLngBoundsClass";
@@ -17,7 +16,7 @@ import {projection} from './Projection';
 
 import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';
-// import {Point} from "../geometry";
+import {PointFunction} from "src/geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 import { PointReturnImpl } from './PointReturnImpl';
@@ -25,14 +24,15 @@ import { PointsTransformationFunction } from 'src/geometry/PointsTransformation'
 import { PointReturn } from "src/geometry/PointReturn";
 import { toLatLngBoundsFunction } from "../LatLngBoundsFunction";
 import { LatLngClass } from "../LatLngClass";
+import { Projection } from "Leaflet";
 type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass|typeof toLatLngBoundsFunction>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-type PointReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 // type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -69,7 +69,7 @@ export const CRS = {
 	
 	// let projection = projection();
 	let projection = Projection.LonLat;
-	let transformation : PointsTransformationFunction.prototype;
+	let transformation = PointsTransformationFunction.prototype;
 
 	// @method latLngToPoint(latlng: LatLng, zoom: Number): Point
 	// Projects geographical coordinates into pixel coordinates for a given zoom.
@@ -121,7 +121,7 @@ export const CRS = {
 
 	// @method getProjectedBounds(zoom: Number): Bounds
 	// Returns the projection's bounds scaled and transformed for the provided `zoom`.
-	getProjectedBounds: function (zoom:NumberReturnType):BoundsClass {
+	getProjectedBounds: function (zoom:NumberReturnType):BoundsClassReturnType|String {
 
 		if (this.infinite) { return null; }
 

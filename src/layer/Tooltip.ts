@@ -7,16 +7,19 @@ import * as Browser from '../core/Browser';
 import {DivOverlay} from './DivOverlay';
 import {toPoint} from '../geometry/PointFunction';
 import {Map} from '../map/Map';
-import {LayerFunction} from './Layer';
+import {LayerFunction} from './LayerFunction';
 import * as Util from '../core/Util';
 import * as DomUtil from '../dom/DomUtil';
 import { MapReturnType } from 'src/core/HandlerFunction';
 import { LayerReturnType } from 'Leaflet';
 
+import {PointClass} from "./src/geometry/PointClass";
+
 import {Event} from "typescript";
 
 type EventReturnType = ReturnType<typeof Event>;
-type TooltipOptionsReturnType = ReturnType<typeof Tooltip|typeof String|typeof Array|typeof Boolean|typeof Number|typeof PointClass>;
+type TooltipOptionsReturnType = 
+ReturnType<typeof Tooltip|typeof String|typeof Array|typeof Boolean|typeof Number|typeof PointClass>;
 
 /*
  * @class Tooltip

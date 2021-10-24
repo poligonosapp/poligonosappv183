@@ -1,15 +1,22 @@
-import {LayerFunction} from '../Layer';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import {LayerFunction} from '../LayerFunction';
 import * as DomUtil from '../../dom/DomUtil';
 import * as Util from '../../core/Util';
 import * as Browser from '../../core/Browser';
-import { Bounds } from "../../geometry/Bounds.1";
+
+import { BoundsClass } from "src/geometry/BoundsClass";
+import { BoundsFunction } from "src/geometry/BoundsFunction";
 
 // import {Bounds} from '../../geometry/Bounds';
 
 import {PointFunction} from '../../geometry/PointFunction';
 // import {Bounds} from '../../geometry/Bounds';
 import {toLatLngBoundsFunction as latLngBounds} from '../../geo/LatLngBoundsFunction';
-import { LatLngBounds } from "../../geo/LatLngBounds.1";
+
+import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
+import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
 
 import {Object, ReturnType, HTMLElement} from 'typescript';
 import {Point} from "../geometry";
@@ -76,7 +83,7 @@ export const Renderer = LayerFunction.extend({
 		tolerance : 0
 	},
 
-	initialize: function (options:NumberReturnType):void {
+	initialize: function (options:NumberReturnType[]):void {
 		Util.getOptions(this, options);
 		Util.stamp(this);
 		this._layers = this._layers || {};
@@ -101,7 +108,7 @@ export const Renderer = LayerFunction.extend({
 		this._destroyContainer();
 	},
 
-	getEvents: function (){
+	getEvents: function ():EventReturnType[]{
 		const events = {
 			viewreset: this._reset,
 			zoom: this._onZoom,
@@ -114,7 +121,7 @@ export const Renderer = LayerFunction.extend({
 		return events;
 	},
 
-	_onAnimZoom: function (ev) {
+	_onAnimZoom: function (ev:EventReturnType) {
 		this._updateTransform(ev.center, ev.zoom);
 	},
 
@@ -122,7 +129,7 @@ export const Renderer = LayerFunction.extend({
 		this._updateTransform(this._map.getCenter(), this._map.getZoom());
 	},
 
-	_updateTransform: function (center, zoom) {
+	_updateTransform: function (center, zoom:NumberReturnType) {
 		const scale = this._map.getZoomScale(zoom, this._zoom);
 		const position = DomUtil.getPosition(this._container);
 		const viewHalf = this._map.getSize().multiplyBy(0.5 + this.options.padding);
@@ -139,7 +146,7 @@ export const Renderer = LayerFunction.extend({
 		}
 	},
 
-	_reset: function ():void {
+	_reset: function ():EventReturnType {
 		this._update();
 		this._updateTransform(this._center, this._zoom);
 
@@ -167,7 +174,7 @@ export const Renderer = LayerFunction.extend({
 		const size = this._map.getSize();
 		const min = this._map.containerPointToLayerPoint(size.multiplyBy(-p)).round();
 
-		this._bounds = new Bounds(min, min.add(size.multiplyBy(1 + p * 2)).round());
+		this._bounds = new BoundsFunction(min, min.add(size.multiplyBy(1 + p * 2)).round());
 
 		this._center = this._map.getCenter();
 		this._zoom = this._map.getZoom();

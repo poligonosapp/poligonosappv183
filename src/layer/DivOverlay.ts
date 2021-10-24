@@ -8,12 +8,13 @@ import {FeatureGroup} from './FeatureGroup';
 import * as Util from '../core/Util';
 import {toLatLng} from '../geo/LatLngFunction';
 import {toPoint} from '../geometry/PointFunction';
+import {LatLngFunction, toLatLng} from "src/geo/LatLngFunction";
 import * as DomUtil from '../dom/DomUtil';
 import {Map} from "src/map/Map";
 
 import {Event} from "typescript";
-import { LatLngReturnType } from './vector/PolylineFunction';
 
+type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 type MapReturnType = ReturnType<typeof Map>;
 type EventReturnType = ReturnType<typeof Event>;
 type DivOverlayOptionsReturnType = ReturnType<typeof DivOverlay|typeof String | typeof Number | typeof Array| typeof PointClass>;

@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {Object, ReturnType} from "typescript";
 import { PointClass } from "./PointClass";
 
-type NumberReturnType = number | ReturnType<typeof Object.Number>;
+type NumberReturnType = ReturnType<typeof Object.Number>;
+type PointClassReturnType = ReturnType<typeof PointClass>;
 
-interface Round{
+abstract class Round{
     x: NumberReturnType;
     y: NumberReturnType;
-    round: NumberReturnType; 
+    roundProperty: NumberReturnType; 
 
-    function round(x: NumberReturnType, y: NumberReturnType, round: NumberReturnType ):PointClass;
+    public function roundPoint(x: NumberReturnType, y: NumberReturnType, round: NumberReturnType ):PointClassReturnType;
 
 }

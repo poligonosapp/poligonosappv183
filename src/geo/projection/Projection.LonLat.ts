@@ -10,6 +10,7 @@ import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';
 // import {Point} from "../geometry";
 import { PointsTransformationClass } from 'src/geometry/PointsTransformation';
+import { LatLngReturnType } from 'src/layer/vector/PolylineFunction';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type MapReturnType = ReturnType<typeof Map>;
@@ -50,7 +51,7 @@ type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | numbe
 
 export const LonLat = {
 	project: function (latlng:LatLngReturnType):PointReturnType {
-		return new PointsTransformationClass(latlng.lng, latlng.lat);
+		return new PointsTransformationClass(latlng.lng, latlng.lat, latlng.alt);
 	},
 
 	unproject: function (point:PointReturnType):LatLngReturnType {

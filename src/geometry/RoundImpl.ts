@@ -10,7 +10,7 @@ class RoundImpl implements Round{
 
     }
 
-    function round(x: NumberReturnType, y: NumberReturnType, round: NumberReturnType){
+    function roundPoint(x: NumberReturnType, y: NumberReturnType, round: NumberReturnType){
 
         // @property x:Number ; The 'x' coordinate of the point
         this.x = (round ? Math.round(x) : x );

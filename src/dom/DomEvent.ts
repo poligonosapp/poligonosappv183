@@ -11,10 +11,12 @@ import {addPointerListener, removePointerListener} from './DomEvent.Pointer';
 import {addDoubleTapListener, removeDoubleTapListener} from './DomEvent.DoubleTap';
 import {getScale} from './DomUtil';
 
-import {HTMLElement, ReturnType, Event, Object} from "typescript";
+import {HTMLElement, ReturnType, Event, Object, EventListener} from "typescript";
 
 type FunctionReturnType = ReturnType<typeof Function| typeof EventListener>;
 type ObjectReturnType = ReturnType<typeof Object>;
+
+type PointReturnType = ReturnType<typeof PointFunction>;
 
 type NumberReturnType = ReturnType<typeof Number>;
 type TypeReturnType = ReturnType<typeof String | typeof Number | typeof Event>;
@@ -194,7 +196,7 @@ export function stopPropagation(e:EventReturnType):EventReturnType {
 
 // @function disableScrollPropagation(el: HTMLElement): this
 // Adds `stopPropagation` to the element's `'wheel'` events (plus browser variants).
-export function disableScrollPropagation(el:HTMLElementReturnType) {
+export function disableScrollPropagation(el:HTMLElementReturnType):EventReturnType {
 	addOne(el, 'wheel', stopPropagation);
 	return this;
 }
@@ -202,7 +204,7 @@ export function disableScrollPropagation(el:HTMLElementReturnType) {
 // @function disableClickPropagation(el: HTMLElement): this
 // Adds `stopPropagation` to the element's `'click'`, `'dblclick'`,
 // `'mousedown'` and `'touchstart'` events (plus browser variants).
-export function disableClickPropagation(el:HTMLElementReturnType) {
+export function disableClickPropagation(el:HTMLElementReturnType):EventReturnType {
 	on(el, 'mousedown touchstart dblclick', stopPropagation);
 	addOne(el, 'click', fakeStop);
 	return this;
@@ -213,7 +215,7 @@ export function disableClickPropagation(el:HTMLElementReturnType) {
 // following a link in the href of the a element, or doing a POST request
 // with page reload when a `<form>` is submitted).
 // Use it inside listener functions.
-export function preventDefault(e:EventReturnType) {
+export function preventDefault(e:EventReturnType):EventReturnType {
 	if (e.preventDefault) {
 		e.preventDefault();
 	} else {
@@ -233,7 +235,7 @@ export function stop(e:EventReturnType):EventReturnType {
 // @function getMousePosition(ev: DOMEvent, container?: HTMLElement): Point
 // Gets normalized mouse position from a DOM event relative to the
 // `container` (border excluded) or to the whole page if not specified.
-export function getMousePosition(e:EventReturnType, container:HTMLElementReturnType) {
+export function getMousePosition(e:EventReturnType, container:HTMLElementReturnType):PointReturnType {
 	if (!container) {
 		return new PointFunction(e.clientX, e.clientY);
 	}

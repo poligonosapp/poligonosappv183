@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
@@ -53,7 +54,7 @@ import { round } from 'lodash';
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
 
-export function PointFunction(...args: [x: NumberReturnType, y: NumberReturnType, round: NumberReturnType]): PointReturnImpl {
+export public function PointFunction(...args: [x: NumberReturnType, y: NumberReturnType, round: NumberReturnType]): PointReturnImpl {
 	// @property x: Number; The `x` coordinate of the point
 	// const x = Object.create((round ? Math.round(x) : x));
 	// @property y: Number; The `y` coordinate of the point
@@ -82,9 +83,12 @@ const trunc = Math.trunc || function (v) {
 };
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
-type PointReturnType = ReturnType<typeof PointFunction|typeof RoundImpl> | ReturnType<typeof Object.Number>;
+
+type PointReturnType = ReturnType<typeof PointFunction|typeof RoundImpl | typeof Object.Number | typeof Object>;
+
 type StringReturnType = ReturnType<typeof  PointFunction.prototype.toString> | string | ReturnType<typeof Object.String>;
-type _roundReturnType = ReturnType<typeof  PointFunction.prototype._round> | number | ReturnType<typeof Object.Number>;
+type _roundReturnType = 
+ReturnType<typeof  PointFunction.prototype._round> | number | ReturnType<typeof Object.Number>;
 type roundReturnType = ReturnType<typeof PointFunction> | ReturnType<typeof  PointFunction.prototype.round> | number | ReturnType<typeof Object.Number>;
 // type floorReturnType = ReturnType<typeof  Point.prototype.floor> | number | ReturnType<typeof Object.Number>;
 
@@ -248,7 +252,7 @@ PointFunction.prototype = {
 
 	// @method equals(otherPoint: Point): Boolean
 	// Returns `true` if the given point has the same coordinates.
-	equals: function (point:NumberReturnType[]):Boolean {
+	equals: function (point:NumberReturnType[]):boolean {
 		point = toPoint(point[0]);
 
 		return point[0].x === this.x &&
@@ -283,18 +287,26 @@ PointFunction.prototype = {
 // @alternative
 // @factory L.point(coords: Object)
 // Expects a plain object of the form `{x: Number, y: Number}` instead.
-export function toPoint(x:PointReturnType[], y:NumberReturnType[], round:NumberReturnType[]): PointReturnType {
-	if (x[0] instanceof PointFunction) {
-		return x;
+export function toPoint(x:PointReturnType|PointReturnType[], 
+	y:NumberReturnType[], round:NumberReturnType[]): PointReturnType|PointReturnType[] {
+	try{
+		if (x[0] instanceof PointFunction) {
+			return x;
+		}
+		if (isArray(x)) {
+			return new RoundImpl().round(x[0], x[1], round);
+		}
+		if (x === undefined || x === null) {
+			return x;
+		}
+		if (typeof x === 'object' && 'x' in x && 'y' in x) {
+			obj: PointReturnType = new PointReturnImpl(x.x, x.y, round).roundXY(x.x, x.y, round);
+			return obj;
+		}
+		return new PointReturnImpl(x.x, x.y, round).roundXY(x.x, x.y, round);
+	}catch(e){
+		throw new Exception("PointFunction.toPointException");
+	}finally{
+
 	}
-	if (isArray(x)) {
-		return new RoundImpl().round(x[0], x[1], round);
-	}
-	if (x === undefined || x === null) {
-		return x;
-	}
-	if (typeof x === 'object' && 'x' in x && 'y' in x) {
-		return new PointFunction(x.x, x.y, round);
-	}
-	return new PointFunction(x, y, round);
 }

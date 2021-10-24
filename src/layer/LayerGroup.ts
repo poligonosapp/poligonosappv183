@@ -172,7 +172,7 @@ export const LayerGroup = LayerFunction.extend({
 	// Returns an array of all the layers added to the group.
 	getLayers: function (): LayerReturnType[] {
 		// let layers:LayerReturnType = [];
-		this.eachLayer(layers.push, this.layers);
+		this.eachLayer(layers.push(this.layers), this.layers);
 		return layers;
 	},
 

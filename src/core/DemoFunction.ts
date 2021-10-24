@@ -18,21 +18,14 @@ export type MapReturnType = ReturnType<typeof Map>;
 type ObjectReturnType = ReturnType<typeof Object>;
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
+NewClass = function(){};
 
-public class DemoAbstractClassImpl extends GeoJSONAbstractClass{
-
-	constructor(){
-		super();
-
-	} // end constructor
-
-// @overrride
-static function extend (props:GeoJSONReturnType[]) {
+export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
 	// @function extend(props: Object): Function
 	// [Extends the current class](#class-inheritance) given the properties to be included.
 	// Returns a Javascript function that is a class constructor (to be called with `new`).
-	const NewClass = function (): GeoJSONReturnType {
+	NewClass = function (): GeoJSONReturnType {
 
 		// call the constructor
 		if (this.initialize) {
@@ -46,8 +39,8 @@ static function extend (props:GeoJSONReturnType[]) {
 	const parentProto = NewClass.__super__ = this.prototype;
 
 	const proto = Util.create(parentProto);
+	
 	proto.constructor = NewClass;
-
 	NewClass.prototype = proto;
 
 	// inherit parent's statics
@@ -97,9 +90,13 @@ static function extend (props:GeoJSONReturnType[]) {
 	};
 
 	return NewClass;
-};
 
-} // end DemoAbstractClassImpl
+}
+
+);
+
+
+
 
 
 // @function include(properties: Object): this
@@ -145,3 +142,5 @@ function checkDeprecatedMixinEvents(includes:GeoJSONReturnType[]) {
 	}
 	
 }
+
+

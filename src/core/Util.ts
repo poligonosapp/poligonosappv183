@@ -1,3 +1,26 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-implied-eval */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable prefer-spread */
@@ -44,7 +67,7 @@
 import {Object, ReturnType} from 'typescript';
 import {Point} from '../geometry';
 
-import {DemoAbstractClassImpl} from './DemoAbstractClassImpl';
+import {DemoAbstractClassImpl} from './DemoFunction';
 
 // import {GeoJSON} from '../layer';
 import {GeoJSONClass} from "src/layer/GeoJSONClass";
@@ -55,7 +78,9 @@ import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
 // import {LatLng} from "../geo";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type OptionsObjectReturnType = ReturnType<typeof String | typeof Number | typeof Boolean | typeof Array>;
 // type LatLngReturnType = ReturnType<typeof LatLng>;
+type GeoJSONOptionsReturnType = ReturnType<typeof Array | typeof String | typeof Number | typeof Boolean | typeof Function>;
 type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 
 type EventReturnType = ReturnType<typeof Event>;
@@ -78,7 +103,7 @@ type numberAuxY = ReturnType<typeof Object.Number>;
 
 // @function extend(dest: Object, src?: Object): Object
 // Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter. Has an `L.extend` shortcut.
-export function extend(dest:PointReturnImpl[], props:GeoJSONReturnType[]): ObjectReturnType[] {
+export function extend(dest:PointReturnImpl[], props:GeoJSONOptionsReturnType[]): ObjectReturnType[] {
 	// const i;
 	// const j;
 	// const len;
@@ -230,7 +255,7 @@ export function splitWords(str:StringReturnType | StringReturnType[]) {
 
 // @function setOptions(obj: Object, options: Object): Object
 // Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`. Has an `L.setOptions` shortcut.
-export function getOptions(obj:ObjectReturnType, options:NumberReturnType[]):GeoJSONReturnType[] {
+export function getOptions(obj:ObjectReturnType, options:OptionsObjectReturnType[]):GeoJSONReturnType[] {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!Object.prototype.hasOwnProperty.call(obj, 'options')) {
 		obj.options = obj.options ? create(obj.options) : {};
@@ -329,7 +354,7 @@ export const cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimat
 // otherwise it's delayed. Returns a request ID that can be used to cancel the request.
 export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType, immediate:boolean):FunctionReturnType {
 	if (immediate && requestFn === timeoutDefer) {
-		fn.call(context);
+		return fn.call(context);
 	} else {
 		return requestFn.call(window, bind(fn, context));
 	}
@@ -342,7 +367,8 @@ try{
 	if (id) {
 		cancelFn.call(window, id);
 	}
-}finally {
+}
+finally {
 	// eslint-disable-next-line no-unsafe-finally
 	return;
 }

@@ -179,9 +179,9 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 
 	getEvents: function ():EventReturnType {
 		const events = {
-			zoom: this._reset,
-			viewreset: this._reset,
-			zoomanim: ReturnType<typeof Event>
+			zoom = this._reset(),
+			viewreset = this._reset(),
+			zoomanim = ReturnType<typeof Event>
 		};
 
 		if (this._zoomAnimated) {
@@ -214,7 +214,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 
 	_initImage: function ():void {
 		const wasElementSupplied = this._url.tagName === 'IMG';
-		const img = this._image = wasElementSupplied ? this._url : DomUtil.create('img');
+		const img = this._image = wasElementSupplied ? this._url : DomUtil.create('img','imageOverlay','img');
 
 		DomUtil.addClass(img, 'leaflet-image-layer');
 		if (this._zoomAnimated) { DomUtil.addClass(img, 'leaflet-zoom-animated'); }
@@ -294,6 +294,6 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 // Instantiates an image overlay object given the URL of the image and the
 // geographical bounds it is tied to.
 export const imageOverlay = function (url:StringReturnType, 
-	bounds:BoundsReturnType, options:NumberReturnType):ImageOverlayReturnType {
+	bounds:BoundsReturnType, options:ImageOverlayOptionsReturnType[]):ImageOverlayReturnType {
 	return new ImageOverlay(url, bounds, options);
 };

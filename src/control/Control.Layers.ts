@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -11,11 +12,13 @@ import * as Util from '../core/Util';
 import * as Browser from '../core/Browser';
 import * as DomEvent from '../dom/DomEvent';
 import * as DomUtil from '../dom/DomUtil';
-import {Object, ReturnType} from "typescript";
+import {Object, ReturnType, HTMLElement} from "typescript";
 import {FeatureGroup, LayerGroup} from "../layer";
 import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+type ControlLayersOptionsReturnType = ReturnType<typeof Array|typeof String|typeof Boolean| typeof Number| typeof Function>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type EventReturnType = ReturnType<typeof Event>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
@@ -96,7 +99,7 @@ export const Layers = Control.extend({
 		}
 	},
 
-	initialize: function (baseLayers:LayerReturnType[], overlays:LayerReturnType[], options:NumberReturnType) {
+	initialize: function (baseLayers:LayerReturnType[], overlays:LayerReturnType[], options:ControlLayersOptionsReturnType) {
 		Util.getOptions(this, options);
 
 		this._layerControlInputs = [];
@@ -192,7 +195,9 @@ export const Layers = Control.extend({
 
 	_initLayout: function () {
 		const className = 'leaflet-control-layers';
-		const container = this._container = DomUtil.create('div', className);
+
+		let container = this._container = DomUtil.create('div', className, 'div');
+		
 		const collapsed = this.options.collapsed;
 
 		// makes this work on IE touch devices by stopping it from firing a mouseout event when the touch is released
@@ -455,6 +460,6 @@ export const Layers = Control.extend({
 
 // @factory L.control.layers(baselayers?: Object, overlays?: Object, options?: Control.Layers options)
 // Creates a layers control with the given layers. Base layers will be switched with radio buttons, while overlays will be switched with checkboxes. Note that all base layers should be passed in the base layers object, but only one should be added to the map during map instantiation.
-export const layers = function (baseLayers:HTMLElementReturnType, overlays, options:[]) {
+export const layers = function (baseLayers:HTMLElementReturnType, overlays, options:ControlLayersOptionsReturnType[]) {
 	return new Layers(baseLayers, overlays, options);
 };

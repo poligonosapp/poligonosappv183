@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
@@ -141,11 +142,15 @@ export function hasClass(el:HTMLElementReturnType, name:StringReturnType):boolea
 // @function addClass(el: HTMLElement, name: String)
 // Adds `name` to the element's class attribute.
 export function addClass(el:HTMLElementReturnType, name:StringReturnType) {
+	
 	if (el.classList !== undefined) {
+		
 		const classes = Util.splitWords(name);
+
 		for (const i = 0, len = classes.length; i < len; i++) {
 			el.classList.add(classes[i]);
 		}
+		
 	} else if (!hasClass(el, name)) {
 		const className = getClass(el);
 		setClass(el, (className ? className + ' ' : '') + name);
@@ -196,7 +201,7 @@ export function setOpacity(el:HTMLElementReturnType, value:NumberReturnType) {
 }
 
 function _setOpacityIE(el:HTMLElementReturnType, value:NumberReturnType) {
-	const filter = false;
+	let filter = false;
 	const filterName = 'DXImageTransform.Microsoft.Alpha';
 
 	// filters collection throws an error if we try to retrieve a filter that doesn't exist

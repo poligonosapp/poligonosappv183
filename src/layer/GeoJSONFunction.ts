@@ -29,6 +29,7 @@ import {Function} from 'typescript';
 import { LatLngClass } from 'src/geo/LatLngClass';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type GeoJSONOptionsReturnType = ReturnType<typeof String | typeof Number | typeof Boolean | typeof Array>;
 export type GeoJSONFunctionOptions = ReturnType<typeof String>;
 type FunctionReturnType = ReturnType<typeof Function>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -61,7 +62,7 @@ type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<ty
 
 export interface Props{
 	geojson:GeoJSONReturnType;
-	options:NumberReturnType;
+	options:GeoJSONOptionsReturnType[];
 }
 
 export const GeoJSONFunction:FunctionReturnType = FeatureGroup.extend({
@@ -116,7 +117,7 @@ export const GeoJSONFunction:FunctionReturnType = FeatureGroup.extend({
 	 * Whether default Markers for "Point" type Features inherit from group options.
 	 */
 
-	initialize: function (geojson:GeoJSONReturnType, options:NumberReturnType):void {
+	initialize: function (geojson:GeoJSONReturnType, options:NumberReturnType):GeoJSONReturnType {
 		Util.getOptions(this, options);
 
 		this._layers = {};
@@ -480,8 +481,8 @@ LayerGroup.include({
 // Creates a GeoJSON layer. Optionally accepts an object in
 // [GeoJSON format](https://tools.ietf.org/html/rfc7946) to display on the map
 // (you can alternatively add it later with `addData` method) and an `options` object.
-export function geoJSON(geojson:GeoJSONReturnType, options:NumberReturnType):GeoJSONReturnType {
-	options = 0;// 12 IANA CONSIDERATIONS Optional parameters:  n/a
+export function geoJSON(geojson:GeoJSONReturnType, options:GeoJSONOptionsReturnType[]):GeoJSONReturnType {
+	// options = null;// 12 IANA CONSIDERATIONS Optional parameters:  n/a
 	return new GeoJSONClass(geojson, options);
 }
 

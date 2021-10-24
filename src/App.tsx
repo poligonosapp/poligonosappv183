@@ -1,11 +1,11 @@
-import PoligonosApp, { polygonsArray, PoligonosAppReturnType } from "./PoligonosApp";
+import PoligonosApp, { MapReturnType, polygonsArray, PoligonosAppReturnType } from "./PoligonosApp";
 import React, {Component, useState, useCallback} from 'react';
 import ReactDOM, { hydrate, render } from 'react-dom';
 import {PoligonosAppComponent} from "./PoligonosAppComponent";
 import Realm from "realm";
 
 import { Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from '../Leaflet';
-import { MapReturnType } from "./layer/GeoJSONFunction";
+// import { MapReturnType } from "./layer/GeoJSONFunction";
 
 import {Response} from "express";
 
@@ -34,7 +34,7 @@ import token from './Token';
 
 interface Props{
     polygons: Promise<PoligonosAppReturnType>[];
-    mapConst: Promise<MapReturnType>;
+    mapConst: Promise<PoligonosApp>;
     leafletTokenGitHub: Promise<string>;
     leafletTokenAtlassian: Promise<string>;
     src : string;
@@ -55,7 +55,9 @@ class App extends React.Component{
         }
 
         this.mapConst = await github();
+        this.mapConst.renderer();
         this.mapConst = await atlassian();
+        this.mapConst.renderer();
 
         await realm();
 
@@ -92,7 +94,7 @@ class App extends React.Component{
     // let a:string;
     // let s:string;
 
-    function github():Promise<string> {
+    function github():Promise<typeof PoligonosApp> {
 
         // const [leafletTokenGitHub, useState]:Promise<string> = this.setState({leafletTokenGitHub:this.props.children});
         
@@ -139,10 +141,10 @@ console.log("then then");
 
         return s;
 
-    }
+    } // end github function
 
 
-        function atlassian():Promise<string> {
+        function atlassian():Promise<typeof PoligonosApp> {
             
         // const [leafletTokenAtlassian, useState]:Promise<string> = this.setState({leafletTokenAtlassian:this.props.children});
             
@@ -160,6 +162,8 @@ try{
     }).addTo(this.mapConst);
 
     this.state.polygons.add(p);
+
+    return p;
 
 }catch(e){
         return throw new Exception("es5 promise exception");

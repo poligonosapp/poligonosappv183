@@ -13,6 +13,8 @@
 
 import { LayerReturnType, Polygon } from "Leaflet";
 import { PolygonClass } from "./layer/vector/PolygonClass";
+import {Map} from "src/map/Map";
+export type MapReturnType = ReturnType<typeof Map>;
 
 // declare module '@babel/preset-react';
 // import("@babel/preset-react").then(

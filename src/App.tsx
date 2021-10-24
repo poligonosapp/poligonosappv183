@@ -57,7 +57,7 @@ class App extends React.Component{
         this.mapConst = await github();
         this.mapConst = await atlassian();
 
-        realm();
+        await realm();
 
         // showMap();
 
@@ -241,37 +241,9 @@ ReactDOM.render(
 export default App;
 
 function realm():Promise<string> {
-    const poligono = require('./ObjectRules');
-    const realm = await Realm.open({
-        path: "myrealm",
-        schema: [poligono],
-      });
-      
-    return require('./TokenRealm').token();
+    const realm = require('./ObjectRules');
+    return require('./TokenRealm').token().toPromise();
 }
-
-
-    async function showMap():Promise<string>{
-        leafletTokenGitHub = await require('./Token').token().toPromise().then(
-            function (response:ResponseReturnType) {
-            return response;
-            }
-                    ).then(
-                        function () {
-            console.log("then then");
-                        }
-                    );
-
-                    if(this.props.leafletTokenGitHub){
-                        return this.props.leafletTokenGitHub;
-                    }
-
-        const leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise().then().then();
-        if(leafletTokenAtlassian){
-            return leafletTokenAtlassian;
-        }
-        // return undefined;
-    }
 
 } // end class App
 

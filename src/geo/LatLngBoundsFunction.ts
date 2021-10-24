@@ -12,9 +12,10 @@ import {FeatureGroup} from "../layer";
 import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
 
 import {IteratorException} from "typescript";
+import { LatLngClass } from './LatLngClass';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-type LatLngReturnType = ReturnType<typeof LatLngFunction>;
+type LatLngReturnType = ReturnType<typeof LatLngFunction| typeof LatLngClass>;
 type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
 type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

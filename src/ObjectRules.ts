@@ -15,4 +15,4 @@ const realm = await Realm.open({
   schema: [poligono],
 });
 
-export poligono;
+export default realm;

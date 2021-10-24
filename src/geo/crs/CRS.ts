@@ -1,6 +1,7 @@
 import { BoundsClass } from "../../geometry/BoundsClass";
 import {LatLngFunction} from '../LatLngFunction';
 import { LatLngBoundsClass } from "../LatLngBoundsClass";
+import { LatLngBoundsFunction } from "../LatLngBoundsFunction";
 import * as Util from '../../core/Util';
 
 import {LonLat} from './Projection.LonLat';
@@ -19,17 +20,18 @@ import {Object, ReturnType} from 'typescript';
 import {PointFunction} from "src/geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
-import { PointReturnImpl } from './PointReturnImpl';
+import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
 import { PointsTransformationFunction } from 'src/geometry/PointsTransformation';
 import { PointReturn } from "src/geometry/PointReturn";
 import { toLatLngBoundsFunction } from "../LatLngBoundsFunction";
 import { LatLngClass } from "../LatLngClass";
 import { Projection } from "Leaflet";
+type BoundsClassReturnType = ReturnType<typeof BoundsClass>;
 type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
-type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass|typeof toLatLngBoundsFunction>;
+type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass|typeof LatLngBoundsFunction>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

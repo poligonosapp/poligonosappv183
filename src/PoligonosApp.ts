@@ -14,7 +14,7 @@
 import { LayerReturnType, Polygon } from "Leaflet";
 import { PolygonClass } from "./layer/vector/PolygonClass";
 import {Map} from "src/map/Map";
-export type MapReturnType = ReturnType<typeof Map>;
+export public type MapReturnType = ReturnType<typeof Map>;
 
 // declare module '@babel/preset-react';
 // import("@babel/preset-react").then(
@@ -58,7 +58,7 @@ export const polygonsArray = require('./polygons.geojson');
 //	const element = polygonsArray[index];
 // }
 
-export const PoligonosApp = L.Class.extend({
+export public const PoligonosApp = L.Class.extend({
 
 	// A property with initial value = 42
 	PoligonosAppProperty: makeUnique(polygonsArray),

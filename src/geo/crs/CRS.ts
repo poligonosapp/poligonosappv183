@@ -13,7 +13,7 @@ import {SphericalMercator} from './Projection.SphericalMercator';
 // import {Bounds} from '../../geometry/Bounds';
 // import {Point} from '../../geometry/Point';
 
-import {projection} from './Projection';
+import {projection} from './Projection.LonLat';
 
 import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';

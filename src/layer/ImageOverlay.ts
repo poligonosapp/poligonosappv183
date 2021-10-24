@@ -177,7 +177,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 		return this;
 	},
 
-	getEvents: function ():EventReturnType {
+	getEvents: function ():EventReturnType[] {
 		const events = {
 			zoom = this._reset(),
 			viewreset = this._reset(),

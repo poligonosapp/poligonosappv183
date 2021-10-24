@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -129,7 +136,7 @@ export function extend(dest:PointReturnImpl[], props:GeoJSONOptionsReturnType[])
 // @function create(proto: Object, properties?: Object): Object
 // Compatibility polyfill for [Object.create](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-export const create = Object.create || (function ():ObjectReturnType|FunctionReturnType {
+export function create = Object.create() || (function ():ObjectReturnType|FunctionReturnType {
 try{
 	
 	function F():FunctionReturnType {};
@@ -227,7 +234,15 @@ export function wrapNum(x:NumberReturnType, range:NumberReturnType[], includeMax
 	const min = range[0];
 	const d = max - min;
 
-	return x === max && includeMax ? x : ((x - min) % d + d) % d + min;
+	if(d < 0 ){
+		return (-1)*d;
+	}
+
+	return wrapNumAux(x, max, includeMax, min, d);
+}
+
+function wrapNumAux(x: NumberReturnType, max: NumberReturnType, includeMax: boolean, min: NumberReturnType, d: NumberReturnType): NumberReturnType {
+	return (x === max && includeMax ? x : ((x - min) % d + d) % d + min);
 }
 
 // @function falseFn(): Function
@@ -309,7 +324,7 @@ export const isArray = Array.isArray || function (obj:ObjectReturnType):boolean 
 
 // @function indexOf(array: Array, el: Object): Number
 // Compatibility polyfill for [Array.prototype.indexOf](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
-export function indexOf(array:ArrayReturnType, el:ObjectReturnType) {
+export function indexOf(array:ArrayReturnType, el:ObjectReturnType):NumberReturnType {
 	
 	for (const i in array) {
 		if (array[i] === el) { return i; }
@@ -352,7 +367,7 @@ export const cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimat
 // the browser doesn't have native support for
 // [`window.requestAnimationFrame`](https://developer.mozilla.org/docs/Web/API/window/requestAnimationFrame),
 // otherwise it's delayed. Returns a request ID that can be used to cancel the request.
-export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType, immediate:boolean):FunctionReturnType {
+export function requestAnimFrame(fn:FunctionReturnType, context:EventReturnType, immediate:boolean):NumberReturnType {
 	if (immediate && requestFn === timeoutDefer) {
 		return fn.call(context);
 	} else {

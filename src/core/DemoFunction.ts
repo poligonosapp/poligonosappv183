@@ -1,7 +1,7 @@
 import { GeoJSONAbstractClass } from './GeoJSONAbstractClass';
 import * as Util from './Util';
 
-import {Object, ReturnType} from "typescript";
+import {Object, ReturnType, HTMLAnchorElement} from "typescript";
 
 import {GeoJSONClass} from "src/layer/GeoJSONClass";
 import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
@@ -14,18 +14,24 @@ import {Map} from '../Map';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
+type HTMLAnchorElementReturnType = ReturnType<typeof HTMLAnchorElement>;
 export type MapReturnType = ReturnType<typeof Map>;
 type ObjectReturnType = ReturnType<typeof Object>;
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
-NewClass = function(){};
+// typescript 2304
+ NewClass = function(){};
 
 export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
-	// @function extend(props: Object): Function
+	try{
+			// @function extend(props: Object): Function
 	// [Extends the current class](#class-inheritance) given the properties to be included.
 	// Returns a Javascript function that is a class constructor (to be called with `new`).
-	NewClass = function (): GeoJSONReturnType {
+	NewClass = function (): HTMLAnchorElementReturnType {
+
+		// name is deprecated typescript 2304
+		// init(name:string):void
 
 		// call the constructor
 		if (this.initialize) {
@@ -36,15 +42,19 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 		this.callInitHooks();
 	};
 
+	// typescript 2304 prototype-based programming paradigm
+	// Object.setPrototypeOf(NewClass,GeoJSONFunction);
+
+	NewClass = Object.prototype.__proto__;
+
 	const parentProto = NewClass.__super__ = this.prototype;
 
-	const proto = Util.create(parentProto);
+	let proto = Util.create(parentProto);
 	
 	proto.constructor = NewClass;
 	NewClass.prototype = proto;
-
-	// inherit parent's statics
-	for (const i in this) {
+// inherit parent's statics
+	for (let i in this) {
 		if (Object.prototype.hasOwnProperty.call(this, i) && i !== 'prototype' && i !== '__super__') {
 			NewClass[i] = this[i];
 		}
@@ -74,6 +84,9 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 	proto._initHooks = [];
 
 	// add method for calling all hooks
+
+try{
+
 	proto.callInitHooks = function () {
 
 		if (this._initHooksCalled) { return; }
@@ -89,7 +102,21 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 		}
 	};
 
-	return NewClass;
+}catch(ex){
+
+}finally{
+
+}
+
+	}catch(){
+
+		throw new Exception("typescript prototype paradigm Exception");
+
+	}finally{
+return NewClass;
+	}
+
+	
 
 }
 

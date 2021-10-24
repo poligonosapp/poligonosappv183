@@ -34,7 +34,7 @@ import token from './Token';
 
 interface Props{
     polygons: Promise<PoligonosAppReturnType>[];
-    mapConst: Promise<PoligonosApp>;
+    mapConst: Promise<MapReturnType>;
     leafletTokenGitHub: Promise<string>;
     leafletTokenAtlassian: Promise<string>;
     src : string;
@@ -54,13 +54,15 @@ class App extends React.Component{
             polygons: new Promise<new PoligonosApp()>[]
         }
 
-        this.mapConst = await github();
-        this.mapConst.renderer();
-        this.mapConst = await atlassian();
-        this.mapConst.renderer();
-
-        await realm();
-
+        this.mapConst = useCallback(
+            () => {
+                await github();
+                this.mapConst.renderer();
+                this.mapConst = await atlassian();
+                this.mapConst.renderer();
+                await realm();
+            }
+        );
         // showMap();
 
         // const a = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
@@ -166,7 +168,7 @@ try{
     return p;
 
 }catch(e){
-        return throw new Exception("es5 promise exception");
+        return throw new Exception("atlassian es5 promise exception");
 }finally{
 
 }

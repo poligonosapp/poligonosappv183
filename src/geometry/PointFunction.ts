@@ -43,6 +43,7 @@ import {Object, ReturnType} from 'typescript';
 // import {PointReturn} from './PointReturn';
 
 import {PointReturnImpl} from './PointReturnImpl';
+import { round } from 'lodash';
 
 // interface PointReturn{
 	// x: number | ReturnType<typeof Object.Number>;
@@ -58,15 +59,20 @@ export function PointFunction(...args: [x: NumberReturnType, y: NumberReturnType
 	// @property y: Number; The `y` coordinate of the point
 	// const y = Object.create((round ? Math.round(y) : y));
 
+	let p;
+
 	try{
 		// if(round){
-			return new PointReturnImpl(x, y, round).roundXY(x, y, round);
+			p = new PointReturnImpl(x, y, round).roundXY(x, y, round);
 		//}
 	}catch(e){
 		throw new RuntimeException("TYPESCRIPT ROUND ARG OVERLOAD EXCEPTION");
 	}
+	finally{
+		return p = new PointReturnImpl(x,y);
+	}
 
-	return new PointReturnImpl(x,y);
+	
 }
 
 // Point(0,0,0);

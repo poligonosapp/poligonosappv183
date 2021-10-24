@@ -223,9 +223,10 @@ BoundsFunction.prototype = {
 // @alternative
 // @factory L.bounds(points: Point[])
 // Creates a Bounds object from the given array of points.
-export function toBounds(a:PointReturnType|PointReturnType[], b:PointReturnType|PointReturnType[]):BoundsReturnType {
-	if (!a || a instanceof BoundsClass) {
+export function toBounds(a:PointReturnType|PointReturnType[], 
+	b:PointReturnType|PointReturnType[]):BoundsReturnType {
+	if (!a || a instanceof BoundsFunction) {
 		return a;
 	}
-	return new BoundsClass(a, b);
+	return new BoundsFunction(a, b);
 }

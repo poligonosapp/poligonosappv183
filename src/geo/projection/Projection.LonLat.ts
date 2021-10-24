@@ -11,6 +11,7 @@ import {Object, ReturnType} from 'typescript';
 // import {Point} from "../geometry";
 import { PointsTransformationClass } from 'src/geometry/PointsTransformation';
 import { LatLngReturnType } from 'src/layer/vector/PolylineFunction';
+import { BoundsFunction } from 'src/geometry/BoundsFunction';
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 // type MapReturnType = ReturnType<typeof Map>;
@@ -58,5 +59,5 @@ export const LonLat = {
 		return new LatLngClass(point.y, point.x);
 	},
 
-	bounds: new BoundsClass([-180, -90], [180, 90])
+	bounds: new BoundsFunction([-180, -90], [180, 90])
 };

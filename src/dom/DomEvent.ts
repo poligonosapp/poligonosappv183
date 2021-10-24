@@ -39,7 +39,8 @@ type StringReturnType = ReturnType<typeof  PointFunction.prototype.toString> | s
 // @alternative
 // @function on(el: HTMLElement, eventMap: Object, context?: Object): this
 // Adds a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
-export function on(obj:HTMLElementReturnType, types: StringReturnType[], fn:FunctionReturnType, context:ObjectReturnType):StringReturnType {
+export function on(obj:HTMLElementReturnType, types: StringReturnType[], 
+	fn:FunctionReturnType, context:ObjectReturnType):StringReturnType {
 
 	if (typeof types === 'object') {
 		for (const type in types) {
@@ -70,8 +71,8 @@ export function off(obj:HTMLElementReturnType[][],
 	types:StringReturnType[], fn:FunctionReturnType, context:ObjectReturnType):EventReturnType {
 
 	if (typeof types === 'object') {
-		for (const type in types) {
-			removeOne(obj, type, types[type], fn);
+		for (let i in types) {
+			removeOne(obj, i, types[i], fn);
 		}
 	} else if (types) {
 		types = Util.splitWords(types);
@@ -102,7 +103,7 @@ const mouseSubst = {
 	wheel: !('onwheel' in window) && 'mousewheel'
 };
 
-function addOne(obj:HTMLElementReturnType, type:TypeReturnType[], fn:FunctionReturnType, context:ObjectReturnType) {
+function addOne(obj:HTMLElementReturnType, type:TypeReturnType[], fn:FunctionReturnType, context:ObjectReturnType):StringReturnType {
 	const id = type + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : '');
 
 	if (obj[eventsKey] && obj[eventsKey][id]) { return this; }
@@ -146,25 +147,25 @@ function addOne(obj:HTMLElementReturnType, type:TypeReturnType[], fn:FunctionRet
 	obj[eventsKey][id] = handler;
 }
 
-function removeOne(obj:HTMLElementReturnType, type: TypeReturnType[], fn:FunctionReturnType, context:ObjectReturnType) {
+function removeOne(obj:HTMLElementReturnType, i: TypeReturnType[], fn:FunctionReturnType, context:ObjectReturnType) {
 
-	const id = type + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : '');
+	const id = i + Util.stamp(fn) + (context ? '_' + Util.stamp(context) : '');
 	const handler = obj[eventsKey] && obj[eventsKey][id];
 
 	if (!handler) { return this; }
 
-	if (Browser.pointer && type.indexOf('touch') === 0) {
-		removePointerListener(obj, type, id);
+	if (Browser.pointer && i.indexOf('touch') === 0) {
+		removePointerListener(obj, i, id);
 
-	} else if (Browser.touch && (type === 'dblclick') && !browserFiresNativeDblClick()) {
+	} else if (Browser.touch && (i === 'dblclick') && !browserFiresNativeDblClick()) {
 		removeDoubleTapListener(obj, id);
 
 	} else if ('removeEventListener' in obj) {
 
-		obj.removeEventListener(mouseSubst[type] || type, handler, false);
+		obj.removeEventListener(mouseSubst[i] || i, handler, false);
 
 	} else if ('detachEvent' in obj) {
-		obj.detachEvent('on' + type, handler);
+		obj.detachEvent('on' + i, handler);
 	}
 
 	obj[eventsKey][id] = null;

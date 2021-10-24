@@ -9,7 +9,7 @@ import {toLatLngBoundsFunction, toLatLngBoundsFunctionArray} from '../geo/LatLng
 import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
 import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
 import { BoundsClass } from "src/geometry/BoundsClass";
-import { BoundsClassFunction } from "src/geometry/BoundsFunction";
+import { BoundsClassFunction, BoundsFunction } from "src/geometry/BoundsFunction";
 
 import * as DomUtil from '../dom/DomUtil';
 import {Object, ReturnType} from "typescript";
@@ -33,7 +33,7 @@ type GeoJSONReturnType = ReturnType<typeof GeoJSONFunction>;
 type MapReturnType = ReturnType<typeof Map>;
 type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
-
+type ImageOverlayOptionsReturnType = ReturnType<typeof String | typeof Number| typeof Boolean>;
 
 /*
  * @class ImageOverlay
@@ -130,7 +130,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 		return this;
 	},
 
-	setStyle: function (styleOpts) {
+	setStyle: function (styleOpts:ImageOverlayOptionsReturnType['opacity']) {
 		if (styleOpts.opacity) {
 			this.setOpacity(styleOpts.opacity);
 		}
@@ -157,7 +157,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 
 	// @method setUrl(url: String): this
 	// Changes the URL of the image.
-	setUrl: function (url:StringReturnType) {
+	setUrl: function (url:StringReturnType):MapReturnType {
 		this._url = url;
 
 		if (this._image) {
@@ -168,7 +168,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 
 	// @method setBounds(bounds: LatLngBounds): this
 	// Update the bounds that this ImageOverlay covers
-	setBounds: function (bounds:BoundsReturnType[]) {
+	setBounds: function (bounds:BoundsReturnType[]):MapReturnType {
 		this._bounds = toLatLngBoundsFunctionArray(bounds);
 
 		if (this._map) {
@@ -193,7 +193,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 
 	// @method setZIndex(value: Number): this
 	// Changes the [zIndex](#imageoverlay-zindex) of the image overlay.
-	setZIndex: function (value:NumberReturnType) {
+	setZIndex: function (value:NumberReturnType):MapReturnType {
 		this.options.zIndex = value;
 		this._updateZIndex();
 		return this;
@@ -252,11 +252,12 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 		return DomUtil.setTransform(this._image, offset, scale);
 	},
 
-	_reset: function ():void {
+	_reset: function ():ImageOverlayReturnType {
 		const image = this._image;
-		const bounds = new BoundsClass(
+		const bounds = new BoundsFunction(
 		        this._map.latLngToLayerPoint(this._bounds.getNorthWest()),
-		        this._map.latLngToLayerPoint(this._bounds.getSouthEast()));
+		        this._map.latLngToLayerPoint(this._bounds.getSouthEast())
+				);
 
 		const size = bounds.getSize();
 
@@ -292,6 +293,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 // @factory L.imageOverlay(imageUrl: String, bounds: LatLngBounds, options?: ImageOverlay options)
 // Instantiates an image overlay object given the URL of the image and the
 // geographical bounds it is tied to.
-export const imageOverlay = function (url:StringReturnType, bounds:BoundsReturnType, options:NumberReturnType):ImageOverlayReturnType {
+export const imageOverlay = function (url:StringReturnType, 
+	bounds:BoundsReturnType, options:NumberReturnType):ImageOverlayReturnType {
 	return new ImageOverlay(url, bounds, options);
 };

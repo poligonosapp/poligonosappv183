@@ -33,7 +33,8 @@ type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof La
 // type EventReturnType= ReturnType<typeof Event>;
 type LatLngBoundsReturnType= ReturnType<typeof LatLngBoundsClass|typeof LatLngBoundsFunction>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
+type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | 
+ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

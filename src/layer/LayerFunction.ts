@@ -21,6 +21,7 @@ import {LatLngBoundsFunction} from "src/geo/LatLngBoundsFunction";
 import {LayerGroup} from "./LayerGroup";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type ObjectReturnType = ReturnType<typeof Object>;
 type LayerGroupReturnType = ReturnType<typeof  LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 export type LayerOptionsReturnType = ReturnType<typeof String|typeof Boolean>;
 type FunctionReturnType = ReturnType<typeof Function>;
@@ -134,7 +135,7 @@ export const LayerFunction = Evented.extend({
 
 	// @method getAttribution: String
 	// Used by the `attribution control`, returns the [attribution option](#gridlayer-attribution).
-	getAttribution: function () {
+	getAttribution: function ():StringReturnType {
 		return this.options.attribution;
 	},
 
@@ -263,14 +264,14 @@ Map.include({
 	 * });
 	 * ```
 	 */
-	eachLayer: function (method, context) {
+	eachLayer: function (method:FunctionReturnType, context:ObjectReturnType) {
 		for (const i in this._layers) {
 			method.call(context, this._layers[i]);
 		}
 		return this;
 	},
 
-	_addLayers: function (layers) {
+	_addLayers: function (layers:LayerReturnType[]) {
 		layers = layers ? (Util.isArray(layers) ? layers : [layers]) : [];
 
 		for (const i = 0, len = layers.length; i < len; i++) {
@@ -278,14 +279,14 @@ Map.include({
 		}
 	},
 
-	_addZoomLimit: function (layer) {
+	_addZoomLimit: function (layer:LayerReturnType) {
 		if (isNaN(layer.options.maxZoom) || !isNaN(layer.options.minZoom)) {
 			this._zoomBoundLayers[Util.stamp(layer)] = layer;
 			this._updateZoomLevels();
 		}
 	},
 
-	_removeZoomLimit: function (layer) {
+	_removeZoomLimit: function (layer:LayerReturnType) {
 		const id = Util.stamp(layer);
 
 		if (this._zoomBoundLayers[id]) {
@@ -294,9 +295,7 @@ Map.include({
 		}
 	},
 
-	_updateZoomLevels: function () {
-		const minZoom = Infinity;
-		const maxZoom = -Infinity;
+	_updateZoomLevels: function () {let minZoom = Infinity;let maxZoom = -Infinity;
 		const oldZoomSpan = this._getZoomSpan();
 
 		for (const i in this._zoomBoundLayers) {

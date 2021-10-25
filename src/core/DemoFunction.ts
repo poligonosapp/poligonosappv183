@@ -12,15 +12,24 @@ import { LayerGroup } from 'src/layer';
 // import * as L from '../Leaflet';
 import {Map} from '../Map';
 
+// polyfill only stable `core-js` features - ES and web standards:
+// import "core-js/stable"; // ES5 Object.create
+
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type GeoJSONOptionsReturnType = ReturnType<typeof String | typeof Boolean | typeof Number>;
 type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 type HTMLAnchorElementReturnType = ReturnType<typeof HTMLAnchorElement>;
 export type MapReturnType = ReturnType<typeof Map>;
 type ObjectReturnType = ReturnType<typeof Object>;
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
+// uuid @types/uuid commonjs vscode es6
+import { v4 as uuidv4 } from 'uuid';
+
 // typescript 2304
- NewClass = function(){};
+ const NewClass = function(){
+	 uuidv4();
+ };
 
 export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
@@ -30,16 +39,18 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 	// Returns a Javascript function that is a class constructor (to be called with `new`).
 	NewClass = function (): HTMLAnchorElementReturnType {
 
+		uuidv4();
+
 		// name is deprecated typescript 2304
 		// init(name:string):void
 
 		// call the constructor
-		if (this.initialize) {
+		if (this.initialize()) {
 			this.initialize.apply(this, arguments);
 		}
 
 		// call all constructor hooks
-		this.callInitHooks();
+		return this.callInitHooks();
 	};
 
 	// typescript 2304 prototype-based programming paradigm
@@ -47,9 +58,14 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
 	NewClass = Object.prototype.__proto__;
 
-	const parentProto = NewClass.__super__ = this.prototype;
+	const parentProto = NewClass().__super__ = this.prototype;
 
-	let proto = Util.create(parentProto);
+	// core-js ES5 Shallow object cloning with prototype and descriptors:
+	// let copy = Object.create(Object.getPrototypeOf(object), Object.getOwnPropertyDescriptors(object));
+
+	let proto = Object.create(parentProto);
+
+	let proto2 = Util.create(parentProto);
 	
 	proto.constructor = NewClass;
 	NewClass.prototype = proto;
@@ -111,18 +127,18 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
 
 
-
+class DemoAbstractClassImpl extends GeoJSONAbstractClass{
 
 // @function include(properties: Object): this
 // [Includes a mixin](#class-includes) into the current class.
-GeoJSONAbstractClass.include = function (props:GeoJSONReturnType[]):DemoAbstractClassImpl {
+GeoJSONAbstractClass.include = function (props:GeoJSONOptionsReturnType[]):DemoAbstractClassImpl {
 	Util.extend(this.prototype, props);
 	return this;
 };
 
 // @function mergeOptions(options: Object): this
 // [Merges `options`](#class-options) into the defaults of the class.
-GeoJSONAbstractClass.mergeOptions = function (options:GeoJSONReturnType[]):DemoAbstractClassImpl {
+GeoJSONAbstractClass.mergeOptions = function (options:GeoJSONOptionsReturnType[]):DemoAbstractClassImpl {
 	Util.extend(this.prototype.options, options);
 	return this;
 };
@@ -156,5 +172,9 @@ function checkDeprecatedMixinEvents(includes:GeoJSONReturnType[]) {
 	}
 	
 }
+
+} // end class 
+
+
 
 

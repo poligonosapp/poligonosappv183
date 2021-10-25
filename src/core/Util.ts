@@ -108,9 +108,14 @@ type numberAuxX = ReturnType<typeof Object.Number>;
 
 type numberAuxY = ReturnType<typeof Object.Number>;
 
+// uuid @types/uuid commonjs vscode es6
+import { v4 as uuidv4 } from 'uuid';
+
 // @function extend(dest: Object, src?: Object): Object
 // Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter. Has an `L.extend` shortcut.
 export function extend(dest:PointReturnImpl[], props:GeoJSONOptionsReturnType[]): ObjectReturnType[] {
+
+	uuidv4();
 	// const i;
 	// const j;
 	// const len;
@@ -133,10 +138,12 @@ export function extend(dest:PointReturnImpl[], props:GeoJSONOptionsReturnType[])
 	return dest;
 }
 
+// (Object.create()) ||
 // @function create(proto: Object, properties?: Object): Object
 // Compatibility polyfill for [Object.create](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-export function create = Object.create() || (function ():ObjectReturnType|FunctionReturnType {
+export function create = (function ():ObjectReturnType|FunctionReturnType {
+	uuidv4();
 try{
 	
 	function F():FunctionReturnType {};
@@ -270,7 +277,7 @@ export function splitWords(str:StringReturnType | StringReturnType[]) {
 
 // @function setOptions(obj: Object, options: Object): Object
 // Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`. Has an `L.setOptions` shortcut.
-export function getOptions(obj:ObjectReturnType, options:OptionsObjectReturnType[]):GeoJSONReturnType[] {
+export function getOptions(obj:GeoJSONReturnType, options:OptionsObjectReturnType[]):GeoJSONReturnType[] {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!Object.prototype.hasOwnProperty.call(obj, 'options')) {
 		obj.options = obj.options ? create(obj.options) : {};

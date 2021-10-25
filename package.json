@@ -83,7 +83,7 @@
     ],
     "private": true,
     "scripts": {
-        "start": "ts-node -r tsconfig-paths/register ./src/PoligonosAppReactDomServer.tsx",
+        "start": "ts-node -r tsconfig-paths/register ./src/App.tsx",
         "docs": "ts-node -r tsconfig-paths/register ./build/docs.ts",
         "pretest": "npm run lint --fix",
         "test": "npm run test-nolint",
@@ -169,6 +169,7 @@
         "@types/eslint": "^7.2.13",
         "@types/express": "^4.17.13",
         "@types/jqueryui": "^1.12.16",
+        "@types/uuid": "^8.3.1",
         "@typescript-eslint/types": "^4.27.0",
         "ansi-regex": "^6.0.1",
         "body-parser": "^1.19.0",
@@ -190,7 +191,8 @@
         "realm": "^10.9.1",
         "regenerator-runtime": "^0.13.7",
         "snyk": "^1.634.0",
-        "tslib": "^2.0.0"
+        "tslib": "^2.0.0",
+        "uuid": "^8.3.2"
     },
     "peerDependencies": {
         "rollup": "^1.20.0 || ^2.0.0 || ^2.30.0 || 2.58.0",

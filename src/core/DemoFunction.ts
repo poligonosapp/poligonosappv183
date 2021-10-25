@@ -24,7 +24,7 @@ type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup>
 
 export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
-	try{
+	
 			// @function extend(props: Object): Function
 	// [Extends the current class](#class-inheritance) given the properties to be included.
 	// Returns a Javascript function that is a class constructor (to be called with `new`).
@@ -85,9 +85,9 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
 	// add method for calling all hooks
 
-try{
 
-	proto.callInitHooks = function () {
+
+	proto.callInitHooks = function (): EventReturnType {
 
 		if (this._initHooksCalled) { return; }
 
@@ -102,23 +102,10 @@ try{
 		}
 	};
 
-}catch(ex){
 
-}finally{
+	return NewClass;
 
-}
-
-	}catch(){
-
-		throw new Exception("typescript prototype paradigm Exception");
-
-	}finally{
-return NewClass;
-	}
-
-	
-
-}
+} // end extend
 
 );
 

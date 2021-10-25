@@ -1,8 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {GridLayer} from './GridLayer';
 import * as Browser from '../../core/Browser';
 import * as Util from '../../core/Util';
 import * as DomEvent from '../../dom/DomEvent';
 import * as DomUtil from '../../dom/DomUtil';
+
+import { ReturnType, Function } from "typescript";
+
+type FunctionReturnType = ReturnType<typeof Function>;
+type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
+type StringReturnType = ReturnType<typeof String>;
+type TileLayerOptionsReturnType = ReturnType<typeof String | typeof Number | typeof Boolean >;
 
 
 /*
@@ -80,7 +92,7 @@ export const TileLayer = GridLayer.extend({
 		crossOrigin: false
 	},
 
-	initialize: function (url, options) {
+	initialize: function (url:StringReturnType, options:TileLayerOptionsReturnType[]) {
 
 		this._url = url;
 
@@ -116,7 +128,7 @@ export const TileLayer = GridLayer.extend({
 	// Updates the layer's URL template and redraws it (unless `noRedraw` is set to `true`).
 	// If the URL does not change, the layer will not be redrawn unless
 	// the noRedraw parameter is set to false.
-	setUrl: function (url, noRedraw) {
+	setUrl: function (url:StringReturnType, noRedraw:boolean) {
 		if (this._url === url && noRedraw === undefined) {
 			noRedraw = true;
 		}
@@ -133,7 +145,7 @@ export const TileLayer = GridLayer.extend({
 	// Called only internally, overrides GridLayer's [`createTile()`](#gridlayer-createtile)
 	// to return an `<img>` HTML element with the appropriate image URL given `coords`. The `done`
 	// callback is called when the tile has been loaded.
-	createTile: function (coords, done) {
+	createTile: function (coords, done:FunctionReturnType): HTMLElementReturnType {
 		const tile = document.createElement('img');
 
 		DomEvent.on(tile, 'load', Util.bind(this._tileOnLoad, this, done, tile));
@@ -270,6 +282,6 @@ export const TileLayer = GridLayer.extend({
 // @factory L.tilelayer(urlTemplate: String, options?: TileLayer options)
 // Instantiates a tile layer object given a `URL template` and optionally an options object.
 
-export function tileLayer(url, options) {
+export function tileLayer(url:StringReturnType, options: TileLayerOptionsReturnType[]) {
 	return new TileLayer(url, options);
 }

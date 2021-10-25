@@ -1,8 +1,9 @@
 import PoligonosApp, { MapReturnType, polygonsArray, PoligonosAppReturnType } from "./PoligonosApp";
-import React, {Component, useState, useCallback} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import ReactDOM, { hydrate, render } from 'react-dom';
 import {PoligonosAppComponent} from "./PoligonosAppComponent";
 import Realm from "realm";
+import ReactDOMServer from 'react-dom/server';
 
 import { Map, Layer, Canvas, tileLayer, geoJSON, Polygon } from '../Leaflet';
 // import { MapReturnType } from "./layer/GeoJSONFunction";
@@ -54,7 +55,7 @@ class App extends React.Component{
             polygons: new Promise<new PoligonosApp()>[]
         }
 
-        this.mapConst = useCallback(
+        this.mapConst = useEffect(
             () => {
                 await github();
                 this.mapConst.renderer();
@@ -89,18 +90,11 @@ class App extends React.Component{
         renderer: PoligonosApp.L.canvas()
     });
 
-    // mapConst.map(x=>x){}
-
-    // let token:string;
-    // let tokenAtlassian:string;
-    // let a:string;
-    // let s:string;
-
     function github():Promise<typeof PoligonosApp> {
 
         // const [leafletTokenGitHub, useState]:Promise<string> = this.setState({leafletTokenGitHub:this.props.children});
         
-        this.state.leafletTokenGitHub = await import("./Token").then(token => {
+        this.props.leafletTokenGitHub = await import("./Token").then(token => {
                 token().toPromise();
             });
 
@@ -119,7 +113,7 @@ class App extends React.Component{
             });
           });
 
-        this.state.leafletTokenGitHub = await require('./Token').token().toPromise().then(
+        this.props.leafletTokenGitHub = await require('./Token').token().toPromise().then(
 function (response:ResponseReturnType) {
 return response;
 }
@@ -151,7 +145,7 @@ console.log("then then");
         // const [leafletTokenAtlassian, useState]:Promise<string> = this.setState({leafletTokenAtlassian:this.props.children});
             
 try{
-    this.state.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
+    this.props.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
     const s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.props.leafletTokenAtlassian);
 
     const p = new PoligonosApp().L.tileLayer(s, {
@@ -211,8 +205,8 @@ try{
 
 function tick():void{
 
-    for(const i in this.state.polygons){
-        this.state.polygons[i].renderer();
+    for(const i in this.props.polygons){
+        this.props.polygons[i].renderer();
     }
 
     const element = (<div>PoligonosApp</div>);
@@ -229,7 +223,7 @@ function tick():void{
 
 async function fun(props:Props){
 
-    this.state.leafletTokenGitHub = await require('./Token').token();
+    this.props.leafletTokenGitHub = await require('./Token').token();
 
     this.state.leafletTokenAtlassian =  await require('./Pipeline').pipeline().toPromise().then().then(),
     const p = new PoligonosApp().L.Map('map', {
@@ -248,7 +242,7 @@ export default App;
 
 function realm():Promise<string> {
     const realm = require('./ObjectRules');
-    return require('./TokenRealm').token().toPromise();
+    return await require('./TokenRealm').token().toPromise();
 }
 
 } // end class App
@@ -261,7 +255,7 @@ const extractor = new ChunkExtractor({ statsFile });
 // Wrap your application using "collectChunks"
 const jsx = extractor.collectChunks(<App />);
 // Render your application
-const html = renderToString(jsx);
+const html = ReactDOMServer.renderToString(jsx);
 // You can now collect your script tags
 const scriptTags = extractor.getScriptTags(); // or extractor.getScriptElements();
 // You can also collect your "preload/prefetch" links
@@ -271,11 +265,15 @@ const styleTags = extractor.getStyleTags(); // or extractor.getStyleElements();
 
 import * as component from '@loadable/component';
 import path from 'path';
+import { hydrate } from 'react-dom';
 component.loadableReady(() => {
-  const root = document.getElementById('main')
-  hydrate(<App />, root)
-})
-function renderToString(jsx: any) {
-    throw new Error('Function not implemented.');
-}
+  
+  const root = document.getElementById('main');
+
+  hydrate(<App />, root);
+
+});
+
+
+
 

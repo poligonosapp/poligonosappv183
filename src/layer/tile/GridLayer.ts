@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {LayerFunction} from '../Layer';
+import {LayerFunction} from 'src/layer/LayerFunction';
 import * as Browser from '../../core/Browser';
 import * as Util from '../../core/Util';
 import * as DomUtil from '../../dom/DomUtil';

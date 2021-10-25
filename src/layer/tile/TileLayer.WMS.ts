@@ -1,8 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable no-mixed-spaces-and-tabs */
 import {TileLayer} from './TileLayer';
 import {extend, getOptions, getParamString} from '../../core/Util';
 import {retina} from '../../core/Browser';
 import {EPSG4326} from '../../geo/crs/CRS.EPSG4326';
 import {toBounds} from '../../geometry/BoundsFunction';
+import { MapReturnType } from 'src/PoligonosApp';
+
+type TileLayerWMSOptionsReturnType = ReturnType<typeof TileLayerWMS>;
+type StringReturnType = ReturnType<typeof String>;
 
 /*
  * @class TileLayer.WMS
@@ -65,7 +74,7 @@ export const TileLayerWMS = TileLayer.extend({
 		uppercase: false
 	},
 
-	initialize: function (url, options) {
+	initialize: function (url:StringReturnType, options:TileLayerWMSOptionsReturnType[]) {
 
 		this._url = url;
 
@@ -88,7 +97,7 @@ export const TileLayerWMS = TileLayer.extend({
 		this.wmsParams = wmsParams;
 	},
 
-	onAdd: function (map) {
+	onAdd: function (map:MapReturnType) {
 
 		this._crs = this.options.crs || map.options.crs;
 		this._wmsVersion = parseFloat(this.wmsParams.version);
@@ -117,7 +126,7 @@ export const TileLayerWMS = TileLayer.extend({
 
 	// @method setParams(params: Object, noRedraw?: Boolean): this
 	// Merges an object with the new parameters and re-requests tiles on the current screen (unless `noRedraw` was set to true).
-	setParams: function (params, noRedraw) {
+	setParams: function (params, noRedraw:boolean) {
 
 		extend(this.wmsParams, params);
 
@@ -132,6 +141,6 @@ export const TileLayerWMS = TileLayer.extend({
 
 // @factory L.tileLayer.wms(baseUrl: String, options: TileLayer.WMS options)
 // Instantiates a WMS tile layer object given a base URL of the WMS service and a WMS parameters/options object.
-export function tileLayerWMS(url, options) {
+export function tileLayerWMS(url:StringReturnType, options:TileLayerWMSOptionsReturnType[]) {
 	return new TileLayerWMS(url, options);
 }

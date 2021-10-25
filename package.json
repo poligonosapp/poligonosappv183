@@ -29,7 +29,7 @@
         "envify": "^4.1.0",
         "eslint": "^7.28.0",
         "eslint-config-mourner": "^2.0.1",
-        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-plugin-react-hooks": "^4.2.1-alpha-3c4c1c470-20211021",
         "git-rev-sync": "^3.0.1",
         "happen": "~0.3.2",
         "html-webpack-plugin": "^5.4.0",
@@ -83,7 +83,7 @@
     ],
     "private": true,
     "scripts": {
-        "start": "ts-node -r tsconfig-paths/register ./src/App.tsx",
+        "start": "ts-node -r tsconfig-paths/register ./src/PoligonosAppReactDomServer.tsx",
         "docs": "ts-node -r tsconfig-paths/register ./build/docs.ts",
         "pretest": "npm run lint --fix",
         "test": "npm run test-nolint",

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Earth} from './CRS.Earth';
 import {Mercator} from '../projection/ProjectionMercator';
 import {toTransformation} from '../../geometry/PointsTransformation';

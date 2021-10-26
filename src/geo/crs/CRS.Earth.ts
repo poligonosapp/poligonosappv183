@@ -4,8 +4,8 @@ import {CRS} from './CRS';
 import * as Util from '../../core/Util';
 
 import {LatLngFunction} from '../LatLngFunction';
-import { BoundsClass } from "../../geometry/BoundsClass";
-import { BoundsFunction } from "../../geometry/BoundsFunction";
+// import { BoundsClass } from "../../geometry/BoundsClass";
+// import { BoundsFunction } from "../../geometry/BoundsFunction";
 import {PointFunction} from '../../geometry/PointFunction';
 
 
@@ -21,7 +21,7 @@ type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 // type LatLngBoundsReturnType= ReturnType<typeof LatLngBounds>;
 // type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type NumberReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
-type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
+// type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof PointFunction>;
 
 // type GridLayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 // type LayerReturnType = ReturnType<typeof  FeatureGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;

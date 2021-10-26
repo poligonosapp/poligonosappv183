@@ -1,30 +1,20 @@
-import React, {Component, useState} from "react";
+import React, {Component, useState, useEffect} from "react";
 import { ReactDOM } from "react-dom";
 import { ReactDOMServer } from "react-dom/server";
 
 import {HTMLElement} from "typescript";
 import { node } from "webpack";
 
-interface Props{
+export interface Props{
     ul:HTMLElement;
 }
 
-class PoligonosAppComponent extends React.Component{
-
-    constructor(props:Props){
-
-        super(props);
-
-        // this.state = {ul: props.ul};
-        // this.setState(props.ul);
-    }
-
-    render(){
+function PoligonosAppComponent(props:Props["ul"]){
 
         const [ul, useState]:HTMLElement = this.setState({ul:this.props.children});
 
-        return (<div>{this.props.children}</div>);
-    }
+        return (<div>{this.props.children.ul}</div>);
+    
 }
 
 ReactDOM.render(<PoligonosAppComponent/>, node); // browser

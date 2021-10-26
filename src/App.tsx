@@ -37,12 +37,14 @@ import loadable from '@loadable/component';// https://github.com/gregberge/loada
 
 import token from './Token';
 
-interface Props{
+export interface Props{
+    this: PoligonosAppReturnType,
     polygons: Promise<PoligonosAppReturnType>[];
     mapConst: Promise<MapReturnType>;
     leafletTokenGitHub: Promise<string>;
     leafletTokenAtlassian: Promise<string>;
     src : string;
+    loading: boolean;
     // a:'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=';
     // s:string;
 }
@@ -125,7 +127,9 @@ console.log("then then");
             id: 'mapbox/light-v9',
             tileSize: 512,
             zoomOffset: -1
-        }).addTo(this.mapConst);
+        }).addTo(this.props.mapConst);
+
+        p.addEventListener();
 
         this.state.polygons.add(p);
 
@@ -148,7 +152,7 @@ console.log("then then");
         id: 'mapbox/light-v9',
         tileSize: 512,
         zoomOffset: -1
-    }).addTo(this.mapConst);
+    }).addTo(this.props.mapConst);
 
     this.state.polygons.add(p);
 
@@ -171,7 +175,7 @@ console.log("then then");
         </ul>
         );
 
-    render(){
+    
 
         // const [leafletTokenGitHub, useState]:Promise<string> = this.setState({leafletTokenGitHub:this.props.children});
         // const [leafletTokenAtlassian, useState]:Promise<string> = this.setState({leafletTokenAtlassian:this.props.children});
@@ -225,11 +229,6 @@ async function fun(props:Props){
     return props;
 };
 
-ReactDOM.render(
-    <App/>,
-    document.getElementById('root')
-);
-
 export default App;
 
 function realm():Promise<string> {
@@ -245,7 +244,7 @@ const statsFile = path.resolve('../dist/loadable-stats.json');
 // We create an extractor from the statsFile
 const extractor = new ChunkExtractor({ statsFile });
 // Wrap your application using "collectChunks"
-const jsx = extractor.collectChunks(<App />);
+const jsx = extractor.collectChunks(<App polygons={[]} mapConst={undefined} leafletTokenGitHub={undefined} leafletTokenAtlassian={undefined} src={'./polygons.geojson'} loading={false} />);
 // Render your application
 const html = ReactDOMServer.renderToString(jsx);
 // You can now collect your script tags
@@ -262,7 +261,7 @@ component.loadableReady(() => {
   
   const root = document.getElementById('main');
 
-  hydrate(<App><TokenComponent></TokenComponent></App>, root);
+  hydrate(<App polygons={[]} mapConst={undefined} leafletTokenGitHub={undefined} leafletTokenAtlassian={undefined} src={'./polygons.geojson'} loading={true}><TokenComponent></TokenComponent></App>, root);
 
 });
 

@@ -177,7 +177,7 @@ function checkDeprecatedMixinEvents(includes:GeoJSONReturnType[]) {
 	
 }
 
-} // end class 
+// } // end class 
 
 
 

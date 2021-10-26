@@ -1,5 +1,5 @@
 import {Earth} from './CRS.Earth';
-import {LonLat} from '../projection/Projection.LonLat';
+import {LonLat} from '../projection/ProjectionLonLat';
 import {toTransformation} from '../../geometry/PointsTransformation';
 import * as Util from '../../core/Util';
 

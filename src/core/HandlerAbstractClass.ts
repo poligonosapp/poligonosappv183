@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { GeoJSONAbstractClass } from "src/Leaflet";
+import { GeoJSONAbstractClass } from "../../Leaflet";
 import { GeoJSONReturnType } from "./HandlerFunction";
 
 /*
@@ -14,8 +15,7 @@ import { GeoJSONReturnType } from "./HandlerFunction";
 export abstract class HandlerAbstractClass extends GeoJSONAbstractClass{
 	props: GeoJSONReturnType;
 	constructor(props: GeoJSONReturnType) {
-
-		super();
+		super(props);
 		this.props = props;
 
 	}

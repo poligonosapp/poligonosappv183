@@ -15,7 +15,7 @@ import {LayerGroup} from "../layer";
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 type ObjectReturnType = ReturnType<typeof Object>;
 type FunctionReturnType = ReturnType<typeof Function>;
-type EventReturnType = ReturnType<typeof Event>;
+type EventReturnType = ReturnType<typeof Event|typeof addEventListener>;
 type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 type onReturnType = ReturnType<typeof String | Object.Number >;
 type eventReturnType = ReturnType<typeof Event>;
@@ -66,7 +66,7 @@ export const Events = {
 	 * @method on(eventMap: Object): this
 	 * Adds a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
 	 */
-	on: function (types:onReturnType, fn:FunctionReturnType, context:EventReturnType):EventReturnType {
+	on: function (types:onReturnType, fn:FunctionReturnType, context:EventReturnType):typeof addEventListener {
 
 if(context.onClick){
 	alert(context.latlng); // ev is an event object (MouseEvent in this case)
@@ -221,7 +221,7 @@ if(context.onClick){
 
 			if (listeners) {
 				this._firingCount = (this._firingCount + 1) || 1;
-				for (const i = 0, len = listeners.length; i < len; i++) {
+				for (let i in listeners) {
 					const l = listeners[i];
 					l.fn.call(l.ctx || this, event);
 				}

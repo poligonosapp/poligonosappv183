@@ -4,9 +4,9 @@ import { LatLngBoundsClass } from "../LatLngBoundsClass";
 import { LatLngBoundsFunction } from "../LatLngBoundsFunction";
 import * as Util from '../../core/Util';
 
-import {LonLat} from './Projection.LonLat';
-import {Mercator} from './Projection.Mercator';
-import {SphericalMercator} from './Projection.SphericalMercator';
+import {LonLat} from './projection/ProjectionLonLat';
+import {Mercator} from './ProjectionMercator';
+import {SphericalMercator} from './ProjectionSphericalMercator';
 
 
 // import {LatLng} from '../LatLng';
@@ -71,8 +71,8 @@ type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | numbe
 export const CRS = {
 	
 	// let projection = projection();
-	let projection = Projection.LonLat;
-	let transformation = PointsTransformationFunction.prototype;
+	projection = LonLat;
+	transformation = PointsTransformationFunction.prototype;
 
 	// @method latLngToPoint(latlng: LatLng, zoom: Number): Point
 	// Projects geographical coordinates into pixel coordinates for a given zoom.

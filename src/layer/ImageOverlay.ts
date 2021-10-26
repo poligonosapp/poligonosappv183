@@ -181,7 +181,7 @@ export const ImageOverlay:GeoJSONReturnType = LayerFunction.extend({
 		const events = {
 			zoom = this._reset(),
 			viewreset = this._reset(),
-			zoomanim = ReturnType<typeof Event>
+			zoomanim = undefined
 		};
 
 		if (this._zoomAnimated) {

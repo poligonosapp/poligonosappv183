@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -25,6 +26,10 @@ type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
 type EventReturnType = ReturnType<typeof Event>;
 type StringReturnType = ReturnType<typeof  PointFunction.prototype.toString> | string | ReturnType<typeof Object.String>;
 
+interface Props{
+	constext: EventListener;
+}
+
 /*
  * @namespace DomEvent
  * Utility functions to work with the [DOM events](https://developer.mozilla.org/docs/Web/API/Event), used by Leaflet internally.
@@ -45,8 +50,8 @@ export function on(obj:HTMLElementReturnType, types: StringReturnType[],
 	fn:FunctionReturnType, context:ObjectReturnType):StringReturnType {
 
 	if (typeof types === 'object') {
-		for (const type in types) {
-			addOne(obj, type, types[type], fn);
+		for (let i in types) {
+			addOne(obj, i, types[i], fn);
 		}
 	} else {
 		types = Util.splitWords(types);
@@ -237,17 +242,18 @@ export function stop(e:EventReturnType):EventReturnType {
 // `container` (border excluded) or to the whole page if not specified.
 export function getMousePosition(e:EventReturnType, container:HTMLElementReturnType):PointReturnType {
 	if (!container) {
-		return new PointFunction(e.clientX, e.clientY);
+		return PointFunction(e.clientX, e.clientY, undefined);
 	}
 
 	const scale = getScale(container);
 	const offset = scale.boundingClientRect; // left and top  values are in page scale (like the event clientX/Y)
 
-	return new PointFunction(
+	return PointFunction(
 		// offset.left/top values are in page scale (like clientX/Y),
 		// whereas clientLeft/Top (border width) values are the original values (before CSS scale applies).
 		(e.clientX - offset.left) / scale.x - container.clientLeft,
-		(e.clientY - offset.top) / scale.y - container.clientTop
+		(e.clientY - offset.top) / scale.y - container.clientTop,
+		undefined
 	);
 }
 
@@ -274,11 +280,14 @@ export function getWheelDelta(e:EventReturnType):NumberReturnType {
 	       0;
 }
 
-const skipEvents = {};
+let skipEvents = [false, false, false];
 
-export function fakeStop(e:EventReturnType) {
+skipEvents = [false, true, false, false];
+
+export function fakeStop(e:EventReturnType):boolean[] {
 	// fakes stopPropagation by setting a special event flag, checked/reset with skipped(e)
-	skipEvents[e.type] = true;
+	skipEvents[e.type] = true
+	return skipEvents;
 }
 
 export function skipped(e:EventReturnType) {

@@ -17,7 +17,7 @@ type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | 
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
 
 
-export const HandlerFunction: GeoJSONReturnType = GeoJSONAbstractClass.extend({
+export let HandlerFunction: GeoJSONReturnType = GeoJSONAbstractClass.extend({
 
 	initialize: function (map:MapReturnType) {
 		this._map = map;

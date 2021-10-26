@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -10,12 +11,13 @@ import * as DomUtil from '../../dom/DomUtil';
 import * as DomEvent from '../../dom/DomEvent';
 
 import { LatLngBoundsClass } from "src/geo/LatLngBoundsClass";
-import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
+// import { LatLngBoundsFunction } from "src/geo/LatLngBoundsFunction";
 
 import { BoundsClass } from "../../geometry/BoundsClass";
-import { BoundsFunction } from "../../geometry/BoundsFunction";
+// import { BoundsFunction } from "../../geometry/BoundsFunction";
 
 import {Event} from "typescript";
+import { BoundsFunction } from 'src/geometry/BoundsFunction';
 
 type EventReturnType = ReturnType<typeof Event>;
 type MapReturnType = ReturnType<typeof Map>;
@@ -43,12 +45,12 @@ export const BoxZoom = HandlerFunction.extend({
 		map.on('unload', this._destroy, this);
 	},
 
-	addHooks: function () {
-		DomEvent.on(this._container, 'mousedown', this._onMouseDown, this);
+	addHooks: function ():EventReturnType[] {
+		return DomEvent.on(this._container, 'mousedown', this._onMouseDown, this);
 	},
 
-	removeHooks: function () {
-		DomEvent.off(this._container, 'mousedown', this._onMouseDown, this);
+	removeHooks: function ():EventReturnType[] {
+		return DomEvent.off(this._container, 'mousedown', this._onMouseDown, this);
 	},
 
 	moved: function () {
@@ -72,7 +74,7 @@ export const BoxZoom = HandlerFunction.extend({
 		}
 	},
 
-	_onMouseDown: function (e:EventReturnType) {
+	_onMouseDown: function (e:EventReturnType):EventReturnType[] {
 		if (!e.shiftKey || ((e.which !== 1) && (e.button !== 1))) { return false; }
 
 		// Clear the deferred resetState if it hasn't executed yet, otherwise it
@@ -85,7 +87,9 @@ export const BoxZoom = HandlerFunction.extend({
 
 		this._startPoint = this._map.mouseEventToContainerPoint(e);
 
-		DomEvent.on(document, {
+		// let $ = require('jquery');
+
+		return DomEvent.on(document.getElementById('root').addEventListener(), {
 			contextmenu: DomEvent.stop,
 			mousemove: this._onMouseMove,
 			mouseup: this._onMouseUp,
@@ -105,7 +109,7 @@ export const BoxZoom = HandlerFunction.extend({
 
 		this._point = this._map.mouseEventToContainerPoint(e);
 
-		const bounds = new BoundsClass(this._point, this._startPoint);
+		const bounds = BoundsFunction(this._point, this._startPoint);
 		const size = bounds.getSize();
 
 		DomUtil.setPosition(this._box, bounds.min);
@@ -114,7 +118,7 @@ export const BoxZoom = HandlerFunction.extend({
 		this._box.style.height = size.y + 'px';
 	},
 
-	_finish: function () {
+	_finish: function ():EventReturnType[] {
 		if (this._moved) {
 			DomUtil.remove(this._box);
 			DomUtil.removeClass(this._container, 'leaflet-crosshair');
@@ -123,7 +127,13 @@ export const BoxZoom = HandlerFunction.extend({
 		DomUtil.enableTextSelection();
 		DomUtil.enableImageDrag();
 
-		DomEvent.off(document, {
+		let { $} = require('jquery');
+
+let document = $('div').on("click"){
+	alert("zoom clicked");
+};
+
+		return DomEvent.off(document, {
 			contextmenu: DomEvent.stop,
 			mousemove: this._onMouseMove,
 			mouseup: this._onMouseUp,
@@ -142,7 +152,7 @@ export const BoxZoom = HandlerFunction.extend({
 		this._clearDeferredResetState();
 		this._resetStateTimeout = setTimeout(Util.bind(this._resetState, this), 0);
 
-		const bounds = new LatLngBoundsClass(this._map.containerPointToLatLng(this._startPoint),
+		const bounds = LatLngBoundsFunction(this._map.containerPointToLatLng(this._startPoint),
 		this._map.containerPointToLatLng(this._point));
 
 		this._map

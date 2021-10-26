@@ -109,7 +109,7 @@ BoundsFunction.prototype = {
 	// @method getCenter(round?: Boolean): Point
 	// Returns the center point of the bounds.
 	getCenter: function (round:boolean):PointReturnType {
-		return new PointReturnImpl(
+		return PointFunction(
 		        (this.min.x + this.max.x) / 2,
 		        (this.min.y + this.max.y) / 2, round);
 	},
@@ -117,13 +117,13 @@ BoundsFunction.prototype = {
 	// @method getBottomLeft(): Point
 	// Returns the bottom-left point of the bounds.
 	getBottomLeft: function ():PointReturnType {
-		return new PointFunction(this.min.x, this.max.y);
+		return PointFunction(this.min.x, this.max.y);
 	},
 
 	// @method getTopRight(): Point
 	// Returns the top-right point of the bounds.
 	getTopRight: function ():PointReturnType { // -> Point
-		return new PointFunction(this.max.x, this.min.y);
+		return PointFunction(this.max.x, this.min.y, undefined);
 	},
 
 	// @method getTopLeft(): Point
@@ -228,5 +228,5 @@ export function toBounds(a:PointReturnType|PointReturnType[],
 	if (!a || a instanceof BoundsFunction) {
 		return a;
 	}
-	return new BoundsFunction(a, b);
+	return BoundsFunction(a, b);
 }

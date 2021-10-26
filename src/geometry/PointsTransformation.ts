@@ -146,9 +146,11 @@ PointsTransformationFunction.prototype = {
 
 		scale = scale || 1;
 		
-		return new PointReturnImpl(
+		return PointFunction(
 			(point.x / scale - this._b) / this._a,
-		(point.y / scale - this._d) / this._c);
+		(point.y / scale - this._d) / this._c,
+		undefined
+		);
 	}
 };
 

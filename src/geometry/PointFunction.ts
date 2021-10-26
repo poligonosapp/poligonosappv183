@@ -44,7 +44,7 @@ import {Object, ReturnType} from 'typescript';
 // import {PointReturn} from './PointReturn';
 
 import {PointReturnImpl} from './PointReturnImpl';
-import { round } from 'lodash';
+// import { round } from 'lodash';
 
 // interface PointReturn{
 	// x: number | ReturnType<typeof Object.Number>;
@@ -60,18 +60,12 @@ export public function PointFunction(...args: [x: NumberReturnType, y: NumberRet
 	// @property y: Number; The `y` coordinate of the point
 	// const y = Object.create((round ? Math.round(y) : y));
 
-	let p;
-
-	try{
-		// if(round){
-			p = new PointReturnImpl(x, y, round).roundXY(x, y, round);
-		//}
-	}catch(e){
-		throw new RuntimeException("TYPESCRIPT ROUND ARG OVERLOAD EXCEPTION");
-	}
-	finally{
-		return p = new PointReturnImpl(x,y);
-	}
+if(round != undefined){
+		        // @property x:Number ; The 'x' coordinate of the point
+				x = (round ? Math.round(x) : x );
+				// @property y:Number ; The 'y' coordinate of the point
+				y = (round ? Math.round(y) : y );
+}
 
 	
 }
@@ -105,23 +99,14 @@ PointFunction.prototype = {
 	// fail type self.Point
 	// @ts-ignore
 	clone: function ():PointReturnImpl {
-	try{
 		
-		let theClone = new PointFunction(this.x.clone(), this.y.clone());
+		let theClone = PointFunction(this.x.clone(), this.y.clone(), undefined);
 
 		if(typeof PointFunction.x === theClone.x ){
 			if(typeof PointFunction.y === theClone.y ) {
 				return theClone;
 			}
 		}
-	}
-	catch(e){
-		throw new Exception("TYPESCRIPT POINT CLONE EXCEPTION");
-	}
-	finally {
-		return -1;// not a number
-	}
-
 	},
 
 	// @method add(otherPoint: Point): Point
@@ -181,14 +166,14 @@ PointFunction.prototype = {
 	// defined by `scale`.
 	scaleBy: function (point:PointReturnType):PointReturnType {
 		// @ts-ignore
-		return new PointFunction(this.x * point.x, this.y * point.y);
+		return PointFunction(this.x * point.x, this.y * point.y, undefined);
 	},
 
 	// @method unscaleBy(scale: Point): Point
 	// Inverse of `scaleBy`. Divide each coordinate of the current point by
 	// each coordinate of `scale`.
 	unscaleBy: function (point:PointReturnType):PointReturnType {
-		return new PointFunction(this.x / point.x, this.y / point.y);
+		return PointFunction(this.x / point.x, this.y / point.y, undefined);
 	},
 
 	// @method round(): Point
@@ -289,24 +274,18 @@ PointFunction.prototype = {
 // Expects a plain object of the form `{x: Number, y: Number}` instead.
 export function toPoint(x:PointReturnType|PointReturnType[], 
 	y:NumberReturnType[], round:NumberReturnType[]): PointReturnType|PointReturnType[] {
-	try{
+	
 		if (x[0] instanceof PointFunction) {
 			return x;
 		}
 		if (isArray(x)) {
-			return new RoundImpl().round(x[0], x[1], round);
+			return PointFunction(x[0], x[1], round);
 		}
 		if (x === undefined || x === null) {
 			return x;
 		}
 		if (typeof x === 'object' && 'x' in x && 'y' in x) {
-			obj: PointReturnType = new PointReturnImpl(x.x, x.y, round).roundXY(x.x, x.y, round);
-			return obj;
+			return PointFunction(x.x, x.y, round);
 		}
-		return new PointReturnImpl(x.x, x.y, round).roundXY(x.x, x.y, round);
-	}catch(e){
-		throw new Exception("PointFunction.toPointException");
-	}finally{
-
-	}
-}
+		return PointFunction(x.x, x.y, round);
+} // end function toPoint

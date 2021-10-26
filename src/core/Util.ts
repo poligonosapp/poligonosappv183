@@ -74,8 +74,6 @@
 import {Object, ReturnType} from 'typescript';
 import {Point} from '../geometry';
 
-import {DemoAbstractClassImpl} from './DemoFunction';
-
 // import {GeoJSON} from '../layer';
 import {GeoJSONClass} from "src/layer/GeoJSONClass";
 import {GeoJSONFunction} from "src/layer/GeoJSONFunction";
@@ -96,7 +94,7 @@ type NumberReturnType = ReturnType<typeof  Point.prototype.clone> | number | Ret
 type ArgumentReturnType = ReturnType<typeof Object.Function.typeArguments>;
 
 type FunctionReturnType = ReturnType<typeof Object.Function>;
-type ObjectReturnType = ReturnType<typeof DemoAbstractClassImpl | typeof Object.String>;
+type ObjectReturnType = ReturnType<typeof Object.String>;
 type PointReturnType = ReturnType<typeof Point>;
 type ArrayReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
 type StringReturnType = ReturnType<typeof  Point.prototype.toString> | string | ReturnType<typeof Object.String>;
@@ -113,16 +111,20 @@ import { v4 as uuidv4 } from 'uuid';
 
 // @function extend(dest: Object, src?: Object): Object
 // Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter. Has an `L.extend` shortcut.
-export function extend(dest:PointReturnImpl[], props:GeoJSONOptionsReturnType[]): ObjectReturnType[] {
+export function extend(dest:PointReturnImpl[], src:GeoJSONOptionsReturnType[]): GeoJSONOptionsReturnType[] {
 
 	uuidv4();
-	// const i;
+if(dest != null){
+		// const i;
 	// const j;
 	// const len;
-	const src:ObjectReturnType[] = [];
+	const src:GeoJSONReturnType[] = [];
 
-	let arguments = new PointReturnImpl[4];
+	let arguments = new PointReturnImpl[dest.length];
 	// arguments = Array.prototype.slice(dest,0,3);// linear transformation 4 coefficients
+
+if(dest != undefined){
+	
 	arguments = dest;
 
 	for (const j in arguments) {
@@ -135,6 +137,9 @@ export function extend(dest:PointReturnImpl[], props:GeoJSONOptionsReturnType[])
 
 		}
 	}
+}
+
+}
 	return dest;
 }
 
@@ -143,22 +148,13 @@ export function extend(dest:PointReturnImpl[], props:GeoJSONOptionsReturnType[])
 // Compatibility polyfill for [Object.create](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 export function create = (function ():ObjectReturnType|FunctionReturnType {
-	uuidv4();
-try{
-	
+	const _id = uuidv4();
 	function F():FunctionReturnType {};
 
 	return function (proto:ObjectReturnType):ObjectReturnType|FunctionReturnType {
 		F.prototype = proto;
-		return new F();
+		return F();
 	};
-	
-}catch(e){
-	throw new TypeError("TypeError");//https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.create
-}
-finally {
-	return;
-}
 })();
 
 // @function bind(fn: Function, …): Function
@@ -203,8 +199,8 @@ export function stamp(obj:ObjectReturnType):NumberReturnType {
 export function throttle(fn:FunctionReturnType, time:NumberReturnType, context:ObjectReturnType):FunctionReturnType {
 
 	let lock:boolean;
-	const args = true;
-	const wrapperFn:FunctionReturnType;
+	let args = true;
+	let wrapperFn:FunctionReturnType;
 	let later:FunctionReturnType;
 
 	later = function ():void {
@@ -214,12 +210,12 @@ export function throttle(fn:FunctionReturnType, time:NumberReturnType, context:O
 			wrapperFn.apply(context, args);
 			args = false;
 		}
-	};
+	},
 
-	wrapperFn = function ():FunctionReturnType {
+	wrapperFn = function ():void {
 		if (lock) {
 			// called too soon, queue to call later
-			args = arguments;
+			args = false;
 
 		} else {
 			// call and lock until later
@@ -277,7 +273,7 @@ export function splitWords(str:StringReturnType | StringReturnType[]) {
 
 // @function setOptions(obj: Object, options: Object): Object
 // Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`. Has an `L.setOptions` shortcut.
-export function getOptions(obj:GeoJSONReturnType, options:OptionsObjectReturnType[]):GeoJSONReturnType[] {
+export function getOptions(obj:GeoJSONReturnType, options:OptionsObjectReturnType[]):GeoJSONOptionsReturnType[] {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!Object.prototype.hasOwnProperty.call(obj, 'options')) {
 		obj.options = obj.options ? create(obj.options) : {};
@@ -308,7 +304,7 @@ const templateRe:StringReturnType = '/\{ *([\w_ -]+) *\}/g';
 // and a data object like `{a: 'foo', b: 'bar'}`, returns evaluated string
 // `('Hello foo, bar')`. You can also specify functions instead of strings for
 // data values — they will be evaluated passing `data` as an argument.
-export function template(str:StringReturnType, data:ObjectReturnType):StringReturnType {
+export function template(str:StringReturnType, data:ObjectReturnType[]|FunctionReturnType):StringReturnType {
 	return str.replace(templateRe, function (str:StringReturnType, key:ObjectReturnType) {
 
 		const value:FunctionReturnType = data[key];

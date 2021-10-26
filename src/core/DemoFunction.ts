@@ -12,6 +12,8 @@ import { LayerGroup } from 'src/layer';
 // import * as L from '../Leaflet';
 import {Map} from '../Map';
 
+import {Event} from "typescript;
+
 // polyfill only stable `core-js` features - ES and web standards:
 // import "core-js/stable"; // ES5 Object.create
 
@@ -19,6 +21,7 @@ import {Map} from '../Map';
 type GeoJSONOptionsReturnType = ReturnType<typeof String | typeof Boolean | typeof Number>;
 type GeoJSONReturnType = ReturnType<typeof GeoJSONClass|typeof GeoJSONFunction>;
 type HTMLAnchorElementReturnType = ReturnType<typeof HTMLAnchorElement>;
+type EventReturnType = ReturnType<typeof Event>;
 export type MapReturnType = ReturnType<typeof Map>;
 type ObjectReturnType = ReturnType<typeof Object>;
 type LayerReturnType = ReturnType<typeof String> | ReturnType<typeof LayerGroup> | number | ReturnType<typeof Object.Number>| ReturnType<typeof Point>;
@@ -28,7 +31,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // typescript 2304
  const NewClass = function(){
-	 uuidv4();
+	const _id =  uuidv4();
  };
 
 export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
@@ -39,18 +42,18 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 	// Returns a Javascript function that is a class constructor (to be called with `new`).
 	NewClass = function (): HTMLAnchorElementReturnType {
 
-		uuidv4();
+		// const _id = uuidv4();
 
 		// name is deprecated typescript 2304
 		// init(name:string):void
 
 		// call the constructor
-		if (this.initialize()) {
-			this.initialize.apply(this, arguments);
+		if (Object.Constructor) {
+			Object.initialize.apply(NewClass, arguments);
 		}
 
 		// call all constructor hooks
-		return this.callInitHooks();
+		return Object.callInitHooks();
 	};
 
 	// typescript 2304 prototype-based programming paradigm
@@ -58,7 +61,7 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
 	NewClass = Object.prototype.__proto__;
 
-	const parentProto = NewClass().__super__ = this.prototype;
+	const parentProto = NewClass().__super__ = Object.prototype;
 
 	// core-js ES5 Shallow object cloning with prototype and descriptors:
 	// let copy = Object.create(Object.getPrototypeOf(object), Object.getOwnPropertyDescriptors(object));
@@ -70,7 +73,7 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 	proto.constructor = NewClass;
 	NewClass.prototype = proto;
 // inherit parent's statics
-	for (let i in this) {
+	for (let i in Object.values(NewClass)) {
 		if (Object.prototype.hasOwnProperty.call(this, i) && i !== 'prototype' && i !== '__super__') {
 			NewClass[i] = this[i];
 		}
@@ -103,7 +106,7 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 
 
 
-	proto.callInitHooks = function (): EventReturnType {
+	proto.callInitHooks = function (): undefined | EventReturnType[] {
 
 		if (this._initHooksCalled) { return; }
 
@@ -116,6 +119,7 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 		for (let i in proto._initHooks) {
 			proto._initHooks[i].call(this);
 		}
+
 	};
 
 

@@ -1,7 +1,19 @@
+import _ from 'lodash';
+
+console.log(_.join(['./TokenComponent', 'module', 'loaded!'], ' '));
+console.log(_.join(['./Token', 'module', 'loaded!'], ' '));
+console.log(_.join(['./Pipeline', 'module', 'loaded!'], ' '));
+console.log(_.join(['./OctokitAppServer', 'module', 'loaded!'], ' '));
+console.log(_.join(['./TokenAtlassian', 'module', 'loaded!'], ' '));
+console.log(_.join(['./TokenPlugin', 'module', 'loaded!'], ' '));
+console.log(_.join(['./ObjectRules', 'module', 'loaded!'], ' '));
+console.log(_.join(['./TokenRealm', 'module', 'loaded!'], ' '));
+
 import PoligonosApp, { MapReturnType, polygonsArray, PoligonosAppReturnType } from "./PoligonosApp";
 import React, {Component, useState, useEffect} from 'react';
 import ReactDOM, { hydrate, render } from 'react-dom';
 import {PoligonosAppComponent} from "./PoligonosAppComponent";
+import {TokenComponent} from "./TokenAppComponent";
 import Realm from "realm";
 import ReactDOMServer from 'react-dom/server';
 
@@ -17,15 +29,7 @@ import {ReturnType} from "typescript";
 type ResponseReturnType = ReturnType<typeof Response>;
 // type PoligonosAppReturnType = ReturnType<typeof PoligonosApp>;
 
-import _ from 'lodash';
 
-console.log(_.join(['./Token', 'module', 'loaded!'], ' '));
-console.log(_.join(['./Pipeline', 'module', 'loaded!'], ' '));
-console.log(_.join(['./OctokitAppServer', 'module', 'loaded!'], ' '));
-console.log(_.join(['./TokenAtlassian', 'module', 'loaded!'], ' '));
-console.log(_.join(['./TokenPlugin', 'module', 'loaded!'], ' '));
-console.log(_.join(['./ObjectRules', 'module', 'loaded!'], ' '));
-console.log(_.join(['./TokenRealm', 'module', 'loaded!'], ' '));
 
 import loadable from '@loadable/component';// https://github.com/gregberge/loadable-components
 
@@ -43,17 +47,7 @@ interface Props{
     // s:string;
 }
 
-class App extends React.Component{
-
-    constructor(props:Props){
-        super(props);
-
-        this.state = {
-            leafletTokenGitHub: new Promise<string>(),
-            leafletTokenAtlassian: new Promise<string>(),
-            mapConst: new Promise<MapReturnType>(),
-            polygons: new Promise<new PoligonosApp()>[]
-        }
+function App (props:Props){
 
         this.mapConst = useEffect(
             () => {
@@ -82,7 +76,7 @@ class App extends React.Component{
             // atlassian();
 
 
-    } // end constructor
+    // } // end constructor
 
     
 
@@ -270,7 +264,7 @@ component.loadableReady(() => {
   
   const root = document.getElementById('main');
 
-  hydrate(<App />, root);
+  hydrate(<App><TokenComponent></TokenComponent></App>, root);
 
 });
 

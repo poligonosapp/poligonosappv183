@@ -9,7 +9,7 @@
     "tsconfig-path-bootstrap.ts",
     "rollup.config.ts",
     "style.css"
-, "src/App.tsx", "Leaflet.tsx", "src/PoligonosAppReactDomServer.tsx", "src/PoligonosAppBrowser.tsx"  ],
+, "src/App.tsx", "Leaflet.tsx", "src/PoligonosAppReactDomServer.tsx", "src/PoligonosAppBrowser.tsx", "src/TokeComponent.tsx"  ],
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,

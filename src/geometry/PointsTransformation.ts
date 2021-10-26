@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -13,7 +14,7 @@ import {ReturnType, Object} from 'typescript';
 // import {LatLngBounds} from "../geo";
 import { PointReturnImpl } from './PointReturnImpl';
 import { LatLngReturnType } from 'src/layer/vector/PolylineFunction';
-import { ArrayTransformationClass } from './ArrayTransformation';
+import { ArrayTransformationClass, ArrayTransformationFunction } from './ArrayTransformation';
 // import { PointsTransformationFunction } from './ArrayTransformation';
 // import {Point} from "../geometry";
 
@@ -99,10 +100,17 @@ export class PointsTransformationClass implements Iterable<PointReturnImpl>{
 
 }
 
-export function PointsTransformationFunction(a:PointReturnImpl, 
+interface Props{
+	a:PointReturnImpl, 
 	b:PointReturnImpl, 
 	c:PointReturnImpl, 
-	d:PointReturnImpl):NumberReturnType[]|NumberReturnType|PointReturnImpl|void {
+	d:PointReturnImpl
+}
+
+export function PointsTransformationFunction(a:Props["a"], 
+	b:Props["b"], 
+	c:Props["c"], 
+	d:Props["d"]):NumberReturnType[]|NumberReturnType|PointReturnImpl|void {
 
 	// this._a:PointReturnImpl = a;
 	// this._b:PointReturnImpl = b;
@@ -155,7 +163,7 @@ PointsTransformationFunction.prototype = {
 // `[a: Number, b: Number, c: Number, d: Number]`.
 
 export function toArrayTransformationFunction(coefficients:NumberReturnType[]):ArrayTransformationClass[]{
-	return new ArrayTransformationClass(coefficients);
+	return ArrayTransformationFunction(coefficients);
 }
 
 export function toPointsTransformationFunction(a:NumberReturnType, b:NumberReturnType, c:NumberReturnType, d:NumberReturnType):PointsTransformationClass {

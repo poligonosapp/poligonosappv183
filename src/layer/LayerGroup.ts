@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import {LayerFunction} from './Layer';
+import {LayerFunction} from './LayerFunction';
 import * as Util from '../core/Util';
 
 import {Object, ReturnType} from 'typescript';
@@ -18,6 +18,7 @@ import {LatLngBounds} from "../geo";
 import {layers} from "../control/Control.Layers";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type LayerGroupOptionsReturnType = ReturnType<typeof String | typeof Number | typeof Boolean>;
 type ObjectReturnType = ReturnType<typeof Object>;
 type FunctionReturnType = ReturnType<typeof Function>;
 type MapReturnType = ReturnType<typeof Map>;
@@ -57,7 +58,7 @@ type numberAuxY = ReturnType<typeof Object.Number>;
 
 export const LayerGroup = LayerFunction.extend({
 // 12 IANA Considerations Optional parameters:  n/a
-	initialize: function (layers:LayerReturnType, options:NumberReturnType):LatLngBoundsReturnType|void {
+	initialize: function (layers:LayerReturnType, options:LayerGroupOptionsReturnType[]):LatLngBoundsReturnType|void {
 		Util.getOptions(this, options);
 
 		this._layers = {};
@@ -93,6 +94,17 @@ export const LayerGroup = LayerFunction.extend({
 	// Removes the layer with the given internal ID from the group.
 	removeLayer: function (layer:LayerReturnType) {
 		const id = layer in this._layers ? layer : this.getLayerId(layer);
+
+		if (this._map && this._layers[id]) {
+			this._map.removeLayer(this._layers[id]);
+		}
+
+		delete this._layers[id];
+
+		return this;
+	},
+	removeLayerId: function (id:NumberReturnType) {
+		// const id = layer in this._layers ? layer : this.getLayerId(layer);
 
 		if (this._map && this._layers[id]) {
 			this._map.removeLayer(this._layers[id]);
@@ -171,8 +183,9 @@ export const LayerGroup = LayerFunction.extend({
 	// @method getLayers(): Layer[]
 	// Returns an array of all the layers added to the group.
 	getLayers: function (): LayerReturnType[] {
-		// let layers:LayerReturnType = [];
-		this.eachLayer(layers.push(this.layers), this.layers);
+		let layers:LayerReturnType = [];
+		layers = this.layers;
+		this.eachLayer(layers, this.layers);
 		return layers;
 	},
 

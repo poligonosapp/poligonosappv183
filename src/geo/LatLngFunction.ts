@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -72,10 +73,10 @@ export interface Props{
 	alt:NumberReturnType;
 }
 
-export function LatLngFunction(props:Props):void {
+export function LatLngFunction(lat:Props["lat"], lng:Props["lng"], alt:Props["alt"]):void {
 	
-	if (isNaN(props.lat) || isNaN(props.lng)) {
-		throw new Error('Invalid LatLng object: (' + props.lat + ', ' + props.lng + ')');
+	if (isNaN(lat) || isNaN(lng)) {
+		throw new Error('Invalid LatLng object: (' + lat + ', ' + lng + ')');
 	}
 
 	// @property lat: Number
@@ -101,11 +102,9 @@ LatLngFunction.prototype = {
 	equals: function (obj:LatLngReturnType, maxMargin:NumberReturnType):boolean {
 		if (!obj) { return false; }
 
-		obj = toLatLng(obj);
+		obj = toLatLng(obj.lat, obj.lng, obj.alt);
 
-		const margin = Math.max(
-		        Math.abs(this.lat - obj.lat),
-		        Math.abs(this.lng - obj.lng));
+		const margin = Math.max(Math.abs(this.lat - obj.lat), Math.abs(this.lng - obj.lng));
 
 		return margin <= (maxMargin === undefined ? 1.0E-9 : maxMargin);
 	},
@@ -113,21 +112,19 @@ LatLngFunction.prototype = {
 	// @method toString(): String
 	// Returns a string representation of the point (for debugging purposes).
 	toString: function (precision:NumberReturnType):StringReturnType {
-		return 'LatLng(' +
-		        Util.formatNum(this.lat, precision) + ', ' +
-		        Util.formatNum(this.lng, precision) + ')';
+		return 'LatLng(' + Util.formatNum(this.lat, precision) + ', ' + Util.formatNum(this.lng, precision) + ')';
 	},
 
 	// @method distanceTo(otherLatLng: LatLng): Number
 	// Returns the distance (in meters) to the given `LatLng` calculated using the [Spherical Law of Cosines](https://en.wikipedia.org/wiki/Spherical_law_of_cosines).
 	distanceTo: function (other:LatLngReturnType):NumberReturnType {
-		return Earth.distance(this, toLatLng(other));
+		return Earth.distance(toLatLng(this.lat,this.lng,this.alt), toLatLng(other.lat, other.lng, other.alt));
 	},
 
 	// @method wrap(): LatLng
 	// Returns a new `LatLng` object with the longitude wrapped so it's always between -180 and +180 degrees.
 	wrap: function ():LatLngReturnType {
-		return Earth.wrapLatLng(this);
+		return LatLngFunction(-180, 180, undefined);
 	},
 
 	// @method toBounds(sizeInMeters: Number): LatLngBounds
@@ -167,10 +164,10 @@ export function toLatLng(a:NumberReturnType, b:NumberReturnType, c:NumberReturnT
 	}
 	if (Util.isArray(a) && typeof a[0] !== 'object') {
 		if (a.length === 3) {
-			return new LatLngClass(a[0], a[1], a[2]);
+			return LatLngFunction(a[0], a[1], a[2]);
 		}
 		if (a.length === 2) {
-			return new LatLngClass(a[0], a[1]);
+			return LatLngFunction(a[0], a[1], undefined);
 		}
 		return null;
 	}
@@ -178,10 +175,10 @@ export function toLatLng(a:NumberReturnType, b:NumberReturnType, c:NumberReturnT
 		return a;
 	}
 	if (typeof a === 'object' && 'lat' in a) {
-		return new LatLngFunction(a.lat, 'lng' in a ? a.lng : a.lon, a.alt);
+		return LatLngFunction(a.lat, 'lng' in a ? a.lng : a.lon, a.alt);
 	}
 	if (b === undefined) {
 		return null;
 	}
-	return new LatLngFunction(a, b, c);
+	return LatLngFunction(a, b, c);
 }

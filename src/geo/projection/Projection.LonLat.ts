@@ -9,7 +9,7 @@ import {PointFunction} from "src/geometry/PointFunction";
 import {Object, ReturnType} from 'typescript';
 // import {$ , Event} from 'jquery';
 // import {Point} from "../geometry";
-import { PointsTransformationClass } from 'src/geometry/PointsTransformation';
+import { PointsTransformationClass, PointsTransformationFunction } from 'src/geometry/PointsTransformation';
 import { LatLngReturnType } from 'src/layer/vector/PolylineFunction';
 import { BoundsFunction } from 'src/geometry/BoundsFunction';
 
@@ -52,12 +52,12 @@ type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | numbe
 
 export const LonLat = {
 	project: function (latlng:LatLngReturnType):PointReturnType {
-		return new PointsTransformationClass(latlng.lng, latlng.lat, latlng.alt);
+		return PointsTransformationFunction(latlng.lng, latlng.lat, latlng.alt);
 	},
 
 	unproject: function (point:PointReturnType):LatLngReturnType {
-		return new LatLngClass(point.y, point.x);
+		return LatLngFunction(point.y, point.x, undefined);
 	},
 
-	bounds: new BoundsFunction([-180, -90], [180, 90])
+	bounds: BoundsFunction([-180, -90], [180, 90])
 };

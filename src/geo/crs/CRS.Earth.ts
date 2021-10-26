@@ -4,7 +4,8 @@ import {CRS} from './CRS';
 import * as Util from '../../core/Util';
 
 import {LatLngFunction} from '../LatLngFunction';
-import { Bounds } from "../../geometry/Bounds.1";
+import { BoundsClass } from "../../geometry/BoundsClass";
+import { BoundsFunction } from "../../geometry/BoundsFunction";
 import {PointFunction} from '../../geometry/PointFunction';
 
 
@@ -13,6 +14,7 @@ import {Object, ReturnType} from 'typescript';
 import {Point} from "../geometry";
 
 // https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+type LatLngReturnType = ReturnType<typeof LatLngFunction>;
 // type MapReturnType = ReturnType<typeof Map>;
 // type LayerGroupReturnType = ReturnType<typeof LayerGroup>;
 // type EventReturnType= ReturnType<typeof Event>;
@@ -47,6 +49,7 @@ type PointReturnType = ReturnType<typeof  PointFunction.prototype.clone> | numbe
 
 export const Earth = Util.extend({}, CRS, {
 	wrapLng: [-180, 180],
+	wrapLatLng: [-180, 180],
 
 	// Mean Earth Radius, as recommended for use by
 	// the International Union of Geodesy and Geophysics,
@@ -60,8 +63,8 @@ export const Earth = Util.extend({}, CRS, {
 		const lat2 = latlng2.lat * rad;
 		const sinDLat = Math.sin((latlng2.lat - latlng1.lat) * rad / 2);
 		const sinDLon = Math.sin((latlng2.lng - latlng1.lng) * rad / 2);
-		    a = sinDLat * sinDLat + Math.cos(lat1) * Math.cos(lat2) * sinDLon * sinDLon,
-		    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		const a = sinDLat * sinDLat + Math.cos(lat1) * Math.cos(lat2) * sinDLon * sinDLon,
+		const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		return this.R * c;
 	}
 });

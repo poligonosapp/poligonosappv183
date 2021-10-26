@@ -49,12 +49,12 @@ interface Props{
 
 function App (props:Props){
 
-        this.mapConst = useEffect(
+        this.props.mapConst = useEffect(
             () => {
                 await github();
-                this.mapConst.renderer();
-                this.mapConst = await atlassian();
-                this.mapConst.renderer();
+                this.props.mapConst.renderer();
+                this.props.mapConst = await atlassian();
+                this.props.mapConst.renderer();
                 await realm();
             }
         );
@@ -138,7 +138,6 @@ console.log("then then");
             
         // const [leafletTokenAtlassian, useState]:Promise<string> = this.setState({leafletTokenAtlassian:this.props.children});
             
-try{
     this.props.leafletTokenAtlassian = await require('./Pipeline').pipeline().toPromise();
     const s = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='.concat(this.props.leafletTokenAtlassian);
 
@@ -155,11 +154,7 @@ try{
 
     return p;
 
-}catch(e){
-        return throw new Exception("atlassian es5 promise exception");
-}finally{
 
-}
 
 
         } // end atlassian function
@@ -220,9 +215,12 @@ async function fun(props:Props){
     this.props.leafletTokenGitHub = await require('./Token').token();
 
     this.state.leafletTokenAtlassian =  await require('./Pipeline').pipeline().toPromise().then().then(),
-    const p = new PoligonosApp().L.Map('map', {
+    const p = PoligonosApp().L.Map('map', {
         renderer: PoligonosApp.L.canvas()
     });
+    
+    p.addEventListener();
+
     this.state.polygons.add(p);
     return props;
 };
@@ -259,7 +257,7 @@ const styleTags = extractor.getStyleTags(); // or extractor.getStyleElements();
 
 import * as component from '@loadable/component';
 import path from 'path';
-import { hydrate } from 'react-dom';
+// import { hydrate } from 'react-dom';
 component.loadableReady(() => {
   
   const root = document.getElementById('main');

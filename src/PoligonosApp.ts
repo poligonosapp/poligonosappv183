@@ -80,7 +80,7 @@ export public const PoligonosApp = L.Class.extend({
 
 });
 
-const PoligonosAppDemoInstance = new PoligonosApp();
+const PoligonosAppDemoInstance = PoligonosApp();
 
 console.log( PoligonosAppDemoInstance.addEventListener() );
 

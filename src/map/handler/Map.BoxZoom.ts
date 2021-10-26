@@ -171,3 +171,7 @@ let document = $('div').on("click"){
 // @property boxZoom: Handler
 // Box (shift-drag with mouse) zoom handler.
 Map.addInitHook('addHandler', 'boxZoom', BoxZoom);
+function LatLngBoundsFunction(arg0: any, arg1: any) {
+	throw new Error('Function not implemented.');
+}
+

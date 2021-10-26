@@ -17,7 +17,7 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "strict": true,
+    "strict": false,
     "moduleResolution": "node",
     "paths": {
       "package":["./package.json"],
@@ -33,7 +33,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "noImplicitThis": true,
-    "baseUrl": "./",
+    "baseUrl": "./src/App.tsx",
     "declaration": true,
     "emitDeclarationOnly": true,
     "sourceMap": true,

@@ -59,7 +59,7 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 	// typescript 2304 prototype-based programming paradigm
 	// Object.setPrototypeOf(NewClass,GeoJSONFunction);
 
-	NewClass = Object.prototype.__proto__;
+	NewClass = Object.prototype.__proto__;//typescript 1117 strict-mode false
 
 	const parentProto = NewClass().__super__ = Object.prototype;
 
@@ -73,10 +73,13 @@ export const DemoFunction:GeoJSONReturnType = GeoJSONFunction.extend({
 	proto.constructor = NewClass;
 	NewClass.prototype = proto;
 // inherit parent's statics
-	for (let i in Object.values(NewClass)) {
+
+	for (let i in NewClass) {
+
 		if (Object.prototype.hasOwnProperty.call(this, i) && i !== 'prototype' && i !== '__super__') {
 			NewClass[i] = this[i];
 		}
+
 	}
 
 	// mix static properties into the class

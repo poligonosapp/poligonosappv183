@@ -41,6 +41,10 @@ module.exports = {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
     ],
   },
   resolve: {
@@ -110,6 +114,12 @@ module.exports = {
       "jQuery":"jquery",
       "window.jQuery":"jquery"
     }),
-    new HtmlWebpackPlugin({ template: './index.html' })
+    new HtmlWebpackPlugin({ template: './index.html' }),
+    [
+      "postcss-preset-env",
+      {
+        // Options
+      },
+    ],
   ]
 };

@@ -1,9 +1,3 @@
-export { Renderer } from './Renderer';
-export { Canvas, canvas } from './Canvas';
-import './Renderer.getRenderer';
-export { Path } from './Path';
-export { CircleMarker, circleMarker } from './CircleMarker';
-export { Circle, circle } from './Circle';
-export { Polyline, polyline } from './Polyline';
-export { Polygon, polygon } from './Polygon';
-export { Rectangle, rectangle } from './Rectangle';
+version https://git-lfs.github.com/spec/v1
+oid sha256:efcbeb7d83549cc8a309b9fb6f2906d90de62c6607d145253616ebd832f1effa
+size 406

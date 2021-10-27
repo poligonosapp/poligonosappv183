@@ -1,16 +1,3 @@
----
-layout: tutorial_frame
-title: WMS example
----
-<script type='text/javascript'>
-
-	var map = L.map('map', {
-		center: [-17, -67],
-		zoom: 3
-	});
-
-	var wmsLayer = L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
-		layers: 'TOPO-OSM-WMS'
-	}).addTo(map);
-
-</script>
+version https://git-lfs.github.com/spec/v1
+oid sha256:22ec1d9e831e6e41a121b9458db495952d51f5cac665727584ee6b58e8828fc4
+size 292

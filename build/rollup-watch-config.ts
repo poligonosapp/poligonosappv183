@@ -1,35 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-// Config file for running Rollup in "watch" mode
-// This adds a sanity check to help ourselves to run 'rollup -w' as needed.
-
-import rollupGitVersion from 'rollup-plugin-git-version'
-import gitRev from 'git-rev-sync'
-
-const branch = gitRev.branch();
-const rev = gitRev.short();
-const version = require('../package.json').version + '+' + branch + '.' + rev;
-const banner = `/* @preserve
- * Leaflet ${version}, a JS library for interactive maps. http://leafletjs.com
- * (c) 2010-2021 Vladimir Agafonkin, (c) 2010-2011 CloudMade
- */
-`;
-
-export default {
-	input: 'src/Leaflet.ts',
-	output: {
-		file: 'dist/leaflet-src.ts',
-		format: 'umd',
-		name: 'L',
-		banner: banner,
-		sourcemap: true,
-		legacy: true, // Needed to create files loadable by IE8
-		freeze: false,
-	},
-	plugins: [
-		rollupGitVersion()
-	]
-};
+version https://git-lfs.github.com/spec/v1
+oid sha256:9c5cae139707655a50a6970c98febd7bf78a5b8901944ab9f8b3c18b207c0c41
+size 1139

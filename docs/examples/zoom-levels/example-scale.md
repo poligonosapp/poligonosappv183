@@ -1,29 +1,3 @@
----
-layout: tutorial_frame
-title: Zoom Levels Tutorial
----
-<script>
-
-	var map = L.map('map', {
-		minZoom: 1,
-		maxZoom: 1,
-		dragging: false
-	});
-
-	var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
-
-	var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-		attribution: cartodbAttribution
-	}).addTo(map);
-
-	L.control.scale({maxWidth: 150}).addTo(map);
-
-	setInterval(function(){
-		map.setView([0, 0], 0, {duration: 1, animate: true});
-		setTimeout(function(){
-			map.setView([60, 0], 0, {duration: 1, animate: true});
-		}, 2000);
-	}, 4000);
-
-	map.setView([0, 0], 0);
-</script>
+version https://git-lfs.github.com/spec/v1
+oid sha256:c81f784377a49a1ef7abb50b9201a718a074bcbe13ad4937d8582df7053f7fc8
+size 766

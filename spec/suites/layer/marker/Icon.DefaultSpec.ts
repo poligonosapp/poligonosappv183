@@ -1,28 +1,3 @@
-describe("Icon.Default", function () {
-	let div, map;
-
-	beforeEach(function () {
-		div = document.createElement('div');
-		div.style.height = '100px';
-		document.body.appendChild(div);
-		map = L.map(div).setView([0, 0], 0);
-		L.marker([0, 0]).addTo(map);
-	});
-
-	afterEach(function () {
-		map.remove();
-		document.body.removeChild(div);
-	});
-
-	it("icon measures 25x41px", function () {
-		const img = map.getPane('markerPane').querySelector('img');
-		expect(img.clientHeight).to.be(41);
-		expect(img.clientWidth).to.be(25);
-	});
-
-	it("shadow measures 41x41px", function () {
-		const img = map.getPane('shadowPane').querySelector('img');
-		expect(img.clientHeight).to.be(41);
-		expect(img.clientWidth).to.be(41);
-	});
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:ee51eeaa0eda66525f0ac7867ab326898a900ff6fa8599eadf6d42f9be66446c
+size 746

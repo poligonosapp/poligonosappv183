@@ -1,8 +1,3 @@
-import { ReturnType, HTMLElement } from 'typescript';
-import { GeoJSONClass } from "src/layer/GeoJSONClass";
-import { GeoJSONFunction } from "src/layer/GeoJSONFunction";
-declare type GeoJSONReturnType = ReturnType<typeof GeoJSONClass | typeof GeoJSONFunction>;
-declare type HTMLElementReturnType = ReturnType<typeof HTMLElement>;
-export declare const Map: GeoJSONReturnType;
-export declare function createMap(id: HTMLElementReturnType, options: any): any;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:39a76f65e38dfa4a4af031a97503ed590d615aabf35763cb0d3163619b8298e9
+size 475

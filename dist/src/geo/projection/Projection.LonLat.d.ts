@@ -1,9 +1,3 @@
-import { Point } from '../../geometry/Point';
-import { Object, ReturnType } from 'typescript';
-declare type PointReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-export declare const LonLat: {
-    project: (latlng: any) => PointReturnType;
-    unproject: (point: PointReturnType) => any;
-    bounds: any;
-};
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:e83cba43c2ff5d5ac7046b46bace61b82f5fd66ac4fb358808a3720753bd95ec
+size 405

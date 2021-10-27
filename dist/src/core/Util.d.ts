@@ -1,35 +1,3 @@
-import { Object, ReturnType } from 'typescript';
-import { Point } from '../geometry';
-import { DemoAbstractClassImpl } from './DemoAbstractClassImpl';
-import { GeoJSONClass } from "src/layer/GeoJSONClass";
-import { GeoJSONFunction } from "src/layer/GeoJSONFunction";
-import { PointReturnImpl } from 'src/geometry/PointReturnImpl';
-declare type GeoJSONReturnType = ReturnType<typeof GeoJSONClass | typeof GeoJSONFunction>;
-declare type EventReturnType = ReturnType<typeof Event>;
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-declare type FunctionReturnType = ReturnType<typeof Object.Function>;
-declare type ObjectReturnType = ReturnType<typeof DemoAbstractClassImpl | typeof Object.String>;
-declare type ArrayReturnType = ReturnType<typeof Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-declare type StringReturnType = ReturnType<typeof Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-export declare function extend(dest: PointReturnImpl[]): ObjectReturnType[];
-export declare const create: any;
-export declare function bind(fn: FunctionReturnType, obj: ObjectReturnType): FunctionReturnType;
-export declare let lastId: number;
-export declare function stamp(obj: ObjectReturnType): NumberReturnType;
-export declare function throttle(fn: FunctionReturnType, time: NumberReturnType, context: ObjectReturnType): FunctionReturnType;
-export declare function wrapNum(x: NumberReturnType, range: NumberReturnType[], includeMax: boolean): NumberReturnType;
-export declare function falseFn(): FunctionReturnType;
-export declare function formatNum(num: NumberReturnType | NumberReturnType[], digits: NumberReturnType | NumberReturnType[]): NumberReturnType | NumberReturnType[];
-export declare function trim(str: StringReturnType | StringReturnType[]): StringReturnType | StringReturnType[];
-export declare function splitWords(str: StringReturnType | StringReturnType[]): any;
-export declare function getOptions(obj: ObjectReturnType, options: GeoJSONReturnType[]): GeoJSONReturnType[];
-export declare function getParamString(obj: ObjectReturnType, existingUrl: StringReturnType, uppercase: boolean): StringReturnType;
-export declare function template(str: StringReturnType, data: ObjectReturnType): StringReturnType;
-export declare const isArray: (arg: any) => arg is any[];
-export declare function indexOf(array: ArrayReturnType, el: ObjectReturnType): string | -1;
-export declare const emptyImageUrl = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-export declare const requestFn: ((callback: FrameRequestCallback) => number) & typeof requestAnimationFrame;
-export declare const cancelFn: ((handle: number) => void) & typeof cancelAnimationFrame;
-export declare function requestAnimFrame(fn: FunctionReturnType, context: EventReturnType, immediate: boolean): FunctionReturnType;
-export declare function cancelAnimFrame(id: NumberReturnType): undefined | void | FunctionReturnType;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:c3592cc78d1003f9eca446e6c8c6427c933c289e5c100b85827b2af02e4d1dbe
+size 3082

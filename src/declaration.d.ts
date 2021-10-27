@@ -1,19 +1,3 @@
-declare module "*.html";
-declare module "*.css";
-declare module "*.ts";
-declare module "*.tsx";
-declare module 'express';
-declare module 'ts-node';
-declare module '@babel/env';
-// declare module '@babel/preset-react';
-import "@babel/preset-react";
-import "typescript";
-import 'jquery-ui';
-import 'jquery-ui-dist';
-import 'jquery';
-import 'webpack';
-import 'iconv';
-import 'typescript-eslint/no-unsafe-call';
-import 'typescript-eslint';
-import '@rollup/plugin-json';
-import '@typescript-eslint/parser';
+version https://git-lfs.github.com/spec/v1
+oid sha256:f30e2ec36706037fe04a634611e44781c448a8edd2049733e66591edba4ffeb0
+size 521

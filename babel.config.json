@@ -1,4 +1,3 @@
-{
-    "presets": ["@babel/preset-env","@babel/preset-react"],
-    "plugins": ["@babel/plugin-syntax-dynamic-import","@loadable/babel-plugin"]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5620c968fa87467c992fb0c95f2e738b2429aac56409184f7cc71d0223d66d82
+size 176

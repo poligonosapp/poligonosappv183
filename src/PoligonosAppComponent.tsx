@@ -1,23 +1,3 @@
-import React, {Component, useState, useEffect} from "react";
-import { ReactDOM } from "react-dom";
-import { ReactDOMServer } from "react-dom/server";
-
-import {HTMLElement} from "typescript";
-import { node } from "webpack";
-
-export interface Props{
-    ul:HTMLElement;
-}
-
-function PoligonosAppComponent(props:Props["ul"]){
-
-        const [ul, useState]:HTMLElement = this.setState({ul:this.props.children});
-
-        return (<div>{this.props.children.ul}</div>);
-    
-}
-
-ReactDOM.render(<PoligonosAppComponent/>, node); // browser
-ReactDOMServer.renderToString(<PoligonosAppComponent/>); // server
-
-export default PoligonosAppComponent;
+version https://git-lfs.github.com/spec/v1
+oid sha256:e5b7ada82ff9106887584472994158823679e66fe16b53bfec0218ae9385a926
+size 657

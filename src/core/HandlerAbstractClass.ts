@@ -1,22 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { GeoJSONAbstractClass } from "../../Leaflet";
-import { GeoJSONReturnType } from "./HandlerFunction";
-
-/*
-	L.Handler is a base class for handler classes that are used internally to inject
-	interaction features like dragging to classes like Map and Marker.
-*/
-// @class Handler
-// @aka L.Handler
-// Abstract class for map interaction handlers
-
-
-export abstract class HandlerAbstractClass extends GeoJSONAbstractClass{
-	props: GeoJSONReturnType;
-	constructor(props: GeoJSONReturnType) {
-		super(props);
-		this.props = props;
-
-	}
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:69bb1e4ae86bc03668319311772b735590d3e629bc5d7b1aebd96ff44e093d43
+size 674

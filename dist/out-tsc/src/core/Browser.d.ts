@@ -1,34 +1,3 @@
-export declare const ie: boolean;
-export declare const ielt9: boolean;
-export declare const edge: boolean;
-export declare const webkit: boolean;
-export declare const android: boolean;
-export declare const android23: boolean;
-export declare const androidStock: boolean;
-export declare const opera: false;
-export declare const chrome: false;
-export declare const gecko: boolean;
-export declare const safari: any;
-export declare const phantom: any;
-export declare const opera12: boolean;
-export declare const win: boolean;
-export declare const ie3d: boolean;
-export declare const webkit3d: boolean;
-export declare const gecko3d: boolean;
-export declare const any3d: boolean;
-export declare const mobile: "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
-export declare const mobileWebkit: boolean;
-export declare const mobileWebkit3d: boolean;
-export declare const msPointer: {
-    new (typeArg: string, eventInitDict?: PointerEventInit): MSPointerEvent;
-    prototype: MSPointerEvent;
-};
-export declare const pointer: boolean;
-export declare const touch: boolean;
-export declare const mobileOpera: false;
-export declare const mobileGecko: boolean;
-export declare const retina: boolean;
-export declare const passiveEvents: boolean;
-export declare const canvas: boolean;
-export declare const svg: boolean;
-export declare const vml: boolean | ChildNode;
+version https://git-lfs.github.com/spec/v1
+oid sha256:a4ea7ad1f908a49a01db41a8a6befce9b5c67882137fd62a9f5e9431d08c6a8a
+size 1426

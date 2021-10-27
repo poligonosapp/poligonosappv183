@@ -1,9 +1,3 @@
-import { Props } from './LatLngBoundsFunction';
-
-
-export class LatLngBounds {
-	props: Props;
-	constructor(props: Props) {
-		this.props = props;
-	}
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:90da80c988ee053b1c01ce30733dd0293d782c619c58d6ef1677e2594a113b1e
+size 158

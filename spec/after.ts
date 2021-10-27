@@ -1,1 +1,3 @@
-L.Icon.Default.imagePath = '/base/dist/images/';
+version https://git-lfs.github.com/spec/v1
+oid sha256:29983ce437257624093ee62533c267496d82213469011971da4b395e646468ff
+size 50

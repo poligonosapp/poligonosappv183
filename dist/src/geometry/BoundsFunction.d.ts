@@ -1,14 +1,3 @@
-import { Object, ReturnType } from 'typescript';
-import { Point } from "./Point";
-import { PointReturnImpl } from "./PointReturnImpl";
-import { BoundsClass } from './BoundsClass';
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-declare type PointReturnType = ReturnType<typeof Point> | ReturnType<typeof PointReturnImpl>;
-declare type BoundsReturnType = ReturnType<typeof BoundsClass | typeof Array | typeof Point | typeof Point[]>;
-export interface Props {
-    a: NumberReturnType;
-    b: NumberReturnType;
-}
-export declare function Bounds(a: NumberReturnType, b: NumberReturnType): BoundsReturnType;
-export declare function toBounds(a: PointReturnType | PointReturnType[], b: PointReturnType | PointReturnType[]): BoundsReturnType;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:dfef21b21208d320c39730234f6848e178c13763350c16179b8196e2efc4678c
+size 856

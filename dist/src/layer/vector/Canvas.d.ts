@@ -1,7 +1,3 @@
-import { Object, ReturnType } from 'typescript';
-import { Point } from "../geometry";
-declare type CanvasReturnType = ReturnType<typeof Canvas>;
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-export declare const Canvas: any;
-export declare function canvas(options: NumberReturnType): CanvasReturnType;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:93e225007ec59216afc21db0b0d3c0df31019fac21e032aed826c7ecd851b89c
+size 419

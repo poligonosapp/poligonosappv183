@@ -1,19 +1,3 @@
-describe('General', function () {
-	describe('noConflict', function () {
-		const leaflet = L;
-
-		after(function () {
-			L = leaflet;
-		});
-
-		expect(L.noConflict()).to.eql(leaflet);
-	});
-
-	describe('namespace extension', function () {
-		L.Util.foo = 'bar';
-		L.Foo = 'Bar';
-
-		expect(L.Util.foo).to.eql('bar');
-		expect(L.Foo).to.eql('Bar');
-	});
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:51b22e510326a1d1ee473d1677ae236092ace1a93fbb453266b96d12846f7e12
+size 369

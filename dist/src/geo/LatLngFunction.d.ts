@@ -1,12 +1,3 @@
-import { Object, ReturnType } from 'typescript';
-import { Point } from "../geometry";
-declare type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-export interface Props {
-    lat: NumberReturnType;
-    lng: NumberReturnType;
-    alt: NumberReturnType;
-}
-export declare function LatLngFunction(props: Props): void;
-export declare function toLatLng(a: NumberReturnType, b: NumberReturnType, c: NumberReturnType): LatLngReturnType;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:9f0186b41eacbea83ca4c8a5a032daf974872d902ec4c21fb1c0a3cca445e0f7
+size 656

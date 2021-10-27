@@ -1,9 +1,3 @@
-import { Object, ReturnType } from "typescript";
-import { Point } from "../geometry";
-import { GeoJSONFunction } from "./GeoJSONFunction";
-declare type StringReturnType = ReturnType<typeof Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-declare type GeoJSONReturnType = ReturnType<typeof GeoJSONFunction>;
-export declare const ImageOverlay: GeoJSONReturnType;
-export declare const imageOverlay: (url: StringReturnType, bounds: any, options: NumberReturnType) => any;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:0bcbad0e09beb02a6e47633c39299c43228840652259683b6e7dc95bd4a2e73b
+size 655

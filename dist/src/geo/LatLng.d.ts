@@ -1,7 +1,3 @@
-import { Object, ReturnType } from 'typescript';
-import { Point } from "../geometry";
-declare type LatLngReturnType = ReturnType<typeof LatLng> | ReturnType<typeof LatLng.prototype.clone>;
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-export declare function LatLng(this: any, lat: NumberReturnType, lng: NumberReturnType, alt: NumberReturnType): void;
-export declare function toLatLng(a: NumberReturnType, b: NumberReturnType, c: NumberReturnType): LatLngReturnType;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:8446a36847ec0d354878db99d7586d907c44da63bb9bfee434eaa8d133f31dd2
+size 585

@@ -1,13 +1,3 @@
-import ServerMain from './src/ServerMain';
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-  const s = new ServerMain();
-  res.render('index', { header: ''+s });
-  res.render('index', { body: ''+s });
-});
-
-module.exports = router;
+version https://git-lfs.github.com/spec/v1
+oid sha256:7e0bfc80a5f7ecd0b4a13fafe54d5ac93600e615b2bfbc02fa62c8eb936252f4
+size 371

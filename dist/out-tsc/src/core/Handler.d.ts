@@ -1,6 +1,3 @@
-import * as L from '../Leaflet';
-export declare type MapReturnType = ReturnType<typeof L.Map>;
-declare const Handler_base: any;
-export declare class Handler extends Handler_base {
-}
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:144b3092af30f65d3c78f8be18ca89b1e201f39bffdda320382c78d027616571
+size 199

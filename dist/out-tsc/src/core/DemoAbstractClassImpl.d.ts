@@ -1,11 +1,3 @@
-import { ReturnType } from "typescript";
-import { GeoJSON } from './layer/vector/GeoJSON';
-import * as L from '../Leaflet';
-declare type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
-export declare type MapReturnType = ReturnType<typeof L.Map>;
-export declare function extend(props: GeoJSONReturnType[]): {
-    (): any;
-    __super__: any;
-    prototype: any;
-};
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:46a6283b72ec94c51a1de6ce43e9126517528fc74cea813280bcd8d45177fef6
+size 387

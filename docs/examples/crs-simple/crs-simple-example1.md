@@ -1,16 +1,3 @@
----
-layout: tutorial_frame
-title: CRS.Simple example
----
-<script>
-
-	var map = L.map('map', {
-		crs: L.CRS.Simple
-	});
-
-	var bounds = [[0,0], [1000,1000]];
-	var image = L.imageOverlay('uqm_map_full.png', bounds).addTo(map);
-
-	map.fitBounds(bounds);
-
-</script>
+version https://git-lfs.github.com/spec/v1
+oid sha256:48218949cfbde964390b25d1fb3fcbd900b9c55b5cd73e79e504619467cba500
+size 275

@@ -1,10 +1,3 @@
-import { LatLng } from '../../geo/LatLng';
-import { Object, ReturnType } from "typescript";
-import { Point } from "../geometry";
-import * as L from './Leaflet';
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-declare type LatLngReturnType = ReturnType<typeof LatLng>;
-export declare type MapReturnType = ReturnType<typeof L.Map>;
-export declare const CircleMarker: any;
-export declare function circleMarker(latlng: LatLngReturnType, options: NumberReturnType): any;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:0d2d13673df8926b937a9d1640db273e11acd90c02b0ac9ad2486712f10d8bba
+size 584

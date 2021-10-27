@@ -1,7 +1,3 @@
-export {GridLayer, gridLayer} from './GridLayer';
-import {TileLayer, tileLayer} from './TileLayer';
-import {TileLayerWMS, tileLayerWMS} from './TileLayer.WMS';
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-TileLayer.WMS = TileLayerWMS;
-tileLayer.wms = tileLayerWMS;
-export {TileLayer, tileLayer};
+version https://git-lfs.github.com/spec/v1
+oid sha256:ca4a88ae45598363764733ccd80a7a9086b51d9d30f0a065f8be3e96b93f73c8
+size 369

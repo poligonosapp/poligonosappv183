@@ -1,3 +1,3 @@
-uses: ./
-with:
-  milliseconds: 1000
+version https://git-lfs.github.com/spec/v1
+oid sha256:637221974d9b2329234291770e4f0fd54b238e2cafb1c967e1886fbe5a61d767
+size 39

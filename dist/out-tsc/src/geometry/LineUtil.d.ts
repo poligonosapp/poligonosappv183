@@ -1,17 +1,3 @@
-import { Point } from './Point';
-import { PointReturnImpl } from './PointReturnImpl';
-import { LatLng } from "../geo";
-import { Object, ReturnType } from "typescript";
-declare type LatLngReturnType = ReturnType<typeof LatLng>;
-declare type PointReturnImplType = ReturnType<typeof PointReturnImpl>;
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-export declare function simplify(points: PointReturnImplType[], tolerance: NumberReturnType): PointReturnImplType[];
-export declare function pointToSegmentDistance(p: PointReturnImpl, p1: PointReturnImpl, p2: PointReturnImpl): NumberReturnType;
-export declare function closestPointOnSegment(p: PointReturnImpl, p1: PointReturnImpl, p2: PointReturnImpl): NumberReturnType;
-export declare function clipSegment(a: any, b: any, bounds: any, useLastCode: any, round: any): false | any[];
-export declare function _getEdgeIntersection(a: any, b: any, code: any, bounds: any, round: any): any;
-export declare function _getBitCode(p: any, bounds: any): number;
-export declare function _sqClosestPointOnSegment(p: PointReturnImpl, p1: PointReturnImpl, p2: PointReturnImpl, sqDist: NumberReturnType): PointReturnImpl;
-export declare function isFlat(latlngs: LatLngReturnType[] | LatLngReturnType[][]): boolean;
-export declare function _flat(latlngs: LatLngReturnType): boolean;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:6366039eb5bfb3b07ab54749d37d32ca31a81ad5dcf2ae6d2d3e2eed22717388
+size 1438

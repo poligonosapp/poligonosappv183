@@ -1,19 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {Map} from './Map';
-import {BoxZoom} from './handler/Map.BoxZoom';
-Map.BoxZoom = BoxZoom;
-import {DoubleClickZoom} from './handler/Map.DoubleClickZoom';
-Map.DoubleClickZoom = DoubleClickZoom;
-import {Drag} from './handler/Map.Drag';
-Map.Drag = Drag;
-import {Keyboard} from './handler/Map.Keyboard';
-Map.Keyboard = Keyboard;
-import {ScrollWheelZoom} from './handler/Map.ScrollWheelZoom';
-Map.ScrollWheelZoom = ScrollWheelZoom;
-import {Tap} from './handler/Map.Tap';
-Map.Tap = Tap;
-import {TouchZoom} from './handler/Map.TouchZoom';
-Map.TouchZoom = TouchZoom;
-
-export {Map, createMap as map} from './Map';
+version https://git-lfs.github.com/spec/v1
+oid sha256:e2689b23a9a01100cc06418f54cf8c5e2f786b546bf417c376dd0e9eb74b960c
+size 755

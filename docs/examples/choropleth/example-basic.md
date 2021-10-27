@@ -1,21 +1,3 @@
----
-layout: tutorial_frame
-title: Choropleth Tutorial
----
-<script type="text/javascript" src="us-states.js"></script>
-<script type="text/javascript">
-
-	var map = L.map('map').setView([37.8, -96], 4);
-
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox/light-v9',
-		tileSize: 512,
-		zoomOffset: -1
-	}).addTo(map);
-
-	var geojson = L.geoJson(statesData).addTo(map);
-
-</script>
+version https://git-lfs.github.com/spec/v1
+oid sha256:fca2c86260837531edc31ec152097d22ab442b0f86d84cc6e41add40cdcfeb66
+size 729

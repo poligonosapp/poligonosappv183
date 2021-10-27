@@ -1,22 +1,3 @@
-import {LatLngFunction} from '../LatLngFunction';
-import { Bounds } from "../../geometry/Bounds.1";
-import {PointFunction} from '../../geometry/PointFunction';
-
-import { PointReturnImpl } from "src/geometry/PointReturnImpl";
-type LatLngReturnType = ReturnType<typeof LatLngFunction> | ReturnType<typeof LatLngFunction.prototype.clone>;
-
-/**
- * CRS helper
-*/
-export function projection(){
-
-}
-
-projection.prototype = {
-    project: function(latlng:LatLngReturnType):PointReturnImpl{
-        return new PointFunction(latlng.y, latlng.x);
-    },
-    unproject: function(latlng:LatLngReturnType):PointReturnImpl{
-        return new PointFunction(latlng.x, latlng.y);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c8157ef301775e7b1c3abfee0ec3caa1527783a106eadcc523f4af6a70bcf146
+size 690

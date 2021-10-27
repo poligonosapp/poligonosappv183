@@ -1,19 +1,3 @@
-const { fetch } = require("node-fetch");
-
-const API_ENDPOINT = 'https://www.poligonosapp.herokuapp.com';
-
-exports.handler = async (event, context) => {
-  try {
-    const response = await fetch(API_ENDPOINT);
-    const data = await response.json();
-    return { statusCode: 200, body: JSON.stringify({ data }) };
-  } catch (error) {
-    console.log(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Failed fetching data' }),
-    };
-  }
-};
-
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:37c1f628c8ff52c007967e57664f5a8afd18a066e27b8452a8cc29f3906d0c18
+size 490

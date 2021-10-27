@@ -1,0 +1,3 @@
+[submodule "packages/poligonosapp-next-dynamic-import-lerna-repo"] 
+  path = packages/poligonosapp-next-dynamic-import-lerna-repo
+  url = https://github.com/poligonosapp/poligonosapp-next-dynamic-import-lerna-repo

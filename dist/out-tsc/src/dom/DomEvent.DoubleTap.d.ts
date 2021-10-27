@@ -1,9 +1,3 @@
-import Event from 'typescript';
-import { Object, ReturnType } from 'typescript';
-import { Point } from "../geometry";
-declare type idReturnType = ReturnType<typeof Number>;
-declare type objReturnType = ReturnType<typeof Object | typeof Event | typeof Point>;
-declare type handlerReturnType = ReturnType<typeof Object | typeof Event | typeof Point>;
-export declare function addDoubleTapListener(obj: objReturnType, handler: handlerReturnType, id: idReturnType): any;
-export declare function removeDoubleTapListener(obj: objReturnType, id: idReturnType): any;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:f8e107edac545dd42f71defa5cd05ae096d83b5a591d7c10f06e63b932f1110e
+size 578

@@ -1,20 +1,3 @@
----
-layout: tutorial_frame
-title: CRS.Simple example
----
-<script>
-
-	var map = L.map('map', {
-		crs: L.CRS.Simple,
-		minZoom: -3
-	});
-
-	var bounds = [[-26.5,-25], [1021.5,1023]];
-	var image = L.imageOverlay('uqm_map_full.png', bounds).addTo(map);
-
-	var sol = L.latLng([ 145, 175 ]);
-	L.marker(sol).addTo(map);
-
-	map.setView( [70, 120], 1);
-
-</script>
+version https://git-lfs.github.com/spec/v1
+oid sha256:9b71f763178fa669ef72b763bbaf57af0df6bda503cd32f6bd5f0f476ef3e0bb
+size 368

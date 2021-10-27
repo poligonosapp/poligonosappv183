@@ -1,7 +1,3 @@
-import { ReturnType } from 'typescript';
-import { LatLngBounds } from "../geo";
-declare type LatLngBoundsReturnType = ReturnType<typeof LatLngBounds>;
-declare type VideoReturnType = ReturnType<typeof String | typeof Array | typeof HTMLVideoElement>;
-export declare const VideoOverlay: any;
-export declare function videoOverlay(video: VideoReturnType | VideoReturnType[], bounds: LatLngBoundsReturnType, options: VideoReturnType): VideoReturnType;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:0dff81fb8c4948ef730706a3bca88ce26a10ffa9b6a58df311a2f306a97d173d
+size 465

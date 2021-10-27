@@ -1,21 +1,3 @@
-import { FeatureGroup } from './FeatureGroup';
-import { LatLng } from '../geo/LatLng';
-import { Object, ReturnType } from "typescript";
-import { Point } from "../geometry";
-import * as L from './Leaflet';
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-declare type LatLngReturnType = ReturnType<typeof LatLng>;
-declare type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
-export declare type MapReturnType = ReturnType<typeof L.Map>;
-declare type LayerReturnType = ReturnType<typeof FeatureGroup> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-export declare const GeoJSON: any;
-export declare function geometryToLayer(geojson: GeoJSONReturnType, options: NumberReturnType): any;
-export declare function coordsToLatLng(coords: []): LatLngReturnType;
-export declare function coordsToLatLngs(coords: [], levelsDeep: NumberReturnType, _coordsToLatLng: any): LatLngReturnType[];
-export declare function latLngToCoords(latlng: LatLngReturnType, precision: NumberReturnType): any[];
-export declare function latLngsToCoords(latlngs: [], levelsDeep: NumberReturnType, closed: boolean, precision: NumberReturnType): NumberReturnType[];
-export declare function getFeature(layer: LayerReturnType, newGeometry: GeoJSONReturnType): GeoJSONReturnType;
-export declare function asFeature(geojson: GeoJSONReturnType): GeoJSONReturnType;
-export declare function geoJSON(geojson: GeoJSONReturnType, options: NumberReturnType): GeoJSONReturnType;
-export declare const geoJson: typeof geoJSON;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:90ce5e736590759037f2fc68ae01154a87186b18157370e63b7a3676e3b4c5a8
+size 1628

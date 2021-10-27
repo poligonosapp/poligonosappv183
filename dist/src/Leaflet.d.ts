@@ -1,13 +1,3 @@
-import { version } from './package.json';
-export { version };
-import { Map } from './map/Map';
-export declare type MapReturnType = ReturnType<typeof Map>;
-import { ReturnType } from "typescript";
-export * from PoligonosApp;
-export * from './control/index';
-export * from './core/index';
-export * from './dom/index';
-export * from './geometry/index';
-export * from './geo/index';
-export * from './layer/index';
-export * from './map/index';
+version https://git-lfs.github.com/spec/v1
+oid sha256:47e82bd1084a2cce3c7697dc652bfd2753ce75a4ce6a1f0315057887748961e9
+size 452

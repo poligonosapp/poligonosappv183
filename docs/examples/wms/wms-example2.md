@@ -1,16 +1,3 @@
----
-layout: tutorial_frame
-title: WMS example
----
-<script type='text/javascript'>
-
-	var map = L.map('map', {
-		center: [-17, -67],
-		zoom: 3
-	});
-
-	var wmsLayer = L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
-		layers: 'SRTM30-Colored-Hillshade'
-	}).addTo(map);
-
-</script>
+version https://git-lfs.github.com/spec/v1
+oid sha256:2a998f32508aa9c807857b8fda959f4738303c3b7f3ab91335e434870fdaf97c
+size 306

@@ -1,10 +1,3 @@
-import { GeoJSON } from '../layer';
-import { ReturnType } from "typescript";
-declare type GeoJSONReturnType = ReturnType<typeof GeoJSON>;
-export declare abstract class GeoJSONAbstractClass {
-    static options: GeoJSONReturnType;
-    static extend: GeoJSONReturnType;
-    static include: GeoJSONReturnType;
-    static initialize: GeoJSONReturnType;
-}
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:da144032e4fab21bafdff6bb9b4703deec72b443decef78d47f70247171bce9b
+size 372

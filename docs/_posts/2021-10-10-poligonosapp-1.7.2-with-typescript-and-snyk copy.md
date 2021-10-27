@@ -1,30 +1,3 @@
----
-layout: post
-title: Leaflet 1.7 released
-description: Leaflet 1.7.2 now available
-author: Luis Mendes Machado
-authorsite: https://hub.docker.com/u/poligonosapp
----
-
-poligonosapp v1.7.2-with-typescript-and-snyk
-
-es5.promise typescript
-javascript.info
-
-jquery-ui alias + rollup + webpack
-
-https://stackoverflow.com/questions/33998262/jquery-ui-and-webpack-how-to-manage-it-into-module
-
-@rollup/plugin-alias
-
-https://www.npmjs.com/package/@rollup/plugin-typescript
-
-https://www.luiztools.com.br/post/como-usar-typescript-com-node-js-3/
-
-https://stackoverflow.com/questions/62096269/cant-run-my-node-js-typescript-project-typeerror-err-unknown-file-extension
-
-Besides that, there's a bunch of small bug and documentation fixes, detailed in [the changelog](https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md). Thanks to everyone who sent a fix, no matter how small!
-
-To get the new release, update your dependencies in your favorite package manager, or check the [downloads page](https://leafletjs.com/download.html).
-
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:87df0643d9a36ad26535528eeaa5d494601b756d9d2eb9428fd4228e46c49ec6
+size 1058

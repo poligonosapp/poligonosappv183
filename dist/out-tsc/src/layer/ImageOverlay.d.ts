@@ -1,7 +1,3 @@
-import { Object, ReturnType } from "typescript";
-import { Point } from "../geometry";
-declare type StringReturnType = ReturnType<typeof Point.prototype.toString> | string | ReturnType<typeof Object.String>;
-declare type NumberReturnType = ReturnType<typeof Point.prototype.clone> | number | ReturnType<typeof Object.Number> | ReturnType<typeof Point>;
-export declare const ImageOverlay: any;
-export declare const imageOverlay: (url: StringReturnType, bounds: any, options: NumberReturnType) => any;
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:bfb022d7d1e181cbd1388eb4e8ffe5b309380fd9aa025723f0b7b13aa9551609
+size 517

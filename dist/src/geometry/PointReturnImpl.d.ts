@@ -1,12 +1,3 @@
-import { PointReturn } from "./PointReturn";
-import { Object, ReturnType } from "typescript";
-declare type NumberReturnType = number | ReturnType<typeof Object.Number>;
-export declare class PointReturnImpl implements PointReturn {
-    constructor(...args: [x: number, y: number, round: number]);
-    x: number | ReturnType<typeof Object.Number>;
-    y: number | ReturnType<typeof Object.Number>;
-    getX(): number | NumberReturnType;
-    getY(): number | NumberReturnType;
-    roundXY(x: number, y: number, round: number): PointReturn;
-}
-export {};
+version https://git-lfs.github.com/spec/v1
+oid sha256:35b051813f28e7dc3ae949ed448ca45f5fd284d27b5c3809a6f5959638cc8fdc
+size 562

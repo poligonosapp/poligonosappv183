@@ -1,6 +1,3 @@
-import { Map } from "src/map/Map";
-import { GeoJSONClass } from "src/layer/GeoJSONClass";
-import { GeoJSONFunction } from "src/layer/GeoJSONFunction";
-export declare type GeoJSONReturnType = ReturnType<typeof GeoJSONClass | typeof GeoJSONFunction>;
-export declare type MapReturnType = ReturnType<typeof Map>;
-export declare const HandlerFunction: any;
+version https://git-lfs.github.com/spec/v1
+oid sha256:ce56207c3402a55221396edfd785872714e8391bebb89b3f1ecc2854411e6386
+size 358

@@ -1,24 +1,3 @@
-export {LayerFunction as Layer} from './Layer';
-export {LayerGroup, layerGroup} from './LayerGroup';
-export {FeatureGroup, featureGroup} from './FeatureGroup';
-import {GeoJSONFunction, geoJSON, geoJson, geometryToLayer, coordsToLatLng, coordsToLatLngs, latLngToCoords, latLngsToCoords, getFeature, asFeature} from './GeoJSONFunction';
-GeoJSONFunction.geometryToLayer = geometryToLayer;
-GeoJSONFunction.coordsToLatLng = coordsToLatLng;
-GeoJSONFunction.coordsToLatLngs = coordsToLatLngs;
-GeoJSONFunction.latLngToCoords = latLngToCoords;
-GeoJSONFunction.latLngsToCoords = latLngsToCoords;
-GeoJSONFunction.getFeature = getFeature;
-GeoJSONFunction.asFeature = asFeature;
-export {GeoJSONFunction as GeoJSON, geoJSON, geoJson};
-
-export {ImageOverlay, imageOverlay} from './ImageOverlay';
-export {VideoOverlay, videoOverlay} from './VideoOverlay';
-// export {SVGOverlay, svgOverlay} from './SVGOverlay';
-
-export {DivOverlay} from './DivOverlay';
-export {Popup, popup} from './Popup';
-export {Tooltip, tooltip} from './Tooltip';
-
-export * from './marker/index';
-export * from './tile/index';
-export * from './vector/index';
+version https://git-lfs.github.com/spec/v1
+oid sha256:577e6a48e1fa1c498f147ba3d4b3a0205a0622f45bb0183622e9743d6de9f784
+size 1139

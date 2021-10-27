@@ -1,31 +1,3 @@
----
-layout: tutorial_frame
-title: Video Overlay Tutorial
----
-<script>
-	var map = L.map('map');
-
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox/satellite-v9',
-		tileSize: 512,
-		zoomOffset: -1
-	}).addTo(map);
-
-	var videoUrls = [
-		'https://www.mapbox.com/bites/00188/patricia_nasa.webm',
-		'https://www.mapbox.com/bites/00188/patricia_nasa.mp4'
-	],
-	bounds = L.latLngBounds([[ 32, -130], [ 13, -100]]);
-
-	map.fitBounds(bounds);
-
-	var overlay = L.videoOverlay(videoUrls, bounds, {
-		opacity: 0.8,
-		interactive: true
-	});
-	map.addLayer(overlay);
-
-</script>
+version https://git-lfs.github.com/spec/v1
+oid sha256:31a5d6116b5aeef9f6a7f1f814749c10d3927092043bf37ce861a9c55b88c6ee
+size 924

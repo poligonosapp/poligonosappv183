@@ -1,0 +1,9 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-ANSIREGEX-1583908:
+    - react-native > @react-native-community/cli > @react-native-community/cli-hermes > @react-native-community/cli-platform-android > logkitty > ansi-fragments > strip-ansi > ansi-regex:
+        reason: npm uninstall
+        expires: '2021-11-26T21:41:19.892Z'
+patch: {}

@@ -17,6 +17,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "no-restricted-globals": ["error", "event", "fdescribe"],
           "no-unused-vars": "off",
           "@typescript-eslint/no-unused-vars": ["error"],
           "typescript-eslint/no-unsafe-call":"warn",

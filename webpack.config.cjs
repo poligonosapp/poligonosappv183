@@ -15,8 +15,22 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var LoadablePlugin = require('@loadable/webpack-plugin');
 
 module.exports = {
+  externals: {
+    jquery: 'jQuery',
+    fs-extra: 'commonjs2 fs-extra',
+    react: 'react',
+    PoligonosApp: function ({ context, request }, callback) {
+      if (/^PoligonosApp%on%$/.test(request)) {
+        // Externalize to a commonjs module using the request path
+        return callback(null, 'commonjs ' + request);
+      }
+
+      // Continue without externalizing the import
+      callback();
+    },
+  },
   mode: 'production',
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   output: {
     filename: '[name].bundle.ts',
     path: path.resolve(__dirname, 'dist'),

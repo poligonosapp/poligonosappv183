@@ -27,6 +27,12 @@ module.exports = {
     },
   },
   module: {
+    loaders: [
+      {exclude: ['node_modules'], loader: 'babel', test: /\.jsx?$/},
+      {loader: 'style-loader!css-loader', test: /\.css$/},
+      {loader: 'url-loader', test: /\.gif$/},
+      {loader: 'file-loader', test: /\.(ttf|eot|svg)$/},
+    ],
     rules: [
       { test: /\.txt$/, use: 'raw-loader' },
       {
@@ -65,13 +71,21 @@ module.exports = {
       path.resolve(__dirname, '../src'),
     ],
     alias: {
+      config$: './configs/app-config.js',
+      react: './vendor/react-master',
       "jquery-ui": "jquery-ui/jquery-ui.js",
       modules: path.join(__dirname, "node_modules"),
       'jquery-ui': 'jquery-ui-dist/jquery-ui.js',
       Utilities: path.resolve(__dirname, 'src/utilities/'),
       Templates: path.resolve(__dirname, 'src/templates/'),
     },
-    extensions: ['', '.ts','.js', '.json', '.geojson'],
+    extensions: ['', 'js', 'jsx','.ts', '.tsx','.json', '.geojson'],
+    modules: [
+      'node_modules',
+      'bower_components',
+      'shared',
+      '/shared/vendor/modules',
+    ],
   },plugins: [
     new LoadablePlugin(),
     new MiniCssExtractPlugin(),

@@ -1,18 +1,18 @@
 // typescript webpack.config.js https://webpack.js.org/guides/typescript/
-const path = require('path');
-const webpack = require('webpack');// https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
+var path = require('path');
+var webpack = require('webpack');// https://stackoverflow.com/questions/31592819/referenceerror-webpack-is-not-defined
 
-const StylelintPlugin = require('stylelint-webpack-plugin');
+var StylelintPlugin = require('stylelint-webpack-plugin');
 
-const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+var JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
+var CopyPlugin = require("copy-webpack-plugin");
 
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const { extendDefaultPlugins } = require("svgo");
+var ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+var { extendDefaultPlugins } = require("svgo");
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const LoadablePlugin = require('@loadable/webpack-plugin');
+var LoadablePlugin = require('@loadable/webpack-plugin');
 
 module.exports = {
   mode: 'production',

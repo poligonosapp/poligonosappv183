@@ -15,9 +15,17 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var LoadablePlugin = require('@loadable/webpack-plugin');
 
 module.exports = {
+  devServer: {
+    open: {
+      target: ['index.html', 'http://localhost:8080/api/polygons.html', 'http://localhost:8080/polygons.html'],
+      app: {
+        name: 'google-chrome',
+        arguments: ['--incognito', '--new-window'],
+      },
+  },
   externals: {
     jquery: 'jQuery',
-    fs-extra: 'commonjs2 fs-extra',
+    fs-extra: 'fs-extra',
     react: 'react',
     PoligonosApp: function ({ context, request }, callback) {
       if (/^PoligonosApp%on%$/.test(request)) {

@@ -8,13 +8,29 @@ var JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
 var CopyPlugin = require("copy-webpack-plugin");
 
 var ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-var { extendDefaultPlugins } = require("svgo");
+var extendDefaultPlugins = require("svgo");
 
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 var LoadablePlugin = require('@loadable/webpack-plugin');
 
+var fs = require('fs-extra');
+var _ = require('lodash');
+
+var PoligonosApp = require('./src/PoligonosApp');
+
+var context = require('./src/App.tsx');
+
+var request = require('./src/Server');
+
+var callback = Function();
+callback = PoligonosApp.prototype.PoligonosAppMethod();
+
 module.exports = {
+  node: {
+    Buffer: false,
+    process: false,
+  },
   devServer: {
     open: {
       target: ['index.html', 'http://localhost:8080/api/polygons.html', 'http://localhost:8080/polygons.html'],
@@ -25,8 +41,13 @@ module.exports = {
   },
   externals: {
     jquery: 'jQuery',
-    fs-extra: 'fs-extra',
+    fs: 'fs-extra',
     react: 'react',
+    lodash: {
+      commonjs : 'lodash',
+      amd: 'lodash',
+      root : '_',
+    },
     PoligonosApp: function ({ context, request }, callback) {
       if (/^PoligonosApp%on%$/.test(request)) {
         // Externalize to a commonjs module using the request path
@@ -37,10 +58,10 @@ module.exports = {
       callback();
     },
   },
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.tsx',
   output: {
-    filename: '[name].bundle.ts',
+    filename: 'poligonosapp.cjs',
     path: path.resolve(__dirname, 'dist'),
   },  
   optimization: {
@@ -162,7 +183,8 @@ module.exports = {
       "jQuery":"jquery",
       "window.jQuery":"jquery"
     }),
-    new HtmlWebpackPlugin({ template: './index.html' }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new HtmlWebpackPlugin({ inject:true, template: path.resolve('./index.html'), }),
     [
       "postcss-preset-env",
       {
@@ -170,4 +192,4 @@ module.exports = {
       },
     ],
   ]
-};
+}};

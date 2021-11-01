@@ -13,6 +13,7 @@ var extendDefaultPlugins = require("svgo");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 var LoadablePlugin = require('@loadable/webpack-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var fs = require('fs-extra');
 var _ = require('lodash');
@@ -163,11 +164,12 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        {
-          context: path.resolve(__dirname, "dist"),
-          from: "./src/*.json",
-        },
+        {context: path.resolve(__dirname, "dist")},
+        {from: "./src/*.json"},
       ],
+        options: {
+          concurrency: 100,
+        },
     }),
     new StylelintPlugin(options),
       require('rollup-plugin-replace')({
@@ -183,7 +185,23 @@ module.exports = {
       "jQuery":"jquery",
       "window.jQuery":"jquery"
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin(
+      {
+        parallel: 4,
+        sourceMap: true,
+        uglifyOptions: {
+          warnings: false,
+          parse: {},
+          compress: {},
+          mangle: true, // Note `mangle.properties` is `false` by default.
+          output: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: false,
+        },
+      }
+    ),
     new HtmlWebpackPlugin({ inject:true, template: path.resolve('./index.html'), }),
     [
       "postcss-preset-env",

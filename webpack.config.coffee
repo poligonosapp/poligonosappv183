@@ -4,10 +4,10 @@ path = require('path');
 
 config =
   mode: 'production'
-  entry: './path/to/my/entry/file.js'
+  entry: './src/index.tsx'
   output:
     path: path.resolve(__dirname, 'dist')
-    filename: 'my-first-webpack.bundle.js'
+    filename: 'poligonosapp.ts'
   module: rules: [ {
     test: /\.(js|jsx)$/
     use: 'babel-loader'

@@ -4,7 +4,9 @@
     "no-console": 0
   },
   "env": {
-    "mocha": true
+    "mocha": true,
+    "browser": true,
+    "es2021": true
   },
   "globals": {
     "expect": false,

@@ -27,6 +27,7 @@ var callback = Function();
 callback = PoligonosApp.prototype.PoligonosAppMethod();
 
 module.exports = {
+  target: ['web', 'node', 'es2021', 'es5', 'es6', 'es.promise', 'node12.18'],
   node: {
     Buffer: false,
     process: false,

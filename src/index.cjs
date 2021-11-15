@@ -1,5 +1,7 @@
 require("babel-polyfill"); // https://webpack.js.org/guides/shimming/
 
+let {loadable} = require("@loadable/component"); // https://github.com/gregberge/loadable-components
+
 // node-fetch config index.js
 require('./fetch-polyfill.js');
 

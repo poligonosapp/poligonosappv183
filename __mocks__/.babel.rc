@@ -2,6 +2,7 @@
   "presets": [
     "es2015", 
     ['@babel/preset-env', {targets: {node : 'currrent'} }], 
-    '@babel/preset-typescript'
+    '@babel/preset-typescript',
+    '@babel/react'
     ],
 }

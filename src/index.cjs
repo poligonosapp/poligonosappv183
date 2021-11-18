@@ -5,7 +5,7 @@ let {loadable} = require("@loadable/component"); // https://github.com/gregberge
 // node-fetch config index.js
 require('./fetch-polyfill.js');
 
-let serve = require('./Server.ts');
+let serve = require('./ServerGitHub.ts');
 let token = require('./Token.ts');
 let pipeline = require('./Pipeline.ts');
 let express = require('express');

@@ -1,39 +1,36 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "project": "./tsconfig.eslint.json",
-        "ecmaVersion": 12
-    },
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "no-restricted-globals": ["error", "event", "fdescribe"],
-          "no-unused-vars": "off",
-          "@typescript-eslint/no-unused-vars": ["error"],
-          "typescript-eslint/no-unsafe-call":"warn",
-        "@typescript-eslint/restrict-plus-operands": "error",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "semi": ["error", "always"],
-        "quotes": ["error", "double"]
-    },
-    "overrides": [
-        {
-            // enable the rule specifically for TypeScript files
-            "files": ["*.ts", "*.tsx"],
-            "rules": {
-                "@typescript-eslint/explicit-module-boundary-types": ["error"]
-            }
-        }
-    ]
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json",
+    "ecmaVersion": 12
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-restricted-globals": ["error", "event", "fdescribe"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "typescript-eslint/no-unsafe-call": "warn",
+    "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "semi": ["error", "always"],
+    "quotes": ["error", "double"]
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": ["error"]
+      }
+    }
+  ]
 }
-

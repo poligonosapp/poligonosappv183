@@ -1,12 +1,12 @@
 name: Create issue on commit
 
-on: [ push ]
+on: [push]
 
 jobs:
   create_commit:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     permissions:
-      issues: write 
+      issues: write
     steps:
       - name: Create issue using REST API
         run: |
